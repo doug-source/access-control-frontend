@@ -1,3 +1,4 @@
+import path from 'path';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
@@ -11,6 +12,12 @@ export default defineConfig({
             reporter: ['text'],
             include: ['src/**/*'],
             exclude: [],
+        },
+        /* Path aliases */
+        alias: {
+            '@': path.resolve(__dirname, './src/'),
+            '@shared': path.resolve(__dirname, './src/shared'),
+            '@pages': path.resolve(__dirname, './src/components/pages'),
         },
     },
 });

@@ -26,6 +26,13 @@
             /* Testing */
             "vitest/globals"
         ],
+
+        /* Path aliases */
+        "paths": {
+            "@/*": ["./src/*"],
+            "@shared/*": ["./src/shared/*"],
+            "@pages/*": ["./src/components/pages/*"]
+        }
     },
     "include": ["src"]
 }
