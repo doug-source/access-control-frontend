@@ -1,0 +1,13 @@
+.item {
+    display: flex;
+}
+
+.itemText {
+    flex: 1;
+}
+
+.iconBox {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}

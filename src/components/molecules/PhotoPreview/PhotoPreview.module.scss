@@ -1,0 +1,26 @@
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 4rem;
+}
+
+.photoLoading {
+    opacity: 0;
+}
+
+.photo {
+    width: 4rem;
+    height: 4rem;
+    position: absolute;
+    left: 0;
+    transition: opacity 0.5s;
+    border-radius: 0.5rem;
+}
+
+.loading {
+    z-index: 1;
+}

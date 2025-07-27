@@ -1,0 +1,26 @@
+.purposeArticle {
+    width: 60%;
+    margin-inline: auto;
+
+    & div {
+        text-align: center;
+        line-height: 1.25;
+
+        &:first-child {
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+            border-top: 0.0625rem solid var(--Border-Info-Secondary);
+            background-color: var(--Background-Info-Secondary);
+            color: var(--Content-Primary-Inverse);
+            border-left: 0.0625rem solid var(--Border-Info-Secondary);
+            border-right: 0.0625rem solid var(--Border-Info-Secondary);
+        }
+        &:last-child {
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+            border-bottom: 0.0625rem solid var(--Border-Secondary);
+            border-left: 0.0625rem solid var(--Border-Secondary);
+            border-right: 0.0625rem solid var(--Border-Secondary);
+        }
+    }
+}

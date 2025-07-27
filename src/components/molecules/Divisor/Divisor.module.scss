@@ -1,0 +1,13 @@
+.divisorBox {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    align-items: center;
+
+    hr {
+        background-color: var(--Border-Secondary);
+        border: none;
+        height: 0.125rem;
+        flex: 1;
+    }
+}

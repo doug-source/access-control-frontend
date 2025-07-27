@@ -1,0 +1,14 @@
+.gateLayout {
+    transition: opacity 800ms 700ms;
+}
+
+.logged {
+    opacity: 0;
+}
+
+.forgotPass {
+    position: absolute;
+    right: 0;
+    left: auto;
+    top: 0;
+}

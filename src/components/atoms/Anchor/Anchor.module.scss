@@ -1,0 +1,14 @@
+.anchor {
+    position: relative;
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--Content-Link);
+    &:link,
+    &:visited,
+    &:focus,
+    &:hover,
+    &:active {
+        color: var(--Content-Link);
+        text-decoration: none;
+    }
+}

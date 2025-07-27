@@ -1,0 +1,17 @@
+.primaryBtn {
+    background-color: var(--Background-Brand);
+    font-weight: bold;
+    color: var(--Content-Primary-Inverse);
+    padding: 1rem;
+    border-radius: 0.75rem;
+    border: 0.0625rem solid var(--Border-Brand);
+    font-size: 1rem;
+
+    &:hover {
+        background-color: var(--Background-Brand-Hover);
+    }
+    &:disabled,
+    &:active {
+        background-color: var(--Background-Brand-Pressed);
+    }
+}

@@ -1,0 +1,6 @@
+.dialogAttach {
+    & [role='dialog'] {
+        width: calc(100% * 0.75);
+        max-width: 24rem;
+    }
+}

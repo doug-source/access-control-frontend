@@ -1,0 +1,13 @@
+.formLayout {
+    & form[name='customForm'] {
+        overflow: visible;
+        padding-top: 0.5rem;
+    }
+    & [role='alert'] {
+        white-space: nowrap;
+    }
+}
+
+.iconFallback {
+    transform: scale(1.75) translateX(-50%);
+}

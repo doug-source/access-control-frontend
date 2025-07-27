@@ -1,0 +1,28 @@
+.dialogContainer {
+    z-index: 1;
+    position: absolute;
+    padding: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 0.5rem;
+}
+.heading {
+    text-align: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin-top: 1.6875rem;
+    margin-bottom: 0.5625rem;
+}
+.btnClose {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    cursor: pointer;
+    background-color: transparent;
+    border-width: 0;
+}
+.closeIcon {
+    transform: scale(0.85);
+}

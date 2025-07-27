@@ -1,0 +1,42 @@
+.mainLayout {
+    width: calc(100vw - (2 * var(--Root-Padding)));
+    height: calc(100vh - (2 * var(--Root-Padding)));
+    position: relative;
+}
+
+.menuItemIcon,
+.logoutMenuItem svg {
+    transform: scale(2) translateY(-0.5rem);
+}
+
+.noWrap {
+    white-space: nowrap;
+}
+
+.menuItemAnchor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    font-size: inherit;
+    position: relative;
+
+    div {
+        font-size: inherit;
+        position: absolute;
+        top: 100%;
+        text-align: center;
+        max-width: 8rem;
+    }
+}
+
+.usersIcon :global(.front-body),
+.usersIcon :global(.front-head) {
+    fill: #1077b3;
+}
+
+.usersIcon :global(.back-body),
+.usersIcon :global(.back-head) {
+    fill: #4eb04e;
+}

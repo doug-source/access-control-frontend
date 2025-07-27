@@ -1,0 +1,12 @@
+.bottomSection {
+    display: flex;
+    gap: 0.625rem;
+    justify-content: space-between;
+    font-weight: 400;
+    line-height: 1.25rem;
+    font-size: 0.875rem;
+}
+
+.bottomSectionLabel {
+    color: var(--Content-Tertiary);
+}

@@ -1,0 +1,17 @@
+.inputFilterBtn {
+    font-family: inherit;
+    background-color: var(--Background-Brand);
+    border-radius: 0.25rem;
+    border-width: 0;
+    padding-inline: 0.75rem;
+    font-weight: 600;
+    color: var(--Content-Primary-Inverse);
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--Background-Brand-Hover);
+    }
+    &:active {
+        background-color: var(--Background-Brand-Pressed);
+    }
+}

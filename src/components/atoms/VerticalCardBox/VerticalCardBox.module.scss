@@ -1,0 +1,11 @@
+.verticalCardBox {
+    max-width: 26rem;
+    padding: 1rem 4.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: 1rem;
+    background-color: var(--Background-Primary);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.19),
+        0 -2px 4px 0 rgba(0, 0, 0, 0.19);
+}

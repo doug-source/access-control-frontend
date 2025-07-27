@@ -1,0 +1,14 @@
+.brandBtn {
+    background-color: var(--Background-Brand);
+    width: 100%;
+    font-weight: bold;
+    color: var(--Content-Primary-Inverse);
+
+    &:hover {
+        background-color: var(--Background-Brand-Hover);
+    }
+    &:disabled,
+    &:active {
+        background-color: var(--Background-Brand-Pressed);
+    }
+}

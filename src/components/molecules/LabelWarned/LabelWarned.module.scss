@@ -1,0 +1,11 @@
+.box {
+    display: flex;
+    gap: 1rem;
+}
+.warningContent {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.75rem;
+    gap: 0.25rem;
+    color: var(--Content-Negative-Bold);
+}

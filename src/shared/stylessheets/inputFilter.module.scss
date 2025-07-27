@@ -1,0 +1,9 @@
+.inputFilterBlock {
+    justify-content: flex-start;
+    width: 80%;
+
+    input {
+        width: 0;
+        flex: 1;
+    }
+}

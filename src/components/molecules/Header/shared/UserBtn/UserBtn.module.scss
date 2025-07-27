@@ -1,0 +1,11 @@
+.userBtn {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border-width: 0;
+    cursor: pointer;
+
+    & svg {
+        fill: var(--Background-Primary);
+    }
+}

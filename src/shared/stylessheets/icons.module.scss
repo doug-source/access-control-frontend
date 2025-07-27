@@ -1,0 +1,6 @@
+.iconSwing:hover {
+    & :global {
+        animation: swing 0.25s 1 ease-in-out;
+        transform-origin: center;
+    }
+}

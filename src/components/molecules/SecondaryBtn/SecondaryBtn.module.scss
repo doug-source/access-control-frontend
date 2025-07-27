@@ -1,0 +1,17 @@
+.secondaryBtn {
+    background-color: var(--Background-Primary);
+    font-weight: bold;
+    color: var(--Content-Primary);
+    padding: 1rem;
+    border-radius: 0.75rem;
+    border: 0.0625rem solid var(--Border-Primary);
+    font-size: 1rem;
+
+    &:hover {
+        background-color: var(--Background-Hover);
+    }
+    &:disabled,
+    &:active {
+        background-color: var(--Background-Pressed);
+    }
+}
