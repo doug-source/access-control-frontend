@@ -5,7 +5,7 @@ import styles from './PhotoFile.module.scss';
 import { useDeps } from './shared/useDeps';
 
 interface PhotoFileProps {
-    inputRef: ForwardedRef<HTMLInputElement>;
+    inputRef?: ForwardedRef<HTMLInputElement>;
 }
 
 export const PhotoFile = ({ inputRef }: PhotoFileProps) => {

@@ -1,21 +1,24 @@
 import classNames from 'classnames';
-import { type ComponentPropsWithoutRef, forwardRef } from 'react';
+import { type ComponentPropsWithRef } from 'react';
 import styles from './Input.module.scss';
 
-type InputProps = ComponentPropsWithoutRef<'input'> & {
+type InputProps = ComponentPropsWithRef<'input'> & {
     blurred?: boolean;
 };
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
-    ({ blurred = false, className, ...remain }, ref) => (
-        <input
-            {...remain}
-            ref={ref}
-            className={classNames(
-                styles.fieldInput,
-                blurred && styles.blurred,
-                className
-            )}
-        />
-    )
+export const Input = ({
+    blurred = false,
+    className,
+    ref,
+    ...remain
+}: InputProps) => (
+    <input
+        {...remain}
+        ref={ref}
+        className={classNames(
+            styles.fieldInput,
+            blurred && styles.blurred,
+            className
+        )}
+    />
 );
