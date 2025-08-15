@@ -16,6 +16,13 @@ export const requestAccountLoader = (
                 email,
             }) as Promise<RequestAccountLoaderReturn>;
         }
+        if (url.searchParams.has('successmsg')) {
+            const message = url.searchParams.get('successmsg') ?? '';
+            return {
+                statusCode: 201,
+                body: { errors: { status: [message] } },
+            };
+        }
         if (url.searchParams.has('errormsg')) {
             const message = url.searchParams.get('errormsg') ?? '';
             return {

@@ -17,7 +17,12 @@ interface RequestAccountTemplateProps {
 export const RequestAccountTemplate = ({
     state,
 }: RequestAccountTemplateProps) => {
-    const { emailRef, phoneRef, handler: submitHandler } = useDeps();
+    const {
+        emailRef,
+        phoneRef,
+        providerLink,
+        handler: submitHandler,
+    } = useDeps();
     return (
         <FormCardContainer
             state={state}
@@ -30,10 +35,7 @@ export const RequestAccountTemplate = ({
                 <>
                     <Divisor>ou</Divisor>
                     <CommonRow>
-                        <SocialLoginLink
-                            href={`http://localhost:8000/auth/google/redirect/register`}
-                            type="secondary"
-                        >
+                        <SocialLoginLink href={providerLink} type="secondary">
                             <GoogleIcon />
                             <div>Continue com Google</div>
                         </SocialLoginLink>
