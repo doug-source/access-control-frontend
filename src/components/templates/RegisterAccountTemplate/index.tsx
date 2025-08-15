@@ -23,6 +23,7 @@ export const RegisterAccountTemplate = ({
         passwordRef,
         passConfirmationRef,
         handler: submitHandler,
+        providerLink,
     } = useDeps(state.token);
     return (
         <FormCardContainer
@@ -36,7 +37,7 @@ export const RegisterAccountTemplate = ({
                 <>
                     <Divisor>ou</Divisor>
                     <CommonRow>
-                        <SocialLoginLink type="secondary">
+                        <SocialLoginLink type="secondary" href={providerLink}>
                             <GoogleIcon />
                             <div>Continuar com Google</div>
                         </SocialLoginLink>
