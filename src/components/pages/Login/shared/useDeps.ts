@@ -1,7 +1,14 @@
-import { standardReducer } from '@/shared/reducers/standardReducer';
 import { standardInitialData } from '@/shared/utils/ReduceInitialValues';
-import { useReducer } from 'react';
+import { useActionState } from 'react';
+import { useAuthStateAction } from './useAuthStateAction';
+import { useLoginProvided } from './useLoginProvided';
 
 export const useDeps = () => {
-    return useReducer(standardReducer, standardInitialData);
+    const submitHandler = useAuthStateAction();
+    const [state, ...remain] = useActionState(
+        submitHandler,
+        standardInitialData
+    );
+    const formState = useLoginProvided(state);
+    return [formState, ...remain] as const;
 };

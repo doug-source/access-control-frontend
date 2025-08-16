@@ -12,14 +12,17 @@ export const standardReducer = <T extends State = State>(
         case 'success':
             return {
                 ...state,
-                requestStatus: { statusCode: 200, message: action.payload },
+                requestStatus: {
+                    statusCode: 200 as const,
+                    message: action.payload,
+                },
             };
         case 'error':
             if (action.payload.type === 'generic') {
                 return {
                     ...state,
                     requestStatus: {
-                        statusCode: 422,
+                        statusCode: 422 as const,
                         type: action.payload.type,
                         message: action.payload.message,
                     },
@@ -28,7 +31,7 @@ export const standardReducer = <T extends State = State>(
             return {
                 ...state,
                 requestStatus: {
-                    statusCode: 422,
+                    statusCode: 422 as const,
                     type: action.payload.type,
                     message: action.payload.message,
                     field: action.payload.field,

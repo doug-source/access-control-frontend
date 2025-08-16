@@ -6,40 +6,32 @@ import { BottomSection } from '@/components/molecules/BottomSection';
 import { GateLinkBox } from '@/components/molecules/GateLinkBox';
 import { LabelWarned } from '@/components/molecules/LabelWarned';
 import { SocialLoginLink } from '@/components/molecules/SocialLoginLink';
-import { FormCardContainer } from '@/components/organisms/FormCardContainer';
+import { FormCardNewContainer } from '@/components/organisms/FormCardNewContainer';
 import { type State } from '@/shared/types/Reducers/Standard/State';
-import { btnIsDisabled } from '@/shared/utils/btnIsDisabled';
 import classNames from 'classnames';
 import styles from './LoginTemplate.module.scss';
-import { useDeps } from './shared/useDeps';
 
 interface LoginTemplateProps {
     state: State;
+    formAction(payload: FormData): void;
+    pending: boolean;
     'data-testid'?: string;
 }
 
 export const LoginTemplate = ({
-    state,
+    state: formState,
+    formAction,
+    pending,
     'data-testid': dataTestId,
 }: LoginTemplateProps) => {
-    const {
-        provided,
-        emailRef,
-        passwordRef,
-        handler: submitHandler,
-    } = useDeps();
-
-    if (provided) {
-        return null;
-    }
     return (
-        <FormCardContainer
+        <FormCardNewContainer
             data-testid={dataTestId}
             className={classNames(
                 styles.gateLayout,
-                state.requestStatus.statusCode === 200 && styles.logged
+                formState.requestStatus.statusCode === 200 && styles.logged
             )}
-            state={state}
+            state={formState}
             heading="Autenticação"
             topContent={<GateLinkBox />}
             beforeContent={
@@ -57,25 +49,25 @@ export const LoginTemplate = ({
                     <Anchor to="/request">Solicitação</Anchor>
                 </BottomSection>
             }
-            submitHandler={submitHandler}
+            formAction={formAction}
             submitBtnText="Logar"
-            disabledBtn={btnIsDisabled(state.requestStatus, 0, 200)}
+            pending={pending}
         >
             <FieldGroup.Box>
-                <LabelWarned request={state.requestStatus} field="email">
+                <LabelWarned request={formState.requestStatus} field="email">
                     E-mail
                 </LabelWarned>
-                <FieldGroup.Input type="email" ref={emailRef} />
+                <FieldGroup.Input type="email" name="email" />
             </FieldGroup.Box>
             <FieldGroup.Box>
-                <LabelWarned request={state.requestStatus} field="password">
+                <LabelWarned request={formState.requestStatus} field="password">
                     Senha
                 </LabelWarned>
-                <FieldGroup.Input type="password" blurred ref={passwordRef} />
+                <FieldGroup.Input type="password" name="password" blurred />
                 <Anchor to="/forgot" className={styles.forgotPass}>
                     Esqueceu ?
                 </Anchor>
             </FieldGroup.Box>
-        </FormCardContainer>
+        </FormCardNewContainer>
     );
 };

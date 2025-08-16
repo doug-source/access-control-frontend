@@ -8,10 +8,10 @@ export type HttpErrorResponse<F1, F2> =
     | HttpStatusErrorResponse
     | HttpFieldErrorResponse<F1, F2>;
 
-export type GenericResponse<B, F1, F2> =
-    | HttpSuccessResponse<B>
+export type GenericResponse<B, C, F1, F2> =
+    | HttpSuccessResponse<B, C>
     | HttpErrorResponse<F1, F2>;
 
-export type NoFieldResponse<B> =
-    | HttpSuccessResponse<B>
+export type NoFieldResponse<B, C> =
+    | HttpSuccessResponse<B, C>
     | HttpStatusErrorResponse;

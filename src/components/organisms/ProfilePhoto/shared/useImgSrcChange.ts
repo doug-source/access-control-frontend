@@ -10,8 +10,7 @@ export const useImgSrcChange = (
         if (photoFile) {
             return;
         }
-        const host = import.meta.env.VITE_HOST as string;
-        setImgSrc(url ? `${host}/storage/app/${url}` : null);
+        setImgSrc(url ?? null);
         onClear();
     }, [photoFile, url, onClear]);
     return [imgSrc, setImgSrc] as const;

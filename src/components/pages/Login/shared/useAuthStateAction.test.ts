@@ -6,13 +6,9 @@ import { type Authenticator } from '@/shared/types/Contracts/Authenticator';
 import { type AuthUser } from '@/shared/types/NullableUser';
 import { faker } from '@faker-js/faker';
 import { renderHook } from '@testing-library/react';
-import { createElement, type FormEvent, type PropsWithChildren } from 'react';
+import { createElement, type PropsWithChildren } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
-import { useAuthSubmit } from './useAuthSubmit';
-
-const makeFormEvent = () => {
-    return { preventDefault() {} } as unknown as FormEvent<HTMLFormElement>;
-};
+import { useAuthStateAction } from './useAuthStateAction';
 
 describe('useAuthSubmit hook', () => {
     it("runs hook's returns correctly", async () => {
@@ -71,13 +67,11 @@ describe('useAuthSubmit hook', () => {
         };
         const { result } = renderHook(
             () => {
-                return useAuthSubmit();
+                return useAuthStateAction();
             },
             { wrapper }
         );
-        expect(result.current.emailRef.current).toBeNull();
-        expect(result.current.passwordRef.current).toBeNull();
-        expect(typeof result.current.handler).toBe('function');
+        expect(typeof result.current).toBe('function');
     });
     it("runs hook's some input ref is nullable correctly", async () => {
         const authenticator = new (class implements Authenticator {
@@ -135,11 +129,11 @@ describe('useAuthSubmit hook', () => {
         };
         const { result } = renderHook(
             () => {
-                return useAuthSubmit();
+                return useAuthStateAction();
             },
             { wrapper }
         );
-        result.current.handler(makeFormEvent());
+        result.current({ requestStatus: { statusCode: 0 } }, new FormData());
         expect(dispatch).not.toHaveBeenCalled();
     });
     it('runs requesting and returning the status code equals 200 correctly', async () => {
@@ -149,6 +143,8 @@ describe('useAuthSubmit hook', () => {
             emailVerified: true,
             name: faker.person.firstName(),
             token: faker.word.noun(),
+            phone: null,
+            photo: null,
         };
         const authenticator = new (class implements Authenticator {
             login(data: { email: string; password: string }): Promise<unknown> {
@@ -210,18 +206,14 @@ describe('useAuthSubmit hook', () => {
         };
         const { result } = renderHook(
             () => {
-                return useAuthSubmit();
+                return useAuthStateAction();
             },
             { wrapper }
         );
-        result.current.emailRef.current = {
-            value: '',
-        } as unknown as HTMLInputElement;
-        result.current.passwordRef.current = {
-            value: '',
-        } as unknown as HTMLInputElement;
-        await result.current.handler(makeFormEvent());
-        expect(dispatch).toHaveBeenNthCalledWith(1, { type: 'loading' });
+        await result.current(
+            { requestStatus: { statusCode: 0 } },
+            new FormData()
+        );
         expect(dispatch).toHaveBeenNthCalledWith(2, {
             type: 'success',
             payload: 'Logado com sucesso!',
@@ -291,18 +283,14 @@ describe('useAuthSubmit hook', () => {
         };
         const { result } = renderHook(
             () => {
-                return useAuthSubmit();
+                return useAuthStateAction();
             },
             { wrapper }
         );
-        result.current.emailRef.current = {
-            value: '',
-        } as unknown as HTMLInputElement;
-        result.current.passwordRef.current = {
-            value: '',
-        } as unknown as HTMLInputElement;
-        await result.current.handler(makeFormEvent());
-        expect(dispatch).toHaveBeenNthCalledWith(1, { type: 'loading' });
+        await result.current(
+            { requestStatus: { statusCode: 0 } },
+            new FormData()
+        );
         expect(dispatch).toHaveBeenNthCalledWith(2, {
             type: 'error',
             payload: {
