@@ -34,12 +34,11 @@ export class LoginDispatcher
             HttpStatusCodes['OK'],
             EmailErrorField,
             PasswordErrorField
-        >,
-        auth: AuthContextProvided | null
+        >
     ) {
         this.authenticator = authenticator;
         this.receiver = receiver;
-        this.auth = auth;
+        this.auth = null;
     }
 
     /**
@@ -90,5 +89,13 @@ export class LoginDispatcher
             };
         }
         return null;
+    }
+
+    /**
+     * Define the inner auth instance
+     */
+    setPath(auth: AuthContextProvided | null) {
+        this.auth = auth;
+        return this;
     }
 }

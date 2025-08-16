@@ -8,7 +8,6 @@ import { RegisterRequestAdapter } from '@/shared/adapters/RegisterRequestAdapter
 import type { Authenticator } from '@/shared/types/Contracts/Authenticator';
 import type { RegisterRequestMaker } from '@/shared/types/Contracts/Guest/RegisterRequestMaker';
 import type { HttpClient } from '@/shared/types/Contracts/HttpClient';
-import type { LoginProvidedDispatcher } from '@/shared/types/Contracts/LoginProvidedDispatcher';
 
 export const httpClientInstance: HttpClient = new FetchHttpClientAdapter();
 
@@ -16,12 +15,12 @@ export const authenticatorInstance: Authenticator = new AuthenticatorAdapter(
     httpClientInstance
 );
 
-export const loginProvidedInstance: LoginProvidedDispatcher =
-    new LoginDispatcher(
-        authenticatorInstance,
-        new LoginReceiver(new LoginSuccessHandler(), new LoginErrorHandler()),
-        null
-    );
+export const loginErrorHandlerInstance = new LoginErrorHandler();
+
+export const loginDispatcherInstance = new LoginDispatcher(
+    authenticatorInstance,
+    new LoginReceiver(new LoginSuccessHandler(), loginErrorHandlerInstance)
+);
 
 export const registerRequestMakerInstance: RegisterRequestMaker =
     new RegisterRequestAdapter(httpClientInstance);

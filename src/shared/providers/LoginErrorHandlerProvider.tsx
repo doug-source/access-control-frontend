@@ -1,5 +1,5 @@
-import { LoginErrorHandler } from '@/shared/adapters/LoginErrorHandler';
 import { LoginErrorHandlerContext } from '@/shared/contexts/LoginErrorHandlerContext';
+import { loginErrorHandlerInstance } from '@/shared/utils/globals';
 import { ComponentPropsWithRef, PropsWithChildren, useMemo } from 'react';
 
 interface LoginErrorHandlerProviderProps extends PropsWithChildren {
@@ -13,7 +13,7 @@ export const LoginErrorHandlerProvider = ({
     children,
 }: LoginErrorHandlerProviderProps) => {
     const handlerInstance = useMemo(
-        () => handler ?? new LoginErrorHandler(),
+        () => handler ?? loginErrorHandlerInstance,
         [handler]
     );
     return (

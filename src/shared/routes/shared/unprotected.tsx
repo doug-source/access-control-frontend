@@ -10,7 +10,7 @@ import { resetPasswordLoader } from '@/shared/loaders/guest/resetPasswordLoader'
 import { LoginDispatcherProvider } from '@/shared/providers/LoginDispatcherProvider';
 import { LoginErrorHandlerProvider } from '@/shared/providers/LoginErrorHandlerProvider';
 import {
-    loginProvidedInstance,
+    loginDispatcherInstance,
     registerRequestMakerInstance,
 } from '@/shared/utils/globals';
 
@@ -25,7 +25,7 @@ export const unprotectedRoutes = [
             </LoginErrorHandlerProvider>
         ),
         index: true,
-        loader: providedLoader(loginProvidedInstance),
+        loader: providedLoader(loginDispatcherInstance),
     },
     {
         path: '/request',
