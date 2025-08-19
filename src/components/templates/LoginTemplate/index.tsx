@@ -6,13 +6,14 @@ import { BottomSection } from '@/components/molecules/BottomSection';
 import { GateLinkBox } from '@/components/molecules/GateLinkBox';
 import { LabelWarned } from '@/components/molecules/LabelWarned';
 import { SocialLoginLink } from '@/components/molecules/SocialLoginLink';
-import { FormCardNewContainer } from '@/components/organisms/FormCardNewContainer';
-import { type State } from '@/shared/types/Reducers/Standard/State';
+import { FormCardContainer } from '@/components/organisms/FormCardContainer';
+import type { LoginState } from '@/shared/types/States';
 import classNames from 'classnames';
 import styles from './LoginTemplate.module.scss';
+import { useDeps } from './shared/useDeps';
 
 interface LoginTemplateProps {
-    state: State;
+    state: LoginState;
     formAction(payload: FormData): void;
     pending: boolean;
     'data-testid'?: string;
@@ -24,8 +25,9 @@ export const LoginTemplate = ({
     pending,
     'data-testid': dataTestId,
 }: LoginTemplateProps) => {
+    const [providerLink] = useDeps();
     return (
-        <FormCardNewContainer
+        <FormCardContainer
             data-testid={dataTestId}
             className={classNames(
                 styles.gateLayout,
@@ -36,10 +38,7 @@ export const LoginTemplate = ({
             topContent={<GateLinkBox />}
             beforeContent={
                 <CommonRow>
-                    <SocialLoginLink
-                        href={`http://localhost:8000/auth/google/redirect/login`}
-                        type="primary"
-                    >
+                    <SocialLoginLink href={providerLink} type="primary">
                         <GoogleIcon />
                     </SocialLoginLink>
                 </CommonRow>
@@ -57,17 +56,26 @@ export const LoginTemplate = ({
                 <LabelWarned request={formState.requestStatus} field="email">
                     E-mail
                 </LabelWarned>
-                <FieldGroup.Input type="email" name="email" />
+                <FieldGroup.Input
+                    type="email"
+                    name="email"
+                    defaultValue={formState.fields.email}
+                />
             </FieldGroup.Box>
             <FieldGroup.Box>
                 <LabelWarned request={formState.requestStatus} field="password">
                     Senha
                 </LabelWarned>
-                <FieldGroup.Input type="password" name="password" blurred />
+                <FieldGroup.Input
+                    type="password"
+                    name="password"
+                    defaultValue={formState.fields.password}
+                    blurred
+                />
                 <Anchor to="/forgot" className={styles.forgotPass}>
                     Esqueceu ?
                 </Anchor>
             </FieldGroup.Box>
-        </FormCardNewContainer>
+        </FormCardContainer>
     );
 };

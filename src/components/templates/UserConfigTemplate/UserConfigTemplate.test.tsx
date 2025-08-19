@@ -1,16 +1,19 @@
-import { userConfigInitialData } from '@/shared/utils/ReduceInitialValues';
+import { userConfigInitialData } from '@/shared/utils/initialStates';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { UserConfigTemplate } from '.';
 
 describe('<UserConfigTemplate /> component', () => {
     it('renders correctly', () => {
+        const formAction = vi.fn();
         const router = createMemoryRouter([
             {
                 path: '/',
                 element: (
                     <UserConfigTemplate
                         state={userConfigInitialData}
+                        formAction={formAction}
+                        pending={false}
                         data-testid="comp-key"
                     />
                 ),

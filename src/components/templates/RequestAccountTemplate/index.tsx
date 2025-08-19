@@ -6,31 +6,29 @@ import { GateLinkBox } from '@/components/molecules/GateLinkBox';
 import { LabelWarned } from '@/components/molecules/LabelWarned';
 import { SocialLoginLink } from '@/components/molecules/SocialLoginLink';
 import { FormCardContainer } from '@/components/organisms/FormCardContainer';
-import { type State } from '@/shared/types/Reducers/Standard/State';
-import { btnIsDisabled } from '@/shared/utils/btnIsDisabled';
+import type { RequestAccountState } from '@/shared/types/States';
 import { useDeps } from './shared/useDeps';
 
 interface RequestAccountTemplateProps {
-    state: State;
+    state: RequestAccountState;
+    formAction(payload: FormData): void;
+    pending: boolean;
 }
 
 export const RequestAccountTemplate = ({
     state,
+    formAction,
+    pending,
 }: RequestAccountTemplateProps) => {
-    const {
-        emailRef,
-        phoneRef,
-        providerLink,
-        handler: submitHandler,
-    } = useDeps();
+    const [providerLink] = useDeps();
     return (
         <FormCardContainer
             state={state}
             heading="Solicitar Acesso"
             topContent={<GateLinkBox />}
-            submitHandler={submitHandler}
             submitBtnText="Solicitar"
-            disabledBtn={btnIsDisabled(state.requestStatus, 0)}
+            formAction={formAction}
+            pending={pending}
             afterContent={
                 <>
                     <Divisor>ou</Divisor>
@@ -47,13 +45,20 @@ export const RequestAccountTemplate = ({
                 <LabelWarned request={state.requestStatus} field="email">
                     E-mail
                 </LabelWarned>
-                <FieldGroup.Input type="text" ref={emailRef} />
+                <FieldGroup.Input
+                    type="text"
+                    name="email"
+                    defaultValue={state.fields.email}
+                />
             </FieldGroup.Box>
             <FieldGroup.Box>
                 <LabelWarned request={state.requestStatus} field="phone">
                     Telefone
                 </LabelWarned>
-                <FieldGroup.Input ref={phoneRef} />
+                <FieldGroup.Input
+                    name="phone"
+                    defaultValue={state.fields.phone}
+                />
             </FieldGroup.Box>
         </FormCardContainer>
     );

@@ -1,4 +1,4 @@
-import { HttpClientProvider } from '@/shared/providers/boxes/HttpClientProvider';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { ViewerProvider } from '@/shared/providers/ViewerProvider';
 import { RegisterPermission } from '@/shared/types/Models/RegisterPermission';
 import { RegisterPermissionState } from '@/shared/types/Reducers/RegisterPermission';

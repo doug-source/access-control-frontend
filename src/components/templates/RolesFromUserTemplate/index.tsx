@@ -12,7 +12,7 @@ import { RolesItems } from '@/components/organisms/RolesItems';
 import { AttachmentDataProvider } from '@/shared/providers/AttachmentDataProvider';
 import { DetachmentDataProvider } from '@/shared/providers/DetachmentDataProvider';
 import { InputRefProvider } from '@/shared/providers/InputRefProvider';
-import { type RolesState } from '@/shared/types/Reducers/Roles';
+import type { RolesState } from '@/shared/types/Reducers/Roles';
 import { useDeps } from './shared/useDeps';
 
 interface RolesFromTemplateProps {
@@ -35,11 +35,11 @@ export const RolesFromUserTemplate = ({ state }: RolesFromTemplateProps) => {
                 <StretchedBox>
                     <AttachmentDataProvider
                         attachmentConfirm={state.attachmentConfirm}
-                        onAttash={attachHandler}
+                        onAttach={attachHandler}
                     >
                         <DetachmentDataProvider
                             detachmentConfirm={state.detachmentConfirm}
-                            onDetash={detachHandler}
+                            onDetach={detachHandler}
                         >
                             <PaginationPurpose show {...info} />
                             <ListWrapper requestType={state.requestType}>

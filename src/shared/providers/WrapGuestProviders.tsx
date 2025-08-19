@@ -1,13 +1,14 @@
-import { AuthenticatorProvider } from '@/shared/providers/boxes/AuthenticatorProvider';
-import { HttpClientProvider } from '@/shared/providers/boxes/HttpClientProvider';
-import { ReactNode } from 'react';
+import { AllocateAuth } from '@/shared/components/atoms/AllocateAuth';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
+import type { AuthSetter } from '@/shared/types/Contracts/AuthSetter';
+import { loginBase } from '@/shared/utils/globals/login';
+import { useMemo, type PropsWithChildren } from 'react';
 
-type WrapGuestProvidersProps = {
-    children: ReactNode;
+export const WrapGuestProviders = ({ children }: PropsWithChildren) => {
+    const setters = useMemo<AuthSetter[]>(() => [loginBase.dispatcher], []);
+    return (
+        <HttpClientProvider>
+            <AllocateAuth setters={setters}>{children}</AllocateAuth>
+        </HttpClientProvider>
+    );
 };
-
-export const WrapGuestProviders = ({ children }: WrapGuestProvidersProps) => (
-    <HttpClientProvider>
-        <AuthenticatorProvider>{children}</AuthenticatorProvider>
-    </HttpClientProvider>
-);

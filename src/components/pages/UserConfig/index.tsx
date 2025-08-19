@@ -1,18 +1,16 @@
 import { UserConfigTemplate } from '@/components/templates/UserConfigTemplate';
-import { DispatchProvider } from '@/shared/providers/DispatchProvider';
-import { PhotoFileProvider } from '@/shared/providers/PhotoFileProvider';
-import { SelfUpdateProvider } from '@/shared/providers/SelfUpdateProvider';
+import { PhotoFileRefProvider } from '@/shared/providers/PhotoFileRefProvider';
 import { useDeps } from './shared/useDeps';
 
 export const UserConfig = () => {
-    const [state, dispatch] = useDeps();
+    const [state, formAction, pending, clearFileRef] = useDeps();
     return (
-        <SelfUpdateProvider>
-            <DispatchProvider dispatch={dispatch}>
-                <PhotoFileProvider file={state.photoChosen}>
-                    <UserConfigTemplate state={state} />
-                </PhotoFileProvider>
-            </DispatchProvider>
-        </SelfUpdateProvider>
+        <PhotoFileRefProvider photoFileRef={clearFileRef}>
+            <UserConfigTemplate
+                state={state}
+                formAction={formAction}
+                pending={pending}
+            />
+        </PhotoFileRefProvider>
     );
 };

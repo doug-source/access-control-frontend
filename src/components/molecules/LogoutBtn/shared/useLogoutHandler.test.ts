@@ -1,5 +1,5 @@
 import * as AuthHooks from '@/shared/hooks/useAuth';
-import * as authenticatorHooks from '@/shared/hooks/useAuthenticator';
+import * as authenticatorHooks from '@/shared/hooks/useUnauthenticator';
 import { AuthProvider } from '@/shared/providers/AuthProvider';
 import { type Abilities } from '@/shared/types/Models/Ability';
 import type {
@@ -16,7 +16,7 @@ import { useLogoutHandler } from './useLogoutHandler';
 
 let authenticatorSpy: MockInstance<
     () => {
-        logout(token: string): Promise<unknown>;
+        signOut(token: string): Promise<unknown>;
     }
 >;
 let authSpy: MockInstance<
@@ -40,7 +40,7 @@ type Children = {
 
 describe('useLogoutHandler hook', () => {
     beforeAll(() => {
-        authenticatorSpy = vi.spyOn(authenticatorHooks, 'useAuthenticator');
+        authenticatorSpy = vi.spyOn(authenticatorHooks, 'useUnauthenticator');
         authSpy = vi.spyOn(AuthHooks, 'useAuth');
     });
     afterAll(() => {
@@ -51,7 +51,7 @@ describe('useLogoutHandler hook', () => {
     });
     it('runs correctly', async () => {
         authenticatorSpy.mockReturnValue({
-            logout(token) {
+            signOut(token) {
                 return Promise.resolve(token);
             },
         });
@@ -97,7 +97,7 @@ describe('useLogoutHandler hook', () => {
     });
     it('runs no token correctly', async () => {
         authenticatorSpy.mockReturnValue({
-            logout(token) {
+            signOut(token) {
                 return Promise.resolve(token);
             },
         });

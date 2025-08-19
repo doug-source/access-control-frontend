@@ -1,4 +1,4 @@
-import { HttpClientProvider } from '@/shared/providers/boxes/HttpClientProvider';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
 import { rolesInitialData } from '@/shared/utils/ReduceInitialValues';
 import { render, screen } from '@testing-library/react';

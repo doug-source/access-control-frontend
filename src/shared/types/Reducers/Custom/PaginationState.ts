@@ -1,4 +1,4 @@
-import { type State } from '@/shared/types/Reducers/Standard/State';
+import { type State } from '../../States';
 
 export interface PaginationState<T = unknown> extends State {
     data: T[];

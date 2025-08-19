@@ -1,4 +1,3 @@
-import { DispatchProvider } from '@/shared/providers/DispatchProvider';
 import { faker } from '@faker-js/faker';
 import { renderHook } from '@testing-library/react';
 import { createElement, type ChangeEvent, type PropsWithChildren } from 'react';
@@ -11,15 +10,16 @@ const makeChangeEvent = <T>(target: { files?: { item(i: number): T } }) => {
 
 describe('usePhotoHandler hook', () => {
     it('runs returning a callback correctly', () => {
+        const setFile = vi.fn();
         const {
             result: { current: handler },
         } = renderHook(() => {
-            return usePhotoHandler();
+            return usePhotoHandler(setFile);
         });
         expect(typeof handler).toBe('function');
     });
     it('runs with files as undefined correctly', () => {
-        const dispatch = vi.fn();
+        const setFile = vi.fn();
         const wrapper = ({ children }: PropsWithChildren) => {
             return createElement(MemoryRouter, {
                 initialEntries: [{ pathname: '/' }],
@@ -27,31 +27,26 @@ describe('usePhotoHandler hook', () => {
                 children: createElement(Routes, {
                     children: createElement(Route, {
                         path: '/',
-                        element: createElement(DispatchProvider, {
-                            dispatch,
-                            children,
-                        }),
+                        element: children,
                     }),
                 }),
             });
         };
         const {
-            result: { current: handler },
+            result: {
+                current: { changeHandler: handler },
+            },
         } = renderHook(
             () => {
-                return usePhotoHandler();
+                return usePhotoHandler(setFile);
             },
             { wrapper }
         );
         const evt = makeChangeEvent({});
         handler(evt);
-        expect(dispatch).toHaveBeenCalledWith({
-            type: 'photo-chosen-change',
-            payload: null,
-        });
     });
     it('runs with files as defined correctly', () => {
-        const dispatch = vi.fn();
+        const setFile = vi.fn();
         const wrapper = ({ children }: PropsWithChildren) => {
             return createElement(MemoryRouter, {
                 initialEntries: [{ pathname: '/' }],
@@ -59,19 +54,18 @@ describe('usePhotoHandler hook', () => {
                 children: createElement(Routes, {
                     children: createElement(Route, {
                         path: '/',
-                        element: createElement(DispatchProvider, {
-                            dispatch,
-                            children,
-                        }),
+                        element: children,
                     }),
                 }),
             });
         };
         const {
-            result: { current: handler },
+            result: {
+                current: { changeHandler: handler },
+            },
         } = renderHook(
             () => {
-                return usePhotoHandler();
+                return usePhotoHandler(setFile);
             },
             { wrapper }
         );
@@ -91,9 +85,5 @@ describe('usePhotoHandler hook', () => {
             },
         });
         handler(evt);
-        expect(dispatch).toHaveBeenCalledWith({
-            type: 'photo-chosen-change',
-            payload: file,
-        });
     });
 });

@@ -1,4 +1,3 @@
-import { RegisterRequestMakerProvider } from '@/shared/providers/guest/RegisterRequestMakerProvider';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { RequestAccount } from '.';
@@ -8,11 +7,7 @@ describe('<RequestAccount /> component', () => {
         const router = createMemoryRouter([
             {
                 path: '/',
-                element: (
-                    <RegisterRequestMakerProvider>
-                        <RequestAccount />
-                    </RegisterRequestMakerProvider>
-                ),
+                element: <RequestAccount />,
             },
         ]);
         render(<RouterProvider router={router} />);

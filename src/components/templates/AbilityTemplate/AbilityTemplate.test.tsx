@@ -1,4 +1,4 @@
-import { HttpClientProvider } from '@/shared/providers/boxes/HttpClientProvider';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { ViewerProvider } from '@/shared/providers/ViewerProvider';
 import { AbilityState } from '@/shared/types/Reducers/Ability';
 import { faker } from '@faker-js/faker';

@@ -1,11 +1,8 @@
-import { type RequestStatus } from '@/shared/types/Http/Request';
-import { type ResetPasswordState } from '@/shared/types/Reducers/Guest/ChangePassword';
-import { btnIsDisabled } from '@/shared/utils/btnIsDisabled';
+import type { ResetPasswordState } from '@/shared/types/States';
 
 export const resetPassBtnIsDisabled = (
     state: ResetPasswordState,
-    ...types: RequestStatus['statusCode'][]
+    pending: boolean
 ) => {
-    const byStatus = btnIsDisabled(state.requestStatus, ...types);
-    return byStatus || state.email === null || state.token === null;
+    return pending || state.email === null || state.token === null;
 };

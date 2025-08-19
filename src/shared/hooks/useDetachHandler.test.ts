@@ -5,8 +5,8 @@ import { renderHook } from '@testing-library/react';
 import { createElement, type PropsWithChildren } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { AuthProvider } from '../providers/AuthProvider';
-import { HttpClientProvider } from '../providers/boxes/HttpClientProvider';
 import { DispatchProvider } from '../providers/DispatchProvider';
+import { HttpClientProvider } from '../providers/HttpClientProvider';
 import { PermissionsRequesterProvider } from '../providers/PermissionsRequesterProvider';
 import { useDetachHandler } from './useDetachHandler';
 

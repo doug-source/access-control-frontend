@@ -38,6 +38,8 @@ describe('useMakeUserChecking hook', () => {
             emailVerified: true,
             name: faker.person.firstName(),
             token: faker.word.noun(),
+            phone: null,
+            photo: null,
         };
         window.localStorage.setItem('user', JSON.stringify(userSigned));
         const wrapper = ({ children }: Children) => {

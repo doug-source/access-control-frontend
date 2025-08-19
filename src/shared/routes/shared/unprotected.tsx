@@ -3,47 +3,61 @@ import { ForgotPassword } from '@/components/pages/ForgotPassword';
 import { Login } from '@/components/pages/Login';
 import { RegisterAccount } from '@/components/pages/RegisterAccount';
 import { RequestAccount } from '@/components/pages/RequestAccount';
-import { providedLoader } from '@/shared/loaders/guest/providedLoader';
-import { registerAccountLoader } from '@/shared/loaders/guest/registerAccountLoader';
-import { requestAccountLoader } from '@/shared/loaders/guest/requestAccountLoader';
-import { resetPasswordLoader } from '@/shared/loaders/guest/resetPasswordLoader';
-import { LoginDispatcherProvider } from '@/shared/providers/LoginDispatcherProvider';
-import { LoginErrorHandlerProvider } from '@/shared/providers/LoginErrorHandlerProvider';
-import {
-    loginDispatcherInstance,
-    registerRequestMakerInstance,
-} from '@/shared/utils/globals';
+import { loginProvidedLoader } from '@/shared/loaders/loginProvidedLoader';
+import { registerAccountLoader } from '@/shared/loaders/registerAccountLoader';
+import { requestAccountLoader } from '@/shared/loaders/requestAccountLoader';
+import { resetPasswordLoader } from '@/shared/loaders/resetPasswordLoader';
+import { LogicBaseProvider } from '@/shared/providers/LogicBaseProvider';
+import { forgotPasswordBase } from '@/shared/utils/globals/forgotPassword';
+import { loginBase } from '@/shared/utils/globals/login';
+import { registerAccountBase } from '@/shared/utils/globals/registerAccount';
+import { requestAccountBase } from '@/shared/utils/globals/requestAccount';
+import { resetPasswordBase } from '@/shared/utils/globals/resetPassword';
 
 export const unprotectedRoutes = [
     {
         path: '/',
         element: (
-            <LoginErrorHandlerProvider>
-                <LoginDispatcherProvider>
-                    <Login />
-                </LoginDispatcherProvider>
-            </LoginErrorHandlerProvider>
+            <LogicBaseProvider base={loginBase}>
+                <Login />
+            </LogicBaseProvider>
         ),
         index: true,
-        loader: providedLoader(loginDispatcherInstance),
+        loader: loginProvidedLoader(loginBase.dispatcher),
     },
     {
         path: '/request',
-        element: <RequestAccount />,
-        loader: requestAccountLoader(registerRequestMakerInstance),
+        element: (
+            <LogicBaseProvider base={requestAccountBase}>
+                <RequestAccount />
+            </LogicBaseProvider>
+        ),
+        loader: requestAccountLoader(requestAccountBase.dispatcher),
     },
     {
         path: '/register',
-        element: <RegisterAccount />,
-        loader: registerAccountLoader,
+        element: (
+            <LogicBaseProvider base={registerAccountBase}>
+                <RegisterAccount />
+            </LogicBaseProvider>
+        ),
+        loader: registerAccountLoader(registerAccountBase.dispatcher),
     },
     {
         path: '/forgot',
-        element: <ForgotPassword />,
+        element: (
+            <LogicBaseProvider base={forgotPasswordBase}>
+                <ForgotPassword />
+            </LogicBaseProvider>
+        ),
     },
     {
         path: '/change-pass',
-        element: <ChangePassword />,
-        loader: resetPasswordLoader,
+        element: (
+            <LogicBaseProvider base={resetPasswordBase}>
+                <ChangePassword />
+            </LogicBaseProvider>
+        ),
+        loader: resetPasswordLoader(resetPasswordBase.dispatcher),
     },
 ];

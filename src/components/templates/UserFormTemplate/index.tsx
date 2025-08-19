@@ -1,51 +1,51 @@
 import { FieldGroup } from '@/components/atoms/FieldGroup';
 import { LabelWarned } from '@/components/molecules/LabelWarned';
 import { FormSimpleContainer } from '@/components/organisms/FormSimpleContainer';
-import { btnIsDisabled } from '@/shared/utils/btnIsDisabled';
-import { type ComponentPropsWithoutRef } from 'react';
-import { useUserFormSubmit } from './shared/useUserFormSubmit';
+import type { UserFormState } from '@/shared/types/States';
 
-type UserFormTemplateProps = Omit<
-    ComponentPropsWithoutRef<typeof FormSimpleContainer>,
-    'submitHandler' | 'disabledBtn' | 'submitBtnText'
->;
+interface UserFormTemplateProps {
+    state: UserFormState;
+    pending: boolean;
+    formAction(payload: FormData): void;
+}
 
 export const UserFormTemplate = ({
     state,
-    ...remain
-}: UserFormTemplateProps) => {
-    const {
-        nameRef,
-        emailRef,
-        passwordRef,
-        handler: submitHandler,
-    } = useUserFormSubmit();
-    return (
-        <FormSimpleContainer
-            {...remain}
-            state={state}
-            submitHandler={submitHandler}
-            submitBtnText="Criar"
-            disabledBtn={btnIsDisabled(state.requestStatus, 0, 200)}
-        >
-            <FieldGroup.Box>
-                <LabelWarned request={state.requestStatus} field="name">
-                    Nome
-                </LabelWarned>
-                <FieldGroup.Input ref={nameRef} />
-            </FieldGroup.Box>
-            <FieldGroup.Box>
-                <LabelWarned request={state.requestStatus} field="email">
-                    E-mail
-                </LabelWarned>
-                <FieldGroup.Input type="email" ref={emailRef} />
-            </FieldGroup.Box>
-            <FieldGroup.Box>
-                <LabelWarned request={state.requestStatus} field="password">
-                    Senha
-                </LabelWarned>
-                <FieldGroup.Input type="password" ref={passwordRef} blurred />
-            </FieldGroup.Box>
-        </FormSimpleContainer>
-    );
-};
+    pending,
+    formAction,
+}: UserFormTemplateProps) => (
+    <FormSimpleContainer
+        state={state}
+        submitBtnText="Criar"
+        pending={pending}
+        formAction={formAction}
+    >
+        <FieldGroup.Box>
+            <LabelWarned request={state.requestStatus} field="name">
+                Nome
+            </LabelWarned>
+            <FieldGroup.Input name="name" defaultValue={state.fields.name} />
+        </FieldGroup.Box>
+        <FieldGroup.Box>
+            <LabelWarned request={state.requestStatus} field="email">
+                E-mail
+            </LabelWarned>
+            <FieldGroup.Input
+                type="email"
+                name="email"
+                defaultValue={state.fields.email}
+            />
+        </FieldGroup.Box>
+        <FieldGroup.Box>
+            <LabelWarned request={state.requestStatus} field="password">
+                Senha
+            </LabelWarned>
+            <FieldGroup.Input
+                type="password"
+                name="password"
+                defaultValue={state.fields.password}
+                blurred
+            />
+        </FieldGroup.Box>
+    </FormSimpleContainer>
+);

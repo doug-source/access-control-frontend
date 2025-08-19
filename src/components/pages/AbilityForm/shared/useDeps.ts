@@ -1,8 +1,8 @@
-import { standardReducer } from '@/shared/reducers/standardReducer';
-import { standardInitialData } from '@/shared/utils/ReduceInitialValues';
-import { useReducer } from 'react';
+import { abilityFormInitialData } from '@/shared/utils/initialStates';
+import { useActionState } from 'react';
+import { useAbilityFormStateAction } from './useAbilityFormStateAction';
 
 export const useDeps = () => {
-    const [state, dispatch] = useReducer(standardReducer, standardInitialData);
-    return { state, dispatch };
+    const submitHandler = useAbilityFormStateAction();
+    return useActionState(submitHandler, abilityFormInitialData);
 };

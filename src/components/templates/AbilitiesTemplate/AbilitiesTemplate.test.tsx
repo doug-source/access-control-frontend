@@ -1,4 +1,4 @@
-import { HttpClientProvider } from '@/shared/providers/boxes/HttpClientProvider';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
 import { LocationStateBetweenScreen } from '@/shared/types/LocationStateBetweenScreen';
 import { UserIndex } from '@/shared/types/Models/User';

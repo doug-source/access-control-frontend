@@ -1,15 +1,19 @@
 import { useAuth } from '@/shared/hooks/useAuth';
-import { useLoginErrorHandler } from '@/shared/hooks/useLoginErrorHandler';
-import type { LoginProvidedDispatcher } from '@/shared/types/Contracts/LoginProvidedDispatcher';
-import type { State } from '@/shared/types/Reducers/Standard/State';
+import { useLogicBase } from '@/shared/hooks/useLogicBase';
+import type { Reference } from '@/shared/types/Responsabilities/LogicBase';
+import type { Generics } from '@/shared/types/Responsabilities/Outputs';
+import type { LoginState } from '@/shared/types/States';
 import { assertUnreachable } from '@/shared/utils/assertUnreachable';
 import { useLoaderData } from 'react-router';
 
-export const useLoginProvided = (state: State): State => {
-    const errorHandler = useLoginErrorHandler();
-    const output = useLoaderData() as Awaited<
-        ReturnType<LoginProvidedDispatcher['provide']>
-    >;
+type ProvideOutput = Generics['Login']['provide'] | null;
+
+export const useLoginProvided = (state: LoginState): LoginState => {
+    const { errorHandler } = useLogicBase<
+        Reference['Handlers']['Login']['Error'],
+        LoginState
+    >();
+    const output = useLoaderData() as ProvideOutput;
     const auth = useAuth();
     if (output === null) {
         return state;
@@ -20,7 +24,10 @@ export const useLoginProvided = (state: State): State => {
                 body: { user },
             } = output;
             auth?.login(user);
-            return state;
+            return {
+                ...state,
+                requestStatus: { statusCode: 200, message: 'OK' },
+            };
         }
         case 422:
         case 401:

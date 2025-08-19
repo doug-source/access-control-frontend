@@ -8,28 +8,7 @@ export class SelfUpdateAdapter implements SelfUpdate {
         this.httpClient = httpClient;
     }
 
-    private makeFormData(
-        data: Parameters<SelfUpdate['update']>[1],
-        photoToUpload: File | null
-    ) {
-        const formData = new FormData();
-        formData.append('name', data.name);
-        if (photoToUpload) {
-            formData.append('photo', photoToUpload);
-        }
-        const phone = data.phone?.trim();
-        if (phone) {
-            formData.append('phone', phone);
-        }
-        return formData;
-    }
-
-    update(
-        token: string,
-        data: Parameters<SelfUpdate['update']>[1],
-        photoToUpload: File | null
-    ): Promise<unknown> {
-        const body = this.makeFormData(data, photoToUpload);
+    update(token: string, data: FormData): Promise<unknown> {
         return this.httpClient.request({
             url: { url: '/api/users', qs: { _method: 'PATCH' } },
             method: 'post',
@@ -37,7 +16,7 @@ export class SelfUpdateAdapter implements SelfUpdate {
                 Authorization: `Bearer ${token}`,
                 accept: 'application/json',
             },
-            body,
+            body: data,
         });
     }
 }

@@ -1,12 +1,25 @@
 import { useAuth } from '@/shared/hooks/useAuth';
-import { userConfigReducer } from '@/shared/reducers/userConfigReducer';
-import { userConfigInitialData } from '@/shared/utils/ReduceInitialValues';
-import { useReducer } from 'react';
+import { userConfigInitialData } from '@/shared/utils/initialStates';
+import { useActionState } from 'react';
+import { useUserConfigStateAction } from './useUserConfigStateAction';
 
 export const useDeps = () => {
-    const photoRemote = useAuth()?.user?.photo ?? null;
-    return useReducer(userConfigReducer, {
+    const user = useAuth()?.user;
+    const photoRemote = user?.photo ?? null;
+    const name = user?.name ?? '';
+    const phone = user?.phone ?? '';
+    const email = user?.email ?? '';
+
+    const [submitHandler, clearFileRef] = useUserConfigStateAction();
+    const actionStateList = useActionState(submitHandler, {
         ...userConfigInitialData,
         photoRemote,
+        fields: {
+            ...userConfigInitialData.fields,
+            name,
+            phone,
+            email,
+        },
     });
+    return [...actionStateList, clearFileRef] as const;
 };

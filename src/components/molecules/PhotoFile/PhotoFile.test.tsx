@@ -1,4 +1,3 @@
-import { DispatchProvider } from '@/shared/providers/DispatchProvider';
 import { faker } from '@faker-js/faker';
 import { render, renderHook, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -13,10 +12,11 @@ const runRefHook = () => {
 
 describe('PhotoFile component', () => {
     it("renders component's content correctly", () => {
+        const setFile = vi.fn();
         const {
             result: { current: inputRef },
         } = runRefHook();
-        render(<PhotoFile inputRef={inputRef} />);
+        render(<PhotoFile inputRef={inputRef} setFile={setFile} />);
         const box = screen.getByText('Clique na caixa para upload');
         expect(box).toBeInTheDocument();
         const input = screen.getByLabelText('Input da foto do usuário');
@@ -26,12 +26,8 @@ describe('PhotoFile component', () => {
         const {
             result: { current: inputRef },
         } = runRefHook();
-        const dispatch = vi.fn();
-        render(
-            <DispatchProvider dispatch={dispatch}>
-                <PhotoFile inputRef={inputRef} />
-            </DispatchProvider>
-        );
+        const setFile = vi.fn();
+        render(<PhotoFile inputRef={inputRef} setFile={setFile} />);
         const user = userEvent.setup();
         const mimetype = 'image/png';
         const filename = faker.system.commonFileName(mimetype);
@@ -46,9 +42,5 @@ describe('PhotoFile component', () => {
         expect(fileInput.files).toHaveLength(1);
         expect(fileInput.files?.[0]).toStrictEqual(file);
         expect(fileInput.files?.item(0)).toStrictEqual(file);
-        expect(dispatch).toHaveBeenCalledWith({
-            type: 'photo-chosen-change',
-            payload: file,
-        });
     });
 });

@@ -1,7 +1,12 @@
-import { registerAccountReducer } from '@/shared/reducers/registerAccountReducer';
-import { registerAccountInitialData } from '@/shared/utils/ReduceInitialValues';
-import { useReducer } from 'react';
+import { registerAccountInitialData } from '@/shared/utils/initialStates';
+import { useActionState } from 'react';
+import { useRegisterAccountProvided } from './useRegisterAccountProvided';
+import { useRegisterAccountStateAction } from './useRegisterAccountStateAction';
 
 export const useDeps = () => {
-    return useReducer(registerAccountReducer, registerAccountInitialData);
+    const submitHandler = useRegisterAccountStateAction();
+    return useActionState(
+        submitHandler,
+        useRegisterAccountProvided(registerAccountInitialData)
+    );
 };

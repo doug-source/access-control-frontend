@@ -1,31 +1,25 @@
-import { AuthenticatorProvider } from '@/shared/providers/boxes/AuthenticatorProvider';
-import { type State } from '@/shared/types/Reducers/Standard/State';
+import type { LoginState } from '@/shared/types/States';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
-import { MockInstance } from 'vitest';
 import { LoginTemplate } from '.';
 import styles from './LoginTemplate.module.scss';
-import * as loginProvided from './shared/useLoginProvided';
-
-let loginProvidedSpy: MockInstance<() => readonly [boolean]>;
 
 describe('<LoginTemplate /> component', () => {
-    beforeAll(() => {
-        loginProvidedSpy = vi.spyOn(loginProvided, 'useLoginProvided');
-    });
-    afterAll(() => {
-        loginProvidedSpy.mockRestore();
-    });
     it('renders correctly', () => {
-        loginProvidedSpy.mockReturnValue([false]);
-        const state: State = { requestStatus: { statusCode: -1 } };
+        const state: LoginState = {
+            requestStatus: { statusCode: -1 },
+            fields: { email: '', password: '' },
+        };
+        const formAction = vi.fn();
         const router = createMemoryRouter([
             {
                 path: '/',
                 element: (
-                    <AuthenticatorProvider>
-                        <LoginTemplate state={state} />
-                    </AuthenticatorProvider>
+                    <LoginTemplate
+                        state={state}
+                        formAction={formAction}
+                        pending={false}
+                    />
                 ),
             },
         ]);
@@ -34,17 +28,21 @@ describe('<LoginTemplate /> component', () => {
         expect($el).toBeInTheDocument();
     });
     it('renders with status code equal 200 correctly', () => {
-        loginProvidedSpy.mockReturnValue([false]);
-        const state: State = {
+        const state: LoginState = {
             requestStatus: { statusCode: 200, message: 'OK' },
+            fields: { email: '', password: '' },
         };
+        const formAction = vi.fn();
         const router = createMemoryRouter([
             {
                 path: '/',
                 element: (
-                    <AuthenticatorProvider>
-                        <LoginTemplate state={state} data-testid="container" />
-                    </AuthenticatorProvider>
+                    <LoginTemplate
+                        state={state}
+                        formAction={formAction}
+                        pending={false}
+                        data-testid="container"
+                    />
                 ),
             },
         ]);
@@ -53,15 +51,20 @@ describe('<LoginTemplate /> component', () => {
         expect($el).toHaveClass(styles.logged);
     });
     it('renders with login already provided correctly', () => {
-        loginProvidedSpy.mockReturnValue([true]);
-        const state: State = { requestStatus: { statusCode: -1 } };
+        const formAction = vi.fn();
+        const state: LoginState = {
+            requestStatus: { statusCode: -1 },
+            fields: { email: '', password: '' },
+        };
         const router = createMemoryRouter([
             {
                 path: '/',
                 element: (
-                    <AuthenticatorProvider>
-                        <LoginTemplate state={state} />
-                    </AuthenticatorProvider>
+                    <LoginTemplate
+                        state={state}
+                        formAction={formAction}
+                        pending={false}
+                    />
                 ),
             },
         ]);

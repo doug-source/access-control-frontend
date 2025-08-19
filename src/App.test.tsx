@@ -16,6 +16,8 @@ describe('main.tsx', () => {
             emailVerified: true,
             name: faker.person.firstName(),
             token: faker.word.noun(),
+            phone: null,
+            photo: null,
         };
         window.localStorage.setItem('user', JSON.stringify(userSigned));
         const content = faker.word.noun();
@@ -56,6 +58,8 @@ describe('main.tsx', () => {
             emailVerified: false,
             name: faker.person.firstName(),
             token: faker.word.noun(),
+            phone: null,
+            photo: null,
         };
         window.localStorage.setItem('user', JSON.stringify(userSigned));
         const content = faker.word.noun();

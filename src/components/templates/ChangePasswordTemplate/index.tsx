@@ -2,33 +2,29 @@ import { FieldGroup } from '@/components/atoms/FieldGroup';
 import { GateLinkBox } from '@/components/molecules/GateLinkBox';
 import { LabelWarned } from '@/components/molecules/LabelWarned';
 import { FormCardContainer } from '@/components/organisms/FormCardContainer';
-import { type ResetPasswordState } from '@/shared/types/Reducers/Guest/ChangePassword';
+import { type ResetPasswordState } from '@/shared/types/States';
 import styles from './ChangePasswordTemplate.module.scss';
 import { resetPassBtnIsDisabled } from './shared/resetPassBtnIsDisabled';
-import { useDeps } from './shared/useDeps';
 
 interface ChangePasswordTemplateProps {
     state: ResetPasswordState;
+    formAction(payload: FormData): void;
+    pending: boolean;
 }
 
 export const ChangePasswordTemplate = ({
     state,
+    formAction,
+    pending,
 }: ChangePasswordTemplateProps) => {
-    const {
-        emailRef,
-        passwordRef,
-        passConfirmRef,
-        tokenRef,
-        handler: submitHandler,
-    } = useDeps();
     return (
         <FormCardContainer
             state={state}
             heading="Alterar senha"
             topContent={<GateLinkBox />}
-            submitHandler={submitHandler}
+            formAction={formAction}
+            pending={resetPassBtnIsDisabled(state, pending)}
             submitBtnText="Alterar"
-            disabledBtn={resetPassBtnIsDisabled(state, 0)}
         >
             <FieldGroup.Box>
                 <LabelWarned
@@ -38,7 +34,12 @@ export const ChangePasswordTemplate = ({
                 >
                     Nova senha
                 </LabelWarned>
-                <FieldGroup.Input type="password" ref={passwordRef} blurred />
+                <FieldGroup.Input
+                    type="password"
+                    name="password"
+                    defaultValue={state.fields.password}
+                    blurred
+                />
             </FieldGroup.Box>
             <FieldGroup.Box>
                 <FieldGroup.Label className={styles.label}>
@@ -46,22 +47,13 @@ export const ChangePasswordTemplate = ({
                 </FieldGroup.Label>
                 <FieldGroup.Input
                     type="password"
-                    ref={passConfirmRef}
+                    name="passConfirm"
+                    defaultValue={state.fields.passConfirm}
                     blurred
                 />
             </FieldGroup.Box>
-            <input
-                type="hidden"
-                name="token"
-                value={state.token ?? ''}
-                ref={tokenRef}
-            />
-            <input
-                type="hidden"
-                name="email"
-                value={state.email ?? ''}
-                ref={emailRef}
-            />
+            <input type="hidden" name="token" value={state.token ?? ''} />
+            <input type="hidden" name="email" value={state.email ?? ''} />
         </FormCardContainer>
     );
 };

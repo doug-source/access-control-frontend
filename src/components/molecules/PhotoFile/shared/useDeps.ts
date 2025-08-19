@@ -1,16 +1,16 @@
-import { usePhotoFile } from '@/shared/hooks/usePhotoFile';
-import { useId } from 'react';
+import { RefObject, useId } from 'react';
 import { usePhotoHandler } from './usePhotoHandler';
 
-export const useDeps = () => {
-    const photoHandler = usePhotoHandler();
-    const photoFile = usePhotoFile();
+export const useDeps = (
+    setFile: (val: File | null) => void,
+    inputRef?: RefObject<HTMLInputElement | null>
+) => {
+    const hookArgs = usePhotoHandler(setFile, inputRef);
     const idPhotoBox = useId();
     const idPhotoInput = useId();
 
     return {
-        photoHandler,
-        photoFile,
+        ...hookArgs,
         idPhotoBox,
         idPhotoInput,
     };

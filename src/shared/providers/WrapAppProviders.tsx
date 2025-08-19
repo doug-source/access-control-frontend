@@ -1,13 +1,30 @@
-import { AuthenticatorProvider } from '@/shared/providers/boxes/AuthenticatorProvider';
-import { HttpClientProvider } from '@/shared/providers/boxes/HttpClientProvider';
-import { type ReactNode } from 'react';
+import { AllocateAuth } from '@/shared/components/atoms/AllocateAuth';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
+import type { AuthSetter } from '@/shared/types/Contracts/AuthSetter';
+import { abilityFormBase } from '@/shared/utils/globals/abilityForm';
+import { loginBase } from '@/shared/utils/globals/login';
+import { roleFormBase } from '@/shared/utils/globals/roleForm';
+import { userConfigBase } from '@/shared/utils/globals/userConfig';
+import { userFormBase } from '@/shared/utils/globals/userForm';
+import { useMemo, type PropsWithChildren } from 'react';
+import { UnauthenticatorProvider } from './UnauthenticatorProvider';
 
-type WrapAppProvidersProps = {
-    children: ReactNode;
+export const WrapAppProviders = ({ children }: PropsWithChildren) => {
+    const setters = useMemo<AuthSetter[]>(
+        () => [
+            loginBase.dispatcher,
+            userFormBase.dispatcher,
+            roleFormBase.dispatcher,
+            abilityFormBase.dispatcher,
+            userConfigBase.dispatcher,
+        ],
+        []
+    );
+    return (
+        <HttpClientProvider>
+            <AllocateAuth setters={setters}>
+                <UnauthenticatorProvider>{children}</UnauthenticatorProvider>
+            </AllocateAuth>
+        </HttpClientProvider>
+    );
 };
-
-export const WrapAppProviders = ({ children }: WrapAppProvidersProps) => (
-    <HttpClientProvider>
-        <AuthenticatorProvider>{children}</AuthenticatorProvider>
-    </HttpClientProvider>
-);

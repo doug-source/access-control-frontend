@@ -13,6 +13,8 @@ describe('<Guest /> component', () => {
             emailVerified: true,
             name: faker.person.firstName(),
             token: faker.word.noun(),
+            phone: null,
+            photo: null,
         };
         window.localStorage.setItem('user', JSON.stringify(userSigned));
         const content = faker.word.noun();

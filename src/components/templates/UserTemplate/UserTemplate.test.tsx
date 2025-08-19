@@ -1,4 +1,4 @@
-import { HttpClientProvider } from '@/shared/providers/boxes/HttpClientProvider';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { ViewerProvider } from '@/shared/providers/ViewerProvider';
 import { User } from '@/shared/types/Models/User';
 import { UserState } from '@/shared/types/Reducers/User';
@@ -18,6 +18,7 @@ describe('<UserTemplate /> component', () => {
             email: faker.internet.email(),
             emailVerifiedAt: faker.date.anytime.toString(),
             phone: faker.phone.number(),
+            photo: null,
         };
         const state: UserState = { requestStatus: { statusCode: -1 }, user };
         const router = createMemoryRouter([

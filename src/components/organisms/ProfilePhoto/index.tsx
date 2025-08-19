@@ -8,25 +8,27 @@ import { useDeps } from './shared/useDeps';
 interface ProfilePhotoProps extends Omit<ComponentPropsWithRef<'div'>, 'ref'> {
     url: string | null;
     fallback: ReactNode;
-    ref?: ComponentPropsWithRef<'input'>['ref'];
 }
 
 export const ProfilePhoto = ({
     url,
     fallback,
-    ref,
     ...remain
 }: ProfilePhotoProps) => {
-    const { photoInputRef, photoFile, fileInputKey, imgSrc } = useDeps(url);
+    const { inputRef, filePath, setFile, clearFileRef, backHandle, imgSrc } =
+        useDeps(url);
 
     return (
         <div {...remain} className={styles.box}>
-            <BackPhotoBtn
-                photoInputRef={photoInputRef}
-                show={Boolean(photoFile?.name)}
-            />
+            <BackPhotoBtn show={Boolean(filePath)} onClick={backHandle} />
             <PhotoPreview src={imgSrc} fallback={fallback} />
-            <PhotoFile key={fileInputKey} inputRef={ref} />
+
+            <PhotoFile
+                ref={clearFileRef}
+                inputRef={inputRef}
+                filePath={filePath}
+                setFile={setFile}
+            />
         </div>
     );
 };

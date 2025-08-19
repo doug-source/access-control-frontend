@@ -1,5 +1,6 @@
-import { HttpClientProvider } from '@/shared/providers/boxes/HttpClientProvider';
-import { VerifyEmailRequesterProvider } from '@/shared/providers/VerifyEmailRequesterProvider';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
+import { LogicBaseProvider } from '@/shared/providers/LogicBaseProvider';
+import { verifyEmailBase } from '@/shared/utils/globals/verifyEmail';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { VerifyEmail } from '.';
@@ -11,9 +12,9 @@ describe('<VerifyEmail /> component', () => {
                 path: '/',
                 element: (
                     <HttpClientProvider>
-                        <VerifyEmailRequesterProvider>
+                        <LogicBaseProvider base={verifyEmailBase}>
                             <VerifyEmail />
-                        </VerifyEmailRequesterProvider>
+                        </LogicBaseProvider>
                     </HttpClientProvider>
                 ),
             },

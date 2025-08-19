@@ -1,21 +1,26 @@
-import { HttpClientProvider } from '@/shared/providers/boxes/HttpClientProvider';
-import { ForgotPasswordHandlerProvider } from '@/shared/providers/guest/ForgotPasswordHandlerProvider';
-import { State } from '@/shared/types/Reducers/Standard/State';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
+import type { ForgotPasswordState } from '@/shared/types/States';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { ForgotPasswordTemplate } from '.';
 
 describe('<ForgotPasswordTemplate /> component', () => {
     it('renders correctly', () => {
-        const state: State = { requestStatus: { statusCode: -1 } };
+        const state: ForgotPasswordState = {
+            requestStatus: { statusCode: -1 },
+            fields: { email: '' },
+        };
+        const formAction = vi.fn();
         const router = createMemoryRouter([
             {
                 path: '/',
                 element: (
                     <HttpClientProvider>
-                        <ForgotPasswordHandlerProvider>
-                            <ForgotPasswordTemplate state={state} />
-                        </ForgotPasswordHandlerProvider>
+                        <ForgotPasswordTemplate
+                            state={state}
+                            formAction={formAction}
+                            pending={false}
+                        />
                     </HttpClientProvider>
                 ),
             },

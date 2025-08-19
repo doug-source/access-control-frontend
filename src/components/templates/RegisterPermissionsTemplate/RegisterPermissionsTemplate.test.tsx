@@ -1,4 +1,4 @@
-import { HttpClientProvider } from '@/shared/providers/boxes/HttpClientProvider';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { InputRefProvider } from '@/shared/providers/InputRefProvider';
 import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
 import { registerPermissionsInitialData } from '@/shared/utils/ReduceInitialValues';

@@ -1,5 +1,5 @@
 import { type User } from '@/shared/types/Models/User';
-import { type State } from '@/shared/types/Reducers/Standard/State';
+import { type State } from '../States';
 
 export interface UserState extends State {
     user: User | null;

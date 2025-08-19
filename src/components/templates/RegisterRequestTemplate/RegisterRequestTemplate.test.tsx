@@ -1,4 +1,4 @@
-import { HttpClientProvider } from '@/shared/providers/boxes/HttpClientProvider';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { ViewerProvider } from '@/shared/providers/ViewerProvider';
 import { RegisterRequest } from '@/shared/types/Models/RegisterRequest';
 import { RegisterRequestState } from '@/shared/types/Reducers/RegisterRequest';

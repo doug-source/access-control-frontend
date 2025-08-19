@@ -1,37 +1,15 @@
 import { AuthProvider } from '@/shared/providers/AuthProvider';
-import { AuthenticatorProvider } from '@/shared/providers/boxes/AuthenticatorProvider';
-import { HttpClientProvider } from '@/shared/providers/boxes/HttpClientProvider';
 import { DispatchProvider } from '@/shared/providers/DispatchProvider';
-import { type Authenticator } from '@/shared/types/Contracts/Authenticator';
-import { type AuthUser } from '@/shared/types/NullableUser';
-import { faker } from '@faker-js/faker';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
+import { LogicBaseProvider } from '@/shared/providers/LogicBaseProvider';
+import { loginBase } from '@/shared/utils/globals/login';
 import { renderHook } from '@testing-library/react';
 import { createElement, type PropsWithChildren } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
-import { useAuthStateAction } from './useAuthStateAction';
+import { useLoginStateAction } from './useLoginStateAction';
 
 describe('useAuthSubmit hook', () => {
     it("runs hook's returns correctly", async () => {
-        const authenticator = new (class implements Authenticator {
-            login(data: { email: string; password: string }): Promise<unknown> {
-                if (typeof data.email === 'undefined') {
-                    throw data.password;
-                }
-                throw new Error('Method not implemented.');
-            }
-            logout(token: string): Promise<unknown> {
-                if (typeof token === 'undefined') {
-                    throw token;
-                }
-                throw new Error('Method not implemented.');
-            }
-            provide(token: string): Promise<unknown> {
-                if (typeof token === 'undefined') {
-                    throw token;
-                }
-                throw new Error('Method not implemented.');
-            }
-        })();
         const dispatch = vi.fn();
         const wrapper = ({ children }: PropsWithChildren) => {
             const router = createMemoryRouter(
@@ -42,13 +20,10 @@ describe('useAuthSubmit hook', () => {
                             dispatch,
                             children: createElement(HttpClientProvider, {
                                 children: createElement(AuthProvider, {
-                                    children: createElement(
-                                        AuthenticatorProvider,
-                                        {
-                                            authenticator,
-                                            children,
-                                        }
-                                    ),
+                                    children: createElement(LogicBaseProvider, {
+                                        base: loginBase,
+                                        children,
+                                    }),
                                 }),
                             }),
                         }),
@@ -67,33 +42,13 @@ describe('useAuthSubmit hook', () => {
         };
         const { result } = renderHook(
             () => {
-                return useAuthStateAction();
+                return useLoginStateAction();
             },
             { wrapper }
         );
         expect(typeof result.current).toBe('function');
     });
     it("runs hook's some input ref is nullable correctly", async () => {
-        const authenticator = new (class implements Authenticator {
-            login(data: { email: string; password: string }): Promise<unknown> {
-                if (typeof data.email === 'undefined') {
-                    throw data.password;
-                }
-                throw new Error('Method not implemented.');
-            }
-            logout(token: string): Promise<unknown> {
-                if (typeof token === 'undefined') {
-                    throw token;
-                }
-                throw new Error('Method not implemented.');
-            }
-            provide(token: string): Promise<unknown> {
-                if (typeof token === 'undefined') {
-                    throw token;
-                }
-                throw new Error('Method not implemented.');
-            }
-        })();
         const dispatch = vi.fn();
         const wrapper = ({ children }: PropsWithChildren) => {
             const router = createMemoryRouter(
@@ -104,13 +59,10 @@ describe('useAuthSubmit hook', () => {
                             dispatch,
                             children: createElement(HttpClientProvider, {
                                 children: createElement(AuthProvider, {
-                                    children: createElement(
-                                        AuthenticatorProvider,
-                                        {
-                                            authenticator,
-                                            children,
-                                        }
-                                    ),
+                                    children: createElement(LogicBaseProvider, {
+                                        base: loginBase,
+                                        children,
+                                    }),
                                 }),
                             }),
                         }),
@@ -129,48 +81,20 @@ describe('useAuthSubmit hook', () => {
         };
         const { result } = renderHook(
             () => {
-                return useAuthStateAction();
+                return useLoginStateAction();
             },
             { wrapper }
         );
-        result.current({ requestStatus: { statusCode: 0 } }, new FormData());
+        result.current(
+            {
+                requestStatus: { statusCode: 0 },
+                fields: { email: '', password: '' },
+            },
+            new FormData()
+        );
         expect(dispatch).not.toHaveBeenCalled();
     });
     it('runs requesting and returning the status code equals 200 correctly', async () => {
-        const userSigned: AuthUser = {
-            id: faker.number.int({ min: 1 }).toString(),
-            email: faker.internet.email(),
-            emailVerified: true,
-            name: faker.person.firstName(),
-            token: faker.word.noun(),
-            phone: null,
-            photo: null,
-        };
-        const authenticator = new (class implements Authenticator {
-            login(data: { email: string; password: string }): Promise<unknown> {
-                if (typeof data.email === 'undefined') {
-                    throw data.password;
-                }
-                return Promise.resolve({
-                    statusCode: 200,
-                    body: {
-                        user: userSigned,
-                    },
-                });
-            }
-            logout(token: string): Promise<unknown> {
-                if (typeof token === 'undefined') {
-                    throw token;
-                }
-                throw new Error('Method not implemented.');
-            }
-            provide(token: string): Promise<unknown> {
-                if (typeof token === 'undefined') {
-                    throw token;
-                }
-                throw new Error('Method not implemented.');
-            }
-        })();
         const dispatch = vi.fn();
         const wrapper = ({ children }: PropsWithChildren) => {
             const router = createMemoryRouter(
@@ -181,13 +105,10 @@ describe('useAuthSubmit hook', () => {
                             dispatch,
                             children: createElement(HttpClientProvider, {
                                 children: createElement(AuthProvider, {
-                                    children: createElement(
-                                        AuthenticatorProvider,
-                                        {
-                                            authenticator,
-                                            children,
-                                        }
-                                    ),
+                                    children: createElement(LogicBaseProvider, {
+                                        base: loginBase,
+                                        children,
+                                    }),
                                 }),
                             }),
                         }),
@@ -206,12 +127,15 @@ describe('useAuthSubmit hook', () => {
         };
         const { result } = renderHook(
             () => {
-                return useAuthStateAction();
+                return useLoginStateAction();
             },
             { wrapper }
         );
         await result.current(
-            { requestStatus: { statusCode: 0 } },
+            {
+                requestStatus: { statusCode: 0 },
+                fields: { email: '', password: '' },
+            },
             new FormData()
         );
         expect(dispatch).toHaveBeenNthCalledWith(2, {
@@ -221,33 +145,6 @@ describe('useAuthSubmit hook', () => {
     });
     it('runs requesting and returning the status code equals 422 correctly', async () => {
         const errorMessage = 'obrigatório';
-        const authenticator = new (class implements Authenticator {
-            login(data: { email: string; password: string }): Promise<unknown> {
-                if (typeof data.email === 'undefined') {
-                    throw data.password;
-                }
-                return Promise.resolve({
-                    statusCode: 422,
-                    body: {
-                        errors: {
-                            email: [errorMessage],
-                        },
-                    },
-                });
-            }
-            logout(token: string): Promise<unknown> {
-                if (typeof token === 'undefined') {
-                    throw token;
-                }
-                throw new Error('Method not implemented.');
-            }
-            provide(token: string): Promise<unknown> {
-                if (typeof token === 'undefined') {
-                    throw token;
-                }
-                throw new Error('Method not implemented.');
-            }
-        })();
         const dispatch = vi.fn();
         const wrapper = ({ children }: PropsWithChildren) => {
             const router = createMemoryRouter(
@@ -258,13 +155,10 @@ describe('useAuthSubmit hook', () => {
                             dispatch,
                             children: createElement(HttpClientProvider, {
                                 children: createElement(AuthProvider, {
-                                    children: createElement(
-                                        AuthenticatorProvider,
-                                        {
-                                            authenticator,
-                                            children,
-                                        }
-                                    ),
+                                    children: createElement(LogicBaseProvider, {
+                                        base: loginBase,
+                                        children,
+                                    }),
                                 }),
                             }),
                         }),
@@ -283,12 +177,15 @@ describe('useAuthSubmit hook', () => {
         };
         const { result } = renderHook(
             () => {
-                return useAuthStateAction();
+                return useLoginStateAction();
             },
             { wrapper }
         );
         await result.current(
-            { requestStatus: { statusCode: 0 } },
+            {
+                requestStatus: { statusCode: 0 },
+                fields: { email: '', password: '' },
+            },
             new FormData()
         );
         expect(dispatch).toHaveBeenNthCalledWith(2, {

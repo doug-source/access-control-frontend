@@ -1,7 +1,12 @@
-import { resetPasswordReducer } from '@/shared/reducers/resetPasswordReducer';
-import { resetPasswordInitialData } from '@/shared/utils/ReduceInitialValues';
-import { useReducer } from 'react';
+import { resetPasswordInitialData } from '@/shared/utils/initialStates';
+import { useActionState } from 'react';
+import { useResetPasswordProvided } from './useResetPasswordProvided';
+import { useResetPasswordStateAction } from './useResetPasswordStateAction';
 
 export const useDeps = () => {
-    return useReducer(resetPasswordReducer, resetPasswordInitialData);
+    const submitHandler = useResetPasswordStateAction();
+    return useActionState(
+        submitHandler,
+        useResetPasswordProvided(resetPasswordInitialData)
+    );
 };

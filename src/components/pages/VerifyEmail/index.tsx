@@ -1,6 +1,5 @@
 import { VerifyEmailTemplate } from '@/components/templates/VerifyEmailTemplate';
-import { DispatchProvider } from '@/shared/providers/DispatchProvider';
-import { VerifyEmailRequesterProvider } from '@/shared/providers/VerifyEmailRequesterProvider';
+import { LocalNavigate } from '@/shared/components/atoms/LocalNavigate';
 import { useDeps } from './shared/useDeps';
 
 /**
@@ -20,12 +19,15 @@ import { useDeps } from './shared/useDeps';
  * shown and the user is redirected to '/home' route.
  */
 export const VerifyEmail = () => {
-    const [state, dispatch] = useDeps();
+    const [state, formAction, pending] = useDeps();
+    if (state.verified) {
+        return <LocalNavigate to="/home" replace />;
+    }
     return (
-        <VerifyEmailRequesterProvider>
-            <DispatchProvider dispatch={dispatch}>
-                <VerifyEmailTemplate state={state} />
-            </DispatchProvider>
-        </VerifyEmailRequesterProvider>
+        <VerifyEmailTemplate
+            state={state}
+            formAction={formAction}
+            pending={pending}
+        />
     );
 };

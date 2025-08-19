@@ -5,26 +5,24 @@ import { VerticalCardBox } from '@/components/atoms/VerticalCardBox';
 import { FormContentBox } from '@/components/molecules/FormContentBox';
 import { GateLinkBox } from '@/components/molecules/GateLinkBox';
 import { MessageResult } from '@/components/molecules/MessageResult';
+import { SpinnerCovering } from '@/components/molecules/SpinnerCovering';
 import { VerifyEmailActivationForm } from '@/components/organisms/VerifyEmailActivationForm';
-import { LocalNavigate } from '@/shared/components/atoms/LocalNavigate';
-import { type State } from '@/shared/types/Reducers/Standard/State';
-import { btnIsDisabled } from '@/shared/utils/btnIsDisabled';
-import { intoRequestStatus } from '@/shared/utils/intoRequestStatus';
+import type { VerifyEmailState } from '@/shared/types/States';
 import styles from './VerifyEmailTemplate.module.scss';
-import { isVerifyEmailRequesting } from './shared/isVerifyEmailRequesting';
-import { useDeps } from './shared/useDeps';
 
 type VerifyEmailTemplateProps = {
-    state: State;
+    state: VerifyEmailState;
+    pending: boolean;
+    formAction(payload: FormData): void;
 };
 
-export const VerifyEmailTemplate = ({ state }: VerifyEmailTemplateProps) => {
-    const { verified, auth, emailRedirect, handler: submitHandler } = useDeps();
-    if (verified || auth?.user?.emailVerified) {
-        return <LocalNavigate to="/home" replace />;
-    }
-    if (isVerifyEmailRequesting(state.requestStatus, emailRedirect)) {
-        return null;
+export const VerifyEmailTemplate = ({
+    state,
+    formAction,
+    pending,
+}: VerifyEmailTemplateProps) => {
+    if (state.requestStatus.statusCode === 0) {
+        return <SpinnerCovering show />;
     }
     return (
         <FormLayout>
@@ -41,10 +39,9 @@ export const VerifyEmailTemplate = ({ state }: VerifyEmailTemplateProps) => {
                         esta aba do navegador.
                     </p>
                     <VerifyEmailActivationForm
-                        show={intoRequestStatus(state.requestStatus, -1, 0)}
-                        submitHandler={submitHandler}
-                        disabledBtn={btnIsDisabled(state.requestStatus, 0)}
-                        loading={intoRequestStatus(state.requestStatus, 0)}
+                        show={!state.resend || pending}
+                        formAction={formAction}
+                        pending={pending}
                     >
                         <p className={styles.paragraph}>
                             Caso você não tenha recebido o email ou ele tenha

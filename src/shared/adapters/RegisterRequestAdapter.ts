@@ -1,5 +1,5 @@
-import { type RegisterRequestMaker } from '@/shared/types/Contracts/Guest/RegisterRequestMaker';
 import { type HttpClient } from '@/shared/types/Contracts/HttpClient';
+import { type RegisterRequestMaker } from '@/shared/types/Contracts/RegisterRequestMaker';
 
 export class RegisterRequestAdapter implements RegisterRequestMaker {
     private httpClient: HttpClient;

@@ -1,7 +1,6 @@
 import type { AuthContextProvided } from '@/shared/contexts/types/AuthContextProvided';
 import * as AuthHooks from '@/shared/hooks/useAuth';
 import { AuthProvider } from '@/shared/providers/AuthProvider';
-import { AuthenticatorProvider } from '@/shared/providers/boxes/AuthenticatorProvider';
 import { faker } from '@faker-js/faker';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
@@ -36,18 +35,19 @@ describe('<MainLayout /> component', () => {
                 emailVerified: true,
                 name: faker.person.firstName(),
                 token: faker.word.noun(),
+                phone: null,
+                photo: null,
             },
             abilities: ['user-screen'],
             emailValidated: vi.fn(),
             login: vi.fn(),
             logout: vi.fn(),
+            updateAuthUser: vi.fn(),
         });
         render(
             <MemoryRouter initialEntries={['/home']}>
                 <AuthProvider>
-                    <AuthenticatorProvider>
-                        <MainLayout />
-                    </AuthenticatorProvider>
+                    <MainLayout />
                 </AuthProvider>
             </MemoryRouter>
         );

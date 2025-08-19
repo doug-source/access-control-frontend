@@ -1,6 +1,6 @@
 import { AuthProvider } from '@/shared/providers/AuthProvider';
-import { HttpClientProvider } from '@/shared/providers/boxes/HttpClientProvider';
 import { DispatchProvider } from '@/shared/providers/DispatchProvider';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { PageRequesterWithRestoreProvider } from '@/shared/providers/PageRequesterWithRestoreProvider';
 import { PageRequesterWithRestore } from '@/shared/types/Contracts/PageRequesterWithRestore';
 import { faker } from '@faker-js/faker';

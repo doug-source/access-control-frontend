@@ -1,0 +1,44 @@
+import { useAuth } from '@/shared/hooks/useAuth';
+import { useLogicBase } from '@/shared/hooks/useLogicBase';
+import type { Reference } from '@/shared/types/Responsabilities/LogicBase';
+import type { VerifyEmailState } from '@/shared/types/States';
+import { assertUnreachable } from '@/shared/utils/assertUnreachable';
+import type { Dispatch, RefObject, SetStateAction } from 'react';
+import { useVerifyEmailRequest } from './useVerifyEmailRequest';
+
+export const useVerifyEmailOutput = (
+    state: VerifyEmailState,
+    dispatchRef: RefObject<Dispatch<SetStateAction<VerifyEmailState>> | null>
+): VerifyEmailState => {
+    const auth = useAuth();
+    const { errorHandler } = useLogicBase<
+        Reference['Handlers']['VerifyEmail']['Error'],
+        VerifyEmailState
+    >();
+    const [newState, output, setState] = useVerifyEmailRequest(state);
+    dispatchRef.current = setState;
+
+    if (state.resend === true) {
+        return state;
+    }
+    if (output === null) {
+        return newState;
+    }
+
+    switch (output.statusCode) {
+        case 200: {
+            auth?.emailValidated();
+            return {
+                ...newState,
+                verified: true,
+            };
+        }
+        case 401:
+        case 403:
+        case 422: {
+            return errorHandler.handle(output, newState);
+        }
+        default:
+            assertUnreachable(output);
+    }
+};

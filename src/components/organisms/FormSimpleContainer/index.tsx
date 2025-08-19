@@ -8,24 +8,24 @@ import { BrandBtn } from '@/components/molecules/BrandBtn';
 import { FormContentBox } from '@/components/molecules/FormContentBox';
 import { MessageResult } from '@/components/molecules/MessageResult';
 import btnStyles from '@/shared/stylessheets/btn.module.scss';
-import { type State } from '@/shared/types/Reducers/Standard/State';
-import type { ComponentPropsWithoutRef, FormEventHandler } from 'react';
+import { type State } from '@/shared/types/States';
+import type { ComponentPropsWithoutRef, ComponentPropsWithRef } from 'react';
 
 type FormSimpleContainerProps<T> = ComponentPropsWithoutRef<
     typeof FormLayout
 > & {
     state: T;
-    submitHandler: FormEventHandler<HTMLFormElement>;
-    disabledBtn: boolean;
+    pending: boolean;
+    formAction: ComponentPropsWithRef<'form'>['action'];
     submitBtnText: string;
 };
 
 export const FormSimpleContainer = <T extends State>({
     state,
     children,
-    submitHandler,
-    disabledBtn,
     submitBtnText,
+    formAction,
+    pending,
     ...remain
 }: FormSimpleContainerProps<T>) => (
     <FormLayout {...remain}>
@@ -34,16 +34,14 @@ export const FormSimpleContainer = <T extends State>({
                 <MessageLine>
                     <MessageResult request={state.requestStatus} />
                 </MessageLine>
-                <CustomForm onSubmit={submitHandler}>
+                <CustomForm action={formAction}>
                     {children}
                     <SubmitRow>
                         <BrandBtn
                             className={btnStyles.submitBtn}
-                            disabled={disabledBtn}
+                            disabled={pending}
                         >
-                            <LoadingIcon
-                                show={state.requestStatus.statusCode === 0}
-                            />
+                            <LoadingIcon show={pending} />
                             <span>{submitBtnText}</span>
                         </BrandBtn>
                     </SubmitRow>

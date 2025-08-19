@@ -1,38 +1,30 @@
 import { AuthProvider } from '@/shared/providers/AuthProvider';
-import { HttpClientProvider } from '@/shared/providers/boxes/HttpClientProvider';
-import { VerifyEmailRequesterProvider } from '@/shared/providers/VerifyEmailRequesterProvider';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { AuthUser } from '@/shared/types/NullableUser';
-import { type State } from '@/shared/types/Reducers/Standard/State';
+import type { VerifyEmailState } from '@/shared/types/States';
 import { faker } from '@faker-js/faker';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
-import { MockInstance } from 'vitest';
 import { VerifyEmailTemplate } from '.';
-import * as useVerifyEmailHook from './shared/useVerifyEmailVerification';
-
-let verifyEmailSpy: MockInstance<() => readonly [boolean]>;
 
 describe('<VerifyEmailTemplate /> component', () => {
-    beforeAll(() => {
-        verifyEmailSpy = vi.spyOn(
-            useVerifyEmailHook,
-            'useVerifyEmailVerification'
-        );
-    });
-    afterAll(() => {
-        verifyEmailSpy.mockRestore();
-    });
     it('renders correctly', () => {
-        verifyEmailSpy.mockReturnValue([false]);
-        const state: State = { requestStatus: { statusCode: -1 } };
+        const state: VerifyEmailState = {
+            requestStatus: { statusCode: -1 },
+            resend: false,
+            verified: false,
+        };
+        const formAction = vi.fn();
         const router = createMemoryRouter([
             {
                 path: '/',
                 element: (
                     <HttpClientProvider>
-                        <VerifyEmailRequesterProvider>
-                            <VerifyEmailTemplate state={state} />,
-                        </VerifyEmailRequesterProvider>
+                        <VerifyEmailTemplate
+                            state={state}
+                            formAction={formAction}
+                            pending={false}
+                        />
                     </HttpClientProvider>
                 ),
             },
@@ -42,26 +34,34 @@ describe('<VerifyEmailTemplate /> component', () => {
         expect($el).toBeInTheDocument();
     });
     it("renders with email already verified by auth's user's status correctly", () => {
-        verifyEmailSpy.mockReturnValue([false]);
         const userSigned: AuthUser = {
             id: faker.number.int({ min: 1 }).toString(),
             email: faker.internet.email(),
             emailVerified: true,
             name: faker.person.firstName(),
             token: faker.word.noun(),
+            phone: null,
+            photo: null,
         };
         window.localStorage.setItem('user', JSON.stringify(userSigned));
         const content = faker.word.noun();
-        const state: State = { requestStatus: { statusCode: -1 } };
+        const state: VerifyEmailState = {
+            requestStatus: { statusCode: -1 },
+            resend: false,
+            verified: false,
+        };
+        const formAction = vi.fn();
         const router = createMemoryRouter([
             {
                 path: '/',
                 element: (
                     <HttpClientProvider>
                         <AuthProvider>
-                            <VerifyEmailRequesterProvider>
-                                <VerifyEmailTemplate state={state} />,
-                            </VerifyEmailRequesterProvider>
+                            <VerifyEmailTemplate
+                                state={state}
+                                formAction={formAction}
+                                pending={false}
+                            />
                         </AuthProvider>
                     </HttpClientProvider>
                 ),
@@ -76,18 +76,24 @@ describe('<VerifyEmailTemplate /> component', () => {
         expect($paragraph).toHaveTextContent(content);
     });
     it('renders with email already verified by request checking', () => {
-        verifyEmailSpy.mockReturnValue([true]);
         const content = faker.word.noun();
-        const state: State = { requestStatus: { statusCode: -1 } };
+        const state: VerifyEmailState = {
+            requestStatus: { statusCode: -1 },
+            resend: false,
+            verified: false,
+        };
+        const formAction = vi.fn();
         const router = createMemoryRouter(
             [
                 {
                     path: '/',
                     element: (
                         <HttpClientProvider>
-                            <VerifyEmailRequesterProvider>
-                                <VerifyEmailTemplate state={state} />,
-                            </VerifyEmailRequesterProvider>
+                            <VerifyEmailTemplate
+                                state={state}
+                                formAction={formAction}
+                                pending={false}
+                            />
                         </HttpClientProvider>
                     ),
                 },
@@ -103,8 +109,12 @@ describe('<VerifyEmailTemplate /> component', () => {
         expect($paragraph).toHaveTextContent(content);
     });
     it('renders requesting email verification', () => {
-        verifyEmailSpy.mockReturnValue([false]);
-        const state: State = { requestStatus: { statusCode: -1 } };
+        const state: VerifyEmailState = {
+            requestStatus: { statusCode: -1 },
+            resend: false,
+            verified: false,
+        };
+        const formAction = vi.fn();
         const id = faker.number.int().toString();
         const hash = faker.word.noun();
         const router = createMemoryRouter(
@@ -113,9 +123,11 @@ describe('<VerifyEmailTemplate /> component', () => {
                     path: '/verify/:id/:hash',
                     element: (
                         <HttpClientProvider>
-                            <VerifyEmailRequesterProvider>
-                                <VerifyEmailTemplate state={state} />
-                            </VerifyEmailRequesterProvider>
+                            <VerifyEmailTemplate
+                                state={state}
+                                formAction={formAction}
+                                pending={false}
+                            />
                         </HttpClientProvider>
                     ),
                 },

@@ -1,15 +1,17 @@
 import { RegisterAccountTemplate } from '@/components/templates/RegisterAccountTemplate';
-import { CreatorProvider } from '@/shared/providers/CreatorProvider';
-import { DispatchProvider } from '@/shared/providers/DispatchProvider';
+import { LocalNavigate } from '@/shared/components/atoms/LocalNavigate';
 import { useDeps } from './shared/useDeps';
 
 export const RegisterAccount = () => {
-    const [state, dispatch] = useDeps();
+    const [state, formAction, pending] = useDeps();
+    if (state.requestStatus.statusCode === 0) {
+        return <LocalNavigate to="/" replace />;
+    }
     return (
-        <CreatorProvider>
-            <DispatchProvider dispatch={dispatch}>
-                <RegisterAccountTemplate state={state} />
-            </DispatchProvider>
-        </CreatorProvider>
+        <RegisterAccountTemplate
+            state={state}
+            formAction={formAction}
+            pending={pending}
+        />
     );
 };

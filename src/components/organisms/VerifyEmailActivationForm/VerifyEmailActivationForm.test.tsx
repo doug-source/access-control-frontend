@@ -3,15 +3,13 @@ import { VerifyEmailActivationForm } from '.';
 
 describe('<VerifyEmailActivationForm /> component', () => {
     it('renders correctly', () => {
-        const disabledBtn = false;
-        const loading = false;
-        const submitHandler = vi.fn();
+        const pending = false;
+        const formAction = vi.fn();
         render(
             <VerifyEmailActivationForm
-                disabledBtn={disabledBtn}
-                loading={loading}
+                pending={pending}
                 show
-                submitHandler={submitHandler}
+                formAction={formAction}
             >
                 content
             </VerifyEmailActivationForm>
@@ -20,15 +18,13 @@ describe('<VerifyEmailActivationForm /> component', () => {
         expect($el).toBeInTheDocument();
     });
     it('renders with show value as falsy correctly', () => {
-        const disabledBtn = false;
-        const loading = false;
-        const submitHandler = vi.fn();
+        const pending = false;
+        const formAction = vi.fn();
         render(
             <VerifyEmailActivationForm
-                disabledBtn={disabledBtn}
-                loading={loading}
+                pending={pending}
                 show={false}
-                submitHandler={submitHandler}
+                formAction={formAction}
             >
                 content
             </VerifyEmailActivationForm>

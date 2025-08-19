@@ -4,6 +4,7 @@ import { type RegisterPermissionIndex } from '@/shared/types/Models/RegisterPerm
 import { type RegisterRequestIndex } from '@/shared/types/Models/RegisterRequest';
 import { type RoleIndex } from '@/shared/types/Models/Role';
 import { type UserIndex } from '@/shared/types/Models/User';
+import { statedInitialData } from '@/shared/utils/initialStates';
 import { groups } from '@/shared/utils/pagination';
 
 const paginateInitialData = <T = unknown>() => ({
@@ -71,48 +72,27 @@ export const registerPermissionsInitialData = {
     registerPermission: null,
 };
 
-export const standardInitialData = {
-    requestStatus: { statusCode: -1 as const },
-};
-
 export const userInitialData = {
-    ...standardInitialData,
+    ...statedInitialData,
     user: null,
 };
 
 export const roleInitialData = {
-    ...standardInitialData,
+    ...statedInitialData,
     role: null,
 };
 
 export const abilityInitialData = {
-    ...standardInitialData,
+    ...statedInitialData,
     ability: null,
 };
 
-export const registerAccountInitialData = {
-    ...standardInitialData,
-    token: null as string | null,
-};
-
-export const resetPasswordInitialData = {
-    ...standardInitialData,
-    token: null as string | null,
-    email: null as string | null,
-};
-
 export const registerRequestInitialData = {
-    ...standardInitialData,
+    ...statedInitialData,
     registerRequest: null,
 };
 
 export const registerPermissionInitialData = {
-    ...standardInitialData,
+    ...statedInitialData,
     registerPermission: null,
-};
-
-export const userConfigInitialData = {
-    ...standardInitialData,
-    photoRemote: null,
-    photoChosen: null,
 };

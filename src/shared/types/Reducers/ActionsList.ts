@@ -7,7 +7,6 @@ import type {
     PaginationAction,
     PaginationActionModels,
 } from '@/shared/types/Reducers/Custom/PaginationAction';
-import type { ResetPasswordAction } from '@/shared/types/Reducers/Guest/ChangePassword';
 import type { RegisterRequestsAction } from '@/shared/types/Reducers/RegisterRequests';
 import type { RolesAction } from '@/shared/types/Reducers/Roles';
 import type {
@@ -15,21 +14,18 @@ import type {
     SingleDataActionModels,
 } from '@/shared/types/Reducers/SingleData';
 import type { Action } from '@/shared/types/Reducers/Standard/Action';
-import type { UserConfigAction } from '@/shared/types/Reducers/UserConfig';
 import type { UsersAction } from '@/shared/types/Reducers/Users';
 import type { Explosion } from '@/shared/types/Utils';
 
 type CustomActions = [
-    UsersAction,
-    PaginationAction<PaginationActionModels>,
-    SingleDataAction<SingleDataActionModels>,
-    AttachmentAction<AttachmentActionModels>,
-    RegisterRequestsAction,
     Action,
-    ResetPasswordAction,
+    UsersAction,
+    RegisterRequestsAction,
     AbilitiesAction,
     RolesAction,
-    UserConfigAction
+    PaginationAction<PaginationActionModels>,
+    SingleDataAction<SingleDataActionModels>,
+    AttachmentAction<AttachmentActionModels>
 ];
 
 export type ActionDispatchList<T = unknown> = Explosion<CustomActions, T>;

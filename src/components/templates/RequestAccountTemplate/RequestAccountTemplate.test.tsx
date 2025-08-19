@@ -1,14 +1,17 @@
-import { HttpClientProvider } from '@/shared/providers/boxes/HttpClientProvider';
-import { RegisterRequestMakerProvider } from '@/shared/providers/guest/RegisterRequestMakerProvider';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { ViewerProvider } from '@/shared/providers/ViewerProvider';
-import { State } from '@/shared/types/Reducers/Standard/State';
+import type { RequestAccountState } from '@/shared/types/States';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { RequestAccountTemplate } from '.';
 
 describe('<RequestAccountTemplate /> component', () => {
     it('renders correctly', () => {
-        const state: State = { requestStatus: { statusCode: -1 } };
+        const state: RequestAccountState = {
+            requestStatus: { statusCode: -1 },
+            fields: { email: '', phone: '' },
+        };
+        const formData = vi.fn();
         const router = createMemoryRouter([
             {
                 element: (
@@ -20,9 +23,11 @@ describe('<RequestAccountTemplate /> component', () => {
                     {
                         path: '/',
                         element: (
-                            <RegisterRequestMakerProvider>
-                                <RequestAccountTemplate state={state} />,
-                            </RegisterRequestMakerProvider>
+                            <RequestAccountTemplate
+                                state={state}
+                                formAction={formData}
+                                pending={false}
+                            />
                         ),
                     },
                 ],

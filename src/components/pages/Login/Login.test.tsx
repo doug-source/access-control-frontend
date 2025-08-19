@@ -1,4 +1,5 @@
-import { AuthenticatorProvider } from '@/shared/providers/boxes/AuthenticatorProvider';
+import { LogicBaseProvider } from '@/shared/providers/LogicBaseProvider';
+import { loginBase } from '@/shared/utils/globals/login';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { Login } from '.';
@@ -9,9 +10,9 @@ describe('<Login /> component', () => {
             {
                 path: '/',
                 element: (
-                    <AuthenticatorProvider>
+                    <LogicBaseProvider base={loginBase}>
                         <Login />
-                    </AuthenticatorProvider>
+                    </LogicBaseProvider>
                 ),
             },
         ]);

@@ -6,7 +6,7 @@ import { faker } from '@faker-js/faker';
 import { renderHook, waitFor } from '@testing-library/react';
 import { createElement, type PropsWithChildren } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
-import { HttpClientProvider } from '../providers/boxes/HttpClientProvider';
+import { HttpClientProvider } from '../providers/HttpClientProvider';
 import { Paths } from '../types/Urls/Paths';
 import { useSingleDataFetch } from './useSingleDataFetch';
 

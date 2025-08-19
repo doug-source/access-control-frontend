@@ -1,7 +1,7 @@
-import { DispatchProvider } from '@/shared/providers/DispatchProvider';
-import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
 import { AuthProvider } from '@/shared/providers/AuthProvider';
-import { HttpClientProvider } from '@/shared/providers/boxes/HttpClientProvider';
+import { DispatchProvider } from '@/shared/providers/DispatchProvider';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
+import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
 import { type PageRequester } from '@/shared/types/Contracts/PageRequester';
 import { faker } from '@faker-js/faker';
 import { renderHook, waitFor } from '@testing-library/react';

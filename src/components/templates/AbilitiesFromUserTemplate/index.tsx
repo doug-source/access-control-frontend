@@ -39,11 +39,11 @@ export const AbilitiesFromUserTemplate = ({
                     <ListWrapper requestType={state.requestType}>
                         <AttachmentDataProvider
                             attachmentConfirm={state.attachmentConfirm}
-                            onAttash={attachHandler}
+                            onAttach={attachHandler}
                         >
                             <DetachmentDataProvider
                                 detachmentConfirm={state.detachmentConfirm}
-                                onDetash={dettachHandler}
+                                onDetach={dettachHandler}
                             >
                                 <AbilitiesItems
                                     items={state.data}

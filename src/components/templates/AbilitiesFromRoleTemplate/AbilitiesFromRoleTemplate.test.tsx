@@ -1,4 +1,4 @@
-import { HttpClientProvider } from '@/shared/providers/boxes/HttpClientProvider';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
 import { type AbilitiesState } from '@/shared/types/Reducers/Abilities';
 import { abilitiesInitialData } from '@/shared/utils/ReduceInitialValues';

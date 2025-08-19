@@ -1,15 +1,17 @@
 import { ChangePasswordTemplate } from '@/components/templates/ChangePasswordTemplate';
-import { DispatchProvider } from '@/shared/providers/DispatchProvider';
-import { ResetPasswordHandlerProvider } from '@/shared/providers/guest/ResetPasswordHandlerProvider';
+import { LocalNavigate } from '@/shared/components/atoms/LocalNavigate';
 import { useDeps } from './shared/useDeps';
 
 export const ChangePassword = () => {
-    const [state, dispatch] = useDeps();
+    const [state, formAction, pending] = useDeps();
+    if (state.requestStatus.statusCode === 200) {
+        return <LocalNavigate to="/" replace />;
+    }
     return (
-        <ResetPasswordHandlerProvider>
-            <DispatchProvider dispatch={dispatch}>
-                <ChangePasswordTemplate state={state} />
-            </DispatchProvider>
-        </ResetPasswordHandlerProvider>
+        <ChangePasswordTemplate
+            state={state}
+            formAction={formAction}
+            pending={pending}
+        />
     );
 };

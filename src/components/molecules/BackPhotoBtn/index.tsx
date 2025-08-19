@@ -1,21 +1,20 @@
 import { BackPhotoIcon } from '@/components/atoms/icons/BackPhotoIcon';
-import { WithShow } from '@/shared/types/Utils';
+import type { WithShow } from '@/shared/types/Utils';
 import classNames from 'classnames';
-import { RefObject } from 'react';
+import { useId } from 'react';
 import styles from './BackPhotoBtn.module.scss';
-import { useDeps } from './shared/useDeps';
 
 interface BackPhotoBtnProps extends WithShow<unknown, true> {
-    photoInputRef: RefObject<HTMLInputElement | null>;
     className?: string;
+    onClick(): void;
 }
 
 export const BackPhotoBtn = ({
     show,
-    photoInputRef,
     className,
+    onClick,
 }: BackPhotoBtnProps) => {
-    const [backBtnId, clickHandler] = useDeps(photoInputRef);
+    const backBtnId = useId();
     if (!show) {
         return null;
     }
@@ -24,7 +23,7 @@ export const BackPhotoBtn = ({
             type="button"
             className={classNames(styles.backPhotoBtn, className)}
             aria-describedby={backBtnId}
-            onClick={clickHandler}
+            onClick={onClick}
         >
             <BackPhotoIcon />
             <span id={backBtnId} className="screen-reader-only">

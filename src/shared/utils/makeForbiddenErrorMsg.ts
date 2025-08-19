@@ -1,11 +1,7 @@
-import { type ResponseErrorData } from '@/shared/types/Http/Error/Response';
-
-export const makeForbiddenErrorMsg = (
-    customMsg?: string
-): ResponseErrorData => {
+export const makeForbiddenErrorMsg = (customMsg?: string) => {
     const message = customMsg ?? (import.meta.env.VITE_FORBIDDEN_MSG as string);
     return {
-        type: 'generic',
+        type: 'generic' as const,
         message,
     };
 };

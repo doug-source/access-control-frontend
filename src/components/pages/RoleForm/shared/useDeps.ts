@@ -1,7 +1,8 @@
-import { standardReducer } from '@/shared/reducers/standardReducer';
-import { standardInitialData } from '@/shared/utils/ReduceInitialValues';
-import { useReducer } from 'react';
+import { roleFormInitialData } from '@/shared/utils/initialStates';
+import { useActionState } from 'react';
+import { useRoleFormStateAction } from './useRoleFormStateAction';
 
 export const useDeps = () => {
-    return useReducer(standardReducer, standardInitialData);
+    const submitHandler = useRoleFormStateAction();
+    return useActionState(submitHandler, roleFormInitialData);
 };

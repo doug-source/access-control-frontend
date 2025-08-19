@@ -1,14 +1,9 @@
-import { standardInitialData } from '@/shared/utils/ReduceInitialValues';
+import { loginInitialData } from '@/shared/utils/initialStates';
 import { useActionState } from 'react';
-import { useAuthStateAction } from './useAuthStateAction';
 import { useLoginProvided } from './useLoginProvided';
+import { useLoginStateAction } from './useLoginStateAction';
 
 export const useDeps = () => {
-    const submitHandler = useAuthStateAction();
-    const [state, ...remain] = useActionState(
-        submitHandler,
-        standardInitialData
-    );
-    const formState = useLoginProvided(state);
-    return [formState, ...remain] as const;
+    const submitHandler = useLoginStateAction();
+    return useActionState(submitHandler, useLoginProvided(loginInitialData));
 };

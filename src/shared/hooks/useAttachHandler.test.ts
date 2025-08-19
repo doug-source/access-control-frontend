@@ -1,6 +1,6 @@
 import { AuthProvider } from '@/shared/providers/AuthProvider';
-import { HttpClientProvider } from '@/shared/providers/boxes/HttpClientProvider';
 import { DispatchProvider } from '@/shared/providers/DispatchProvider';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { PermissionsRequesterProvider } from '@/shared/providers/PermissionsRequesterProvider';
 import { type PermissionsRelationRequester } from '@/shared/types/Contracts/PermissionsRelationRequester';
 import { type Paths } from '@/shared/types/Urls/Paths';

@@ -1,7 +1,7 @@
 import { DispatchProvider } from '@/shared/providers/DispatchProvider';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { InputRefProvider } from '@/shared/providers/InputRefProvider';
 import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
-import { HttpClientProvider } from '@/shared/providers/boxes/HttpClientProvider';
 import { usersReducer } from '@/shared/reducers/usersReducer';
 import { usersInitialData } from '@/shared/utils/ReduceInitialValues';
 import { faker } from '@faker-js/faker';

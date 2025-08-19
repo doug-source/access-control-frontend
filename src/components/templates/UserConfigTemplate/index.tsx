@@ -2,74 +2,77 @@ import { FieldGroup } from '@/components/atoms/FieldGroup';
 import { UserIcon } from '@/components/atoms/icons/UserIcon';
 import { LabelWarned } from '@/components/molecules/LabelWarned';
 import { FormSimpleContainer } from '@/components/organisms/FormSimpleContainer';
-import { UserConfigState } from '@/shared/types/Reducers/UserConfig';
-import { btnIsDisabled } from '@/shared/utils/btnIsDisabled';
-import type { ComponentPropsWithoutRef } from 'react';
-import { ProfilePhoto } from '../../organisms/ProfilePhoto';
-import { useDeps } from './shared/useDeps';
+import { ProfilePhoto } from '@/components/organisms/ProfilePhoto';
+import type { UserConfigState } from '@/shared/types/States';
 import styles from './UserConfigTemplate.module.scss';
+import { useDeps } from './shared/useDeps';
 
-interface UserConfigTemplateProps
-    extends Omit<
-        ComponentPropsWithoutRef<typeof FormSimpleContainer>,
-        'submitHandler' | 'disabledBtn' | 'submitBtnText' | 'state'
-    > {
+interface UserConfigTemplateProps {
     state: UserConfigState;
+    pending: boolean;
+    formAction(payload: FormData): void;
 }
 
 export const UserConfigTemplate = ({
     state,
-    ...remain
+    formAction,
+    pending,
 }: UserConfigTemplateProps) => {
-    const {
-        photoRef,
-        nameRef,
-        emailRef,
-        phoneRef,
-        ids,
-        handler: submitHandler,
-    } = useDeps();
+    const [nameId, phoneId] = useDeps();
     return (
         <FormSimpleContainer
-            {...remain}
             state={state}
-            submitHandler={submitHandler}
             submitBtnText="Atualizar"
-            disabledBtn={btnIsDisabled(state.requestStatus, 0)}
+            formAction={formAction}
+            pending={pending}
             className={styles.formLayout}
         >
             <FieldGroup.Box>
                 <ProfilePhoto
-                    fallback={<UserIcon className={styles.iconFallback} />}
-                    ref={photoRef}
                     url={state.photoRemote}
+                    fallback={<UserIcon className={styles.iconFallback} />}
                 />
             </FieldGroup.Box>
             <FieldGroup.Box>
                 <LabelWarned
                     request={state.requestStatus}
                     field="name"
-                    htmlFor={ids.name}
+                    htmlFor={nameId}
                 >
                     Nome
                 </LabelWarned>
-                <FieldGroup.Input ref={nameRef} id={ids.name} />
+                <FieldGroup.Input
+                    id={nameId}
+                    name="name"
+                    defaultValue={state.fields.name}
+                    onReset={(evt) => evt.preventDefault()}
+                />
             </FieldGroup.Box>
             <FieldGroup.Box>
                 <LabelWarned
                     request={state.requestStatus}
                     field="phone"
-                    htmlFor={ids.phone}
+                    htmlFor={phoneId}
                 >
                     Telefone
                 </LabelWarned>
-                <FieldGroup.Input type="tel" ref={phoneRef} id={ids.phone} />
+                <FieldGroup.Input
+                    type="tel"
+                    id={phoneId}
+                    name="phone"
+                    defaultValue={state.fields.phone}
+                    onReset={(evt) => evt.preventDefault()}
+                />
             </FieldGroup.Box>
             <FieldGroup.Box>
                 <LabelWarned request={state.requestStatus} field="email">
                     Email
                 </LabelWarned>
-                <FieldGroup.Input type="email" ref={emailRef} disabled />
+                <FieldGroup.Input
+                    type="email"
+                    defaultValue={state.fields.email}
+                    disabled
+                />
             </FieldGroup.Box>
         </FormSimpleContainer>
     );

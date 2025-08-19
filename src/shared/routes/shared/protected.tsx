@@ -18,7 +18,12 @@ import { AppTitle } from '@/shared/components/atoms/AppTitle';
 import { CheckParams } from '@/shared/components/molecules/CheckParams';
 import { ScreenWrapper } from '@/shared/components/molecules/ScreenWrapper';
 import { Gate } from '@/shared/components/organisms/Gate';
+import { LogicBaseProvider } from '@/shared/providers/LogicBaseProvider';
 import { ViewerProvider } from '@/shared/providers/ViewerProvider';
+import { abilityFormBase } from '@/shared/utils/globals/abilityForm';
+import { roleFormBase } from '@/shared/utils/globals/roleForm';
+import { userConfigBase } from '@/shared/utils/globals/userConfig';
+import { userFormBase } from '@/shared/utils/globals/userForm';
 import {
     abilityRoutes,
     emailVerifyRoutes,
@@ -155,7 +160,9 @@ export const protectedRoutes = [
                         path: '/users-create',
                         element: (
                             <ScreenWrapper title="Criar usuário">
-                                <UserForm />
+                                <LogicBaseProvider base={userFormBase}>
+                                    <UserForm />
+                                </LogicBaseProvider>
                             </ScreenWrapper>
                         ),
                     },
@@ -168,7 +175,9 @@ export const protectedRoutes = [
                         path: '/roles-create',
                         element: (
                             <ScreenWrapper title="Criar Papel">
-                                <RoleForm />
+                                <LogicBaseProvider base={roleFormBase}>
+                                    <RoleForm />
+                                </LogicBaseProvider>
                             </ScreenWrapper>
                         ),
                     },
@@ -181,7 +190,9 @@ export const protectedRoutes = [
                         path: '/abilities-create',
                         element: (
                             <ScreenWrapper title="Criar Habilidade">
-                                <AbilityForm />
+                                <LogicBaseProvider base={abilityFormBase}>
+                                    <AbilityForm />
+                                </LogicBaseProvider>
                             </ScreenWrapper>
                         ),
                     },
@@ -240,7 +251,9 @@ export const protectedRoutes = [
                 path: '/config-user',
                 element: (
                     <ScreenWrapper title="Configurações do usuário">
-                        <UserConfig />
+                        <LogicBaseProvider base={userConfigBase}>
+                            <UserConfig />
+                        </LogicBaseProvider>
                     </ScreenWrapper>
                 ),
             },

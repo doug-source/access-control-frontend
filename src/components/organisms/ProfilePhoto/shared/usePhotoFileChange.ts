@@ -1,19 +1,19 @@
 import { useEffect } from 'react';
 
 export const usePhotoFileChange = (
-    photoFile: File | null,
+    file: File | null,
     onChange: (path: string) => void
 ) => {
     useEffect(() => {
         let isCancel = false;
-        if (!photoFile) {
+        if (!file) {
             return;
         }
         const reader = new FileReader();
-        reader.readAsDataURL(photoFile);
+        reader.readAsDataURL(file);
         reader.addEventListener('loadend', () => {
             if (
-                !photoFile.name.match(/\.(jpe?g|png)$/) ||
+                !file.name.match(/\.(jpe?g|png)$/) ||
                 typeof reader.result !== 'string' ||
                 isCancel
             ) {
@@ -27,5 +27,5 @@ export const usePhotoFileChange = (
                 reader.abort();
             }
         };
-    }, [photoFile, onChange]);
+    }, [file, onChange]);
 };

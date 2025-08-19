@@ -25,7 +25,6 @@ describe('useLoginProvided hook', () => {
         localNavigateSpy.mockReset();
     });
     it('runs with request resulting on status code equal 200 correctly', async () => {
-        const dispatch = vi.fn();
         const body = {
             user: {
                 id: faker.number.int({ min: 1 }).toString(),
@@ -41,11 +40,8 @@ describe('useLoginProvided hook', () => {
                 [
                     {
                         path: '/',
-                        element: createElement(DispatchProvider, {
-                            dispatch,
-                            children: createElement(AuthProvider, {
-                                children,
-                            }),
+                        element: createElement(AuthProvider, {
+                            children,
                         }),
                         loader: vi.fn(async () => ({ statusCode: 200, body })),
                         HydrateFallback: () => null,
@@ -63,13 +59,15 @@ describe('useLoginProvided hook', () => {
         };
         const { result } = renderHook(
             () => {
-                return useLoginProvided();
+                return useLoginProvided({
+                    requestStatus: { statusCode: -1 },
+                    fields: { email: '', password: '' },
+                });
             },
             { wrapper }
         );
         await waitFor(() => {
-            expect(dispatch).not.toHaveBeenCalled();
-            expect(result.current[0]).toBeTruthy();
+            expect(result.current).toBeTruthy();
             expect(localStorage.getItem('user')).toBeTruthy();
         });
     });
@@ -108,7 +106,10 @@ describe('useLoginProvided hook', () => {
         };
         const { result } = renderHook(
             () => {
-                return useLoginProvided();
+                return useLoginProvided({
+                    requestStatus: { statusCode: -1 },
+                    fields: { email: '', password: '' },
+                });
             },
             { wrapper }
         );
@@ -122,7 +123,7 @@ describe('useLoginProvided hook', () => {
                     field: 'email',
                 },
             });
-            expect(result.current[0]).toBeFalsy();
+            expect(result.current).toBeFalsy();
         });
     });
 });

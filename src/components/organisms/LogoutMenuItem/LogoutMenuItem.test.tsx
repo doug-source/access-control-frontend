@@ -1,15 +1,21 @@
-import { AuthenticatorProvider } from '@/shared/providers/boxes/AuthenticatorProvider';
+import { UnauthenticatorProvider } from '@/shared/providers/UnauthenticatorProvider';
+import type { SignOutDispatcher } from '@/shared/types/Contracts/LogoutDispatcher';
 import { render, screen } from '@testing-library/react';
 import { LogoutMenuItem } from '.';
 
 describe('<LogoutMenuItem /> component', () => {
     it('renders correctly', () => {
+        const unauth: SignOutDispatcher = {
+            async signOut() {
+                return { statusCode: 204, body: undefined };
+            },
+        };
         render(
-            <AuthenticatorProvider>
+            <UnauthenticatorProvider unauthenticator={unauth}>
                 <ul>
                     <LogoutMenuItem />
                 </ul>
-            </AuthenticatorProvider>
+            </UnauthenticatorProvider>
         );
         const $el = screen.getByRole('listitem');
         expect($el).toBeInTheDocument();

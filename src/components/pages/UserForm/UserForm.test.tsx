@@ -1,5 +1,5 @@
-import { HttpClientProvider } from '@/shared/providers/boxes/HttpClientProvider';
 import { CreatorProvider } from '@/shared/providers/CreatorProvider';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { UserForm } from '.';

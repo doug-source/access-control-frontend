@@ -1,7 +1,8 @@
-import { standardReducer } from '@/shared/reducers/standardReducer';
-import { standardInitialData } from '@/shared/utils/ReduceInitialValues';
-import { useReducer } from 'react';
+import { userFormInitialData } from '@/shared/utils/initialStates';
+import { useActionState } from 'react';
+import { useUserFormStateAction } from './useUserFormStateAction';
 
 export const useDeps = () => {
-    return useReducer(standardReducer, standardInitialData);
+    const submitHandler = useUserFormStateAction();
+    return useActionState(submitHandler, userFormInitialData);
 };

@@ -1,5 +1,4 @@
-import { HttpClientProvider } from '@/shared/providers/boxes/HttpClientProvider';
-import { ResetPasswordHandlerProvider } from '@/shared/providers/guest/ResetPasswordHandlerProvider';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { ChangePassword } from '.';
@@ -11,9 +10,7 @@ describe('<ChangePassword /> component', () => {
                 path: '/',
                 element: (
                     <HttpClientProvider>
-                        <ResetPasswordHandlerProvider>
-                            <ChangePassword />
-                        </ResetPasswordHandlerProvider>
+                        <ChangePassword />
                     </HttpClientProvider>
                 ),
             },

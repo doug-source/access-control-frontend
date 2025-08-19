@@ -1,18 +1,26 @@
-import { useDispatch } from '@/shared/hooks/useDispatch';
-import type { PhotoChosenChangeAction } from '@/shared/types/Reducers/UserConfig';
-import { type ChangeEvent, useCallback } from 'react';
+import { type ChangeEvent, RefObject, useCallback, useState } from 'react';
 
-export const usePhotoHandler = () => {
-    const dispatch = useDispatch<PhotoChosenChangeAction>();
-    return useCallback(
+export const usePhotoHandler = (
+    setFile: (val: File | null) => void,
+    inputRef?: RefObject<HTMLInputElement | null>
+) => {
+    const [inputKey, setInputKey] = useState(Date.now());
+    const changeHandler = useCallback(
         (evt: ChangeEvent<HTMLInputElement>) => {
-            const $input = evt.target;
-            const $file = $input.files?.item(0) ?? null;
-            dispatch({
-                type: 'photo-chosen-change',
-                payload: $file,
-            });
+            setFile(evt.target.files?.item(0) ?? null);
         },
-        [dispatch]
+        [setFile]
     );
+    const clearFile = useCallback(() => {
+        const $input = inputRef?.current;
+        if (!$input) {
+            return;
+        }
+        setFile(null);
+        $input.value = '';
+        // $input.form?.reset();
+        setInputKey(Date.now());
+    }, [inputRef, setFile]);
+
+    return { inputKey, clearFile, changeHandler };
 };

@@ -5,21 +5,24 @@ import { RolesFromUser } from '@/components/pages/RolesFromUser';
 import { VerifyEmail } from '@/components/pages/VerifyEmail';
 import { ScreenWrapper } from '@/shared/components/molecules/ScreenWrapper';
 import { Gate } from '@/shared/components/organisms/Gate';
-import { emailVerifyLoader } from '@/shared/loaders/emailVerifyLoader';
+import { LogicBaseProvider } from '@/shared/providers/LogicBaseProvider';
+import { verifyEmailBase } from '@/shared/utils/globals/verifyEmail';
 import { type RouteObject } from 'react-router';
 
 export const emailVerifyRoutes = (): RouteObject[] => {
-    const verifyEmailComponent = <VerifyEmail />;
+    const verifyEmailComponent = (
+        <LogicBaseProvider base={verifyEmailBase}>
+            <VerifyEmail />
+        </LogicBaseProvider>
+    );
     return [
         {
             path: '/email/verify',
             element: verifyEmailComponent,
-            loader: emailVerifyLoader,
         },
         {
             path: '/email/verify/:id/:hash',
             element: verifyEmailComponent,
-            loader: emailVerifyLoader,
         },
     ];
 };

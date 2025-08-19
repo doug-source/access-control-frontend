@@ -1,6 +1,6 @@
 import { CreatorProvider } from '@/shared/providers/CreatorProvider';
-import { HttpClientProvider } from '@/shared/providers/boxes/HttpClientProvider';
-import { RegisterAccountState } from '@/shared/types/Reducers/Guest/RegisterAccount';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
+import { RegisterAccountState } from '@/shared/types/States';
 import { faker } from '@faker-js/faker';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
@@ -11,14 +11,21 @@ describe('<RegisterAccountTemplate /> component', () => {
         const state: RegisterAccountState = {
             requestStatus: { statusCode: -1 },
             token: faker.hacker.noun(),
+            fields: { email: '', name: '', passConfirm: '', password: '' },
         };
+        const formAction = vi.fn();
         const router = createMemoryRouter([
             {
                 path: '/',
                 element: (
                     <HttpClientProvider>
                         <CreatorProvider>
-                            <RegisterAccountTemplate state={state} />,
+                            <RegisterAccountTemplate
+                                state={state}
+                                formAction={formAction}
+                                pending={false}
+                            />
+                            ,
                         </CreatorProvider>
                     </HttpClientProvider>
                 ),
