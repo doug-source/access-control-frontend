@@ -1,7 +1,8 @@
 import { DispatchContext } from '@/shared/contexts/DispatchContext';
+import type { ActionDispatchList } from '@/shared/types/Reducers/ActionsList';
+import type { AD } from '@/shared/types/Utils';
 import { useContext } from 'react';
-import { ActionDispatchList } from '../types/Reducers/ActionsList';
 
 export const useDispatch = <T>() => {
-    return useContext<ActionDispatchList<T>>(DispatchContext);
+    return useContext<AD<ActionDispatchList<T>>>(DispatchContext);
 };

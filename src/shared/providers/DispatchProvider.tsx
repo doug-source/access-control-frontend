@@ -1,10 +1,11 @@
 import { DispatchContext } from '@/shared/contexts/DispatchContext';
-import { type ActionDispatchList } from '@/shared/types/Reducers/ActionsList';
-import { type ReactNode } from 'react';
+import type { ActionDispatchList } from '@/shared/types/Reducers/ActionsList';
+import type { AD } from '@/shared/types/Utils';
+import type { ReactNode } from 'react';
 
 interface DispatchProviderProps {
     children: ReactNode;
-    dispatch: ActionDispatchList;
+    dispatch: AD<ActionDispatchList>;
 }
 
 export const DispatchProvider = ({
