@@ -64,13 +64,16 @@ export const rolesInitialData = (
     role: null,
 });
 
-export const abilitiesInitialData = {
-    ...paginateInitialData<AbilityIndex>(),
+export const abilitiesInitialData = (
+    context?: PaginateKeyContext,
+    userSigned?: number
+) => ({
+    ...paginateInitialData<AbilityIndex>(context, userSigned),
     ...remotionInitialData,
     ...attachmentInitialData,
     ...detachmentInitialData,
     ability: null,
-};
+});
 
 export const registerRequestsInitialData = {
     ...paginateInitialData<RegisterRequestIndex>(),

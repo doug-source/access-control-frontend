@@ -14,7 +14,9 @@ describe('<AbilitiesTemplate /> component', () => {
             <MemoryRouter initialEntries={['/']}>
                 <HttpClientProvider>
                     <PageRequesterProvider>
-                        <AbilitiesTemplate state={abilitiesInitialData} />
+                        <AbilitiesTemplate
+                            state={abilitiesInitialData('ability', 0)}
+                        />
                     </PageRequesterProvider>
                 </HttpClientProvider>
             </MemoryRouter>
@@ -27,7 +29,9 @@ describe('<AbilitiesTemplate /> component', () => {
             <MemoryRouter initialEntries={['/abilities']}>
                 <HttpClientProvider>
                     <PageRequesterProvider>
-                        <AbilitiesTemplate state={abilitiesInitialData} />
+                        <AbilitiesTemplate
+                            state={abilitiesInitialData('ability', 0)}
+                        />
                     </PageRequesterProvider>
                 </HttpClientProvider>
             </MemoryRouter>
@@ -59,7 +63,9 @@ describe('<AbilitiesTemplate /> component', () => {
             >
                 <HttpClientProvider>
                     <PageRequesterProvider>
-                        <AbilitiesTemplate state={abilitiesInitialData} />
+                        <AbilitiesTemplate
+                            state={abilitiesInitialData('ability', 0)}
+                        />
                     </PageRequesterProvider>
                 </HttpClientProvider>
             </MemoryRouter>

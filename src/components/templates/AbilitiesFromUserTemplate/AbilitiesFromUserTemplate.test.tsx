@@ -5,14 +5,14 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { AbilitiesFromUserTemplate } from '.';
 
-describe('<AbilitiesTemplate /> component', () => {
+describe('<AbilitiesFromUserTemplate /> component', () => {
     it('renders correctly', () => {
         render(
             <MemoryRouter initialEntries={['/']}>
                 <HttpClientProvider>
                     <PageRequesterProvider>
                         <AbilitiesFromUserTemplate
-                            state={abilitiesInitialData}
+                            state={abilitiesInitialData('ability-from-user', 0)}
                         />
                     </PageRequesterProvider>
                 </HttpClientProvider>

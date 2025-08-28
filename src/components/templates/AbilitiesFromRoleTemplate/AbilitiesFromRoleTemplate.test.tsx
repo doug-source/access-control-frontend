@@ -6,9 +6,12 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { AbilitiesFromRoleTemplate } from '.';
 
-describe('<AbilitiesTemplate /> component', () => {
+describe('<AbilitiesFromRoleTemplate /> component', () => {
     it('renders correctly', () => {
-        const state: AbilitiesState = abilitiesInitialData;
+        const state: AbilitiesState = abilitiesInitialData(
+            'ability-from-role',
+            0
+        );
         render(
             <MemoryRouter initialEntries={['/']}>
                 <HttpClientProvider>

@@ -5,7 +5,10 @@ export type PaginateKeyContext =
     | 'user'
     | 'user-removed'
     | 'role'
-    | 'role-from-user';
+    | 'role-from-user'
+    | 'ability'
+    | 'ability-from-role'
+    | 'ability-from-user';
 
 export const storePagination = (
     context: PaginateKeyContext,
