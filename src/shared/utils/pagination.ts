@@ -8,7 +8,8 @@ export type PaginateKeyContext =
     | 'role-from-user'
     | 'ability'
     | 'ability-from-role'
-    | 'ability-from-user';
+    | 'ability-from-user'
+    | 'register-request';
 
 export const storePagination = (
     context: PaginateKeyContext,

@@ -14,7 +14,7 @@ const runHook = () => {
 
 describe('<RegisterRequestsTemplate /> component', () => {
     it('renders correctly', () => {
-        const state = registerRequestsInitialData;
+        const state = registerRequestsInitialData('register-request', 0);
         const {
             result: { current: ref },
         } = runHook();

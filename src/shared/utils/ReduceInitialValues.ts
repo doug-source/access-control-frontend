@@ -75,13 +75,16 @@ export const abilitiesInitialData = (
     ability: null,
 });
 
-export const registerRequestsInitialData = {
-    ...paginateInitialData<RegisterRequestIndex>(),
+export const registerRequestsInitialData = (
+    context?: PaginateKeyContext,
+    userSigned?: number
+) => ({
+    ...paginateInitialData<RegisterRequestIndex>(context, userSigned),
     ...remotionInitialData,
     registerRequest: null,
     idApproved: null,
     approvementConfirm: true,
-};
+});
 
 export const registerPermissionsInitialData = {
     ...paginateInitialData<RegisterPermissionIndex>(),
