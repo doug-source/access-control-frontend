@@ -5,13 +5,20 @@ import { type RegisterRequestIndex } from '@/shared/types/Models/RegisterRequest
 import { type RoleIndex } from '@/shared/types/Models/Role';
 import { type UserIndex } from '@/shared/types/Models/User';
 import { statedInitialData } from '@/shared/utils/initialStates';
-import { groups } from '@/shared/utils/pagination';
+import {
+    getPaginationStored,
+    groups,
+    type PaginateKeyContext,
+} from '@/shared/utils/pagination';
 
-const paginateInitialData = <T = unknown>() => ({
+const paginateInitialData = <T = unknown>(
+    context?: PaginateKeyContext,
+    userSigned?: number
+) => ({
     requestStatus: { statusCode: 0 } as RequestStatus,
     data: [] as T[],
-    page: 1,
-    group: groups.at(0) ?? 1,
+    page: getPaginationStored(context, 'page', userSigned) ?? 1,
+    group: getPaginationStored(context, 'group', userSigned) ?? groups[0] ?? 1,
     lastPage: 0,
     warning: false,
     error: null,
@@ -34,14 +41,17 @@ const attachmentInitialData = {
     attachmentConfirm: true,
 };
 
-export const usersInitialData = {
-    ...paginateInitialData<UserIndex>(),
+export const usersInitialData = (
+    context?: PaginateKeyContext,
+    userSigned?: number
+) => ({
+    ...paginateInitialData<UserIndex>(context, userSigned),
     ...remotionInitialData,
     user: null,
     idRestored: null,
     restorationConfirm: true,
     idToAttach: null,
-};
+});
 
 export const rolesInitialData = {
     ...paginateInitialData<RoleIndex>(),

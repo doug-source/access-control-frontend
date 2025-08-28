@@ -6,32 +6,32 @@ import {
     type UsersAction,
     type UsersState,
 } from '@/shared/types/Reducers/Users';
+import type { PaginateKeyContext } from '@/shared/utils/pagination';
 
-export const usersReducer = (
-    state: UsersState,
-    action: UsersAction
-): UsersState => {
-    switch (action.type) {
-        case 'to-attach':
-            return {
-                ...state,
-                user: action.payload,
-                idToAttach: action.payload?.id ?? null,
-            };
-        case 'to-remove':
-        case 'remotion-success':
-            return remotionReducer(state, action, 'user');
-        case 'to-restore':
-        case 'restoration-success':
-            return restorationReducer(state, action, 'user');
-        case 'change-filter':
-        case 'change-page':
-        case 'change-group':
-        case 'pagination-success':
-            return paginationReducer(state, action);
-        default: {
-            const standardState = standardReducer(state, action);
-            return { ...standardState, requestType: null };
+export const usersReducer = (context: PaginateKeyContext, id: number) => {
+    return (state: UsersState, action: UsersAction): UsersState => {
+        switch (action.type) {
+            case 'to-attach':
+                return {
+                    ...state,
+                    user: action.payload,
+                    idToAttach: action.payload?.id ?? null,
+                };
+            case 'to-remove':
+            case 'remotion-success':
+                return remotionReducer(state, action, 'user');
+            case 'to-restore':
+            case 'restoration-success':
+                return restorationReducer(state, action, 'user');
+            case 'change-filter':
+            case 'change-page':
+            case 'change-group':
+            case 'pagination-success':
+                return paginationReducer(state, action, context, id);
+            default: {
+                const standardState = standardReducer(state, action);
+                return { ...standardState, requestType: null };
+            }
         }
-    }
+    };
 };

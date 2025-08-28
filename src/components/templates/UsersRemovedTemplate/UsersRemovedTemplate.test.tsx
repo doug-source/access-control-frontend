@@ -21,7 +21,9 @@ describe('<UsersRemovedTemplate /> component', () => {
             <HttpClientProvider>
                 <PageRequesterProvider>
                     <InputRefProvider inputRef={ref}>
-                        <UsersRemovedTemplate state={usersInitialData} />
+                        <UsersRemovedTemplate
+                            state={usersInitialData('user-removed', 0)}
+                        />
                     </InputRefProvider>
                 </PageRequesterProvider>
             </HttpClientProvider>

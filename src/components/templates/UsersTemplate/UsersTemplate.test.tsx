@@ -21,8 +21,8 @@ const runStateHook = (outerDispatch: ReturnType<typeof vi.fn>) => {
     const initialProps = { outerDispatch };
     return renderHook(
         ({ outerDispatch }) => {
-            const [state, dispatch] = useReducer(usersReducer, {
-                ...usersInitialData,
+            const [state, dispatch] = useReducer(usersReducer('user', 0), {
+                ...usersInitialData('user'),
                 data: [
                     {
                         id: faker.number.int({
@@ -53,7 +53,7 @@ describe('<UsersPageTemplate /> component', () => {
                 <HttpClientProvider>
                     <PageRequesterProvider>
                         <InputRefProvider inputRef={ref}>
-                            <UsersTemplate state={usersInitialData} />
+                            <UsersTemplate state={usersInitialData('user')} />
                         </InputRefProvider>
                     </PageRequesterProvider>
                 </HttpClientProvider>
