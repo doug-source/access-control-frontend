@@ -9,7 +9,8 @@ export type PaginateKeyContext =
     | 'ability'
     | 'ability-from-role'
     | 'ability-from-user'
-    | 'register-request';
+    | 'register-request'
+    | 'register-permissions';
 
 export const storePagination = (
     context: PaginateKeyContext,

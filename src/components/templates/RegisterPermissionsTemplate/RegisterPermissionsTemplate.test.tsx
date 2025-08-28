@@ -14,7 +14,7 @@ const runHook = () => {
 
 describe('<RegisterPermissionsTemplate /> component', () => {
     it('renders correctly', () => {
-        const state = registerPermissionsInitialData;
+        const state = registerPermissionsInitialData('register-permissions', 0);
         const {
             result: { current: ref },
         } = runHook();

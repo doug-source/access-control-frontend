@@ -86,10 +86,13 @@ export const registerRequestsInitialData = (
     approvementConfirm: true,
 });
 
-export const registerPermissionsInitialData = {
-    ...paginateInitialData<RegisterPermissionIndex>(),
+export const registerPermissionsInitialData = (
+    context?: PaginateKeyContext,
+    userSigned?: number
+) => ({
+    ...paginateInitialData<RegisterPermissionIndex>(context, userSigned),
     registerPermission: null,
-};
+});
 
 export const userInitialData = {
     ...statedInitialData,
