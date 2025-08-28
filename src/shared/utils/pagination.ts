@@ -1,7 +1,11 @@
 export const groups = [3, 5, 10];
 
 type PaginateKey = 'page' | 'group';
-export type PaginateKeyContext = 'user' | 'user-removed';
+export type PaginateKeyContext =
+    | 'user'
+    | 'user-removed'
+    | 'role'
+    | 'role-from-user';
 
 export const storePagination = (
     context: PaginateKeyContext,

@@ -7,7 +7,7 @@ import { RolesTemplate } from '.';
 
 describe('<RolesTemplate /> component', () => {
     it('renders correctly', () => {
-        const state = rolesInitialData;
+        const state = rolesInitialData('role', 0);
         render(
             <MemoryRouter initialEntries={['/']}>
                 <HttpClientProvider>

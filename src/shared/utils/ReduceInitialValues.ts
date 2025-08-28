@@ -53,13 +53,16 @@ export const usersInitialData = (
     idToAttach: null,
 });
 
-export const rolesInitialData = {
-    ...paginateInitialData<RoleIndex>(),
+export const rolesInitialData = (
+    context?: PaginateKeyContext,
+    userSigned?: number
+) => ({
+    ...paginateInitialData<RoleIndex>(context, userSigned),
     ...remotionInitialData,
     ...attachmentInitialData,
     ...detachmentInitialData,
     role: null,
-};
+});
 
 export const abilitiesInitialData = {
     ...paginateInitialData<AbilityIndex>(),
