@@ -1,5 +1,10 @@
-import { type PaginationAction } from '@/shared/types/Reducers/Custom/PaginationAction';
-import { type PaginationState } from '@/shared/types/Reducers/Custom/PaginationState';
+import type { PaginationAction } from '@/shared/types/Reducers/Custom/PaginationAction';
+import type { PaginationState } from '@/shared/types/Reducers/Custom/PaginationState';
+import {
+    groups,
+    type PaginateKeyContext,
+    storePagination,
+} from '@/shared/utils/pagination';
 
 export const paginationReducer = <
     M,
@@ -7,29 +12,45 @@ export const paginationReducer = <
     A extends PaginationAction<M>
 >(
     state: S,
-    action: A
+    action: A,
+    context?: PaginateKeyContext,
+    id?: number
 ): S => {
     switch (action.type) {
-        case 'change-filter':
+        case 'change-filter': {
+            if (context && id) {
+                storePagination(context, 'page', 1, id);
+                storePagination(context, 'group', groups[0], id);
+            }
             return {
                 ...state,
+                page: 1,
                 requestStatus: { statusCode: 0 },
                 requestType: 'list',
             };
-        case 'change-page':
+        }
+        case 'change-page': {
+            if (context && id) {
+                storePagination(context, 'page', action.payload, id);
+            }
             return {
                 ...state,
                 page: action.payload,
                 requestStatus: { statusCode: 0 },
                 requestType: 'list',
             };
-        case 'change-group':
+        }
+        case 'change-group': {
+            if (context && id) {
+                storePagination(context, 'group', action.payload, id);
+            }
             return {
                 ...state,
                 group: action.payload,
                 requestStatus: { statusCode: 0 },
                 requestType: 'list',
             };
+        }
         case 'pagination-success': {
             const { payload } = action;
             return {

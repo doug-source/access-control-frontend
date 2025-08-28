@@ -1,7 +1,11 @@
 .mainLayout {
-    width: calc(100vw - (6 * var(--Root-Padding)));
+    width: calc(100vw - (2 * var(--Root-Padding)));
     height: calc(100vh - (2 * var(--Root-Padding)));
     position: relative;
+
+    @media only screen and (min-width: 992px) {
+        width: calc(100vw - (6 * var(--Root-Padding)));
+    }
 }
 
 .menuItemIcon,
