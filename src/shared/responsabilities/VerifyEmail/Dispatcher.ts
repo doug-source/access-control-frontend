@@ -66,4 +66,8 @@ export class VerifyEmailDispatcher implements Dispatcher, Provide, AuthSetter {
         this.auth = auth;
         return this;
     }
+
+    abortRequest(): void {
+        this.requester.abortRequest();
+    }
 }

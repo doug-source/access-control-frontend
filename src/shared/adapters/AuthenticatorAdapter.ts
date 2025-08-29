@@ -44,4 +44,8 @@ export class AuthenticatorAdapter implements Authenticator {
             },
         });
     }
+
+    abortRequest(): void {
+        this.httpClient.abortRequest();
+    }
 }

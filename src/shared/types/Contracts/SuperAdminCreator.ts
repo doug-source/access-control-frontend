@@ -1,10 +1,11 @@
-import { type HttpClient } from '@/shared/types/Contracts/HttpClient';
-import { type AbilityCreationParams } from '@/shared/types/Parameters/AbilityCreation';
-import { type RoleCreationParams } from '@/shared/types/Parameters/RoleCreation';
-import { type UserCreationParams } from '@/shared/types/Parameters/UserCreation';
-import { type Paths } from '@/shared/types/Urls/Paths';
+import type { HttpClient } from '@/shared/types/Contracts/HttpClient';
+import type { RequestAborter } from '@/shared/types/Contracts/RequestAborter';
+import type { AbilityCreationParams } from '@/shared/types/Parameters/AbilityCreation';
+import type { RoleCreationParams } from '@/shared/types/Parameters/RoleCreation';
+import type { UserCreationParams } from '@/shared/types/Parameters/UserCreation';
+import type { Paths } from '@/shared/types/Urls/Paths';
 
-export interface SuperAdminCreator {
+export interface SuperAdminCreator extends RequestAborter {
     /**
      * Request asking an user's storagement
      */

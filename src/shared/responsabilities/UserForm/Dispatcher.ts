@@ -49,4 +49,8 @@ export class UserFormDispatcher implements Dispatcher, AuthSetter {
         this.auth = auth;
         return this;
     }
+
+    abortRequest(): void {
+        this.creator.abortRequest();
+    }
 }

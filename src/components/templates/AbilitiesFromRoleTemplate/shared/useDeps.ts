@@ -3,8 +3,9 @@ import { useDataToRequest } from '@/shared/hooks/useDataToRequest';
 import { useDetachHandler } from '@/shared/hooks/useDetachHandler';
 import { useOwnerInputRefs } from '@/shared/hooks/useOwnerInputRefs';
 import { usePaginationListData } from '@/shared/hooks/usePaginationListData';
-import { RoleIndex } from '@/shared/types/Models/Role';
-import { AbilitiesState } from '@/shared/types/Reducers/Abilities';
+import { usePermissionsUnmount } from '@/shared/hooks/usePermissionsUnmount';
+import type { RoleIndex } from '@/shared/types/Models/Role';
+import type { AbilitiesState } from '@/shared/types/Reducers/Abilities';
 
 export const useDeps = (state: AbilitiesState) => {
     const [endpoint, info] = useDataToRequest<
@@ -25,6 +26,7 @@ export const useDeps = (state: AbilitiesState) => {
         endpoint,
         state.ability?.name ?? ''
     );
+    usePermissionsUnmount();
     return {
         inputRef: inputRefs[0],
         attachHandler,

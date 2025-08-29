@@ -47,6 +47,9 @@ export const useVerifyEmailRequest = (state: VerifyEmailState): HookOutput => {
             setOutput(output);
         });
         setRequested(true);
+        return () => {
+            verifyEmailBase.dispatcher.abortRequest();
+        };
     }, [requested, search, id, hash, auth]);
     return [currentState, output, setCurrentState] as const;
 };

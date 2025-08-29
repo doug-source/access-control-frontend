@@ -22,4 +22,8 @@ export class ViewerAdapter implements Viewer {
             },
         });
     }
+
+    abortRequest(): void {
+        this.httpClient.abortRequest();
+    }
 }

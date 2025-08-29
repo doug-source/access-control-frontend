@@ -56,4 +56,8 @@ export class RegisterAccountDispatcher implements Dispatcher, Provide {
         }
         return null;
     }
+
+    abortRequest(): void {
+        this.creator.abortRequest();
+    }
 }

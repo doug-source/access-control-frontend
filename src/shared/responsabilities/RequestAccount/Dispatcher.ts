@@ -60,4 +60,8 @@ export class RequestAccountDispatcher implements Dispatcher, Provide {
         }
         return null;
     }
+
+    abortRequest(): void {
+        this.requestMaker.abortRequest();
+    }
 }

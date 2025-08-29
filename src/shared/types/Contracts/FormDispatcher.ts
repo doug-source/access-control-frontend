@@ -1,4 +1,6 @@
-export interface FormDispatcher<S = unknown> {
+import type { RequestAborter } from '@/shared/types/Contracts/RequestAborter';
+
+export interface FormDispatcher<S = unknown> extends RequestAborter {
     /**
      * Send the form request
      *

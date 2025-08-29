@@ -46,6 +46,9 @@ describe('useRemoveHandler hook', () => {
                 }
                 throw new Error('Method not implemented.');
             }
+            abortRequest(): void {
+                throw new Error('abortRequest');
+            }
         })();
         const dispatch = vi.fn();
         const wrapper = ({ children }: PropsWithChildren) => {
@@ -107,6 +110,9 @@ describe('useRemoveHandler hook', () => {
                     throw url;
                 }
                 throw new Error('Method not implemented.');
+            }
+            abortRequest(): void {
+                throw new Error('abortRequest');
             }
         })();
         const dispatch = vi.fn();
@@ -182,6 +188,9 @@ describe('useRemoveHandler hook', () => {
                 }
                 throw new Error('Method not implemented.');
             }
+            abortRequest(): void {
+                throw new Error('abortRequest');
+            }
         })();
         const dispatch = vi.fn();
         const wrapper = ({ children }: PropsWithChildren) => {
@@ -256,6 +265,9 @@ describe('useRemoveHandler hook', () => {
                 return Promise.resolve({
                     statusCode: 200,
                 });
+            }
+            abortRequest(): void {
+                throw new Error('abortRequest');
             }
         })();
         const dispatch = vi.fn();
@@ -340,6 +352,9 @@ describe('useRemoveHandler hook', () => {
                         },
                     },
                 });
+            }
+            abortRequest(): void {
+                throw new Error('abortRequest');
             }
         })();
         const dispatch = vi.fn();

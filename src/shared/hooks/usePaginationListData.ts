@@ -90,6 +90,10 @@ export const usePaginationListData = (
                         assertUnreachable(output);
                 }
             });
+
+        return () => {
+            pageRequester.abortRequest();
+        };
     }, [
         auth,
         pageRequester,

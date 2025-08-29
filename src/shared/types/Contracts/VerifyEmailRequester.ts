@@ -1,4 +1,5 @@
-import { type HttpClient } from '@/shared/types/Contracts/HttpClient';
+import type { HttpClient } from '@/shared/types/Contracts/HttpClient';
+import type { RequestAborter } from '@/shared/types/Contracts/RequestAborter';
 
 interface VerifyData {
     id: string;
@@ -7,7 +8,7 @@ interface VerifyData {
     signature: string;
 }
 
-export interface VerifyEmailRequester {
+export interface VerifyEmailRequester extends RequestAborter {
     /**
      * Request asking to validate the user's mail
      */

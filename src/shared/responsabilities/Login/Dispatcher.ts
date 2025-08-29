@@ -72,9 +72,6 @@ export class LoginDispatcher
         return null;
     }
 
-    /**
-     * Define the inner auth instance
-     */
     setAuth(auth: AuthContextProvided | null) {
         this.auth = auth;
         return this;
@@ -89,5 +86,9 @@ export class LoginDispatcher
             });
         }
         return this.authenticator.logout(token) as Promise<SignOutOutput>;
+    }
+
+    abortRequest(): void {
+        this.authenticator.abortRequest();
     }
 }

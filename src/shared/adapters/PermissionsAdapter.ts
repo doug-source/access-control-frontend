@@ -1,6 +1,6 @@
-import { type HttpClient } from '@/shared/types/Contracts/HttpClient';
-import { type PermissionsRelationRequester } from '@/shared/types/Contracts/PermissionsRelationRequester';
-import { type Paths } from '@/shared/types/Urls/Paths';
+import type { HttpClient } from '@/shared/types/Contracts/HttpClient';
+import type { PermissionsRelationRequester } from '@/shared/types/Contracts/PermissionsRelationRequester';
+import type { Paths } from '@/shared/types/Urls/Paths';
 
 export class PermissionsAdapter implements PermissionsRelationRequester {
     private httpClient: HttpClient;
@@ -41,5 +41,9 @@ export class PermissionsAdapter implements PermissionsRelationRequester {
             },
             body: JSON.stringify({ included, _method: 'PATCH' }),
         });
+    }
+
+    abortRequest(): void {
+        this.httpClient.abortRequest();
     }
 }

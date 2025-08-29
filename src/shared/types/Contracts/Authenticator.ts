@@ -1,8 +1,9 @@
-import { type HttpClient } from '@/shared/types/Contracts/HttpClient';
+import type { HttpClient } from '@/shared/types/Contracts/HttpClient';
+import type { RequestAborter } from '@/shared/types/Contracts/RequestAborter';
 
 type SubmitData = { email: string; password: string };
 
-export interface Authenticator {
+export interface Authenticator extends RequestAborter {
     /**
      * Execute the login request
      */

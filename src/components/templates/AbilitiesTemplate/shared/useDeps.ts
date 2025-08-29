@@ -2,8 +2,9 @@ import { useAttachHandler } from '@/shared/hooks/useAttachHandler';
 import { useAuth } from '@/shared/hooks/useAuth';
 import { useOwnerInputRefs } from '@/shared/hooks/useOwnerInputRefs';
 import { usePaginationListData } from '@/shared/hooks/usePaginationListData';
+import { usePermissionsUnmount } from '@/shared/hooks/usePermissionsUnmount';
 import { useRemoveHandler } from '@/shared/hooks/useRemoveHandler';
-import { AbilitiesState } from '@/shared/types/Reducers/Abilities';
+import type { AbilitiesState } from '@/shared/types/Reducers/Abilities';
 import { useAbilityEndpoints } from './useAbilityEndpoints';
 
 export const useDeps = (state: AbilitiesState) => {
@@ -18,6 +19,7 @@ export const useDeps = (state: AbilitiesState) => {
         `/api/roles/${info?.data.id ?? 0}/abilities`,
         state.ability?.name ?? ''
     );
+    usePermissionsUnmount();
     return {
         inputRef: inputRefs[0],
         removeHandler,

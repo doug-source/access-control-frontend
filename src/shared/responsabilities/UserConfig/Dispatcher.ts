@@ -51,4 +51,8 @@ export class UserConfigDispatcher implements Dispatcher, AuthSetter {
         this.auth = auth;
         return this;
     }
+
+    abortRequest(): void {
+        this.updater.abortRequest();
+    }
 }

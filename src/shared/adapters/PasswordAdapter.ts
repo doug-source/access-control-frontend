@@ -35,4 +35,8 @@ export class PasswordAdapter
             },
         });
     }
+
+    abortRequest(): void {
+        this.httpClient.abortRequest();
+    }
 }

@@ -41,5 +41,9 @@ export const useSingleDataFetch = (endpoint: Paths['endpoint']['viewers']) => {
                     break;
             }
         })(token, viewer, dispatch);
+
+        return () => {
+            viewer.abortRequest();
+        };
     }, [token, viewer, dispatch, endpoint]);
 };

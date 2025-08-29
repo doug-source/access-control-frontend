@@ -43,4 +43,8 @@ export class PageRequestAdapter
             },
         });
     }
+
+    abortRequest(): void {
+        this.httpClient.abortRequest();
+    }
 }

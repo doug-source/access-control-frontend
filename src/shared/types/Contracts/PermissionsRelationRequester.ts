@@ -1,7 +1,8 @@
-import { type HttpClient } from '@/shared/types/Contracts/HttpClient';
-import { type Paths } from '@/shared/types/Urls/Paths';
+import type { HttpClient } from '@/shared/types/Contracts/HttpClient';
+import type { RequestAborter } from '@/shared/types/Contracts/RequestAborter';
+import type { Paths } from '@/shared/types/Urls/Paths';
 
-export interface PermissionsRelationRequester {
+export interface PermissionsRelationRequester extends RequestAborter {
     /**
      * Execute attachment between instances (user, role or abilities)
      */

@@ -31,4 +31,8 @@ export class ForgotPasswordDispatcher implements Dispatcher {
             fields: { email },
         });
     }
+
+    abortRequest(): void {
+        this.requester.abortRequest();
+    }
 }

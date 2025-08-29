@@ -42,6 +42,9 @@ describe('useRestoreHandler hook', () => {
                 }
                 throw new Error('Method not implemented.');
             }
+            abortRequest(): void {
+                throw new Error('abortRequest');
+            }
         })();
         const dispatch = vi.fn();
         const wrapper = ({ children }: PropsWithChildren) => {
@@ -162,6 +165,9 @@ describe('useRestoreHandler hook', () => {
                 }
                 throw new Error('Method not implemented.');
             }
+            abortRequest(): void {
+                throw new Error('abortRequest');
+            }
         })();
         const dispatch = vi.fn();
         const wrapper = ({ children }: PropsWithChildren) => {
@@ -236,6 +242,9 @@ describe('useRestoreHandler hook', () => {
                     throw url;
                 }
                 throw new Error('Method not implemented.');
+            }
+            abortRequest(): void {
+                throw new Error('abortRequest');
             }
         })();
         const dispatch = vi.fn();
@@ -328,6 +337,9 @@ describe('useRestoreHandler hook', () => {
                     throw url;
                 }
                 throw new Error('Method not implemented.');
+            }
+            abortRequest(): void {
+                throw new Error('abortRequest');
             }
         })();
         const dispatch = vi.fn();
@@ -429,6 +441,9 @@ describe('useRestoreHandler hook', () => {
                     throw url;
                 }
                 throw new Error('Method not implemented.');
+            }
+            abortRequest(): void {
+                throw new Error('abortRequest');
             }
         })();
         const dispatch = vi.fn();

@@ -1,8 +1,9 @@
-import { type HttpClient } from '@/shared/types/Contracts/HttpClient';
+import type { HttpClient } from '@/shared/types/Contracts/HttpClient';
+import type { RequestAborter } from '@/shared/types/Contracts/RequestAborter';
 
 type SubmitData = { email: string; phone?: string };
 
-export interface RegisterRequestMaker {
+export interface RegisterRequestMaker extends RequestAborter {
     /**
      * Execute the RegisterRequest provide request
      */

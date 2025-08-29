@@ -6,13 +6,18 @@ import { fetchIt } from '@/shared/utils/Fetchin';
 type StatusCodes = HttpStatusCodes[keyof HttpStatusCodes];
 
 export class FetchHttpClientAdapter implements HttpClient {
+    protected abortCtrl: AbortController | null = null;
+
     async request(data: CustomRequestInit): Promise<unknown> {
+        this.abortCtrl = new AbortController();
         const response = await fetchIt(this.prepareEndpoint(data.url), {
             method: data.method,
             body: data.body,
             headers: data.headers,
             credentials: 'include',
+            signal: this.abortCtrl.signal,
         });
+        this.abortCtrl = null;
         const output = await this.makeOutput(response);
         return {
             statusCode: response.status as StatusCodes,
@@ -41,5 +46,9 @@ export class FetchHttpClientAdapter implements HttpClient {
             default:
                 return response.json();
         }
+    }
+
+    abortRequest(): void {
+        this.abortCtrl?.abort();
     }
 }

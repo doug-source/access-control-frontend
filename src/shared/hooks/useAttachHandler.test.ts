@@ -33,6 +33,9 @@ describe('useAttachHandler hook', () => {
                 }
                 throw new Error('Method not implemented.');
             }
+            abortRequest(): void {
+                throw new Error('abortRequest');
+            }
         })();
         const dispatch = vi.fn();
         const wrapper = ({ children }: PropsWithChildren) => {
@@ -148,6 +151,9 @@ describe('useAttachHandler hook', () => {
                 }
                 throw new Error('Method not implemented.');
             }
+            abortRequest(): void {
+                throw new Error('abortRequest');
+            }
         })();
         const dispatch = vi.fn();
         const wrapper = ({ children }: PropsWithChildren) => {
@@ -224,6 +230,9 @@ describe('useAttachHandler hook', () => {
                     throw [url, removed];
                 }
                 throw new Error('Method not implemented.');
+            }
+            abortRequest(): void {
+                throw new Error('abortRequest');
             }
         })();
         const dispatch = vi.fn();
@@ -311,6 +320,10 @@ describe('useAttachHandler hook', () => {
                     throw [url, removed];
                 }
                 throw new Error('Method not implemented.');
+            }
+
+            abortRequest(): void {
+                throw new Error('abortRequest');
             }
         })();
         const dispatch = vi.fn();
@@ -411,6 +424,9 @@ describe('useAttachHandler hook', () => {
                     throw [url, removed];
                 }
                 throw new Error('Method not implemented.');
+            }
+            abortRequest(): void {
+                throw new Error('abortRequest');
             }
         })();
         const dispatch = vi.fn();

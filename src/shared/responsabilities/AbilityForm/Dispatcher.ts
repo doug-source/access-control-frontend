@@ -42,4 +42,8 @@ export class AbilityFormDispatcher implements Dispatcher, AuthSetter {
         this.auth = auth;
         return this;
     }
+
+    abortRequest(): void {
+        this.creator.abortRequest();
+    }
 }

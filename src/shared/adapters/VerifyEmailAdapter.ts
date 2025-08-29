@@ -34,4 +34,8 @@ export class VerifyEmailAdapter implements VerifyEmailRequester {
             },
         });
     }
+
+    abortRequest(): void {
+        this.httpClient.abortRequest();
+    }
 }

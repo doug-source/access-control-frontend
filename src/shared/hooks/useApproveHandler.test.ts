@@ -41,6 +41,9 @@ describe('useApproveHandler hook', () => {
                 }
                 throw new Error('Method not implemented.');
             }
+            abortRequest(): void {
+                throw new Error('abortRequest');
+            }
         })();
         const dispatch = vi.fn();
         const wrapper = ({ children }: PropsWithChildren) => {
@@ -166,6 +169,9 @@ describe('useApproveHandler hook', () => {
                 }
                 throw new Error('Method not implemented.');
             }
+            abortRequest(): void {
+                throw new Error('abortRequest');
+            }
         })();
         const dispatch = vi.fn();
         const wrapper = ({ children }: PropsWithChildren) => {
@@ -243,6 +249,9 @@ describe('useApproveHandler hook', () => {
                     throw url;
                 }
                 throw new Error('Method not implemented.');
+            }
+            abortRequest(): void {
+                throw new Error('abortRequest');
             }
         })();
         const dispatch = vi.fn();
@@ -326,6 +335,9 @@ describe('useApproveHandler hook', () => {
                 return Promise.resolve({
                     statusCode: 200,
                 });
+            }
+            abortRequest(): void {
+                throw new Error('abortRequest');
             }
         })();
         const dispatch = vi.fn();
@@ -430,6 +442,9 @@ describe('useApproveHandler hook', () => {
                         },
                     },
                 });
+            }
+            abortRequest(): void {
+                throw new Error('abortRequest');
             }
         })();
         const dispatch = vi.fn();

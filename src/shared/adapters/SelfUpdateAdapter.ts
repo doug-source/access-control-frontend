@@ -19,4 +19,8 @@ export class SelfUpdateAdapter implements SelfUpdate {
             body: data,
         });
     }
+
+    abortRequest(): void {
+        this.httpClient.abortRequest();
+    }
 }

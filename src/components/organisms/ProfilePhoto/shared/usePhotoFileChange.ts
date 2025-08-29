@@ -23,7 +23,7 @@ export const usePhotoFileChange = (
         });
         return () => {
             isCancel = true;
-            if (reader?.readyState === 1) {
+            if (reader?.readyState === FileReader.LOADING) {
                 reader.abort();
             }
         };

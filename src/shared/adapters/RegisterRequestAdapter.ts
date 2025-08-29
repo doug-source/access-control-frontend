@@ -1,5 +1,5 @@
-import { type HttpClient } from '@/shared/types/Contracts/HttpClient';
-import { type RegisterRequestMaker } from '@/shared/types/Contracts/RegisterRequestMaker';
+import type { HttpClient } from '@/shared/types/Contracts/HttpClient';
+import type { RegisterRequestMaker } from '@/shared/types/Contracts/RegisterRequestMaker';
 
 export class RegisterRequestAdapter implements RegisterRequestMaker {
     private httpClient: HttpClient;
@@ -21,5 +21,9 @@ export class RegisterRequestAdapter implements RegisterRequestMaker {
             },
             body,
         });
+    }
+
+    abortRequest(): void {
+        this.httpClient.abortRequest();
     }
 }

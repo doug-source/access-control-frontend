@@ -58,4 +58,8 @@ export class ResetPasswordDispatcher implements Dispatcher, Provide {
             body: { errors: { status: [message] } },
         };
     }
+
+    abortRequest(): void {
+        this.requester.abortRequest();
+    }
 }

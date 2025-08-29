@@ -1,9 +1,9 @@
-import { type HttpClient } from '@/shared/types/Contracts/HttpClient';
-import { type SuperAdminCreator } from '@/shared/types/Contracts/SuperAdminCreator';
-import { type RoleCreationParams } from '@/shared/types/Parameters/RoleCreation';
-import { type UserCreationParams } from '@/shared/types/Parameters/UserCreation';
-import { type Paths } from '@/shared/types/Urls/Paths';
-import { AbilityCreationParams } from '../types/Parameters/AbilityCreation';
+import type { HttpClient } from '@/shared/types/Contracts/HttpClient';
+import type { SuperAdminCreator } from '@/shared/types/Contracts/SuperAdminCreator';
+import type { AbilityCreationParams } from '@/shared/types/Parameters/AbilityCreation';
+import type { RoleCreationParams } from '@/shared/types/Parameters/RoleCreation';
+import type { UserCreationParams } from '@/shared/types/Parameters/UserCreation';
+import type { Paths } from '@/shared/types/Urls/Paths';
 
 export class StoreAdapter implements SuperAdminCreator {
     private httpClient: HttpClient;
@@ -75,5 +75,9 @@ export class StoreAdapter implements SuperAdminCreator {
         token: string
     ): ReturnType<HttpClient['request']> {
         return this.store(url, data, token);
+    }
+
+    abortRequest(): void {
+        this.httpClient.abortRequest();
     }
 }

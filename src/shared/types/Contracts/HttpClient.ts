@@ -1,6 +1,7 @@
-import { type CustomRequestInit } from '@/shared/types/Parameters/CustomRequestInit';
+import type { RequestAborter } from '@/shared/types/Contracts/RequestAborter';
+import type { CustomRequestInit } from '@/shared/types/Parameters/CustomRequestInit';
 
-export interface HttpClient {
+export interface HttpClient extends RequestAborter {
     /**
      * Execute the authentication request
      */

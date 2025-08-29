@@ -22,6 +22,9 @@ describe('useSingleDataFetch hook', () => {
                 }
                 throw new Error('Method not implemented.');
             }
+            abortRequest(): void {
+                throw new Error('abortRequest');
+            }
         })();
         const dispatch = vi.fn();
         const wrapper = ({ children }: PropsWithChildren) => {
@@ -92,6 +95,9 @@ describe('useSingleDataFetch hook', () => {
                     statusCode: 200,
                     body: role,
                 });
+            }
+            abortRequest(): void {
+                throw new Error('abortRequest');
             }
         })();
         const dispatch = vi.fn();
@@ -170,6 +176,9 @@ describe('useSingleDataFetch hook', () => {
                         },
                     },
                 });
+            }
+            abortRequest(): void {
+                throw new Error('abortRequest');
             }
         })();
         const dispatch = vi.fn();

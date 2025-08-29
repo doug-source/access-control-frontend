@@ -3,9 +3,10 @@ import { useDetachHandler } from '@/shared/hooks/useDetachHandler';
 import { useLocalLocation } from '@/shared/hooks/useLocalLocation';
 import { useOwnerInputRefs } from '@/shared/hooks/useOwnerInputRefs';
 import { usePaginationListData } from '@/shared/hooks/usePaginationListData';
-import { type LocationStateBetweenScreen } from '@/shared/types/LocationStateBetweenScreen';
-import { type UserIndex } from '@/shared/types/Models/User';
-import { type RolesState } from '@/shared/types/Reducers/Roles';
+import { usePermissionsUnmount } from '@/shared/hooks/usePermissionsUnmount';
+import type { LocationStateBetweenScreen } from '@/shared/types/LocationStateBetweenScreen';
+import type { UserIndex } from '@/shared/types/Models/User';
+import type { RolesState } from '@/shared/types/Reducers/Roles';
 import { useParams } from 'react-router';
 
 export const useDeps = (state: RolesState) => {
@@ -25,6 +26,7 @@ export const useDeps = (state: RolesState) => {
         endpoint,
         state.role?.name ?? ''
     );
+    usePermissionsUnmount();
     const { state: info } = useLocalLocation();
     return {
         inputRef: inputRefs[0],
