@@ -8,7 +8,7 @@ import type {
 export interface AuthContextProvided {
     user: NullableAuthUser;
     abilities: Abilities[];
-    login(data: OutcomeAuthUSer): Promise<void>;
+    login(data: OutcomeAuthUSer): void;
     logout(): void;
     emailValidated(): void;
     updateAuthUser(

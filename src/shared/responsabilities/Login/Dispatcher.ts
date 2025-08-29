@@ -2,10 +2,7 @@ import type { AuthContextProvided } from '@/shared/contexts/types/AuthContextPro
 import type { Authenticator } from '@/shared/types/Contracts/Authenticator';
 import type { AuthSetter } from '@/shared/types/Contracts/AuthSetter';
 import type { Reference } from '@/shared/types/Responsabilities/LogicBase';
-import type {
-    Generics,
-    Successes,
-} from '@/shared/types/Responsabilities/Outputs';
+import type { Generics } from '@/shared/types/Responsabilities/Outputs';
 import type { LoginState } from '@/shared/types/States';
 
 type Dispatcher = Reference['Dispatcher']['Login']['base'];
@@ -29,15 +26,6 @@ export class LoginDispatcher
         this.auth = null;
     }
 
-    /**
-     * Authenticate inside of frontend storage
-     */
-    private appAuth({ user }: Successes['Login']['Body']) {
-        setTimeout(() => {
-            this.auth?.login(user);
-        }, 1500);
-    }
-
     async request(state: LoginState, formData: FormData): Promise<LoginState> {
         const email = String(formData.get('email') ?? '').trim();
         const password = String(formData.get('password') ?? '');
@@ -46,11 +34,9 @@ export class LoginDispatcher
             password,
         })) as RequestOutput;
 
-        if (output.statusCode === 200) {
-            this.appAuth(output.body);
-        }
         return this.receiver.receive(output, {
             ...state,
+            user: output.statusCode === 200 ? output.body.user : null,
             fields: { email, password },
         });
     }

@@ -4,6 +4,7 @@ export const statedInitialData = {
 
 export const loginInitialData = {
     ...statedInitialData,
+    user: null,
     fields: {
         email: '',
         password: '',

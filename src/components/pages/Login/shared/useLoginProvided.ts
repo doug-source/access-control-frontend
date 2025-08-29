@@ -1,4 +1,5 @@
 import { useAuth } from '@/shared/hooks/useAuth';
+import { useLocalNavigate } from '@/shared/hooks/useLocalNavigate';
 import { useLogicBase } from '@/shared/hooks/useLogicBase';
 import type { Reference } from '@/shared/types/Responsabilities/LogicBase';
 import type { Generics } from '@/shared/types/Responsabilities/Outputs';
@@ -15,6 +16,7 @@ export const useLoginProvided = (state: LoginState): LoginState => {
     >();
     const output = useLoaderData() as ProvideOutput;
     const auth = useAuth();
+    const navigate = useLocalNavigate();
     if (output === null) {
         return state;
     }
@@ -24,6 +26,7 @@ export const useLoginProvided = (state: LoginState): LoginState => {
                 body: { user },
             } = output;
             auth?.login(user);
+            navigate('/home', { replace: true });
             return {
                 ...state,
                 requestStatus: { statusCode: 200, message: 'OK' },

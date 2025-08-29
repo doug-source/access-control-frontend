@@ -7,17 +7,16 @@ import { useDeps } from './shared/useDeps';
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
     const [user, setUser] = useLocalStorage<NullableAuthUser>('user', null);
-    const { abilities, setAbilities, setEndpoints } = useDeps();
+    const [abilities, setAbilities] = useDeps();
 
     const value: AuthContextProvided = useMemo(
         () => ({
             user,
             abilities,
-            async login(data) {
+            login(data) {
                 const { abilities: newAbilities, ...newUser } = data;
                 setAbilities(newAbilities);
                 setUser(newUser);
-                setEndpoints('/home');
             },
             updateAuthUser(name, phone, photo) {
                 if (user === null) {
@@ -28,7 +27,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
             },
             logout() {
                 setUser(null);
-                setEndpoints('/');
             },
             emailValidated() {
                 if (user === null) {
@@ -40,7 +38,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
                 });
             },
         }),
-        [setUser, user, setEndpoints, abilities, setAbilities]
+        [setUser, user, abilities, setAbilities]
     );
     return (
         <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
