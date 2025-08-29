@@ -1,7 +1,10 @@
+import type { PhotoFile } from '@/components/molecules/PhotoFile';
 import { useAuth } from '@/shared/hooks/useAuth';
+import { useLogicBaseStateAction } from '@/shared/hooks/useLogicBaseStateAction';
+import type { UserConfigState } from '@/shared/types/States';
 import { userConfigInitialData } from '@/shared/utils/initialStates';
-import { useActionState } from 'react';
-import { useUserConfigStateAction } from './useUserConfigStateAction';
+import { ComponentRef, useActionState, useRef } from 'react';
+import { useUserConfigCallback } from './useUserConfigCallback';
 
 export const useDeps = () => {
     const user = useAuth()?.user;
@@ -10,8 +13,12 @@ export const useDeps = () => {
     const phone = user?.phone ?? '';
     const email = user?.email ?? '';
 
-    const [submitHandler, clearFileRef] = useUserConfigStateAction();
-    const actionStateList = useActionState(submitHandler, {
+    const clearFileRef = useRef<ComponentRef<typeof PhotoFile> | null>(null);
+    const userConfigCallback = useUserConfigCallback(clearFileRef);
+    const submitHandler =
+        useLogicBaseStateAction<UserConfigState>(userConfigCallback);
+
+    const [state, formAction, pending] = useActionState(submitHandler, {
         ...userConfigInitialData,
         photoRemote,
         fields: {
@@ -21,5 +28,5 @@ export const useDeps = () => {
             email,
         },
     });
-    return [...actionStateList, clearFileRef] as const;
+    return { state, formAction, pending, clearFileRef };
 };

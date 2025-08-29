@@ -32,19 +32,22 @@ export class UserConfigDispatcher implements Dispatcher, AuthSetter {
             formData
         )) as RequestOutput;
 
-        if (output.statusCode === 200) {
-            const photo = output.body.photo ?? this.auth?.user?.photo ?? null;
-            this.auth?.updateAuthUser(name, phone ?? null, photo);
-        }
-
         return this.receiver.receive(output, {
             ...state,
             fields: {
                 ...state.fields,
                 name,
                 phone,
+                photo: this.extractPhoto(output),
             },
         });
+    }
+
+    private extractPhoto(output: RequestOutput) {
+        if (output.statusCode === 200) {
+            return output.body.photo ?? null;
+        }
+        return null;
     }
 
     setAuth(auth: AuthContextProvided | null) {

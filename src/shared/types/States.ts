@@ -63,6 +63,7 @@ export interface UserConfigState extends State {
         name: string;
         phone: string;
         email: string;
+        photo: string | null;
     };
 }
 

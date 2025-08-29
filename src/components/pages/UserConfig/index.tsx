@@ -3,7 +3,7 @@ import { PhotoFileRefProvider } from '@/shared/providers/PhotoFileRefProvider';
 import { useDeps } from './shared/useDeps';
 
 export const UserConfig = () => {
-    const [state, formAction, pending, clearFileRef] = useDeps();
+    const { state, formAction, pending, clearFileRef } = useDeps();
     return (
         <PhotoFileRefProvider photoFileRef={clearFileRef}>
             <UserConfigTemplate

@@ -75,6 +75,7 @@ export const userConfigInitialData = {
         name: '',
         phone: '',
         email: '',
+        photo: null,
     },
 };
 
