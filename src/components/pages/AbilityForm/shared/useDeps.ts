@@ -1,8 +1,9 @@
+import { useLogicBaseStateAction } from '@/shared/hooks/useLogicBaseStateAction';
+import { AbilityFormState } from '@/shared/types/States';
 import { abilityFormInitialData } from '@/shared/utils/initialStates';
 import { useActionState } from 'react';
-import { useAbilityFormStateAction } from './useAbilityFormStateAction';
 
 export const useDeps = () => {
-    const submitHandler = useAbilityFormStateAction();
+    const submitHandler = useLogicBaseStateAction<AbilityFormState>();
     return useActionState(submitHandler, abilityFormInitialData);
 };

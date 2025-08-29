@@ -13,5 +13,6 @@ export const useDeps = () => {
     const [submitHandler, dispatchRef] = useVerifyEmailStateAction();
     const [state, ...remain] = useActionState(submitHandler, initialState);
     const stateUpdated = useVerifyEmailOutput(state, dispatchRef);
+
     return [stateUpdated, ...remain] as const;
 };

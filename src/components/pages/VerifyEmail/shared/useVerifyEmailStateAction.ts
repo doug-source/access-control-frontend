@@ -1,4 +1,5 @@
 import { useLogicBase } from '@/shared/hooks/useLogicBase';
+import { useUnmountAbortRequest } from '@/shared/hooks/useUnmountAbortRequest';
 import type { VerifyEmailState } from '@/shared/types/States';
 import {
     type Dispatch,
@@ -36,5 +37,6 @@ export const useVerifyEmailStateAction = (): HookOutput => {
         },
         [dispatcher, dispatchRef]
     );
+    useUnmountAbortRequest(dispatcher);
     return [submitHandler, dispatchRef] as const;
 };

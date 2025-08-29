@@ -1,5 +1,6 @@
 import { PhotoFile } from '@/components/molecules/PhotoFile';
 import { useLogicBase } from '@/shared/hooks/useLogicBase';
+import { useUnmountAbortRequest } from '@/shared/hooks/useUnmountAbortRequest';
 import type { UserConfigState } from '@/shared/types/States';
 import { ComponentRef, useCallback, useRef } from 'react';
 
@@ -17,5 +18,6 @@ export const useUserConfigStateAction = () => {
         },
         [dispatcher]
     );
+    useUnmountAbortRequest(dispatcher);
     return [submitHandler, clearFileRef] as const;
 };

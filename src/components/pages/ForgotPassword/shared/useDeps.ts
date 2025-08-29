@@ -1,8 +1,9 @@
+import { useLogicBaseStateAction } from '@/shared/hooks/useLogicBaseStateAction';
+import type { ForgotPasswordState } from '@/shared/types/States';
 import { forgotPasswordInitialData } from '@/shared/utils/initialStates';
 import { useActionState } from 'react';
-import { useForgotPasswordStateAction } from './useForgotPasswordStateAction';
 
 export const useDeps = () => {
-    const submitHandler = useForgotPasswordStateAction();
+    const submitHandler = useLogicBaseStateAction<ForgotPasswordState>();
     return useActionState(submitHandler, forgotPasswordInitialData);
 };
