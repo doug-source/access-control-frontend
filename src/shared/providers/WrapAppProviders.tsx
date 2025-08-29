@@ -1,6 +1,6 @@
 import { AllocateAuth } from '@/shared/components/atoms/AllocateAuth';
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
-import type { AuthSetter } from '@/shared/types/Contracts/AuthSetter';
+import type { TokenSetter } from '@/shared/types/Contracts/TokenSetter';
 import { abilityFormBase } from '@/shared/utils/globals/abilityForm';
 import { loginBase } from '@/shared/utils/globals/login';
 import { roleFormBase } from '@/shared/utils/globals/roleForm';
@@ -10,7 +10,7 @@ import { useMemo, type PropsWithChildren } from 'react';
 import { UnauthenticatorProvider } from './UnauthenticatorProvider';
 
 export const WrapAppProviders = ({ children }: PropsWithChildren) => {
-    const setters = useMemo<AuthSetter[]>(
+    const setters = useMemo<TokenSetter[]>(
         () => [
             loginBase.dispatcher,
             userFormBase.dispatcher,

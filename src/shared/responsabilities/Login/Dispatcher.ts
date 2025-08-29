@@ -1,6 +1,5 @@
-import type { AuthContextProvided } from '@/shared/contexts/types/AuthContextProvided';
 import type { Authenticator } from '@/shared/types/Contracts/Authenticator';
-import type { AuthSetter } from '@/shared/types/Contracts/AuthSetter';
+import type { TokenSetter } from '@/shared/types/Contracts/TokenSetter';
 import type { Reference } from '@/shared/types/Responsabilities/LogicBase';
 import type { Generics } from '@/shared/types/Responsabilities/Outputs';
 import type { LoginState } from '@/shared/types/States';
@@ -14,16 +13,16 @@ type ProvideOutput = Generics['Login']['provide'];
 type SignOutOutput = Generics['Login']['signOut'];
 
 export class LoginDispatcher
-    implements Dispatcher, Provide, AuthSetter, SignOut
+    implements Dispatcher, Provide, TokenSetter, SignOut
 {
     private authenticator: Authenticator;
     private receiver: Receiver;
-    private auth: AuthContextProvided | null;
+    private token: string | null;
 
     constructor(authenticator: Authenticator, receiver: Receiver) {
         this.authenticator = authenticator;
         this.receiver = receiver;
-        this.auth = null;
+        this.token = null;
     }
 
     async request(state: LoginState, formData: FormData): Promise<LoginState> {
@@ -58,13 +57,13 @@ export class LoginDispatcher
         return null;
     }
 
-    setAuth(auth: AuthContextProvided | null) {
-        this.auth = auth;
+    setToken(token: string) {
+        this.token = token;
         return this;
     }
 
     signOut(): Promise<SignOutOutput> {
-        const token = this.auth?.user?.token;
+        const token = this.token;
         if (!token) {
             return Promise.resolve({
                 body: undefined,

@@ -36,16 +36,22 @@ export const useVerifyEmailRequest = (state: VerifyEmailState): HookOutput => {
             id,
             hash
         );
-        verifyEmailBase.dispatcher.setAuth(auth);
-        verifyEmailBase.dispatcher.provide(urlSearchParams).then((output) => {
-            if (output === null) {
-                setCurrentState((lastState) => ({
-                    ...lastState,
-                    requestStatus: { statusCode: -1 as const },
-                }));
-            }
-            setOutput(output);
-        });
+        if (auth?.user?.emailVerified === true) {
+            setOutput(null);
+        } else {
+            verifyEmailBase.dispatcher.setToken(auth?.user?.token ?? '');
+            verifyEmailBase.dispatcher
+                .provide(urlSearchParams)
+                .then((output) => {
+                    if (output === null) {
+                        setCurrentState((lastState) => ({
+                            ...lastState,
+                            requestStatus: { statusCode: -1 as const },
+                        }));
+                    }
+                    setOutput(output);
+                });
+        }
         setRequested(true);
         return () => {
             verifyEmailBase.dispatcher.abortRequest();

@@ -1,11 +1,11 @@
 import { AllocateAuth } from '@/shared/components/atoms/AllocateAuth';
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
-import type { AuthSetter } from '@/shared/types/Contracts/AuthSetter';
+import type { TokenSetter } from '@/shared/types/Contracts/TokenSetter';
 import { loginBase } from '@/shared/utils/globals/login';
 import { useMemo, type PropsWithChildren } from 'react';
 
 export const WrapGuestProviders = ({ children }: PropsWithChildren) => {
-    const setters = useMemo<AuthSetter[]>(() => [loginBase.dispatcher], []);
+    const setters = useMemo<TokenSetter[]>(() => [loginBase.dispatcher], []);
     return (
         <HttpClientProvider>
             <AllocateAuth setters={setters}>{children}</AllocateAuth>

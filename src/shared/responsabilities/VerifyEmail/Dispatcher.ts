@@ -1,9 +1,8 @@
-import type { AuthContextProvided } from '@/shared/contexts/types/AuthContextProvided';
-import type { AuthSetter } from '@/shared/types/Contracts/AuthSetter';
+import type { TokenSetter } from '@/shared/types/Contracts/TokenSetter';
 import type { VerifyEmailRequester } from '@/shared/types/Contracts/VerifyEmailRequester';
 import type { Reference } from '@/shared/types/Responsabilities/LogicBase';
 import type { Generics } from '@/shared/types/Responsabilities/Outputs';
-import { NoFieldResponse } from '@/shared/types/Response/GateDispatcher';
+import type { NoFieldResponse } from '@/shared/types/Response/GateDispatcher';
 import type { VerifyEmailState } from '@/shared/types/States';
 
 type Dispatcher = Reference['Dispatcher']['VerifyEmail']['base'];
@@ -12,19 +11,19 @@ type Receiver = Reference['Receiver']['VerifyEmail'];
 type RequestOutput = Generics['VerifyEmail']['request'];
 type ProvideOutput = Generics['VerifyEmail']['provide'];
 
-export class VerifyEmailDispatcher implements Dispatcher, Provide, AuthSetter {
+export class VerifyEmailDispatcher implements Dispatcher, Provide, TokenSetter {
     private requester: VerifyEmailRequester;
     private receiver: Receiver;
-    private auth: AuthContextProvided | null;
+    private token: string | null;
 
     constructor(requester: VerifyEmailRequester, receiver: Receiver) {
         this.requester = requester;
         this.receiver = receiver;
-        this.auth = null;
+        this.token = null;
     }
 
     async request(state: VerifyEmailState): Promise<VerifyEmailState> {
-        const token = this.auth?.user?.token ?? '';
+        const token = this.token ?? '';
         const output = (await this.requester.resend(token)) as RequestOutput;
 
         return this.receiver.receive(output, state);
@@ -33,9 +32,8 @@ export class VerifyEmailDispatcher implements Dispatcher, Provide, AuthSetter {
     async provide(
         searchParams: URLSearchParams
     ): Promise<NoFieldResponse<unknown, 200> | null> {
-        const token = this.auth?.user?.token ?? '';
+        const token = this.token ?? '';
         if (
-            this.auth?.user?.emailVerified === true ||
             !searchParams.has('expires') ||
             !searchParams.has('signature') ||
             !searchParams.has('id') ||
@@ -62,8 +60,8 @@ export class VerifyEmailDispatcher implements Dispatcher, Provide, AuthSetter {
         };
     }
 
-    setAuth(auth: AuthContextProvided | null) {
-        this.auth = auth;
+    setToken(token: string) {
+        this.token = token;
         return this;
     }
 
