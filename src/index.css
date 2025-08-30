@@ -23,6 +23,7 @@ input::-ms-clear {
 :root {
     --white: #fff;
     --snow: #fffafa;
+    --Transparent: #0000;
     --Background-Primary: var(--snow);
     --Background-Secondary: #faf9f6;
     --Background-Hover: #f7f7f7;
