@@ -9,6 +9,7 @@ describe('<LoginTemplate /> component', () => {
         const state: LoginState = {
             requestStatus: { statusCode: -1 },
             fields: { email: '', password: '' },
+            user: null,
         };
         const formAction = vi.fn();
         const router = createMemoryRouter([
@@ -31,6 +32,7 @@ describe('<LoginTemplate /> component', () => {
         const state: LoginState = {
             requestStatus: { statusCode: 200, message: 'OK' },
             fields: { email: '', password: '' },
+            user: null,
         };
         const formAction = vi.fn();
         const router = createMemoryRouter([
@@ -55,6 +57,7 @@ describe('<LoginTemplate /> component', () => {
         const state: LoginState = {
             requestStatus: { statusCode: -1 },
             fields: { email: '', password: '' },
+            user: null,
         };
         const router = createMemoryRouter([
             {

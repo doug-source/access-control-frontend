@@ -9,13 +9,13 @@ export class FetchHttpClientAdapter implements HttpClient {
     protected abortCtrl: AbortController | null = null;
 
     async request(data: CustomRequestInit): Promise<unknown> {
-        this.abortCtrl = new AbortController();
+        this.abortCtrl = data.signal ? new AbortController() : null;
         const response = await fetchIt(this.prepareEndpoint(data.url), {
             method: data.method,
             body: data.body,
             headers: data.headers,
             credentials: 'include',
-            signal: this.abortCtrl.signal,
+            signal: data.signal ?? this.abortCtrl?.signal,
         });
         this.abortCtrl = null;
         const output = await this.makeOutput(response);

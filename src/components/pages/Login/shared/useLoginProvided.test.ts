@@ -62,6 +62,7 @@ describe('useLoginProvided hook', () => {
                 return useLoginProvided({
                     requestStatus: { statusCode: -1 },
                     fields: { email: '', password: '' },
+                    user: null,
                 });
             },
             { wrapper }
@@ -109,6 +110,7 @@ describe('useLoginProvided hook', () => {
                 return useLoginProvided({
                     requestStatus: { statusCode: -1 },
                     fields: { email: '', password: '' },
+                    user: null,
                 });
             },
             { wrapper }

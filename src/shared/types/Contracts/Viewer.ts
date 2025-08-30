@@ -8,6 +8,7 @@ export interface Viewer extends RequestAborter {
      */
     show(
         url: Paths['endpoint']['viewers'],
-        token: string
+        token: string,
+        signal?: AbortSignal
     ): ReturnType<HttpClient['request']>;
 }

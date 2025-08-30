@@ -1,25 +1,11 @@
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { ViewerProvider } from '@/shared/providers/ViewerProvider';
-import { RegisterRequest } from '@/shared/types/Models/RegisterRequest';
-import { RegisterRequestState } from '@/shared/types/Reducers/RegisterRequest';
-import { faker } from '@faker-js/faker';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { RegisterRequestTemplate } from '.';
 
 describe('<RegisterRequestTemplate /> component', () => {
     it('renders correctly', () => {
-        const registerRequest: RegisterRequest = {
-            id: faker.number.int({ min: 1 }),
-            email: faker.internet.email(),
-            phone: faker.phone.number(),
-            createdAt: faker.date.anytime.toString(),
-            updatedAt: faker.date.anytime.toString(),
-        };
-        const state: RegisterRequestState = {
-            requestStatus: { statusCode: -1 },
-            registerRequest: registerRequest,
-        };
         const router = createMemoryRouter([
             {
                 element: (
@@ -30,12 +16,7 @@ describe('<RegisterRequestTemplate /> component', () => {
                 children: [
                     {
                         path: '/',
-                        element: (
-                            <RegisterRequestTemplate
-                                state={state}
-                                data-testid="box"
-                            />
-                        ),
+                        element: <RegisterRequestTemplate data-testid="box" />,
                     },
                 ],
             },

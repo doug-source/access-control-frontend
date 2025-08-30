@@ -18,6 +18,7 @@ import { AppTitle } from '@/shared/components/atoms/AppTitle';
 import { CheckParams } from '@/shared/components/molecules/CheckParams';
 import { ScreenWrapper } from '@/shared/components/molecules/ScreenWrapper';
 import { Gate } from '@/shared/components/organisms/Gate';
+import { subjectShowLoader } from '@/shared/loaders/subjectShowLoader';
 import { LogicBaseProvider } from '@/shared/providers/LogicBaseProvider';
 import { ViewerProvider } from '@/shared/providers/ViewerProvider';
 import { attachToken } from '@/shared/utils/attachToken';
@@ -79,13 +80,21 @@ export const makeProtectedRoutes = (token: string) => [
                                                 <User />
                                             </ScreenWrapper>
                                         ),
+                                        loader: subjectShowLoader(
+                                            token,
+                                            (id) => `/api/users/${id}`
+                                        ),
                                     },
                                     {
                                         path: '/users/removed/:id',
                                         element: (
                                             <ScreenWrapper title="Visão geral do Usuário">
-                                                <User />
+                                                <User removed />
                                             </ScreenWrapper>
+                                        ),
+                                        loader: subjectShowLoader(
+                                            token,
+                                            (id) => `/api/users/removed/${id}`
                                         ),
                                     },
                                 ],
@@ -102,6 +111,10 @@ export const makeProtectedRoutes = (token: string) => [
                                                 <Role />
                                             </ScreenWrapper>
                                         ),
+                                        loader: subjectShowLoader(
+                                            token,
+                                            (id) => `/api/roles/${id}`
+                                        ),
                                     },
                                 ],
                             },
@@ -116,6 +129,10 @@ export const makeProtectedRoutes = (token: string) => [
                                             <ScreenWrapper title="Visão geral da habilidade">
                                                 <Ability />
                                             </ScreenWrapper>
+                                        ),
+                                        loader: subjectShowLoader(
+                                            token,
+                                            (id) => `/api/abilities/${id}`
                                         ),
                                     },
                                 ],
@@ -132,6 +149,12 @@ export const makeProtectedRoutes = (token: string) => [
                                                 <RegisterRequest />
                                             </ScreenWrapper>
                                         ),
+                                        loader: subjectShowLoader(
+                                            token,
+                                            (id) => {
+                                                return `/api/registers/requests/${id}`;
+                                            }
+                                        ),
                                     },
                                 ],
                             },
@@ -146,6 +169,12 @@ export const makeProtectedRoutes = (token: string) => [
                                             <ScreenWrapper title="Visão geral da permissão">
                                                 <RegisterPermission />
                                             </ScreenWrapper>
+                                        ),
+                                        loader: subjectShowLoader(
+                                            token,
+                                            (id) => {
+                                                return `/api/registers/permissions/${id}`;
+                                            }
                                         ),
                                     },
                                 ],

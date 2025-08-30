@@ -4,7 +4,6 @@ import { type RegisterPermissionIndex } from '@/shared/types/Models/RegisterPerm
 import { type RegisterRequestIndex } from '@/shared/types/Models/RegisterRequest';
 import { type RoleIndex } from '@/shared/types/Models/Role';
 import { type UserIndex } from '@/shared/types/Models/User';
-import { statedInitialData } from '@/shared/utils/initialStates';
 import {
     getPaginationStored,
     groups,
@@ -93,28 +92,3 @@ export const registerPermissionsInitialData = (
     ...paginateInitialData<RegisterPermissionIndex>(context, userSigned),
     registerPermission: null,
 });
-
-export const userInitialData = {
-    ...statedInitialData,
-    user: null,
-};
-
-export const roleInitialData = {
-    ...statedInitialData,
-    role: null,
-};
-
-export const abilityInitialData = {
-    ...statedInitialData,
-    ability: null,
-};
-
-export const registerRequestInitialData = {
-    ...statedInitialData,
-    registerRequest: null,
-};
-
-export const registerPermissionInitialData = {
-    ...statedInitialData,
-    registerPermission: null,
-};

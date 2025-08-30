@@ -5,7 +5,7 @@ describe('<UserInfoStackContent /> component', () => {
     it('renders correctly', () => {
         render(
             <div data-testid="box">
-                <UserInfoStackContent user={null} />
+                <UserInfoStackContent />
             </div>
         );
         const $el = screen.getByTestId('box');

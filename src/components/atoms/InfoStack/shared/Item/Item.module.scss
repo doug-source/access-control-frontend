@@ -3,6 +3,7 @@
     text-align: center;
     border-left: 0.0625rem solid var(--Border-Secondary);
     border-right: 0.0625rem solid var(--Border-Secondary);
+    min-height: 1.5625rem;
 
     &.header {
         border-top: 0.0625rem solid var(--Border-Secondary);

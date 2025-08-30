@@ -11,7 +11,8 @@ export class ViewerAdapter implements Viewer {
 
     show(
         url: Paths['endpoint']['viewers'],
-        token: string
+        token: string,
+        signal?: AbortSignal
     ): ReturnType<HttpClient['request']> {
         return this.httpClient.request({
             url,
@@ -20,6 +21,7 @@ export class ViewerAdapter implements Viewer {
                 accept: 'application/json',
                 Authorization: `Bearer ${token}`,
             },
+            signal,
         });
     }
 
