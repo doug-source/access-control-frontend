@@ -1,0 +1,23 @@
+.errorContainer {
+    background-image: url('img/coffeeMugPilled.png');
+    background-repeat: no-repeat;
+    background-position-y: 100%;
+    background-position-x: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1,
+    p {
+        text-align: center;
+    }
+    p {
+        font-size: 1.5rem;
+    }
+    .goBackHomeBtn {
+        padding-inline: 2.75rem;
+        border-radius: 1.5rem;
+    }
+}
