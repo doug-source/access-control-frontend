@@ -1,38 +1,28 @@
 import { App } from '@/App';
 import { NotFound } from '@/components/pages/NotFound';
 import { Guest } from '@/shared/components/molecules/Guest';
-import { AuthProvider } from '@/shared/providers/AuthProvider';
 import { WrapAppProviders } from '@/shared/providers/WrapAppProviders';
 import { WrapGuestProviders } from '@/shared/providers/WrapGuestProviders';
-import { protectedRoutes } from '@/shared/routes/shared/protected';
+import { makeProtectedRoutes } from '@/shared/routes/shared/makeProtectedRoutes';
 import { unprotectedRoutes } from '@/shared/routes/shared/unprotected';
-import { type RouteObject, Outlet } from 'react-router';
+import type { RouteObject } from 'react-router';
 
-export const routeList: RouteObject[] = [
+export const makeRouteList = (token: string): RouteObject[] => [
     {
         element: (
-            <AuthProvider>
-                <Outlet />
-            </AuthProvider>
+            <WrapGuestProviders>
+                <Guest />
+            </WrapGuestProviders>
         ),
-        children: [
-            {
-                element: (
-                    <WrapGuestProviders>
-                        <Guest />
-                    </WrapGuestProviders>
-                ),
-                children: unprotectedRoutes,
-            },
-            {
-                element: (
-                    <WrapAppProviders>
-                        <App />
-                    </WrapAppProviders>
-                ),
-                children: protectedRoutes,
-            },
-        ],
+        children: unprotectedRoutes,
+    },
+    {
+        element: (
+            <WrapAppProviders token={token}>
+                <App />
+            </WrapAppProviders>
+        ),
+        children: makeProtectedRoutes(token),
     },
     {
         path: '/not-found',

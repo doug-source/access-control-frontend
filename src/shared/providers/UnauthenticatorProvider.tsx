@@ -6,15 +6,19 @@ interface UnauthenticatorProviderProps extends PropsWithChildren {
     unauthenticator?: ComponentPropsWithRef<
         typeof UnauthenticatorContext.Provider
     >['value'];
+    token: string;
 }
 
 export const UnauthenticatorProvider = ({
     unauthenticator,
+    token,
     children,
-}: UnauthenticatorProviderProps) => (
-    <UnauthenticatorContext.Provider
-        value={unauthenticator ?? loginBase.dispatcher}
-    >
-        {children}
-    </UnauthenticatorContext.Provider>
-);
+}: UnauthenticatorProviderProps) => {
+    const instance = unauthenticator ?? loginBase.dispatcher;
+    instance.setToken(token);
+    return (
+        <UnauthenticatorContext.Provider value={instance}>
+            {children}
+        </UnauthenticatorContext.Provider>
+    );
+};

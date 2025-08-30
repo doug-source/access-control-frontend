@@ -20,6 +20,7 @@ import { ScreenWrapper } from '@/shared/components/molecules/ScreenWrapper';
 import { Gate } from '@/shared/components/organisms/Gate';
 import { LogicBaseProvider } from '@/shared/providers/LogicBaseProvider';
 import { ViewerProvider } from '@/shared/providers/ViewerProvider';
+import { attachToken } from '@/shared/utils/attachToken';
 import { abilityFormBase } from '@/shared/utils/globals/abilityForm';
 import { roleFormBase } from '@/shared/utils/globals/roleForm';
 import { userConfigBase } from '@/shared/utils/globals/userConfig';
@@ -30,7 +31,7 @@ import {
     rolesFromUserRoutes,
 } from './multiple';
 
-export const protectedRoutes = [
+export const makeProtectedRoutes = (token: string) => [
     {
         element: <MainLayout />,
         children: [
@@ -160,7 +161,9 @@ export const protectedRoutes = [
                         path: '/users-create',
                         element: (
                             <ScreenWrapper title="Criar usuário">
-                                <LogicBaseProvider base={userFormBase}>
+                                <LogicBaseProvider
+                                    base={attachToken(userFormBase, token)}
+                                >
                                     <UserForm />
                                 </LogicBaseProvider>
                             </ScreenWrapper>
@@ -175,7 +178,9 @@ export const protectedRoutes = [
                         path: '/roles-create',
                         element: (
                             <ScreenWrapper title="Criar Papel">
-                                <LogicBaseProvider base={roleFormBase}>
+                                <LogicBaseProvider
+                                    base={attachToken(roleFormBase, token)}
+                                >
                                     <RoleForm />
                                 </LogicBaseProvider>
                             </ScreenWrapper>
@@ -190,7 +195,9 @@ export const protectedRoutes = [
                         path: '/abilities-create',
                         element: (
                             <ScreenWrapper title="Criar Habilidade">
-                                <LogicBaseProvider base={abilityFormBase}>
+                                <LogicBaseProvider
+                                    base={attachToken(abilityFormBase, token)}
+                                >
                                     <AbilityForm />
                                 </LogicBaseProvider>
                             </ScreenWrapper>
@@ -251,7 +258,9 @@ export const protectedRoutes = [
                 path: '/config-user',
                 element: (
                     <ScreenWrapper title="Configurações do usuário">
-                        <LogicBaseProvider base={userConfigBase}>
+                        <LogicBaseProvider
+                            base={attachToken(userConfigBase, token)}
+                        >
                             <UserConfig />
                         </LogicBaseProvider>
                     </ScreenWrapper>
@@ -259,5 +268,5 @@ export const protectedRoutes = [
             },
         ],
     },
-    ...emailVerifyRoutes(),
+    ...emailVerifyRoutes(token),
 ];

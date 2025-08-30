@@ -1,8 +1,9 @@
+import { makeRouteList } from '@/shared/routes';
+import { faker } from '@faker-js/faker';
 import { render, screen } from '@testing-library/react';
 import { createBrowserRouter, RouterProvider } from 'react-router';
-import { routeList } from './shared/routes';
 
-const router = createBrowserRouter(routeList);
+const router = createBrowserRouter(makeRouteList(faker.word.noun()));
 
 describe('main.tsx', () => {
     it('renders correctly', async () => {
