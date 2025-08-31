@@ -1,5 +1,4 @@
 import * as LocalNavigateHooks from '@/shared/hooks/useLocalNavigate';
-import { AuthProvider } from '@/shared/providers/AuthProvider';
 import { DispatchProvider } from '@/shared/providers/DispatchProvider';
 import { faker } from '@faker-js/faker';
 import { renderHook, waitFor } from '@testing-library/react';
@@ -40,9 +39,7 @@ describe('useLoginProvided hook', () => {
                 [
                     {
                         path: '/',
-                        element: createElement(AuthProvider, {
-                            children,
-                        }),
+                        element: children,
                         loader: vi.fn(async () => ({ statusCode: 200, body })),
                         HydrateFallback: () => null,
                     },

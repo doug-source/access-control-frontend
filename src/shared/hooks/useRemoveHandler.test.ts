@@ -2,12 +2,11 @@ import { faker } from '@faker-js/faker';
 import { renderHook } from '@testing-library/react';
 import { createElement, type PropsWithChildren } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
-import { AuthProvider } from '../providers/AuthProvider';
 import { DispatchProvider } from '../providers/DispatchProvider';
 import { HttpClientProvider } from '../providers/HttpClientProvider';
 import { PageRequesterProvider } from '../providers/PageRequesterProvider';
-import { PageRequester } from '../types/Contracts/PageRequester';
-import { Paths } from '../types/Urls/Paths';
+import type { PageRequester } from '../types/Contracts/PageRequester';
+import type { Paths } from '../types/Urls/Paths';
 import { useRemoveHandler } from './useRemoveHandler';
 
 describe('useRemoveHandler hook', () => {
@@ -61,9 +60,7 @@ describe('useRemoveHandler hook', () => {
                             children: createElement(HttpClientProvider, {
                                 children: createElement(PageRequesterProvider, {
                                     pageRequester: requester,
-                                    children: createElement(AuthProvider, {
-                                        children,
-                                    }),
+                                    children,
                                 }),
                             }),
                         }),
@@ -126,9 +123,7 @@ describe('useRemoveHandler hook', () => {
                             children: createElement(HttpClientProvider, {
                                 children: createElement(PageRequesterProvider, {
                                     pageRequester: requester,
-                                    children: createElement(AuthProvider, {
-                                        children,
-                                    }),
+                                    children,
                                 }),
                             }),
                         }),
@@ -203,9 +198,7 @@ describe('useRemoveHandler hook', () => {
                             children: createElement(HttpClientProvider, {
                                 children: createElement(PageRequesterProvider, {
                                     pageRequester: requester,
-                                    children: createElement(AuthProvider, {
-                                        children,
-                                    }),
+                                    children,
                                 }),
                             }),
                         }),
@@ -281,9 +274,7 @@ describe('useRemoveHandler hook', () => {
                             children: createElement(HttpClientProvider, {
                                 children: createElement(PageRequesterProvider, {
                                     pageRequester: requester,
-                                    children: createElement(AuthProvider, {
-                                        children,
-                                    }),
+                                    children,
                                 }),
                             }),
                         }),
@@ -368,9 +359,7 @@ describe('useRemoveHandler hook', () => {
                             children: createElement(HttpClientProvider, {
                                 children: createElement(PageRequesterProvider, {
                                     pageRequester: requester,
-                                    children: createElement(AuthProvider, {
-                                        children,
-                                    }),
+                                    children,
                                 }),
                             }),
                         }),

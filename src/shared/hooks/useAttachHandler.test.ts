@@ -1,9 +1,8 @@
-import { AuthProvider } from '@/shared/providers/AuthProvider';
 import { DispatchProvider } from '@/shared/providers/DispatchProvider';
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { PermissionsRequesterProvider } from '@/shared/providers/PermissionsRequesterProvider';
-import { type PermissionsRelationRequester } from '@/shared/types/Contracts/PermissionsRelationRequester';
-import { type Paths } from '@/shared/types/Urls/Paths';
+import type { PermissionsRelationRequester } from '@/shared/types/Contracts/PermissionsRelationRequester';
+import type { Paths } from '@/shared/types/Urls/Paths';
 import { faker } from '@faker-js/faker';
 import { renderHook } from '@testing-library/react';
 import { createElement, PropsWithChildren } from 'react';
@@ -50,9 +49,7 @@ describe('useAttachHandler hook', () => {
                                     PermissionsRequesterProvider,
                                     {
                                         requester,
-                                        children: createElement(AuthProvider, {
-                                            children,
-                                        }),
+                                        children,
                                     }
                                 ),
                             }),
@@ -95,9 +92,7 @@ describe('useAttachHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
-                                children: createElement(AuthProvider, {
-                                    children,
-                                }),
+                                children,
                             }),
                         }),
                         HydrateFallback: () => null,
@@ -164,20 +159,13 @@ describe('useAttachHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
-                                children: createElement(AuthProvider, {
-                                    children: createElement(
-                                        PermissionsRequesterProvider,
-                                        {
-                                            requester,
-                                            children: createElement(
-                                                AuthProvider,
-                                                {
-                                                    children,
-                                                }
-                                            ),
-                                        }
-                                    ),
-                                }),
+                                children: createElement(
+                                    PermissionsRequesterProvider,
+                                    {
+                                        requester,
+                                        children,
+                                    }
+                                ),
                             }),
                         }),
                         HydrateFallback: () => null,
@@ -244,20 +232,13 @@ describe('useAttachHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
-                                children: createElement(AuthProvider, {
-                                    children: createElement(
-                                        PermissionsRequesterProvider,
-                                        {
-                                            requester,
-                                            children: createElement(
-                                                AuthProvider,
-                                                {
-                                                    children,
-                                                }
-                                            ),
-                                        }
-                                    ),
-                                }),
+                                children: createElement(
+                                    PermissionsRequesterProvider,
+                                    {
+                                        requester,
+                                        children,
+                                    }
+                                ),
                             }),
                         }),
                         HydrateFallback: () => null,
@@ -335,20 +316,13 @@ describe('useAttachHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
-                                children: createElement(AuthProvider, {
-                                    children: createElement(
-                                        PermissionsRequesterProvider,
-                                        {
-                                            requester,
-                                            children: createElement(
-                                                AuthProvider,
-                                                {
-                                                    children,
-                                                }
-                                            ),
-                                        }
-                                    ),
-                                }),
+                                children: createElement(
+                                    PermissionsRequesterProvider,
+                                    {
+                                        requester,
+                                        children,
+                                    }
+                                ),
                             }),
                         }),
                         HydrateFallback: () => null,
@@ -438,20 +412,13 @@ describe('useAttachHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
-                                children: createElement(AuthProvider, {
-                                    children: createElement(
-                                        PermissionsRequesterProvider,
-                                        {
-                                            requester,
-                                            children: createElement(
-                                                AuthProvider,
-                                                {
-                                                    children,
-                                                }
-                                            ),
-                                        }
-                                    ),
-                                }),
+                                children: createElement(
+                                    PermissionsRequesterProvider,
+                                    {
+                                        requester,
+                                        children,
+                                    }
+                                ),
                             }),
                         }),
                         HydrateFallback: () => null,

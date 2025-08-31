@@ -1,4 +1,3 @@
-import { AuthProvider } from '@/shared/providers/AuthProvider';
 import { AuthUser } from '@/shared/types/NullableUser';
 import { faker } from '@faker-js/faker';
 import { renderHook } from '@testing-library/react';
@@ -18,9 +17,7 @@ describe('useMakeUserChecking hook', () => {
         const wrapper = ({ children }: Children) => {
             return createElement(MemoryRouter, {
                 initialEntries: ['/'],
-                children: createElement(AuthProvider, {
-                    children,
-                }),
+                children,
             });
         };
         const { result } = renderHook(
@@ -45,9 +42,7 @@ describe('useMakeUserChecking hook', () => {
         const wrapper = ({ children }: Children) => {
             return createElement(MemoryRouter, {
                 initialEntries: ['/'],
-                children: createElement(AuthProvider, {
-                    children,
-                }),
+                children,
             });
         };
         const { result } = renderHook(

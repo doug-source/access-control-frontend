@@ -1,4 +1,3 @@
-import { AuthProvider } from '@/shared/providers/AuthProvider';
 import { DispatchProvider } from '@/shared/providers/DispatchProvider';
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
@@ -70,9 +69,7 @@ describe('usePaginationListData hook', () => {
                             children: createElement(HttpClientProvider, {
                                 children: createElement(PageRequesterProvider, {
                                     pageRequester: requester,
-                                    children: createElement(AuthProvider, {
-                                        children,
-                                    }),
+                                    children,
                                 }),
                             }),
                         }),
@@ -168,9 +165,7 @@ describe('usePaginationListData hook', () => {
                             children: createElement(HttpClientProvider, {
                                 children: createElement(PageRequesterProvider, {
                                     pageRequester: requester,
-                                    children: createElement(AuthProvider, {
-                                        children,
-                                    }),
+                                    children,
                                 }),
                             }),
                         }),

@@ -1,12 +1,12 @@
-import { useAuth } from '@/shared/hooks/useAuth';
 import { useDispatch } from '@/shared/hooks/useDispatch';
 import { usePermissionsRequester } from '@/shared/hooks/usePermissionsRequester';
-import { type AbilityIndex } from '@/shared/types/Models/Ability';
-import { type RoleIndex } from '@/shared/types/Models/Role';
-import { type AttachmentSuccessAction } from '@/shared/types/Reducers/Custom/AttachmentAction';
-import { type ActionError } from '@/shared/types/Reducers/Standard/Action';
-import { type PermissionIncludedResponse } from '@/shared/types/Response/PermissionIncluded';
-import { type Paths } from '@/shared/types/Urls/Paths';
+import { useSignState } from '@/shared/hooks/useSignState';
+import type { AbilityIndex } from '@/shared/types/Models/Ability';
+import type { RoleIndex } from '@/shared/types/Models/Role';
+import type { AttachmentSuccessAction } from '@/shared/types/Reducers/Custom/AttachmentAction';
+import type { ActionError } from '@/shared/types/Reducers/Standard/Action';
+import type { PermissionIncludedResponse } from '@/shared/types/Response/PermissionIncluded';
+import type { Paths } from '@/shared/types/Urls/Paths';
 import { assertUnreachable } from '@/shared/utils/assertUnreachable';
 import { detachPermissionIncludedErrors } from '@/shared/utils/detachErrors/detachPermissionIncludedErrors';
 import { useCallback } from 'react';
@@ -17,9 +17,8 @@ export const useAttachHandler = <T extends RoleIndex | AbilityIndex>(
     ...names: string[]
 ) => {
     const permissionsRequester = usePermissionsRequester();
-    const auth = useAuth();
     const dispatch = useDispatch<ActionError | AttachmentSuccessAction<T>>();
-    const token = auth?.user?.token;
+    const token = useSignState().user?.token;
     return useCallback(async () => {
         if (!permissionsRequester || !token || !data?.id) {
             return;

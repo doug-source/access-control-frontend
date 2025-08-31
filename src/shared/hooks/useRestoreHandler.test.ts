@@ -1,13 +1,12 @@
-import { AuthProvider } from '@/shared/providers/AuthProvider';
 import { DispatchProvider } from '@/shared/providers/DispatchProvider';
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { PageRequesterWithRestoreProvider } from '@/shared/providers/PageRequesterWithRestoreProvider';
-import { PageRequesterWithRestore } from '@/shared/types/Contracts/PageRequesterWithRestore';
+import type { PageRequesterWithRestore } from '@/shared/types/Contracts/PageRequesterWithRestore';
 import { faker } from '@faker-js/faker';
 import { renderHook } from '@testing-library/react';
-import { createElement, PropsWithChildren } from 'react';
+import { createElement, type PropsWithChildren } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
-import { type Paths } from '../types/Urls/Paths';
+import type { Paths } from '../types/Urls/Paths';
 import { useRestoreHandler } from './useRestoreHandler';
 
 describe('useRestoreHandler hook', () => {
@@ -59,9 +58,7 @@ describe('useRestoreHandler hook', () => {
                                     PageRequesterWithRestoreProvider,
                                     {
                                         requester: requester,
-                                        children: createElement(AuthProvider, {
-                                            children,
-                                        }),
+                                        children,
                                     }
                                 ),
                             }),
@@ -102,9 +99,7 @@ describe('useRestoreHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
-                                children: createElement(AuthProvider, {
-                                    children,
-                                }),
+                                children,
                             }),
                         }),
                         HydrateFallback: () => null,
@@ -182,9 +177,7 @@ describe('useRestoreHandler hook', () => {
                                     PageRequesterWithRestoreProvider,
                                     {
                                         requester: requester,
-                                        children: createElement(AuthProvider, {
-                                            children,
-                                        }),
+                                        children,
                                     }
                                 ),
                             }),
@@ -260,9 +253,7 @@ describe('useRestoreHandler hook', () => {
                                     PageRequesterWithRestoreProvider,
                                     {
                                         requester: requester,
-                                        children: createElement(AuthProvider, {
-                                            children,
-                                        }),
+                                        children,
                                     }
                                 ),
                             }),
@@ -355,9 +346,7 @@ describe('useRestoreHandler hook', () => {
                                     PageRequesterWithRestoreProvider,
                                     {
                                         requester: requester,
-                                        children: createElement(AuthProvider, {
-                                            children,
-                                        }),
+                                        children,
                                     }
                                 ),
                             }),
@@ -459,9 +448,7 @@ describe('useRestoreHandler hook', () => {
                                     PageRequesterWithRestoreProvider,
                                     {
                                         requester: requester,
-                                        children: createElement(AuthProvider, {
-                                            children,
-                                        }),
+                                        children,
                                     }
                                 ),
                             }),

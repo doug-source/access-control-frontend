@@ -1,13 +1,13 @@
 // import { StrictMode } from 'react';
 import { BuildRoutes } from '@/shared/components/atoms/BuildRoutes';
-import { AuthProvider } from '@/shared/providers/AuthProvider';
+import { SignProvider } from '@/shared/providers/SignProvider';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 
 createRoot(document.getElementById('root')!).render(
     // <StrictMode>
-    <AuthProvider>
+    <SignProvider>
         <BuildRoutes />
-    </AuthProvider>
+    </SignProvider>
     // </StrictMode>
 );

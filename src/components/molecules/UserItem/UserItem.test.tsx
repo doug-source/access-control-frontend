@@ -1,8 +1,7 @@
 import { RemotionDataProvided } from '@/shared/contexts/types/RemotionDataProvided';
-import { AuthProvider } from '@/shared/providers/AuthProvider';
 import { RemotionDataProvider } from '@/shared/providers/RemotionDataProvider';
-import { UserIndex } from '@/shared/types/Models/User';
-import { AuthUser } from '@/shared/types/NullableUser';
+import type { UserIndex } from '@/shared/types/Models/User';
+import type { AuthUser } from '@/shared/types/NullableUser';
 import { faker } from '@faker-js/faker';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -87,13 +86,11 @@ describe('<UserItem /> component', () => {
             {
                 path: '/',
                 element: (
-                    <AuthProvider>
-                        <RemotionDataProvider {...remotionData}>
-                            <ul>
-                                <UserItem user={userIndex} />
-                            </ul>
-                        </RemotionDataProvider>
-                    </AuthProvider>
+                    <RemotionDataProvider {...remotionData}>
+                        <ul>
+                            <UserItem user={userIndex} />
+                        </ul>
+                    </RemotionDataProvider>
                 ),
             },
         ]);

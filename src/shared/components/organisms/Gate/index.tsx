@@ -1,5 +1,5 @@
 import { ProtectedRoute } from '@/shared/components/molecules/ProtectedRoute';
-import { useAuth } from '@/shared/hooks/useAuth';
+import { useSignState } from '@/shared/hooks/useSignState';
 import type { Abilities } from '@/shared/types/Models/Ability';
 
 interface GateProps {
@@ -7,7 +7,7 @@ interface GateProps {
 }
 
 export const Gate = ({ abilityName }: GateProps) => {
-    const abilities = useAuth()?.abilities ?? [];
+    const abilities = useSignState().user?.abilities ?? [];
     return (
         <ProtectedRoute
             redirectPath="/home"

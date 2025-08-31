@@ -1,16 +1,16 @@
-import { useAuth } from '@/shared/hooks/useAuth';
+import { useDispatch } from '@/shared/hooks/useDispatch';
 import { usePageRequester } from '@/shared/hooks/usePageRequester';
-import {
-    type PaginationAction,
-    type PaginationActionModels,
+import { useSignState } from '@/shared/hooks/useSignState';
+import type {
+    PaginationAction,
+    PaginationActionModels,
 } from '@/shared/types/Reducers/Custom/PaginationAction';
-import { type PaginationState } from '@/shared/types/Reducers/Custom/PaginationState';
-import { type PaginationResponse } from '@/shared/types/Response/Pagination';
-import { type Paths } from '@/shared/types/Urls/Paths';
+import type { PaginationState } from '@/shared/types/Reducers/Custom/PaginationState';
+import type { PaginationResponse } from '@/shared/types/Response/Pagination';
+import type { Paths } from '@/shared/types/Urls/Paths';
 import { assertUnreachable } from '@/shared/utils/assertUnreachable';
 import { detachPaginationErrors } from '@/shared/utils/detachErrors/detachPaginationErrors';
 import { useEffect, type RefObject } from 'react';
-import { useDispatch } from './useDispatch';
 
 export const usePaginationListData = (
     endpoint: Paths['endpoint']['paginations'],
@@ -25,21 +25,18 @@ export const usePaginationListData = (
         | RefObject<{ name: string; value: string }>
     )[]
 ) => {
-    const auth = useAuth();
+    const token = useSignState().user?.token;
     const pageRequester = usePageRequester();
     const dispatch = useDispatch<PaginationAction<PaginationActionModels>>();
 
     useEffect(() => {
         if (
-            typeof auth?.user?.token === 'undefined' ||
+            typeof token === 'undefined' ||
             statusCode !== 0 ||
             requestType !== 'list'
         ) {
             return;
         }
-        const {
-            user: { token },
-        } = auth;
         const qs: Record<string, string> = Object.fromEntries(
             inputRefs
                 .filter((inputRef) => {
@@ -95,7 +92,7 @@ export const usePaginationListData = (
             pageRequester.abortRequest();
         };
     }, [
-        auth,
+        token,
         pageRequester,
         inputRefs,
         page,

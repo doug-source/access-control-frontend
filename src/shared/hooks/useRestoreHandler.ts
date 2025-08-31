@@ -1,6 +1,6 @@
-import { useAuth } from '@/shared/hooks/useAuth';
 import { useDispatch } from '@/shared/hooks/useDispatch';
 import { usePageRequesterWithRestore } from '@/shared/hooks/usePageRequesterWithRestore';
+import { useSignState } from '@/shared/hooks/useSignState';
 import { type UserIndex } from '@/shared/types/Models/User';
 import { type RestorationSuccessAction } from '@/shared/types/Reducers/Custom/RestorationAction';
 import { type ActionError } from '@/shared/types/Reducers/Standard/Action';
@@ -18,7 +18,7 @@ export const useRestoreHandler = (
     const dispatch = useDispatch<
         ActionError | RestorationSuccessAction<UserIndex>
     >();
-    const token = useAuth()?.user?.token;
+    const token = useSignState().user?.token;
     return useCallback(async () => {
         if (requester === null || !data || !token) {
             return;

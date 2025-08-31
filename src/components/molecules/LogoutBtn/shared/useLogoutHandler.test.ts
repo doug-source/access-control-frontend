@@ -1,12 +1,4 @@
-import * as AuthHooks from '@/shared/hooks/useAuth';
 import * as authenticatorHooks from '@/shared/hooks/useUnauthenticator';
-import { AuthProvider } from '@/shared/providers/AuthProvider';
-import { type Abilities } from '@/shared/types/Models/Ability';
-import type {
-    AuthUser,
-    NullableAuthUser,
-    OutcomeAuthUSer,
-} from '@/shared/types/NullableUser';
 import { faker } from '@faker-js/faker';
 import { act, renderHook } from '@testing-library/react';
 import { createElement, type ReactNode } from 'react';
@@ -19,20 +11,6 @@ let authenticatorSpy: MockInstance<
         signOut(token: string): Promise<unknown>;
     }
 >;
-let authSpy: MockInstance<
-    () => {
-        user: NullableAuthUser;
-        abilities: Abilities[];
-        login(data: OutcomeAuthUSer): Promise<void>;
-        logout(): void;
-        emailValidated(): void;
-        updateAuthUser(
-            name: AuthUser['name'],
-            phone: AuthUser['phone'],
-            photo: AuthUser['photo']
-        ): void;
-    }
->;
 
 type Children = {
     children: ReactNode;
@@ -41,7 +19,6 @@ type Children = {
 describe('useLogoutHandler hook', () => {
     beforeAll(() => {
         authenticatorSpy = vi.spyOn(authenticatorHooks, 'useUnauthenticator');
-        authSpy = vi.spyOn(AuthHooks, 'useAuth');
     });
     afterAll(() => {
         authenticatorSpy.mockRestore();
@@ -72,9 +49,7 @@ describe('useLogoutHandler hook', () => {
                 router: createMemoryRouter([
                     {
                         path: '/',
-                        element: createElement(AuthProvider, {
-                            children,
-                        }),
+                        element: children,
                     },
                 ]),
             });
@@ -117,15 +92,12 @@ describe('useLogoutHandler hook', () => {
             logout: vi.fn(),
             updateAuthUser: vi.fn(),
         };
-        authSpy.mockReturnValue(auth);
         const wrapper = ({ children }: Children) => {
             return createElement(RouterProvider, {
                 router: createMemoryRouter([
                     {
                         path: '/',
-                        element: createElement(AuthProvider, {
-                            children,
-                        }),
+                        element: children,
                     },
                 ]),
             });

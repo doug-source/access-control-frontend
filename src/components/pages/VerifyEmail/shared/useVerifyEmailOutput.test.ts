@@ -1,5 +1,4 @@
 import * as LocalNavigateHooks from '@/shared/hooks/useLocalNavigate';
-import { AuthProvider } from '@/shared/providers/AuthProvider';
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { AuthUser } from '@/shared/types/NullableUser';
 import { VerifyEmailState } from '@/shared/types/States';
@@ -55,9 +54,7 @@ describe('useVerifyEmailVerification hook', () => {
                     {
                         path: '/',
                         element: createElement(HttpClientProvider, {
-                            children: createElement(AuthProvider, {
-                                children,
-                            }),
+                            children,
                         }),
                         loader: vi.fn(async () => emailVerifyLoaderReturn),
                         HydrateFallback: () => null,
@@ -123,9 +120,7 @@ describe('useVerifyEmailVerification hook', () => {
                     {
                         path: '/',
                         element: createElement(HttpClientProvider, {
-                            children: createElement(AuthProvider, {
-                                children,
-                            }),
+                            children,
                         }),
                         loader: vi.fn(async () => emailVerifyLoaderReturn),
                         HydrateFallback: () => null,

@@ -4,7 +4,6 @@ import { faker } from '@faker-js/faker';
 import { renderHook } from '@testing-library/react';
 import { createElement, type PropsWithChildren } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
-import { AuthProvider } from '../providers/AuthProvider';
 import { DispatchProvider } from '../providers/DispatchProvider';
 import { HttpClientProvider } from '../providers/HttpClientProvider';
 import { PermissionsRequesterProvider } from '../providers/PermissionsRequesterProvider';
@@ -50,9 +49,7 @@ describe('useDetachHandler hook', () => {
                                     PermissionsRequesterProvider,
                                     {
                                         requester,
-                                        children: createElement(AuthProvider, {
-                                            children,
-                                        }),
+                                        children,
                                     }
                                 ),
                             }),
@@ -95,9 +92,7 @@ describe('useDetachHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
-                                children: createElement(AuthProvider, {
-                                    children,
-                                }),
+                                children,
                             }),
                         }),
                         HydrateFallback: () => null,
@@ -164,20 +159,13 @@ describe('useDetachHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
-                                children: createElement(AuthProvider, {
-                                    children: createElement(
-                                        PermissionsRequesterProvider,
-                                        {
-                                            requester,
-                                            children: createElement(
-                                                AuthProvider,
-                                                {
-                                                    children,
-                                                }
-                                            ),
-                                        }
-                                    ),
-                                }),
+                                children: createElement(
+                                    PermissionsRequesterProvider,
+                                    {
+                                        requester,
+                                        children,
+                                    }
+                                ),
                             }),
                         }),
                         HydrateFallback: () => null,
@@ -244,20 +232,13 @@ describe('useDetachHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
-                                children: createElement(AuthProvider, {
-                                    children: createElement(
-                                        PermissionsRequesterProvider,
-                                        {
-                                            requester,
-                                            children: createElement(
-                                                AuthProvider,
-                                                {
-                                                    children,
-                                                }
-                                            ),
-                                        }
-                                    ),
-                                }),
+                                children: createElement(
+                                    PermissionsRequesterProvider,
+                                    {
+                                        requester,
+                                        children,
+                                    }
+                                ),
                             }),
                         }),
                         HydrateFallback: () => null,
@@ -334,20 +315,13 @@ describe('useDetachHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
-                                children: createElement(AuthProvider, {
-                                    children: createElement(
-                                        PermissionsRequesterProvider,
-                                        {
-                                            requester,
-                                            children: createElement(
-                                                AuthProvider,
-                                                {
-                                                    children,
-                                                }
-                                            ),
-                                        }
-                                    ),
-                                }),
+                                children: createElement(
+                                    PermissionsRequesterProvider,
+                                    {
+                                        requester,
+                                        children,
+                                    }
+                                ),
                             }),
                         }),
                         HydrateFallback: () => null,
@@ -437,20 +411,13 @@ describe('useDetachHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
-                                children: createElement(AuthProvider, {
-                                    children: createElement(
-                                        PermissionsRequesterProvider,
-                                        {
-                                            requester,
-                                            children: createElement(
-                                                AuthProvider,
-                                                {
-                                                    children,
-                                                }
-                                            ),
-                                        }
-                                    ),
-                                }),
+                                children: createElement(
+                                    PermissionsRequesterProvider,
+                                    {
+                                        requester,
+                                        children,
+                                    }
+                                ),
                             }),
                         }),
                         HydrateFallback: () => null,

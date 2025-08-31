@@ -3,7 +3,6 @@ import { faker } from '@faker-js/faker';
 import { renderHook } from '@testing-library/react';
 import { createElement, PropsWithChildren } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
-import { AuthProvider } from '../providers/AuthProvider';
 import { DispatchProvider } from '../providers/DispatchProvider';
 import { HttpClientProvider } from '../providers/HttpClientProvider';
 import { PageRequesterWithApproveProvider } from '../providers/PageRequesterWithApproveProvider';
@@ -58,9 +57,7 @@ describe('useApproveHandler hook', () => {
                                     PageRequesterWithApproveProvider,
                                     {
                                         requester,
-                                        children: createElement(AuthProvider, {
-                                            children,
-                                        }),
+                                        children,
                                     }
                                 ),
                             }),
@@ -104,9 +101,7 @@ describe('useApproveHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
-                                children: createElement(AuthProvider, {
-                                    children,
-                                }),
+                                children,
                             }),
                         }),
                         HydrateFallback: () => null,
@@ -186,9 +181,7 @@ describe('useApproveHandler hook', () => {
                                     PageRequesterWithApproveProvider,
                                     {
                                         requester,
-                                        children: createElement(AuthProvider, {
-                                            children,
-                                        }),
+                                        children,
                                     }
                                 ),
                             }),
@@ -267,9 +260,7 @@ describe('useApproveHandler hook', () => {
                                     PageRequesterWithApproveProvider,
                                     {
                                         requester,
-                                        children: createElement(AuthProvider, {
-                                            children,
-                                        }),
+                                        children,
                                     }
                                 ),
                             }),
@@ -364,9 +355,7 @@ describe('useApproveHandler hook', () => {
                                     PageRequesterWithApproveProvider,
                                     {
                                         requester,
-                                        children: createElement(AuthProvider, {
-                                            children,
-                                        }),
+                                        children,
                                     }
                                 ),
                             }),
@@ -471,9 +460,7 @@ describe('useApproveHandler hook', () => {
                                     PageRequesterWithApproveProvider,
                                     {
                                         requester,
-                                        children: createElement(AuthProvider, {
-                                            children,
-                                        }),
+                                        children,
                                     }
                                 ),
                             }),

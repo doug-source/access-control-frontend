@@ -1,5 +1,5 @@
-import { useAuth } from '@/shared/hooks/useAuth';
 import { useLocalLocation } from '@/shared/hooks/useLocalLocation';
+import { useSignState } from '@/shared/hooks/useSignState';
 import type { Generics } from '@/shared/types/Responsabilities/Outputs';
 import type { VerifyEmailState } from '@/shared/types/States';
 import { verifyEmailBase } from '@/shared/utils/globals/verifyEmail';
@@ -17,7 +17,9 @@ type HookOutput = Readonly<
 >;
 
 export const useVerifyEmailRequest = (state: VerifyEmailState): HookOutput => {
-    const auth = useAuth();
+    const user = useSignState().user;
+    const token = user?.token;
+    const emailVerified = user?.emailVerified;
     const { search } = useLocalLocation();
     const { id, hash } = useParams();
     const [output, setOutput] = useState<ProvideOutput>(null);
@@ -36,10 +38,10 @@ export const useVerifyEmailRequest = (state: VerifyEmailState): HookOutput => {
             id,
             hash
         );
-        if (auth?.user?.emailVerified === true) {
+        if (emailVerified === true) {
             setOutput(null);
         } else {
-            verifyEmailBase.dispatcher.setToken(auth?.user?.token ?? '');
+            verifyEmailBase.dispatcher.setToken(token ?? '');
             verifyEmailBase.dispatcher
                 .provide(urlSearchParams)
                 .then((output) => {
@@ -56,6 +58,6 @@ export const useVerifyEmailRequest = (state: VerifyEmailState): HookOutput => {
         return () => {
             verifyEmailBase.dispatcher.abortRequest();
         };
-    }, [requested, search, id, hash, auth]);
+    }, [requested, search, id, hash, token, emailVerified]);
     return [currentState, output, setCurrentState] as const;
 };

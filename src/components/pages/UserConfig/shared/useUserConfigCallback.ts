@@ -1,25 +1,30 @@
 import type { PhotoFile } from '@/components/molecules/PhotoFile';
-import { useAuth } from '@/shared/hooks/useAuth';
+import { useSignDispatch } from '@/shared/hooks/useSignDispatch';
+import { useSignState } from '@/shared/hooks/useSignState';
 import type { UserConfigState } from '@/shared/types/States';
 import { type ComponentRef, useCallback } from 'react';
 
 export const useUserConfigCallback = (
     clearFileRef: React.RefObject<ComponentRef<typeof PhotoFile> | null>
 ) => {
-    const auth = useAuth();
+    const photoStored = useSignState().user?.photo;
+    const dispatch = useSignDispatch();
     return useCallback(
         async (output: Promise<UserConfigState>) => {
             const result = await output;
             if (result.requestStatus.statusCode === 200) {
-                auth?.updateAuthUser(
-                    result.fields.name,
-                    result.fields.phone ?? null,
-                    result.fields.photo ?? auth?.user?.photo ?? null
-                );
+                dispatch({
+                    type: 'CONFIG_UPDATING',
+                    payload: {
+                        name: result.fields.name,
+                        phone: result.fields.phone ?? null,
+                        photo: result.fields.photo ?? photoStored ?? null,
+                    },
+                });
                 clearFileRef.current?.clear();
             }
             return result;
         },
-        [clearFileRef, auth]
+        [clearFileRef, dispatch, photoStored]
     );
 };

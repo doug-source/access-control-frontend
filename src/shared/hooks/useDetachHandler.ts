@@ -1,15 +1,15 @@
-import { useAuth } from '@/shared/hooks/useAuth';
 import { useDispatch } from '@/shared/hooks/useDispatch';
 import { usePermissionsRequester } from '@/shared/hooks/usePermissionsRequester';
-import { type AbilityIndex } from '@/shared/types/Models/Ability';
-import { type RoleIndex } from '@/shared/types/Models/Role';
-import { type DetachmentSuccessAction } from '@/shared/types/Reducers/Custom/DetachmentAction';
-import { type ActionError } from '@/shared/types/Reducers/Standard/Action';
-import { type PermissionRemovedResponse } from '@/shared/types/Response/PermissionRemoved';
-import { type Paths } from '@/shared/types/Urls/Paths';
+import type { AbilityIndex } from '@/shared/types/Models/Ability';
+import type { RoleIndex } from '@/shared/types/Models/Role';
+import type { DetachmentSuccessAction } from '@/shared/types/Reducers/Custom/DetachmentAction';
+import type { ActionError } from '@/shared/types/Reducers/Standard/Action';
+import type { PermissionRemovedResponse } from '@/shared/types/Response/PermissionRemoved';
+import type { Paths } from '@/shared/types/Urls/Paths';
 import { assertUnreachable } from '@/shared/utils/assertUnreachable';
 import { detachPermissionRemovedErrors } from '@/shared/utils/detachErrors/detachPermissionRemovedErrors';
 import { useCallback } from 'react';
+import { useSignState } from './useSignState';
 
 export const useDetachHandler = <T extends RoleIndex | AbilityIndex>(
     data: T | null,
@@ -17,9 +17,8 @@ export const useDetachHandler = <T extends RoleIndex | AbilityIndex>(
     ...names: string[]
 ) => {
     const permissionsRequester = usePermissionsRequester();
-    const auth = useAuth();
+    const token = useSignState().user?.token;
     const dispatch = useDispatch<ActionError | DetachmentSuccessAction<T>>();
-    const token = auth?.user?.token;
     return useCallback(async () => {
         if (!permissionsRequester || !token || !data?.id) {
             return;

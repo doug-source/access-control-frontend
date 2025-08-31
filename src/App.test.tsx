@@ -2,8 +2,7 @@ import { faker } from '@faker-js/faker';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { App } from './App';
-import { AuthProvider } from './shared/providers/AuthProvider';
-import { AuthUser } from './shared/types/NullableUser';
+import type { AuthUser } from './shared/types/NullableUser';
 
 describe('main.tsx', () => {
     beforeEach(() => {
@@ -25,11 +24,7 @@ describe('main.tsx', () => {
         const router = createMemoryRouter(
             [
                 {
-                    element: (
-                        <AuthProvider>
-                            <App />
-                        </AuthProvider>
-                    ),
+                    element: <App />,
                     children: [
                         {
                             path: '/home',
@@ -67,11 +62,7 @@ describe('main.tsx', () => {
             [
                 {
                     path: '/',
-                    element: (
-                        <AuthProvider>
-                            <App />
-                        </AuthProvider>
-                    ),
+                    element: <App />,
                 },
                 {
                     path: '/email/verify',

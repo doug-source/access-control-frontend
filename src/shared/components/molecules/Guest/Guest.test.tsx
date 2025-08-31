@@ -1,4 +1,3 @@
-import { AuthProvider } from '@/shared/providers/AuthProvider';
 import { AuthUser } from '@/shared/types/NullableUser';
 import { faker } from '@faker-js/faker';
 import { render, screen } from '@testing-library/react';
@@ -21,11 +20,7 @@ describe('<Guest /> component', () => {
         const rootContent = faker.word.noun();
         const router = createMemoryRouter([
             {
-                element: (
-                    <AuthProvider>
-                        <Guest />
-                    </AuthProvider>
-                ),
+                element: <Guest />,
                 children: [
                     {
                         path: '/',
@@ -49,11 +44,7 @@ describe('<Guest /> component', () => {
         const rootContent = faker.word.noun();
         const router = createMemoryRouter([
             {
-                element: (
-                    <AuthProvider>
-                        <Guest />
-                    </AuthProvider>
-                ),
+                element: <Guest />,
                 children: [
                     {
                         path: '/',

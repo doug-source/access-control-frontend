@@ -1,16 +1,16 @@
 import { useAttachHandler } from '@/shared/hooks/useAttachHandler';
-import { useAuth } from '@/shared/hooks/useAuth';
 import { useOwnerInputRefs } from '@/shared/hooks/useOwnerInputRefs';
 import { usePaginationListData } from '@/shared/hooks/usePaginationListData';
 import { usePermissionsUnmount } from '@/shared/hooks/usePermissionsUnmount';
 import { useRemoveHandler } from '@/shared/hooks/useRemoveHandler';
+import { useSignState } from '@/shared/hooks/useSignState';
 import type { AbilitiesState } from '@/shared/types/Reducers/Abilities';
 import { useAbilityEndpoints } from './useAbilityEndpoints';
 
 export const useDeps = (state: AbilitiesState) => {
     const [endpointPagination, endpointRemotion, info] = useAbilityEndpoints();
     const inputRefs = useOwnerInputRefs();
-    const abilities = useAuth()?.abilities ?? [];
+    const abilities = useSignState().user?.abilities ?? [];
 
     usePaginationListData(endpointPagination, state, ...inputRefs);
     const removeHandler = useRemoveHandler(state.ability, endpointRemotion);

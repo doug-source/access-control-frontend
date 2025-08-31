@@ -1,14 +1,14 @@
-import { useAuth } from '@/shared/hooks/useAuth';
+import { useDispatch } from '@/shared/hooks/useDispatch';
 import { usePageRequesterWithApprove } from '@/shared/hooks/usePageRequesterWithApprove';
-import { type RegisterRequestIndex } from '@/shared/types/Models/RegisterRequest';
-import { type ApprovementSuccessAction } from '@/shared/types/Reducers/Custom/ApprovementAction';
-import { type ActionError } from '@/shared/types/Reducers/Standard/Action';
-import { type ApprovementResponse } from '@/shared/types/Response/Approvement';
-import { type Paths } from '@/shared/types/Urls/Paths';
+import { useSignState } from '@/shared/hooks/useSignState';
+import type { RegisterRequestIndex } from '@/shared/types/Models/RegisterRequest';
+import type { ApprovementSuccessAction } from '@/shared/types/Reducers/Custom/ApprovementAction';
+import type { ActionError } from '@/shared/types/Reducers/Standard/Action';
+import type { ApprovementResponse } from '@/shared/types/Response/Approvement';
+import type { Paths } from '@/shared/types/Urls/Paths';
 import { assertUnreachable } from '@/shared/utils/assertUnreachable';
 import { detachApprovementErrors } from '@/shared/utils/detachErrors/detachApprovementErrors';
 import { useCallback } from 'react';
-import { useDispatch } from './useDispatch';
 
 export const useApproveHandler = (
     data: RegisterRequestIndex | null,
@@ -18,7 +18,7 @@ export const useApproveHandler = (
     const dispatch = useDispatch<
         ActionError | ApprovementSuccessAction<RegisterRequestIndex>
     >();
-    const token = useAuth()?.user?.token;
+    const token = useSignState().user?.token;
     return useCallback(async () => {
         if (requester === null || !data || !token) {
             return;

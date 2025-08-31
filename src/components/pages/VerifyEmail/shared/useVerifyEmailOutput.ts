@@ -1,5 +1,5 @@
-import { useAuth } from '@/shared/hooks/useAuth';
 import { useLogicBase } from '@/shared/hooks/useLogicBase';
+import { useSignDispatch } from '@/shared/hooks/useSignDispatch';
 import type { Reference } from '@/shared/types/Responsabilities/LogicBase';
 import type { VerifyEmailState } from '@/shared/types/States';
 import { assertUnreachable } from '@/shared/utils/assertUnreachable';
@@ -10,7 +10,7 @@ export const useVerifyEmailOutput = (
     state: VerifyEmailState,
     dispatchRef: RefObject<Dispatch<SetStateAction<VerifyEmailState>> | null>
 ): VerifyEmailState => {
-    const auth = useAuth();
+    const signDispatch = useSignDispatch();
     const { errorHandler } = useLogicBase<
         Reference['Handlers']['VerifyEmail']['Error'],
         VerifyEmailState
@@ -27,7 +27,7 @@ export const useVerifyEmailOutput = (
 
     switch (output.statusCode) {
         case 200: {
-            auth?.emailValidated();
+            signDispatch({ type: 'EMAIL_VALIDATED' });
             return {
                 ...newState,
                 verified: true,

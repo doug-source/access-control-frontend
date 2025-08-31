@@ -1,13 +1,14 @@
-import { type AuthContextProvided } from '@/shared/contexts/types/AuthContextProvided';
-import { type Location } from 'react-router';
+import type { NullableUserSigned } from '@/shared/types/NullableUser';
+import type { Location } from 'react-router';
 
 export const userEmailMustVerify = (
-    auth: AuthContextProvided | null,
+    user: NullableUserSigned,
     location: Location
 ) => {
     const regex = /^\/email\/verify(\/\d+\/.+\?expires=\d+&signature=.+)?$/;
+    const emailVerified = user?.emailVerified;
     return (
-        auth?.user?.emailVerified === false &&
+        emailVerified === false &&
         regex.test(`${location.pathname}${location.search}`) === false
     );
 };

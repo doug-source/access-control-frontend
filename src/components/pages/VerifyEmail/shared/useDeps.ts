@@ -1,14 +1,14 @@
-import { useAuth } from '@/shared/hooks/useAuth';
+import { useSignState } from '@/shared/hooks/useSignState';
 import { verifyEmailInitialData } from '@/shared/utils/initialStates';
 import { useActionState } from 'react';
 import { useVerifyEmailOutput } from './useVerifyEmailOutput';
 import { useVerifyEmailStateAction } from './useVerifyEmailStateAction';
 
 export const useDeps = () => {
-    const auth = useAuth();
+    const emailVerified = useSignState().user?.emailVerified;
     const initialState = {
         ...verifyEmailInitialData,
-        verified: auth?.user?.emailVerified ?? false,
+        verified: emailVerified ?? false,
     };
     const [submitHandler, dispatchRef] = useVerifyEmailStateAction();
     const [state, ...remain] = useActionState(submitHandler, initialState);
