@@ -1,13 +1,13 @@
-import { useSignState } from '@/shared/hooks/useSignState';
+import { usePageGroupPagination } from '@/shared/hooks/usePageGroupPagination';
 import { registerRequestsReducer } from '@/shared/reducers/registerRequestsReducer';
 import { registerRequestsInitialData } from '@/shared/utils/ReduceInitialValues';
 import { useReducer, useRef } from 'react';
 
 export const useDeps = () => {
-    const id = useSignState().user?.id;
+    const { page, group } = usePageGroupPagination('register-request');
     const [state, dispatch] = useReducer(
-        registerRequestsReducer('register-request', Number(id ?? 0)),
-        registerRequestsInitialData('register-request', Number(id ?? 0))
+        registerRequestsReducer,
+        registerRequestsInitialData(page, group)
     );
     const inputRef = useRef<HTMLInputElement | null>(null);
 

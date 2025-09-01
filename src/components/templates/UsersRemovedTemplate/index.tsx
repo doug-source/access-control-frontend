@@ -30,9 +30,10 @@ export const UsersRemovedTemplate = ({ state }: UsersRemovedTemplateProps) => {
                         <NameInputFilterBlock
                             className={inputFilterStyles.inputFilterBlock}
                             subject="usuário"
+                            context="user-removed"
                         />
                     </FiltersBlock>
-                    <PaginationDispatch state={state} />
+                    <PaginationDispatch state={state} context="user-removed" />
                 </ColumnBox>
                 <StretchedBox>
                     <ListWrapper requestType={state.requestType}>

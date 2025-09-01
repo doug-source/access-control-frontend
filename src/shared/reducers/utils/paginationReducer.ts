@@ -1,10 +1,6 @@
 import type { PaginationAction } from '@/shared/types/Reducers/Custom/PaginationAction';
 import type { PaginationState } from '@/shared/types/Reducers/Custom/PaginationState';
-import {
-    groups,
-    type PaginateKeyContext,
-    storePagination,
-} from '@/shared/utils/pagination';
+import { groups } from '@/shared/utils/pagination';
 
 export const paginationReducer = <
     M,
@@ -12,27 +8,19 @@ export const paginationReducer = <
     A extends PaginationAction<M>
 >(
     state: S,
-    action: A,
-    context?: PaginateKeyContext,
-    id?: number
+    action: A
 ): S => {
     switch (action.type) {
         case 'change-filter': {
-            if (context && id) {
-                storePagination(context, 'page', 1, id);
-                storePagination(context, 'group', groups[0], id);
-            }
             return {
                 ...state,
                 page: 1,
+                group: groups[0],
                 requestStatus: { statusCode: 0 },
                 requestType: 'list',
             };
         }
         case 'change-page': {
-            if (context && id) {
-                storePagination(context, 'page', action.payload, id);
-            }
             return {
                 ...state,
                 page: action.payload,
@@ -41,9 +29,6 @@ export const paginationReducer = <
             };
         }
         case 'change-group': {
-            if (context && id) {
-                storePagination(context, 'group', action.payload, id);
-            }
             return {
                 ...state,
                 group: action.payload,

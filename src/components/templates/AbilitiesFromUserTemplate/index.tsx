@@ -29,10 +29,16 @@ export const AbilitiesFromUserTemplate = ({
                 <ColumnBox>
                     <FiltersBlock>
                         <InputRefProvider inputRef={inputRef}>
-                            <NameInputFilterBlock subject="papel" />
+                            <NameInputFilterBlock
+                                subject="papel"
+                                context="ability-from-user"
+                            />
                         </InputRefProvider>
                     </FiltersBlock>
-                    <PaginationDispatch state={state} />
+                    <PaginationDispatch
+                        state={state}
+                        context="ability-from-user"
+                    />
                 </ColumnBox>
                 <StretchedBox>
                     <PaginationPurpose show {...info} />

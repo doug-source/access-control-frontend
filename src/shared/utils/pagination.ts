@@ -12,22 +12,10 @@ export type PaginateKeyContext =
     | 'register-request'
     | 'register-permissions';
 
-export const storePagination = (
+export const getPaginationKey = (
     context: PaginateKeyContext,
     key: PaginateKey,
-    value: number,
     id: number
 ) => {
-    localStorage.setItem(`pagination.${context}.${key}.${id}`, String(value));
-};
-
-export const getPaginationStored = (
-    context?: PaginateKeyContext,
-    key?: PaginateKey,
-    id?: number
-) => {
-    const value = localStorage.getItem(
-        `pagination.${context ?? ''}.${key ?? ''}.${id ?? ''}`
-    );
-    return value ? Number(value) : null;
+    return `pagination.${context}.${key}.${id}`;
 };

@@ -27,10 +27,16 @@ export const RolesFromUserTemplate = ({ state }: RolesFromTemplateProps) => {
                 <ColumnBox>
                     <FiltersBlock>
                         <InputRefProvider inputRef={inputRef}>
-                            <NameInputFilterBlock subject="papel" />
+                            <NameInputFilterBlock
+                                subject="papel"
+                                context="role-from-user"
+                            />
                         </InputRefProvider>
                     </FiltersBlock>
-                    <PaginationDispatch state={state} />
+                    <PaginationDispatch
+                        state={state}
+                        context="role-from-user"
+                    />
                 </ColumnBox>
                 <StretchedBox>
                     <AttachmentDataProvider

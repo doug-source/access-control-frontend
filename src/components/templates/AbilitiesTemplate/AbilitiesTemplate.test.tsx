@@ -2,6 +2,7 @@ import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
 import { LocationStateBetweenScreen } from '@/shared/types/LocationStateBetweenScreen';
 import { UserIndex } from '@/shared/types/Models/User';
+import { groups } from '@/shared/utils/pagination';
 import { abilitiesInitialData } from '@/shared/utils/ReduceInitialValues';
 import { faker } from '@faker-js/faker';
 import { render, screen } from '@testing-library/react';
@@ -15,7 +16,7 @@ describe('<AbilitiesTemplate /> component', () => {
                 <HttpClientProvider>
                     <PageRequesterProvider>
                         <AbilitiesTemplate
-                            state={abilitiesInitialData('ability', 0)}
+                            state={abilitiesInitialData(1, groups[0])}
                         />
                     </PageRequesterProvider>
                 </HttpClientProvider>
@@ -30,7 +31,7 @@ describe('<AbilitiesTemplate /> component', () => {
                 <HttpClientProvider>
                     <PageRequesterProvider>
                         <AbilitiesTemplate
-                            state={abilitiesInitialData('ability', 0)}
+                            state={abilitiesInitialData(1, groups[0])}
                         />
                     </PageRequesterProvider>
                 </HttpClientProvider>
@@ -64,7 +65,7 @@ describe('<AbilitiesTemplate /> component', () => {
                 <HttpClientProvider>
                     <PageRequesterProvider>
                         <AbilitiesTemplate
-                            state={abilitiesInitialData('ability', 0)}
+                            state={abilitiesInitialData(1, groups[0])}
                         />
                     </PageRequesterProvider>
                 </HttpClientProvider>

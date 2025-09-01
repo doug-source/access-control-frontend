@@ -4,20 +4,12 @@ import { type RegisterPermissionIndex } from '@/shared/types/Models/RegisterPerm
 import { type RegisterRequestIndex } from '@/shared/types/Models/RegisterRequest';
 import { type RoleIndex } from '@/shared/types/Models/Role';
 import { type UserIndex } from '@/shared/types/Models/User';
-import {
-    getPaginationStored,
-    groups,
-    type PaginateKeyContext,
-} from '@/shared/utils/pagination';
 
-const paginateInitialData = <T = unknown>(
-    context?: PaginateKeyContext,
-    userSigned?: number
-) => ({
+const paginateInitialData = <T = unknown>(page: number, group: number) => ({
     requestStatus: { statusCode: 0 } as RequestStatus,
     data: [] as T[],
-    page: getPaginationStored(context, 'page', userSigned) ?? 1,
-    group: getPaginationStored(context, 'group', userSigned) ?? groups[0] ?? 1,
+    page,
+    group,
     lastPage: 0,
     warning: false,
     error: null,
@@ -40,11 +32,8 @@ const attachmentInitialData = {
     attachmentConfirm: true,
 };
 
-export const usersInitialData = (
-    context?: PaginateKeyContext,
-    userSigned?: number
-) => ({
-    ...paginateInitialData<UserIndex>(context, userSigned),
+export const usersInitialData = (page: number, group: number) => ({
+    ...paginateInitialData<UserIndex>(page, group),
     ...remotionInitialData,
     user: null,
     idRestored: null,
@@ -52,33 +41,24 @@ export const usersInitialData = (
     idToAttach: null,
 });
 
-export const rolesInitialData = (
-    context?: PaginateKeyContext,
-    userSigned?: number
-) => ({
-    ...paginateInitialData<RoleIndex>(context, userSigned),
+export const rolesInitialData = (page: number, group: number) => ({
+    ...paginateInitialData<RoleIndex>(page, group),
     ...remotionInitialData,
     ...attachmentInitialData,
     ...detachmentInitialData,
     role: null,
 });
 
-export const abilitiesInitialData = (
-    context?: PaginateKeyContext,
-    userSigned?: number
-) => ({
-    ...paginateInitialData<AbilityIndex>(context, userSigned),
+export const abilitiesInitialData = (page: number, group: number) => ({
+    ...paginateInitialData<AbilityIndex>(page, group),
     ...remotionInitialData,
     ...attachmentInitialData,
     ...detachmentInitialData,
     ability: null,
 });
 
-export const registerRequestsInitialData = (
-    context?: PaginateKeyContext,
-    userSigned?: number
-) => ({
-    ...paginateInitialData<RegisterRequestIndex>(context, userSigned),
+export const registerRequestsInitialData = (page: number, group: number) => ({
+    ...paginateInitialData<RegisterRequestIndex>(page, group),
     ...remotionInitialData,
     registerRequest: null,
     idApproved: null,
@@ -86,9 +66,9 @@ export const registerRequestsInitialData = (
 });
 
 export const registerPermissionsInitialData = (
-    context?: PaginateKeyContext,
-    userSigned?: number
+    page: number,
+    group: number
 ) => ({
-    ...paginateInitialData<RegisterPermissionIndex>(context, userSigned),
+    ...paginateInitialData<RegisterPermissionIndex>(page, group),
     registerPermission: null,
 });

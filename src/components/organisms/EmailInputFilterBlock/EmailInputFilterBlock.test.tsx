@@ -23,6 +23,7 @@ describe('<EmailInputFilterBlock /> component', () => {
                 <EmailInputFilterBlock
                     subject={faker.word.noun()}
                     data-testid="block"
+                    context="register-request"
                 />
             </InputRefProvider>
         );
@@ -43,6 +44,7 @@ describe('<EmailInputFilterBlock /> component', () => {
                     <EmailInputFilterBlock
                         subject={faker.word.noun()}
                         data-testid="block"
+                        context="register-request"
                     />
                 </InputRefProvider>
             </DispatchProvider>

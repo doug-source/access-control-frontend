@@ -1,6 +1,7 @@
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { InputRefProvider } from '@/shared/providers/InputRefProvider';
 import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
+import { groups } from '@/shared/utils/pagination';
 import { registerPermissionsInitialData } from '@/shared/utils/ReduceInitialValues';
 import { render, renderHook, screen } from '@testing-library/react';
 import { useRef } from 'react';
@@ -14,7 +15,7 @@ const runHook = () => {
 
 describe('<RegisterPermissionsTemplate /> component', () => {
     it('renders correctly', () => {
-        const state = registerPermissionsInitialData('register-permissions', 0);
+        const state = registerPermissionsInitialData(1, groups[0]);
         const {
             result: { current: ref },
         } = runHook();

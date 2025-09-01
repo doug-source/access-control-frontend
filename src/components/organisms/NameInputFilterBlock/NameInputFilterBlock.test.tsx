@@ -21,7 +21,11 @@ describe('<NameInputFilterBlock /> component', () => {
         } = runHook();
         render(
             <InputRefProvider inputRef={ref}>
-                <NameInputFilterBlock subject={subject} data-testid="f-block" />
+                <NameInputFilterBlock
+                    subject={subject}
+                    context="user"
+                    data-testid="f-block"
+                />
             </InputRefProvider>
         );
         const $el = screen.getByTestId('f-block');
@@ -40,6 +44,7 @@ describe('<NameInputFilterBlock /> component', () => {
                 <InputRefProvider inputRef={ref}>
                     <NameInputFilterBlock
                         subject={faker.word.noun()}
+                        context="user"
                         data-testid="f-block"
                     />
                 </InputRefProvider>

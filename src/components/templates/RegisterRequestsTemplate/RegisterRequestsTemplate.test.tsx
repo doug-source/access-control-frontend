@@ -1,6 +1,7 @@
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { InputRefProvider } from '@/shared/providers/InputRefProvider';
 import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
+import { groups } from '@/shared/utils/pagination';
 import { registerRequestsInitialData } from '@/shared/utils/ReduceInitialValues';
 import { render, renderHook, screen } from '@testing-library/react';
 import { useRef } from 'react';
@@ -14,7 +15,7 @@ const runHook = () => {
 
 describe('<RegisterRequestsTemplate /> component', () => {
     it('renders correctly', () => {
-        const state = registerRequestsInitialData('register-request', 0);
+        const state = registerRequestsInitialData(1, groups[0]);
         const {
             result: { current: ref },
         } = runHook();

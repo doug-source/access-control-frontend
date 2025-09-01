@@ -28,8 +28,12 @@ export const RegisterRequestsTemplate = ({
                     <EmailInputFilterBlock
                         className={inputFilterStyles.inputFilterBlock}
                         subject="usuário"
+                        context="register-request"
                     />
-                    <PaginationDispatch state={state} />
+                    <PaginationDispatch
+                        state={state}
+                        context="register-request"
+                    />
                 </ColumnBox>
                 <StretchedBox>
                     <ApprovementDataProvider

@@ -25,7 +25,10 @@ export const RolesTemplate = ({ state }: RolesTemplateProps) => {
                 <ColumnBox>
                     <FiltersBlock>
                         <InputRefProvider inputRef={inputRef}>
-                            <NameInputFilterBlock subject="papel" />
+                            <NameInputFilterBlock
+                                subject="papel"
+                                context="role"
+                            />
                         </InputRefProvider>
                         <PlusLink
                             show={abilities.includes('add-role-screen')}
@@ -33,7 +36,7 @@ export const RolesTemplate = ({ state }: RolesTemplateProps) => {
                             title="Criar papel"
                         />
                     </FiltersBlock>
-                    <PaginationDispatch state={state} />
+                    <PaginationDispatch state={state} context="role" />
                 </ColumnBox>
                 <StretchedBox>
                     <RemotionDataProvider

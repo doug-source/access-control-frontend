@@ -1,4 +1,3 @@
-import { AuthProvider } from '@/shared/providers/AuthProvider';
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { AuthUser } from '@/shared/types/NullableUser';
 import type { VerifyEmailState } from '@/shared/types/States';
@@ -56,13 +55,11 @@ describe('<VerifyEmailTemplate /> component', () => {
                 path: '/',
                 element: (
                     <HttpClientProvider>
-                        <AuthProvider>
-                            <VerifyEmailTemplate
-                                state={state}
-                                formAction={formAction}
-                                pending={false}
-                            />
-                        </AuthProvider>
+                        <VerifyEmailTemplate
+                            state={state}
+                            formAction={formAction}
+                            pending={false}
+                        />
                     </HttpClientProvider>
                 ),
             },

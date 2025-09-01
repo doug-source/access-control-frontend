@@ -29,7 +29,10 @@ export const AbilitiesTemplate = ({ state }: AbilitiesTemplateProps) => {
                 <ColumnBox>
                     <FiltersBlock>
                         <InputRefProvider inputRef={inputRef}>
-                            <NameInputFilterBlock subject="papel" />
+                            <NameInputFilterBlock
+                                subject="papel"
+                                context="ability"
+                            />
                         </InputRefProvider>
                         <PlusLink
                             show={abilities.includes('add-ability-screen')}
@@ -37,7 +40,7 @@ export const AbilitiesTemplate = ({ state }: AbilitiesTemplateProps) => {
                             title="Criar habilidade"
                         />
                     </FiltersBlock>
-                    <PaginationDispatch state={state} />
+                    <PaginationDispatch state={state} context="ability" />
                 </ColumnBox>
                 <StretchedBox>
                     <RemotionDataProvider

@@ -29,10 +29,16 @@ export const AbilitiesFromRoleTemplate = ({
                 <ColumnBox>
                     <FiltersBlock>
                         <InputRefProvider inputRef={inputRef}>
-                            <NameInputFilterBlock subject="papel" />
+                            <NameInputFilterBlock
+                                subject="papel"
+                                context="ability-from-role"
+                            />
                         </InputRefProvider>
                     </FiltersBlock>
-                    <PaginationDispatch state={state} />
+                    <PaginationDispatch
+                        state={state}
+                        context="ability-from-role"
+                    />
                 </ColumnBox>
                 <StretchedBox>
                     <PaginationPurpose show {...info} />

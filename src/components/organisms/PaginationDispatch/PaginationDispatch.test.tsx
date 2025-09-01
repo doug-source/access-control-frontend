@@ -12,6 +12,7 @@ describe('<PaginationDispatch /> component', () => {
         render(
             <PaginationDispatch
                 state={{ page: 1, group: 1, lastPage: 1, total: 1 }}
+                context="ability"
                 data-testid="pag-dispatch"
             />
         );
@@ -27,6 +28,7 @@ describe('<PaginationDispatch /> component', () => {
             <DispatchProvider dispatch={dispatch}>
                 <PaginationDispatch
                     state={{ page: 2, group: 3, lastPage: 5, total: 15 }}
+                    context="ability"
                 />
             </DispatchProvider>
         );
@@ -48,6 +50,7 @@ describe('<PaginationDispatch /> component', () => {
             <DispatchProvider dispatch={dispatch}>
                 <PaginationDispatch
                     state={{ page: 2, group: 3, lastPage: 5, total: 15 }}
+                    context="ability"
                 />
             </DispatchProvider>
         );

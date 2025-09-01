@@ -29,6 +29,7 @@ export const UsersTemplate = ({ state }: UsersTemplateProps) => {
                         <NameInputFilterBlock
                             className={inputFilterStyles.inputFilterBlock}
                             subject="usuário"
+                            context="user"
                         />
                         <PlusLink
                             to="/users-create"
@@ -36,7 +37,7 @@ export const UsersTemplate = ({ state }: UsersTemplateProps) => {
                             show={canAddUser}
                         />
                     </FiltersBlock>
-                    <PaginationDispatch state={state} />
+                    <PaginationDispatch state={state} context="user" />
                 </ColumnBox>
                 <StretchedBox>
                     <ListWrapper requestType={state.requestType}>

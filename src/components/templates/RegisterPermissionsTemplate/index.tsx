@@ -24,8 +24,12 @@ export const RegisterPermissionsTemplate = ({
                     <EmailInputFilterBlock
                         className={inputFilterStyles.inputFilterBlock}
                         subject="permissão"
+                        context="register-permissions"
                     />
-                    <PaginationDispatch state={state} />
+                    <PaginationDispatch
+                        state={state}
+                        context="register-permissions"
+                    />
                 </ColumnBox>
                 <StretchedBox>{children}</StretchedBox>
             </StretchedBox>

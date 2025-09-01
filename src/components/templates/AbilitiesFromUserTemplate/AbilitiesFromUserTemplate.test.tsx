@@ -1,5 +1,6 @@
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
+import { groups } from '@/shared/utils/pagination';
 import { abilitiesInitialData } from '@/shared/utils/ReduceInitialValues';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
@@ -12,7 +13,7 @@ describe('<AbilitiesFromUserTemplate /> component', () => {
                 <HttpClientProvider>
                     <PageRequesterProvider>
                         <AbilitiesFromUserTemplate
-                            state={abilitiesInitialData('ability-from-user', 0)}
+                            state={abilitiesInitialData(1, groups[0])}
                         />
                     </PageRequesterProvider>
                 </HttpClientProvider>

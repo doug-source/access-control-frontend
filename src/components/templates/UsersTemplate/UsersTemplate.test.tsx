@@ -3,6 +3,7 @@ import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { InputRefProvider } from '@/shared/providers/InputRefProvider';
 import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
 import { usersReducer } from '@/shared/reducers/usersReducer';
+import { groups } from '@/shared/utils/pagination';
 import { usersInitialData } from '@/shared/utils/ReduceInitialValues';
 import { faker } from '@faker-js/faker';
 import { render, renderHook, screen } from '@testing-library/react';
@@ -21,8 +22,8 @@ const runStateHook = (outerDispatch: ReturnType<typeof vi.fn>) => {
     const initialProps = { outerDispatch };
     return renderHook(
         ({ outerDispatch }) => {
-            const [state, dispatch] = useReducer(usersReducer('user', 0), {
-                ...usersInitialData('user'),
+            const [state, dispatch] = useReducer(usersReducer, {
+                ...usersInitialData(1, groups[0]),
                 data: [
                     {
                         id: faker.number.int({
@@ -53,7 +54,9 @@ describe('<UsersPageTemplate /> component', () => {
                 <HttpClientProvider>
                     <PageRequesterProvider>
                         <InputRefProvider inputRef={ref}>
-                            <UsersTemplate state={usersInitialData('user')} />
+                            <UsersTemplate
+                                state={usersInitialData(1, groups[0])}
+                            />
                         </InputRefProvider>
                     </PageRequesterProvider>
                 </HttpClientProvider>
