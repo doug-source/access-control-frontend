@@ -1,10 +1,10 @@
 import { useLocalNavigate } from '@/shared/hooks/useLocalNavigate';
-import { useSignDispatch } from '@/shared/hooks/useSignDispatch';
+import { useSignState } from '@/shared/hooks/useSignState';
 import type { LoginState } from '@/shared/types/States';
 import { useCallback } from 'react';
 
 export const useLoginCallback = () => {
-    const dispatch = useSignDispatch();
+    const { dispatch } = useSignState();
     const navigate = useLocalNavigate();
     return useCallback(
         async (output: Promise<LoginState>) => {

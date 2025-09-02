@@ -7,7 +7,7 @@ import {
 } from '@/shared/utils/pagination';
 
 export const usePageGroupPagination = (context: PaginateKeyContext) => {
-    const id = Number(useSignState().user?.id ?? 0);
+    const id = Number(useSignState().state.user?.id ?? 0);
     const [page, setPage] = useLocalStorage(
         getPaginationKey(context, 'page', id),
         1

@@ -17,7 +17,7 @@ export const useDetachHandler = <T extends RoleIndex | AbilityIndex>(
     ...names: string[]
 ) => {
     const permissionsRequester = usePermissionsRequester();
-    const token = useSignState().user?.token;
+    const token = useSignState().state.user?.token;
     const dispatch = useDispatch<ActionError | DetachmentSuccessAction<T>>();
     return useCallback(async () => {
         if (!permissionsRequester || !token || !data?.id) {

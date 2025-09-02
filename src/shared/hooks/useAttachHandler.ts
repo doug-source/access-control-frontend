@@ -18,7 +18,7 @@ export const useAttachHandler = <T extends RoleIndex | AbilityIndex>(
 ) => {
     const permissionsRequester = usePermissionsRequester();
     const dispatch = useDispatch<ActionError | AttachmentSuccessAction<T>>();
-    const token = useSignState().user?.token;
+    const token = useSignState().state.user?.token;
     return useCallback(async () => {
         if (!permissionsRequester || !token || !data?.id) {
             return;

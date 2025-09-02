@@ -10,7 +10,7 @@ import { useAbilityEndpoints } from './useAbilityEndpoints';
 export const useDeps = (state: AbilitiesState) => {
     const [endpointPagination, endpointRemotion, info] = useAbilityEndpoints();
     const inputRefs = useOwnerInputRefs();
-    const abilities = useSignState().user?.abilities ?? [];
+    const abilities = useSignState().state.user?.abilities ?? [];
 
     usePaginationListData(endpointPagination, state, ...inputRefs);
     const removeHandler = useRemoveHandler(state.ability, endpointRemotion);

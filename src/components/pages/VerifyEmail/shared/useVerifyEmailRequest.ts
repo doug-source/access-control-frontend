@@ -17,7 +17,7 @@ type HookOutput = Readonly<
 >;
 
 export const useVerifyEmailRequest = (state: VerifyEmailState): HookOutput => {
-    const user = useSignState().user;
+    const user = useSignState().state.user;
     const token = user?.token;
     const emailVerified = user?.emailVerified;
     const { search } = useLocalLocation();

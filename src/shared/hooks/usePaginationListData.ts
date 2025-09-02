@@ -25,7 +25,7 @@ export const usePaginationListData = (
         | RefObject<{ name: string; value: string }>
     )[]
 ) => {
-    const token = useSignState().user?.token;
+    const token = useSignState().state.user?.token;
     const pageRequester = usePageRequester();
     const dispatch = useDispatch<PaginationAction<PaginationActionModels>>();
 

@@ -1,6 +1,6 @@
 import { useLocalNavigate } from '@/shared/hooks/useLocalNavigate';
 import { useLogicBase } from '@/shared/hooks/useLogicBase';
-import { useSignDispatch } from '@/shared/hooks/useSignDispatch';
+import { useSignState } from '@/shared/hooks/useSignState';
 import type { Reference } from '@/shared/types/Responsabilities/LogicBase';
 import type { Generics } from '@/shared/types/Responsabilities/Outputs';
 import type { LoginState } from '@/shared/types/States';
@@ -15,7 +15,7 @@ export const useLoginProvided = (state: LoginState): LoginState => {
         LoginState
     >();
     const output = useLoaderData() as ProvideOutput;
-    const dispatch = useSignDispatch();
+    const { dispatch } = useSignState();
     const navigate = useLocalNavigate();
     if (output === null) {
         return state;

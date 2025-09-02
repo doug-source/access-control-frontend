@@ -8,6 +8,6 @@ export const useDeps = (state: RolesState) => {
     const inputRef = useRef<HTMLInputElement | null>(null);
     usePaginationListData('/api/roles', state, inputRef);
     const removeHandler = useRemoveHandler(state.role, '/api/roles');
-    const abilities = useSignState().user?.abilities ?? [];
+    const abilities = useSignState().state.user?.abilities ?? [];
     return { removeHandler, inputRef, abilities };
 };

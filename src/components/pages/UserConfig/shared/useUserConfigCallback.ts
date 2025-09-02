@@ -1,5 +1,4 @@
 import type { PhotoFile } from '@/components/molecules/PhotoFile';
-import { useSignDispatch } from '@/shared/hooks/useSignDispatch';
 import { useSignState } from '@/shared/hooks/useSignState';
 import type { UserConfigState } from '@/shared/types/States';
 import { type ComponentRef, useCallback } from 'react';
@@ -7,8 +6,8 @@ import { type ComponentRef, useCallback } from 'react';
 export const useUserConfigCallback = (
     clearFileRef: React.RefObject<ComponentRef<typeof PhotoFile> | null>
 ) => {
-    const photoStored = useSignState().user?.photo;
-    const dispatch = useSignDispatch();
+    const { state, dispatch } = useSignState();
+    const photoStored = state.user?.photo;
     return useCallback(
         async (output: Promise<UserConfigState>) => {
             const result = await output;

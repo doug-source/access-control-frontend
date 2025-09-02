@@ -1,4 +1,7 @@
-import type { SignState } from '@/shared/types/Reducers/Sign';
-import { createContext } from 'react';
+import type { SignAction, SignState } from '@/shared/types/Reducers/Sign';
+import { ActionDispatch, createContext } from 'react';
 
-export const SignStateContext = createContext<SignState | null>(null);
+export const SignStateContext = createContext<{
+    state: SignState;
+    dispatch: ActionDispatch<[action: SignAction]>;
+} | null>(null);

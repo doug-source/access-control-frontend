@@ -18,7 +18,7 @@ export const useApproveHandler = (
     const dispatch = useDispatch<
         ActionError | ApprovementSuccessAction<RegisterRequestIndex>
     >();
-    const token = useSignState().user?.token;
+    const token = useSignState().state.user?.token;
     return useCallback(async () => {
         if (requester === null || !data || !token) {
             return;

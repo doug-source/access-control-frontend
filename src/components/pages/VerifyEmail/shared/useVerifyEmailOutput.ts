@@ -1,5 +1,5 @@
 import { useLogicBase } from '@/shared/hooks/useLogicBase';
-import { useSignDispatch } from '@/shared/hooks/useSignDispatch';
+import { useSignState } from '@/shared/hooks/useSignState';
 import type { Reference } from '@/shared/types/Responsabilities/LogicBase';
 import type { VerifyEmailState } from '@/shared/types/States';
 import { assertUnreachable } from '@/shared/utils/assertUnreachable';
@@ -10,7 +10,7 @@ export const useVerifyEmailOutput = (
     state: VerifyEmailState,
     dispatchRef: RefObject<Dispatch<SetStateAction<VerifyEmailState>> | null>
 ): VerifyEmailState => {
-    const signDispatch = useSignDispatch();
+    const { dispatch: signDispatch } = useSignState();
     const { errorHandler } = useLogicBase<
         Reference['Handlers']['VerifyEmail']['Error'],
         VerifyEmailState

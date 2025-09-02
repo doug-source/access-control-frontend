@@ -17,7 +17,7 @@ export const useRemoveHandler = <T extends { id: number }>(
     endpoint: Paths['endpoint']['remotionPrefixes']
 ) => {
     const pageRequester = usePageRequester();
-    const token = useSignState().user?.token;
+    const token = useSignState().state.user?.token;
     const dispatch = useDispatch<
         ActionError | RemotionSuccessAction<RemotionActionModels>
     >();

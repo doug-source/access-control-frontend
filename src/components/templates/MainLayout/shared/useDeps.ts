@@ -5,7 +5,7 @@ import { useId } from 'react';
 export const useDeps = () => {
     const { pathname } = useLocalLocation();
     const usersMenuId = useId();
-    const abilities = useSignState().user?.abilities ?? [];
+    const abilities = useSignState().state.user?.abilities ?? [];
 
     return {
         pathname,

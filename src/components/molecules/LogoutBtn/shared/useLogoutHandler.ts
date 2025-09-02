@@ -1,12 +1,11 @@
 import { useLocalNavigate } from '@/shared/hooks/useLocalNavigate';
-import { useSignDispatch } from '@/shared/hooks/useSignDispatch';
 import { useSignState } from '@/shared/hooks/useSignState';
 import { useUnauthenticator } from '@/shared/hooks/useUnauthenticator';
 import { useCallback } from 'react';
 
 export const useLogoutHandler = (onLoading: (loading: boolean) => void) => {
-    const token = useSignState().user?.token;
-    const dispatch = useSignDispatch();
+    const { state, dispatch } = useSignState();
+    const token = state.user?.token;
     const unauthenticator = useUnauthenticator();
     const navigate = useLocalNavigate();
     return useCallback(async () => {

@@ -18,7 +18,7 @@ export const useRestoreHandler = (
     const dispatch = useDispatch<
         ActionError | RestorationSuccessAction<UserIndex>
     >();
-    const token = useSignState().user?.token;
+    const token = useSignState().state.user?.token;
     return useCallback(async () => {
         if (requester === null || !data || !token) {
             return;

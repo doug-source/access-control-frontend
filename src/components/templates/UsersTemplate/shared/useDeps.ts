@@ -12,7 +12,7 @@ export const useDeps = (state: UsersState) => {
     usePaginationListData(endpoint, state, inputRef);
     const removeHandler = useRemoveHandler(state.user, endpoint);
     const dispatch = useDispatch<IdToAttachAction<null>>();
-    const abilities = useSignState().user?.abilities ?? [];
+    const abilities = useSignState().state.user?.abilities ?? [];
 
     return {
         removeHandler,

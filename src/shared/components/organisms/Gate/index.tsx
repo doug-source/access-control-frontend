@@ -7,7 +7,7 @@ interface GateProps {
 }
 
 export const Gate = ({ abilityName }: GateProps) => {
-    const abilities = useSignState().user?.abilities ?? [];
+    const abilities = useSignState().state.user?.abilities ?? [];
     return (
         <ProtectedRoute
             redirectPath="/home"

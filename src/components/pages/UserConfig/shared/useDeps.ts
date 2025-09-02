@@ -7,7 +7,7 @@ import { ComponentRef, useActionState, useRef } from 'react';
 import { useUserConfigCallback } from './useUserConfigCallback';
 
 export const useDeps = () => {
-    const user = useSignState().user;
+    const user = useSignState().state.user;
 
     const photoRemote = user?.photo ?? null;
     const name = user?.name ?? '';

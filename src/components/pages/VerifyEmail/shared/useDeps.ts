@@ -5,7 +5,7 @@ import { useVerifyEmailOutput } from './useVerifyEmailOutput';
 import { useVerifyEmailStateAction } from './useVerifyEmailStateAction';
 
 export const useDeps = () => {
-    const emailVerified = useSignState().user?.emailVerified;
+    const emailVerified = useSignState().state.user?.emailVerified;
     const initialState = {
         ...verifyEmailInitialData,
         verified: emailVerified ?? false,
