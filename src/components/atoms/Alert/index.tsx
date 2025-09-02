@@ -1,10 +1,10 @@
 import classNames from 'classnames';
-import { type ComponentPropsWithoutRef } from 'react';
+import { memo, type ComponentPropsWithoutRef } from 'react';
 import styles from './Alert.module.scss';
 
 type AlertProps = ComponentPropsWithoutRef<'div'>;
 
-export const Alert = ({ className, children, ...remain }: AlertProps) => (
+export const Alert = memo(({ className, children, ...remain }: AlertProps) => (
     <div
         {...remain}
         role="alert"
@@ -12,4 +12,4 @@ export const Alert = ({ className, children, ...remain }: AlertProps) => (
     >
         {children}
     </div>
-);
+));

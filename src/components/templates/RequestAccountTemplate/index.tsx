@@ -1,12 +1,9 @@
-import { CommonRow } from '@/components/atoms/CommonRow';
 import { FieldGroup } from '@/components/atoms/FieldGroup';
-import { GoogleIcon } from '@/components/atoms/icons/GoogleIcon';
-import { Divisor } from '@/components/molecules/Divisor';
 import { GateLinkBox } from '@/components/molecules/GateLinkBox';
 import { LabelWarned } from '@/components/molecules/LabelWarned';
-import { SocialLoginLink } from '@/components/molecules/SocialLoginLink';
 import { FormCardContainer } from '@/components/organisms/FormCardContainer';
 import type { RequestAccountState } from '@/shared/types/States';
+import { AfterContent } from './shared/AfterContent';
 import { useDeps } from './shared/useDeps';
 
 interface RequestAccountTemplateProps {
@@ -20,7 +17,7 @@ export const RequestAccountTemplate = ({
     formAction,
     pending,
 }: RequestAccountTemplateProps) => {
-    const [providerLink] = useDeps();
+    const { providerLink, emailId, phoneId } = useDeps();
     return (
         <FormCardContainer
             state={state}
@@ -29,34 +26,34 @@ export const RequestAccountTemplate = ({
             submitBtnText="Solicitar"
             formAction={formAction}
             pending={pending}
-            afterContent={
-                <>
-                    <Divisor>ou</Divisor>
-                    <CommonRow>
-                        <SocialLoginLink href={providerLink} type="secondary">
-                            <GoogleIcon />
-                            <div>Continue com Google</div>
-                        </SocialLoginLink>
-                    </CommonRow>
-                </>
-            }
+            afterContent={<AfterContent providerLink={providerLink} />}
         >
             <FieldGroup.Box>
-                <LabelWarned request={state.requestStatus} field="email">
+                <LabelWarned
+                    request={state.requestStatus}
+                    field="email"
+                    htmlFor={emailId}
+                >
                     E-mail
                 </LabelWarned>
                 <FieldGroup.Input
                     type="text"
                     name="email"
+                    id={emailId}
                     defaultValue={state.fields.email}
                 />
             </FieldGroup.Box>
             <FieldGroup.Box>
-                <LabelWarned request={state.requestStatus} field="phone">
+                <LabelWarned
+                    request={state.requestStatus}
+                    field="phone"
+                    htmlFor={phoneId}
+                >
                     Telefone
                 </LabelWarned>
                 <FieldGroup.Input
                     name="phone"
+                    id={phoneId}
                     defaultValue={state.fields.phone}
                 />
             </FieldGroup.Box>

@@ -1,12 +1,12 @@
 import { Alert } from '@/components/atoms/Alert';
 import { FieldGroup } from '@/components/atoms/FieldGroup';
-import { type RequestStatus } from '@/shared/types/Http/Request';
+import type { RequestStatus } from '@/shared/types/Http/Request';
 import classNames from 'classnames';
-import { type ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import styles from './LabelWarned.module.scss';
 import { renderNotice } from './shared/renderNotice';
 
-type LabelWarnedProps = ComponentPropsWithoutRef<'div'> & {
+type LabelWarnedProps = ComponentPropsWithRef<'div'> & {
     request: RequestStatus;
     field: string;
     htmlFor?: string;

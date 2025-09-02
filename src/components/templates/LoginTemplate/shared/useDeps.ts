@@ -1,4 +1,13 @@
+import { useId } from 'react';
+
 export const useDeps = () => {
+    const emailId = useId();
+    const passwordId = useId();
+
     const host = import.meta.env.VITE_HOST as string;
-    return [`${host}/auth/google/redirect/login`] as const;
+    return {
+        providerLink: `${host}/auth/google/redirect/login`,
+        emailId,
+        passwordId,
+    };
 };
