@@ -1,10 +1,10 @@
 import { Btn } from '@/components/atoms/Btn';
-import { type ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import { useLogoutHandler } from './shared/useLogoutHandler';
 
-type LogoutBtnProps = ComponentPropsWithoutRef<typeof Btn> & {
+interface LogoutBtnProps extends ComponentPropsWithRef<typeof Btn> {
     logoutLoading: Parameters<typeof useLogoutHandler>[number];
-};
+}
 
 export const LogoutBtn = ({
     logoutLoading,

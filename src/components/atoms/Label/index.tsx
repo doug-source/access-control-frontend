@@ -1,8 +1,8 @@
-import { type WithShow } from '@/shared/types/Utils';
+import type { WithShow } from '@/shared/types/Utils';
 import classNames from 'classnames';
-import { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
-type LabelProps = WithShow<ComponentPropsWithoutRef<'label'>>;
+type LabelProps = WithShow<ComponentPropsWithRef<'label'>>;
 
 export const Label = ({ show, children, ...remain }: LabelProps) => (
     <label {...remain} className={classNames(!show && 'screen-reader-only')}>

@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import { memo, type ComponentPropsWithoutRef } from 'react';
+import { memo, type ComponentPropsWithRef } from 'react';
 import styles from './VerticalCardBox.module.scss';
 
-type VerticalCardBoxProps = ComponentPropsWithoutRef<'div'>;
+type VerticalCardBoxProps = ComponentPropsWithRef<'div'>;
 
 export const VerticalCardBox = memo(
     ({ className, children, ...remain }: VerticalCardBoxProps) => (

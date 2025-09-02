@@ -2,11 +2,12 @@ import { InfoStack } from '@/components/atoms/InfoStack';
 import { UserInfoStackContent } from '@/components/organisms/UserInfoStackContent';
 import boxStyles from '@/shared/stylessheets/box.module.scss';
 import classNames from 'classnames';
-import type { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
-type UserTemplateProps = ComponentPropsWithoutRef<typeof InfoStack.Box> & {
+type RemainProps = ComponentPropsWithRef<typeof InfoStack.Box>;
+interface UserTemplateProps extends RemainProps {
     removed: boolean;
-};
+}
 
 export const UserTemplate = ({
     removed,

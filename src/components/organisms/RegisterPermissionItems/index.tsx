@@ -1,8 +1,8 @@
 import { List } from '@/components/atoms/List';
 import { RegisterPermissionItem } from '@/components/molecules/RegisterPermissionItem';
-import { type ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
-type RegisterPermissionItemProps = ComponentPropsWithoutRef<
+type RegisterPermissionItemProps = ComponentPropsWithRef<
     typeof RegisterPermissionItem
 >;
 

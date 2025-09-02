@@ -1,9 +1,9 @@
 import { Btn } from '@/components/atoms/Btn';
 import classNames from 'classnames';
-import { type ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import styles from './SecondaryBtn.module.scss';
 
-type SecondaryBtnProps = ComponentPropsWithoutRef<typeof Btn>;
+type SecondaryBtnProps = ComponentPropsWithRef<typeof Btn>;
 
 export const SecondaryBtn = ({
     className,

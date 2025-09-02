@@ -1,9 +1,9 @@
 import Icon from '@/icons/approve-24x23.svg?react';
-import { type WithShow } from '@/shared/types/Utils';
+import type { WithShow } from '@/shared/types/Utils';
 import { svgAppendTitle } from '@/shared/utils/svgAppendTitle';
-import { type ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
-type ApproveIconProps = WithShow<ComponentPropsWithoutRef<'svg'>> & {
+type ApproveIconProps = WithShow<ComponentPropsWithRef<'svg'>> & {
     title?: string;
 };
 

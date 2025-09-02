@@ -1,9 +1,9 @@
 import Icon from '@/icons/roles-18x24.svg?react';
-import { type WithShow } from '@/shared/types/Utils';
+import type { WithShow } from '@/shared/types/Utils';
 import { svgAppendTitle } from '@/shared/utils/svgAppendTitle';
-import { type ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
-type RolesIconProps = WithShow<ComponentPropsWithoutRef<'svg'>> & {
+type RolesIconProps = WithShow<ComponentPropsWithRef<'svg'>> & {
     title?: string;
 };
 

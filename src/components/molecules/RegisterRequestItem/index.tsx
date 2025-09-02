@@ -3,12 +3,12 @@ import { TrashIcon } from '@/components/atoms/icons/TrashIcon';
 import { List } from '@/components/atoms/List';
 import dataItemStyles from '@/shared/stylessheets/dataItem.module.scss';
 import iconStyles from '@/shared/stylessheets/icons.module.scss';
-import { type RegisterRequestIndex } from '@/shared/types/Models/RegisterRequest';
-import { ComponentPropsWithoutRef } from 'react';
+import type { RegisterRequestIndex } from '@/shared/types/Models/RegisterRequest';
+import type { ComponentPropsWithRef } from 'react';
 import { useDeps } from './shared/useDeps';
 
-interface RegisterRequestItemProps
-    extends ComponentPropsWithoutRef<typeof List.Item> {
+type RemainProps = ComponentPropsWithRef<typeof List.Item>;
+interface RegisterRequestItemProps extends RemainProps {
     registerRequest: RegisterRequestIndex;
 }
 

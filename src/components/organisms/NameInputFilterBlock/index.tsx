@@ -3,10 +3,10 @@ import { useDispatch } from '@/shared/hooks/useDispatch';
 import { usePageGroupPagination } from '@/shared/hooks/usePageGroupPagination';
 import type { ChangeFilterAction } from '@/shared/types/Reducers/Custom/PaginationAction';
 import { groups, type PaginateKeyContext } from '@/shared/utils/pagination';
-import type { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
-interface NameInputFilterBlockProps
-    extends Omit<ComponentPropsWithoutRef<'div'>, 'children'> {
+type RemainProps = Omit<ComponentPropsWithRef<'div'>, 'children'>;
+interface NameInputFilterBlockProps extends RemainProps {
     subject: string;
     context: PaginateKeyContext;
 }

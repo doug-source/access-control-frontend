@@ -1,9 +1,9 @@
 import Icon from '@/icons/backPhoto-24x18.svg?react';
 import type { WithShow } from '@/shared/types/Utils';
 import { svgAppendTitle } from '@/shared/utils/svgAppendTitle';
-import type { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
-interface BackPhotoIconProps extends WithShow<ComponentPropsWithoutRef<'svg'>> {
+interface BackPhotoIconProps extends WithShow<ComponentPropsWithRef<'svg'>> {
     title?: string;
 }
 

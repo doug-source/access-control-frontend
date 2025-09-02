@@ -1,9 +1,9 @@
 import Icon from '@/icons/reg-request-24x25.svg?react';
-import { type WithShow } from '@/shared/types/Utils';
+import type { WithShow } from '@/shared/types/Utils';
 import { svgAppendTitle } from '@/shared/utils/svgAppendTitle';
-import { type ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
-type RegisterRequestIconProps = WithShow<ComponentPropsWithoutRef<'svg'>> & {
+type RegisterRequestIconProps = WithShow<ComponentPropsWithRef<'svg'>> & {
     title?: string;
 };
 

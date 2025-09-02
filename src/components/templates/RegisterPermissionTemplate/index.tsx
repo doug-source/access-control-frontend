@@ -2,9 +2,9 @@ import { InfoStack } from '@/components/atoms/InfoStack';
 import { RegisterPermissionInfoStackContent } from '@/components/organisms/RegisterPermissionInfoStackContent';
 import boxStyles from '@/shared/stylessheets/box.module.scss';
 import classNames from 'classnames';
-import type { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
-type RegisterPermissionTemplateProps = ComponentPropsWithoutRef<
+type RegisterPermissionTemplateProps = ComponentPropsWithRef<
     typeof InfoStack.Box
 >;
 

@@ -1,10 +1,14 @@
 import { PermissionsAdapter } from '@/shared/adapters/PermissionsAdapter';
 import { PermissionsRequesterContext } from '@/shared/contexts/PermissionsRequesterContext';
 import { useHttpClient } from '@/shared/hooks/useHttpClient';
-import { ComponentPropsWithoutRef, PropsWithChildren, useMemo } from 'react';
+import {
+    type ComponentPropsWithRef,
+    type PropsWithChildren,
+    useMemo,
+} from 'react';
 
 interface PermissionsRequesterProviderProps extends PropsWithChildren {
-    requester?: ComponentPropsWithoutRef<
+    requester?: ComponentPropsWithRef<
         typeof PermissionsRequesterContext.Provider
     >['value'];
 }

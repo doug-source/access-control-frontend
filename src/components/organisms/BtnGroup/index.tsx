@@ -1,17 +1,17 @@
 import { PrimaryBtn } from '@/components/molecules/PrimaryBtn';
 import { SecondaryBtn } from '@/components/molecules/SecondaryBtn';
 import classNames from 'classnames';
-import { MouseEventHandler, type ComponentPropsWithoutRef } from 'react';
+import { MouseEventHandler, type ComponentPropsWithRef } from 'react';
 import styles from './BtnGroup.module.scss';
 
-type BtnGroupProps = ComponentPropsWithoutRef<'div'> & {
+interface BtnGroupProps extends ComponentPropsWithRef<'div'> {
     firstLabel: string;
     secondLabel: string;
     onFirstClick: MouseEventHandler<HTMLButtonElement>;
     onSecondClick: MouseEventHandler<HTMLButtonElement>;
     orientation?: 'horizontal' | 'vertical';
     pattern?: 'no-equal' | 'equal';
-};
+}
 
 export const BtnGroup = ({
     firstLabel,

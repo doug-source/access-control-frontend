@@ -1,12 +1,12 @@
-import { type Paths } from '@/shared/types/Urls/Paths';
-import { type WithShow } from '@/shared/types/Utils';
+import type { Paths } from '@/shared/types/Urls/Paths';
+import type { WithShow } from '@/shared/types/Utils';
 import classNames from 'classnames';
-import { type ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import { NavLink } from 'react-router';
 import styles from './Anchor.module.scss';
 
 type AnchorProps = WithShow<
-    ComponentPropsWithoutRef<typeof NavLink> & {
+    ComponentPropsWithRef<typeof NavLink> & {
         to: Paths['navigation']['concrete'];
     }
 >;

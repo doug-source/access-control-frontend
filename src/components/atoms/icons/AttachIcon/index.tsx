@@ -1,9 +1,9 @@
 import Icon from '@/icons/attach-24x12.svg?react';
-import { type WithShow } from '@/shared/types/Utils';
+import type { WithShow } from '@/shared/types/Utils';
 import { svgAppendTitle } from '@/shared/utils/svgAppendTitle';
-import { type ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
-type AttachIconProps = WithShow<ComponentPropsWithoutRef<'svg'>> & {
+type AttachIconProps = WithShow<ComponentPropsWithRef<'svg'>> & {
     title?: string;
 };
 

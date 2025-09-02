@@ -8,17 +8,16 @@ import { BrandBtn } from '@/components/molecules/BrandBtn';
 import { FormContentBox } from '@/components/molecules/FormContentBox';
 import { MessageResult } from '@/components/molecules/MessageResult';
 import btnStyles from '@/shared/stylessheets/btn.module.scss';
-import { type State } from '@/shared/types/States';
-import type { ComponentPropsWithoutRef, ComponentPropsWithRef } from 'react';
+import type { State } from '@/shared/types/States';
+import type { ComponentPropsWithRef } from 'react';
 
-type FormSimpleContainerProps<T> = ComponentPropsWithoutRef<
-    typeof FormLayout
-> & {
+type RemainProps = ComponentPropsWithRef<typeof FormLayout>;
+interface FormSimpleContainerProps<T> extends RemainProps {
     state: T;
     pending: boolean;
-    formAction: ComponentPropsWithRef<'form'>['action'];
+    formAction: (formData: FormData) => void | Promise<void>;
     submitBtnText: string;
-};
+}
 
 export const FormSimpleContainer = <T extends State>({
     state,

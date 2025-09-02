@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import styles from './ColumnBox.module.scss';
 
-type ColumnBoxProps = ComponentPropsWithoutRef<'div'>;
+type ColumnBoxProps = ComponentPropsWithRef<'div'>;
 
 export const ColumnBox = ({
     className,

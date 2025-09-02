@@ -1,9 +1,9 @@
 import { Anchor } from '@/components/atoms/Anchor';
 import classNames from 'classnames';
-import { memo, type ComponentPropsWithoutRef } from 'react';
+import { memo, type ComponentPropsWithRef } from 'react';
 import styles from './GateLinkBox.module.scss';
 
-type GateLinkBoxProps = Omit<ComponentPropsWithoutRef<typeof Anchor>, 'to'>;
+type GateLinkBoxProps = Omit<ComponentPropsWithRef<typeof Anchor>, 'to'>;
 
 export const GateLinkBox = memo(
     ({ className, ...remain }: GateLinkBoxProps) => (

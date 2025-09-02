@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import { type ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import styles from './Total.module.scss';
 
-type TotalProps = ComponentPropsWithoutRef<'div'> & {
+interface TotalProps extends ComponentPropsWithRef<'div'> {
     label?: string;
     value: number;
-};
+}
 
 export const Total = ({
     className,

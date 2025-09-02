@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import styles from './StretchedBox.module.scss';
 
-type StretchedBoxProps = ComponentPropsWithoutRef<'div'>;
+type StretchedBoxProps = ComponentPropsWithRef<'div'>;
 
 export const StretchedBox = ({
     className,

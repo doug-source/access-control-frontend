@@ -1,10 +1,10 @@
 import { AppTitle } from '@/shared/components/atoms/AppTitle';
-import { type Resolve } from '@/shared/types/Utils';
-import { PropsWithChildren, type ComponentPropsWithoutRef } from 'react';
+import type { Resolve } from '@/shared/types/Utils';
+import type { ComponentPropsWithRef, PropsWithChildren } from 'react';
 import { ScrollRestoration } from 'react-router';
 
 type ScreenWrapperProps = Resolve<
-    Required<PropsWithChildren<ComponentPropsWithoutRef<typeof AppTitle>>>
+    Required<PropsWithChildren<ComponentPropsWithRef<typeof AppTitle>>>
 >;
 
 export const ScreenWrapper = ({ title, children }: ScreenWrapperProps) => (

@@ -3,13 +3,13 @@ import { PageRequesterWithRestoreContext } from '@/shared/contexts/PageRequester
 import { useHttpClient } from '@/shared/hooks/useHttpClient';
 import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
 import {
-    type ComponentPropsWithoutRef,
+    type ComponentPropsWithRef,
     type PropsWithChildren,
     useMemo,
 } from 'react';
 
 interface PageRequesterWithRestoreProviderProps extends PropsWithChildren {
-    requester?: ComponentPropsWithoutRef<
+    requester?: ComponentPropsWithRef<
         typeof PageRequesterWithRestoreContext
     >['value'];
 }

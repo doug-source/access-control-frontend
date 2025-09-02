@@ -1,8 +1,8 @@
 import { List } from '@/components/atoms/List';
 import { RegisterRequestItem } from '@/components/molecules/RegisterRequestItem';
-import { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
-type RegisterRequestItemProps = ComponentPropsWithoutRef<
+type RegisterRequestItemProps = ComponentPropsWithRef<
     typeof RegisterRequestItem
 >;
 

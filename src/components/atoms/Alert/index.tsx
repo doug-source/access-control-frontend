@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import { memo, type ComponentPropsWithoutRef } from 'react';
+import { memo, type ComponentPropsWithRef } from 'react';
 import styles from './Alert.module.scss';
 
-type AlertProps = ComponentPropsWithoutRef<'div'>;
+type AlertProps = ComponentPropsWithRef<'div'>;
 
 export const Alert = memo(({ className, children, ...remain }: AlertProps) => (
     <div

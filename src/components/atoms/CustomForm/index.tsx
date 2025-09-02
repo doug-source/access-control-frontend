@@ -1,7 +1,7 @@
-import { memo, type ComponentPropsWithoutRef } from 'react';
+import { memo, type ComponentPropsWithRef } from 'react';
 import styles from './CustomForm.module.scss';
 
-type CustomFormProps = ComponentPropsWithoutRef<'form'>;
+type CustomFormProps = ComponentPropsWithRef<'form'>;
 
 export const CustomForm = memo(({ children, ...remain }: CustomFormProps) => (
     <form {...remain} className={styles.customForm} name="customForm">

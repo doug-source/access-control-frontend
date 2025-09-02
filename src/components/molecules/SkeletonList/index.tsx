@@ -1,14 +1,12 @@
 import { List } from '@/components/atoms/List';
-import { type WithShow } from '@/shared/types/Utils';
-import { type ComponentPropsWithoutRef } from 'react';
+import type { WithShow } from '@/shared/types/Utils';
+import type { ComponentPropsWithRef } from 'react';
 import styles from './SkeletonList.module.scss';
 
-type SkeletonListProps = WithShow<
-    ComponentPropsWithoutRef<typeof List.Box> & {
-        rows?: number;
-    },
-    true
->;
+type RemainProps = ComponentPropsWithRef<typeof List.Box>;
+interface SkeletonListProps extends RemainProps {
+    rows?: number;
+}
 
 export const SkeletonList = ({
     show,
@@ -16,7 +14,7 @@ export const SkeletonList = ({
     rows = 4,
     children,
     ...remain
-}: SkeletonListProps) => {
+}: WithShow<SkeletonListProps, true>) => {
     if (!show) {
         return (
             <List.Box {...remain} className={className}>

@@ -1,13 +1,11 @@
-import { type WithShow } from '@/shared/types/Utils';
+import type { WithShow } from '@/shared/types/Utils';
 import classNames from 'classnames';
-import { type ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import styles from './Item.module.scss';
 
-type ItemProps = WithShow<
-    ComponentPropsWithoutRef<'div'> & {
-        header?: boolean;
-    }
->;
+interface ItemProps extends ComponentPropsWithRef<'div'> {
+    header?: boolean;
+}
 
 export const Item = ({
     header,
@@ -15,7 +13,7 @@ export const Item = ({
     className,
     children,
     ...remain
-}: ItemProps) => {
+}: WithShow<ItemProps>) => {
     if (!show) {
         return null;
     }

@@ -1,9 +1,9 @@
 import Icon from '@/icons/reg-permission-24x24.svg?react';
-import { type WithShow } from '@/shared/types/Utils';
+import type { WithShow } from '@/shared/types/Utils';
 import { svgAppendTitle } from '@/shared/utils/svgAppendTitle';
-import { type ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
-type RegisterPermissionIconProps = WithShow<ComponentPropsWithoutRef<'svg'>> & {
+type RegisterPermissionIconProps = WithShow<ComponentPropsWithRef<'svg'>> & {
     title?: string;
 };
 

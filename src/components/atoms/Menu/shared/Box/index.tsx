@@ -1,9 +1,9 @@
-import { type WithShow } from '@/shared/types/Utils';
+import type { WithShow } from '@/shared/types/Utils';
 import classNames from 'classnames';
-import { type ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import styles from './Box.module.scss';
 
-type BoxProps = WithShow<ComponentPropsWithoutRef<'ul'>>;
+type BoxProps = WithShow<ComponentPropsWithRef<'ul'>>;
 
 export const Box = ({
     show = true,

@@ -1,9 +1,9 @@
 import { Btn } from '@/components/atoms/Btn';
 import classNames from 'classnames';
-import { ComponentPropsWithoutRef, useId } from 'react';
+import { type ComponentPropsWithRef, useId } from 'react';
 import styles from './Group.module.scss';
 
-interface GroupProps extends ComponentPropsWithoutRef<typeof Btn> {
+interface GroupProps extends ComponentPropsWithRef<typeof Btn> {
     valueGroup: number;
     selected: number;
     onChangeGroup(): void;

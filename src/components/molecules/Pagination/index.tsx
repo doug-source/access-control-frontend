@@ -1,11 +1,11 @@
 import { groups } from '@/shared/utils/pagination';
-import { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import { Box } from './shared/Box';
 import { Controls } from './shared/Controls';
 import { Groups } from './shared/Groups';
 import { Total } from './shared/Total';
 
-interface PaginationProps extends ComponentPropsWithoutRef<'div'> {
+interface PaginationProps extends ComponentPropsWithRef<'div'> {
     page: number;
     lastPage: number;
     group: number;

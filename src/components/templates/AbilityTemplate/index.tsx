@@ -2,9 +2,9 @@ import { InfoStack } from '@/components/atoms/InfoStack';
 import { AbilityInfoStackContent } from '@/components/organisms/AbilityInfoStackContent';
 import boxStyles from '@/shared/stylessheets/box.module.scss';
 import classNames from 'classnames';
-import type { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
-type AbilityTemplateProps = ComponentPropsWithoutRef<typeof InfoStack.Box>;
+type AbilityTemplateProps = ComponentPropsWithRef<typeof InfoStack.Box>;
 
 export const AbilityTemplate = ({
     className,

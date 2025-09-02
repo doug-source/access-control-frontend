@@ -1,9 +1,9 @@
-import { ComponentPropsWithoutRef, type PropsWithChildren } from 'react';
+import type { ComponentPropsWithRef, PropsWithChildren } from 'react';
 import styles from './BottomSection.module.scss';
 
-type BottomSectionProps = ComponentPropsWithoutRef<'div'> & {
+interface BottomSectionProps extends ComponentPropsWithRef<'div'> {
     label: string;
-};
+}
 
 export const BottomSection = ({
     label,

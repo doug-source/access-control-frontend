@@ -1,11 +1,11 @@
 import { List } from '@/components/atoms/List';
 import { useLocalNavigate } from '@/shared/hooks/useLocalNavigate';
 import dataItemStyles from '@/shared/stylessheets/dataItem.module.scss';
-import { type RegisterPermissionIndex } from '@/shared/types/Models/RegisterPermission';
-import { ComponentPropsWithoutRef } from 'react';
+import type { RegisterPermissionIndex } from '@/shared/types/Models/RegisterPermission';
+import type { ComponentPropsWithRef } from 'react';
 
-interface RegisterPermissionItemProps
-    extends ComponentPropsWithoutRef<typeof List.Item> {
+type RemainProps = ComponentPropsWithRef<typeof List.Item>;
+interface RegisterPermissionItemProps extends RemainProps {
     registerPermission: RegisterPermissionIndex;
 }
 

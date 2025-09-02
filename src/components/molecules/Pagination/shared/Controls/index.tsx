@@ -1,14 +1,14 @@
 import { Btn } from '@/components/atoms/Btn';
 import { DoubleArrowIcon } from '@/components/atoms/icons/DoubleArrowIcon';
 import classNames from 'classnames';
-import { useId, type ComponentPropsWithoutRef } from 'react';
+import { useId, type ComponentPropsWithRef } from 'react';
 import styles from './Controls.module.scss';
 
-type ControlsProps = ComponentPropsWithoutRef<'div'> & {
+interface ControlsProps extends ComponentPropsWithRef<'div'> {
     page: number;
     lastPage: number;
     onChangePage: (value: number) => void;
-};
+}
 
 export const Controls = ({
     className,

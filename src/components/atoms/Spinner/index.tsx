@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import { type ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import styles from './Spinner.module.scss';
 
-type SpinnerProps = ComponentPropsWithoutRef<'span'>;
+type SpinnerProps = ComponentPropsWithRef<'span'>;
 
 export const Spinner = ({ className, ...remain }: SpinnerProps) => (
     <span {...remain} className={classNames(styles.loader, className)}></span>

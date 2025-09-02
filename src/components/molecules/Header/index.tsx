@@ -1,11 +1,11 @@
 import { Anchor } from '@/components/atoms/Anchor';
 import { BrandIcon } from '@/components/atoms/icons/BrandIcon';
 import classNames from 'classnames';
-import { type ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import styles from './Header.module.scss';
 import { UserBtn } from './shared/UserBtn';
 
-type HeaderProps = Omit<ComponentPropsWithoutRef<'header'>, 'children'>;
+type HeaderProps = Omit<ComponentPropsWithRef<'header'>, 'children'>;
 
 export const Header = ({ className, ...remain }: HeaderProps) => (
     <header {...remain} className={classNames(styles.header, className)}>

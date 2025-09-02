@@ -8,9 +8,9 @@ import type {
 import type { PaginationState } from '@/shared/types/Reducers/Custom/PaginationState';
 import type { Resolve } from '@/shared/types/Utils';
 import type { PaginateKeyContext } from '@/shared/utils/pagination';
-import type { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
-interface PaginationDispatchProps extends ComponentPropsWithoutRef<'div'> {
+interface PaginationDispatchProps extends ComponentPropsWithRef<'div'> {
     state: Resolve<
         Pick<PaginationState, 'page' | 'lastPage' | 'group' | 'total'>
     >;

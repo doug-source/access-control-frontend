@@ -1,10 +1,10 @@
 import classNames from 'classnames';
-import { type ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import styles from './SocialLoginLink.module.scss';
 
-type SocialLoginLinkProps = ComponentPropsWithoutRef<'a'> & {
+interface SocialLoginLinkProps extends ComponentPropsWithRef<'a'> {
     type: 'primary' | 'secondary';
-};
+}
 
 export const SocialLoginLink = ({
     type,

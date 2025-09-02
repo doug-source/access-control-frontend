@@ -1,22 +1,25 @@
 import { Backdrop } from '@/components/atoms/Backdrop';
 import { CloseIcon } from '@/components/atoms/icons/CloseIcon';
 import { TabIndexReset } from '@/components/atoms/TabIndexReset';
-import { type ComponentPropsWithoutRef, useId } from 'react';
+import {
+    type ComponentPropsWithRef,
+    type PropsWithChildren,
+    useId,
+} from 'react';
 import styles from './Dialog.module.scss';
 
 type DialogContainerProps = Pick<
-    ComponentPropsWithoutRef<'div'>,
+    ComponentPropsWithRef<'div'>,
     'aria-label' | 'children'
 >;
-type DialogProps = Omit<
-    ComponentPropsWithoutRef<typeof Backdrop>,
-    keyof DialogContainerProps
-> & {
+type BackdropProps = ComponentPropsWithRef<typeof Backdrop>;
+type RemainProps = Omit<BackdropProps, keyof DialogContainerProps>;
+
+interface DialogProps extends PropsWithChildren, RemainProps {
     heading: string;
     'aria-label': NonNullable<DialogContainerProps['aria-label']>;
-    children?: DialogContainerProps['children'];
     onClose?: () => void;
-};
+}
 
 export const Dialog = ({
     show = false,

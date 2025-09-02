@@ -1,13 +1,13 @@
-import { type AbilityIndex } from '@/shared/types/Models/Ability';
+import type { AbilityIndex } from '@/shared/types/Models/Ability';
 import { faker } from '@faker-js/faker';
 import { render, screen, within } from '@testing-library/react';
-import { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import { AbilitiesItems } from '.';
 
 const Item = ({
     ability,
-}: ComponentPropsWithoutRef<
-    ComponentPropsWithoutRef<typeof AbilitiesItems>['item']
+}: ComponentPropsWithRef<
+    ComponentPropsWithRef<typeof AbilitiesItems>['item']
 >) => <li>{ability.id}</li>;
 
 describe('<AbilitiesItems /> component', () => {

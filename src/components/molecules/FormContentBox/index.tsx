@@ -1,9 +1,9 @@
 import { ContentBox } from '@/components/atoms/ContentBox';
 import classNames from 'classnames';
-import { memo, type ComponentPropsWithoutRef } from 'react';
+import { memo, type ComponentPropsWithRef } from 'react';
 import styles from './FormContentBox.module.scss';
 
-type FormContentBoxProps = ComponentPropsWithoutRef<typeof ContentBox>;
+type FormContentBoxProps = ComponentPropsWithRef<typeof ContentBox>;
 
 export const FormContentBox = memo(
     ({ children, className, ...remain }: FormContentBoxProps) => (

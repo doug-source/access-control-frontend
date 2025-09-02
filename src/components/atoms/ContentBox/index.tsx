@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import { memo, type ComponentPropsWithoutRef } from 'react';
+import { memo, type ComponentPropsWithRef } from 'react';
 import styles from './ContentBox.module.scss';
 
-type ContentBoxProps = ComponentPropsWithoutRef<'div'>;
+type ContentBoxProps = ComponentPropsWithRef<'div'>;
 
 export const ContentBox = memo(
     ({ className, children, ...remain }: ContentBoxProps) => (

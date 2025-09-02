@@ -3,12 +3,12 @@ import { DetachIcon } from '@/components/atoms/icons/DetachIcon';
 import { List } from '@/components/atoms/List';
 import dataItemStyles from '@/shared/stylessheets/dataItem.module.scss';
 import iconStyles from '@/shared/stylessheets/icons.module.scss';
-import { type RoleIndex } from '@/shared/types/Models/Role';
-import { ComponentPropsWithoutRef } from 'react';
+import type { RoleIndex } from '@/shared/types/Models/Role';
+import type { ComponentPropsWithRef } from 'react';
 import { useDeps } from './shared/useDeps';
 
-interface RoleFromUserItemProps
-    extends Omit<ComponentPropsWithoutRef<typeof List.Item>, 'role'> {
+type RemainProps = Omit<ComponentPropsWithRef<typeof List.Item>, 'role'>;
+interface RoleFromUserItemProps extends RemainProps {
     role: RoleIndex;
 }
 

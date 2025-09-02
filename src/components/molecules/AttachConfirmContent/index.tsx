@@ -1,10 +1,10 @@
 import { BtnGroup } from '@/components/organisms/BtnGroup';
 import dialogStyles from '@/shared/stylessheets/dialog.module.scss';
 import classNames from 'classnames';
-import { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import styles from './AttachConfirmContent.module.scss';
 
-type BtnGroupProps = ComponentPropsWithoutRef<typeof BtnGroup>;
+type BtnGroupProps = ComponentPropsWithRef<typeof BtnGroup>;
 
 interface AttachConfirmContentProps {
     firstLabel: BtnGroupProps['firstLabel'];

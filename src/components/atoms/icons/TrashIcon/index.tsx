@@ -1,11 +1,11 @@
 import Icon from '@/icons/trash-24x24.svg?react';
-import { type WithShow } from '@/shared/types/Utils';
+import type { WithShow } from '@/shared/types/Utils';
 import { svgAppendTitle } from '@/shared/utils/svgAppendTitle';
 import classNames from 'classnames';
-import { type ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import styles from './TrashIcon.module.scss';
 
-type TrashIconProps = WithShow<ComponentPropsWithoutRef<'svg'>> & {
+type TrashIconProps = WithShow<ComponentPropsWithRef<'svg'>> & {
     title?: string;
 };
 

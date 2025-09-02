@@ -2,11 +2,11 @@ import { LogoutIcon } from '@/components/atoms/icons/LogoutIcon';
 import { Menu } from '@/components/atoms/Menu';
 import { LogoutBtn } from '@/components/molecules/LogoutBtn';
 import { SpinnerCovering } from '@/components/molecules/SpinnerCovering';
-import { type ComponentPropsWithoutRef, useState } from 'react';
+import { type ComponentPropsWithRef, useState } from 'react';
 import styles from './LogoutMenuItem.module.scss';
 
 type LogoutMenuItemProps = Omit<
-    ComponentPropsWithoutRef<typeof Menu.Item>,
+    ComponentPropsWithRef<typeof Menu.Item>,
     'children'
 >;
 

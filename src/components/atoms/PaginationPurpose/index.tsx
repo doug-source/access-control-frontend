@@ -1,15 +1,13 @@
-import { WithShow } from '@/shared/types/Utils';
+import type { WithShow } from '@/shared/types/Utils';
 import classNames from 'classnames';
-import { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import styles from './PaginationPurpose.module.scss';
 
-type PaginationPurposeProps = WithShow<
-    Omit<ComponentPropsWithoutRef<'div'>, 'children'> & {
-        label?: string;
-        value?: string;
-    },
-    true
->;
+interface PaginationPurposeProps
+    extends Omit<ComponentPropsWithRef<'div'>, 'children'> {
+    label?: string;
+    value?: string;
+}
 
 export const PaginationPurpose = ({
     show,
@@ -17,7 +15,7 @@ export const PaginationPurpose = ({
     label,
     value,
     ...remain
-}: PaginationPurposeProps) => {
+}: WithShow<PaginationPurposeProps, true>) => {
     if (!show) {
         return null;
     }

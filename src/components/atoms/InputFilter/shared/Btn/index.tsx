@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import styles from './Btn.module.scss';
 
-type BtnProps = ComponentPropsWithoutRef<'button'>;
+type BtnProps = ComponentPropsWithRef<'button'>;
 
 export const Btn = ({ className, children, ...remain }: BtnProps) => (
     <button

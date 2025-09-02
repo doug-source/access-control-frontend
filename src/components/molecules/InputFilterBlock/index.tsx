@@ -1,18 +1,18 @@
 import { InputFilter } from '@/components/atoms/InputFilter';
 import { Label } from '@/components/atoms/Label';
 import { useInputRef } from '@/shared/hooks/useInputRef';
-import { ComponentPropsWithoutRef, useId } from 'react';
+import { type ComponentPropsWithRef, useId } from 'react';
 
-type InputFilterBlockProps = ComponentPropsWithoutRef<
-    typeof InputFilter.Box
-> & {
+type RemainProps = ComponentPropsWithRef<typeof InputFilter.Box>;
+
+interface InputFilterBlockProps extends RemainProps {
     className?: string;
     label: string;
     placeholder: string;
     btnText: string;
     onChange(): void;
     nameInput?: string;
-};
+}
 
 export const InputFilterBlock = ({
     className,
