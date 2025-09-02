@@ -1,10 +1,8 @@
 import { RestorationDataContext } from '@/shared/contexts/RestorationDataContext';
-import { type RestorationDataProvided } from '@/shared/contexts/types/RestorationDataProvided';
-import { type ReactNode, useMemo } from 'react';
+import type { RestorationDataProvided } from '@/shared/contexts/types/RestorationDataProvided';
+import { type PropsWithChildren, useMemo } from 'react';
 
-interface RestorationDataProviderProps extends RestorationDataProvided {
-    children: ReactNode;
-}
+type RestorationDataProviderProps = RestorationDataProvided & PropsWithChildren;
 
 export const RestorationDataProvider = ({
     children,
@@ -19,8 +17,8 @@ export const RestorationDataProvider = ({
         [restorationConfirm, onRestore]
     );
     return (
-        <RestorationDataContext.Provider value={value}>
+        <RestorationDataContext value={value}>
             {children}
-        </RestorationDataContext.Provider>
+        </RestorationDataContext>
     );
 };

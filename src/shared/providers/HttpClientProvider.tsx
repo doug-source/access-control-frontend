@@ -1,13 +1,7 @@
 import { HttpClientContext } from '@/shared/contexts/HttpClientContext';
 import { httpClientInstance } from '@/shared/utils/globals/generic';
-import { type ReactNode } from 'react';
+import type { PropsWithChildren } from 'react';
 
-interface HttpClientProviderProps {
-    children: ReactNode;
-}
-
-export const HttpClientProvider = ({ children }: HttpClientProviderProps) => (
-    <HttpClientContext.Provider value={httpClientInstance}>
-        {children}
-    </HttpClientContext.Provider>
+export const HttpClientProvider = ({ children }: PropsWithChildren) => (
+    <HttpClientContext value={httpClientInstance}>{children}</HttpClientContext>
 );

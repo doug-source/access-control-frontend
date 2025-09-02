@@ -1,10 +1,8 @@
 import { AttachmentDataContext } from '@/shared/contexts/AttachmentDataContext';
-import { type AttachmentDataProvided } from '@/shared/contexts/types/AttachmentDataProvided';
-import { useMemo, type ReactNode } from 'react';
+import type { AttachmentDataProvided } from '@/shared/contexts/types/AttachmentDataProvided';
+import { type PropsWithChildren, useMemo } from 'react';
 
-interface AttachmentDataProviderProps extends AttachmentDataProvided {
-    children: ReactNode;
-}
+type AttachmentDataProviderProps = AttachmentDataProvided & PropsWithChildren;
 
 export const AttachmentDataProvider = ({
     children,
@@ -19,8 +17,6 @@ export const AttachmentDataProvider = ({
         [attachmentConfirm, onAttach]
     );
     return (
-        <AttachmentDataContext.Provider value={data}>
-            {children}
-        </AttachmentDataContext.Provider>
+        <AttachmentDataContext value={data}>{children}</AttachmentDataContext>
     );
 };

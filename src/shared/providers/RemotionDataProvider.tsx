@@ -1,10 +1,8 @@
-import { type RemotionDataProvided } from '@/shared/contexts/types/RemotionDataProvided';
-import { ReactNode, useMemo } from 'react';
-import { RemotionDataContext } from '../contexts/RemotionDataContext';
+import { RemotionDataContext } from '@/shared/contexts/RemotionDataContext';
+import type { RemotionDataProvided } from '@/shared/contexts/types/RemotionDataProvided';
+import { type PropsWithChildren, useMemo } from 'react';
 
-interface RemotionDataProviderProps extends RemotionDataProvided {
-    children: ReactNode;
-}
+type RemotionDataProviderProps = RemotionDataProvided & PropsWithChildren;
 
 export const RemotionDataProvider = ({
     children,
@@ -18,9 +16,5 @@ export const RemotionDataProvider = ({
         }),
         [remotionConfirm, onRemove]
     );
-    return (
-        <RemotionDataContext.Provider value={value}>
-            {children}
-        </RemotionDataContext.Provider>
-    );
+    return <RemotionDataContext value={value}>{children}</RemotionDataContext>;
 };

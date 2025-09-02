@@ -1,13 +1,16 @@
-import { ComponentPropsWithoutRef, PropsWithChildren, useMemo } from 'react';
-import { PageRequestWithRestoreAdapter } from '../adapters/PageRequestWithRestoreAdapter';
-import { useHttpClient } from '../hooks/useHttpClient';
-import { PageRequesterProvider } from './PageRequesterProvider';
-
+import { PageRequestWithRestoreAdapter } from '@/shared/adapters/PageRequestWithRestoreAdapter';
 import { PageRequesterWithRestoreContext } from '@/shared/contexts/PageRequesterWithRestoreContext';
+import { useHttpClient } from '@/shared/hooks/useHttpClient';
+import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
+import {
+    type ComponentPropsWithoutRef,
+    type PropsWithChildren,
+    useMemo,
+} from 'react';
 
 interface PageRequesterWithRestoreProviderProps extends PropsWithChildren {
     requester?: ComponentPropsWithoutRef<
-        typeof PageRequesterWithRestoreContext.Provider
+        typeof PageRequesterWithRestoreContext
     >['value'];
 }
 
@@ -21,10 +24,10 @@ export const PageRequesterWithRestoreProvider = ({
         [requester, httpClient]
     );
     return (
-        <PageRequesterWithRestoreContext.Provider value={pageRequesterStored}>
+        <PageRequesterWithRestoreContext value={pageRequesterStored}>
             <PageRequesterProvider pageRequester={pageRequesterStored}>
                 {children}
             </PageRequesterProvider>
-        </PageRequesterWithRestoreContext.Provider>
+        </PageRequesterWithRestoreContext>
     );
 };

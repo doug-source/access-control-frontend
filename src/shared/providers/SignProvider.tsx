@@ -6,10 +6,8 @@ import { type PropsWithChildren, useReducer } from 'react';
 export const SignProvider = ({ children }: PropsWithChildren) => {
     const [state, dispatch] = useReducer(signReducer, { user: null });
     return (
-        <SignDispatchContext.Provider value={dispatch}>
-            <SignStateContext.Provider value={state}>
-                {children}
-            </SignStateContext.Provider>
-        </SignDispatchContext.Provider>
+        <SignDispatchContext value={dispatch}>
+            <SignStateContext value={state}>{children}</SignStateContext>
+        </SignDispatchContext>
     );
 };

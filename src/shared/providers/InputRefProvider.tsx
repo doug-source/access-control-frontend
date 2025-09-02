@@ -1,18 +1,13 @@
 import { InputRefContext } from '@/shared/contexts/InputRefContext';
-import { type ComponentPropsWithoutRef, type ReactNode } from 'react';
+import type { ComponentPropsWithRef, PropsWithChildren } from 'react';
 
-interface InputRefProviderProps {
-    inputRef: ComponentPropsWithoutRef<
-        typeof InputRefContext.Provider
-    >['value'];
-    children: ReactNode;
+interface InputRefProviderProps extends PropsWithChildren {
+    inputRef: ComponentPropsWithRef<typeof InputRefContext.Provider>['value'];
 }
 
 export const InputRefProvider = ({
     inputRef,
     children,
 }: InputRefProviderProps) => (
-    <InputRefContext.Provider value={inputRef}>
-        {children}
-    </InputRefContext.Provider>
+    <InputRefContext value={inputRef}>{children}</InputRefContext>
 );

@@ -1,17 +1,13 @@
-import { ComponentPropsWithRef, PropsWithChildren } from 'react';
-import { PhotoFileRefContext } from '../contexts/PhotoFileRefContext';
+import { PhotoFileRefContext } from '@/shared/contexts/PhotoFileRefContext';
+import type { ComponentPropsWithRef, PropsWithChildren } from 'react';
 
 interface PhotoFileRefProviderProps extends PropsWithChildren {
-    photoFileRef: ComponentPropsWithRef<
-        typeof PhotoFileRefContext.Provider
-    >['value'];
+    photoFileRef: ComponentPropsWithRef<typeof PhotoFileRefContext>['value'];
 }
 
 export const PhotoFileRefProvider = ({
     photoFileRef,
     children,
 }: PhotoFileRefProviderProps) => (
-    <PhotoFileRefContext.Provider value={photoFileRef}>
-        {children}
-    </PhotoFileRefContext.Provider>
+    <PhotoFileRefContext value={photoFileRef}>{children}</PhotoFileRefContext>
 );

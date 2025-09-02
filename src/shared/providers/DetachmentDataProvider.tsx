@@ -1,10 +1,8 @@
-import { type DetachmentDataProvided } from '@/shared/contexts/types/DetachmentDataProvided';
-import { ReactNode, useMemo } from 'react';
-import { DetachmentDataContext } from '../contexts/DetachmentDataContext';
+import { DetachmentDataContext } from '@/shared/contexts/DetachmentDataContext';
+import type { DetachmentDataProvided } from '@/shared/contexts/types/DetachmentDataProvided';
+import { type PropsWithChildren, useMemo } from 'react';
 
-interface DetachmentDataProviderProps extends DetachmentDataProvided {
-    children: ReactNode;
-}
+type DetachmentDataProviderProps = DetachmentDataProvided & PropsWithChildren;
 
 export const DetachmentDataProvider = ({
     detachmentConfirm,
@@ -19,8 +17,6 @@ export const DetachmentDataProvider = ({
         [detachmentConfirm, onDetach]
     );
     return (
-        <DetachmentDataContext.Provider value={value}>
-            {children}
-        </DetachmentDataContext.Provider>
+        <DetachmentDataContext value={value}>{children}</DetachmentDataContext>
     );
 };

@@ -1,8 +1,8 @@
 import { PageRequestAdapter } from '@/shared/adapters/PageRequestAdapter';
 import { PageRequesterContext } from '@/shared/contexts/PageRequesterContext';
 import { useHttpClient } from '@/shared/hooks/useHttpClient';
-import { type PageRequester } from '@/shared/types/Contracts/PageRequester';
-import { PropsWithChildren, useMemo } from 'react';
+import type { PageRequester } from '@/shared/types/Contracts/PageRequester';
+import { type PropsWithChildren, useMemo } from 'react';
 
 interface PageRequesterProviderProps extends PropsWithChildren {
     pageRequester?: PageRequester;
@@ -18,8 +18,8 @@ export const PageRequesterProvider = ({
         [httpClient, pageRequester]
     );
     return (
-        <PageRequesterContext.Provider value={pageRequesterStored}>
+        <PageRequesterContext value={pageRequesterStored}>
             {children}
-        </PageRequesterContext.Provider>
+        </PageRequesterContext>
     );
 };

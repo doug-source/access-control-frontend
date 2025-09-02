@@ -1,10 +1,8 @@
 import { ApprovementDataContext } from '@/shared/contexts/ApprovementDataContext';
-import { type ApprovementDataProvided } from '@/shared/contexts/types/ApprovementDataProvided';
-import { useMemo, type ReactNode } from 'react';
+import type { ApprovementDataProvided } from '@/shared/contexts/types/ApprovementDataProvided';
+import { type PropsWithChildren, useMemo } from 'react';
 
-interface ApprovementDataProviderProps extends ApprovementDataProvided {
-    children: ReactNode;
-}
+type ApprovementDataProviderProps = ApprovementDataProvided & PropsWithChildren;
 
 export const ApprovementDataProvider = ({
     children,
@@ -19,8 +17,8 @@ export const ApprovementDataProvider = ({
         [approvementConfirm, onApprove]
     );
     return (
-        <ApprovementDataContext.Provider value={value}>
+        <ApprovementDataContext value={value}>
             {children}
-        </ApprovementDataContext.Provider>
+        </ApprovementDataContext>
     );
 };

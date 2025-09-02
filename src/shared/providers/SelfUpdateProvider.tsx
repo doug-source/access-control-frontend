@@ -1,12 +1,14 @@
 import { SelfUpdateAdapter } from '@/shared/adapters/SelfUpdateAdapter';
 import { SelfUpdateContext } from '@/shared/contexts/SelfUpdateContext';
 import { useHttpClient } from '@/shared/hooks/useHttpClient';
-import { ComponentPropsWithoutRef, PropsWithChildren, useMemo } from 'react';
+import {
+    type ComponentPropsWithoutRef,
+    type PropsWithChildren,
+    useMemo,
+} from 'react';
 
 interface SelfUpdateProviderProps extends PropsWithChildren {
-    updater?: ComponentPropsWithoutRef<
-        typeof SelfUpdateContext.Provider
-    >['value'];
+    updater?: ComponentPropsWithoutRef<typeof SelfUpdateContext>['value'];
 }
 
 export const SelfUpdateProvider = ({
@@ -19,8 +21,8 @@ export const SelfUpdateProvider = ({
         [updater, httpClient]
     );
     return (
-        <SelfUpdateContext.Provider value={updaterInstance}>
+        <SelfUpdateContext value={updaterInstance}>
             {children}
-        </SelfUpdateContext.Provider>
+        </SelfUpdateContext>
     );
 };

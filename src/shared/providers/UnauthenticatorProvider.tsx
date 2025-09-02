@@ -4,7 +4,7 @@ import type { ComponentPropsWithRef, PropsWithChildren } from 'react';
 
 interface UnauthenticatorProviderProps extends PropsWithChildren {
     unauthenticator?: ComponentPropsWithRef<
-        typeof UnauthenticatorContext.Provider
+        typeof UnauthenticatorContext
     >['value'];
     token: string;
 }
@@ -17,8 +17,8 @@ export const UnauthenticatorProvider = ({
     const instance = unauthenticator ?? loginBase.dispatcher;
     instance.setToken(token);
     return (
-        <UnauthenticatorContext.Provider value={instance}>
+        <UnauthenticatorContext value={instance}>
             {children}
-        </UnauthenticatorContext.Provider>
+        </UnauthenticatorContext>
     );
 };

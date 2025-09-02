@@ -1,7 +1,7 @@
 import { StoreAdapter } from '@/shared/adapters/StoreAdapter';
 import { SuperAdminCreatorContext } from '@/shared/contexts/SuperAdminCreatorContext';
 import { useHttpClient } from '@/shared/hooks/useHttpClient';
-import { type SuperAdminCreator } from '@/shared/types/Contracts/SuperAdminCreator';
+import type { SuperAdminCreator } from '@/shared/types/Contracts/SuperAdminCreator';
 import { type PropsWithChildren, useMemo } from 'react';
 
 interface CreatorProviderProps extends PropsWithChildren {
@@ -18,8 +18,8 @@ export const CreatorProvider = ({
         [creator, httpClient]
     );
     return (
-        <SuperAdminCreatorContext.Provider value={creatorInstance}>
+        <SuperAdminCreatorContext value={creatorInstance}>
             {children}
-        </SuperAdminCreatorContext.Provider>
+        </SuperAdminCreatorContext>
     );
 };

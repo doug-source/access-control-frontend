@@ -1,11 +1,11 @@
 import { ViewerAdapter } from '@/shared/adapters/ViewerAdapter';
 import { ViewerContext } from '@/shared/contexts/ViewerContext';
 import { useHttpClient } from '@/shared/hooks/useHttpClient';
-import { ComponentPropsWithoutRef, useMemo } from 'react';
+import { type ComponentPropsWithRef, useMemo } from 'react';
 import { Outlet } from 'react-router';
 
 interface ViewerProviderProps {
-    viewer?: ComponentPropsWithoutRef<typeof ViewerContext.Provider>['value'];
+    viewer?: ComponentPropsWithRef<typeof ViewerContext>['value'];
 }
 
 export const ViewerProvider = ({ viewer }: ViewerProviderProps) => {
@@ -15,8 +15,8 @@ export const ViewerProvider = ({ viewer }: ViewerProviderProps) => {
         [viewer, httpClient]
     );
     return (
-        <ViewerContext.Provider value={viewerInstance}>
+        <ViewerContext value={viewerInstance}>
             <Outlet />
-        </ViewerContext.Provider>
+        </ViewerContext>
     );
 };

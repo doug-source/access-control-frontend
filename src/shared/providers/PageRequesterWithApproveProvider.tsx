@@ -1,16 +1,16 @@
 import { PageRequestWithApproveAdapter } from '@/shared/adapters/PageRequestWithApproveAdapter';
 import { PageRequesterWithApproveContext } from '@/shared/contexts/PageRequesterWithApproveContext';
 import { useHttpClient } from '@/shared/hooks/useHttpClient';
+import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
 import {
     type ComponentPropsWithoutRef,
     type PropsWithChildren,
     useMemo,
 } from 'react';
-import { PageRequesterProvider } from './PageRequesterProvider';
 
 interface PageRequesterWithApproveProviderProps extends PropsWithChildren {
     requester?: ComponentPropsWithoutRef<
-        typeof PageRequesterWithApproveContext.Provider
+        typeof PageRequesterWithApproveContext
     >['value'];
 }
 
@@ -24,10 +24,10 @@ export const PageRequesterWithApproveProvider = ({
         [requester, httpClient]
     );
     return (
-        <PageRequesterWithApproveContext.Provider value={pageRequesterStored}>
+        <PageRequesterWithApproveContext value={pageRequesterStored}>
             <PageRequesterProvider pageRequester={pageRequesterStored}>
                 {children}
             </PageRequesterProvider>
-        </PageRequesterWithApproveContext.Provider>
+        </PageRequesterWithApproveContext>
     );
 };
