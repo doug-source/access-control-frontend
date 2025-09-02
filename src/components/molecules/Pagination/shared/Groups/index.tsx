@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { type ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 import { Group } from '../Group';
 import styles from './Groups.module.scss';
 

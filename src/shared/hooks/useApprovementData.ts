@@ -1,5 +1,5 @@
+import { ApprovementDataContext } from '@/shared/contexts/ApprovementDataContext';
 import { useContext } from 'react';
-import { ApprovementDataContext } from '../contexts/ApprovementDataContext';
 
 export const useApprovementData = () => {
     const approvementData = useContext(ApprovementDataContext);

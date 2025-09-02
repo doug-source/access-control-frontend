@@ -1,7 +1,7 @@
-import { AbilityIndex } from '../../Models/Ability';
-import { RegisterRequestIndex } from '../../Models/RegisterRequest';
-import { RoleIndex } from '../../Models/Role';
-import { UserIndex } from '../../Models/User';
+import type { AbilityIndex } from '@/shared/types/Models/Ability';
+import type { RegisterRequestIndex } from '@/shared/types/Models/RegisterRequest';
+import type { RoleIndex } from '@/shared/types/Models/Role';
+import type { UserIndex } from '@/shared/types/Models/User';
 
 export interface IdToRemovedAction<T = unknown> {
     type: 'to-remove';

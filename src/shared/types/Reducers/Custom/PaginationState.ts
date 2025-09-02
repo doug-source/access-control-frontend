@@ -1,4 +1,4 @@
-import { type State } from '../../States';
+import type { State } from '@/shared/types/States';
 
 export interface PaginationState<T = unknown> extends State {
     data: T[];

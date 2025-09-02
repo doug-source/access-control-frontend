@@ -1,5 +1,5 @@
+import { RemotionDataContext } from '@/shared/contexts/RemotionDataContext';
 import { useContext } from 'react';
-import { RemotionDataContext } from '../contexts/RemotionDataContext';
 
 export const useRemotionData = () => {
     const remotionData = useContext(RemotionDataContext);

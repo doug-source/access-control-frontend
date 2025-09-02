@@ -1,10 +1,10 @@
+import { useAbilityLocalAttachHandler } from '@/shared/hooks/useAbilityLocalAttachHandler';
+import { AttachmentDataProvider } from '@/shared/providers/AttachmentDataProvider';
+import { DispatchProvider } from '@/shared/providers/DispatchProvider';
 import { faker } from '@faker-js/faker';
 import { renderHook } from '@testing-library/react';
 import { createElement, type PropsWithChildren } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
-import { AttachmentDataProvider } from '../providers/AttachmentDataProvider';
-import { DispatchProvider } from '../providers/DispatchProvider';
-import { useAbilityLocalAttachHandler } from './useAbilityLocalAttachHandler';
 
 describe('useAbilityLocalAttachHandler hook', () => {
     it("renders hook's returns correctly", () => {

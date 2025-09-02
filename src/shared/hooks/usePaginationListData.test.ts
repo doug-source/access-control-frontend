@@ -1,13 +1,13 @@
+import { usePaginationListData } from '@/shared/hooks/usePaginationListData';
 import { DispatchProvider } from '@/shared/providers/DispatchProvider';
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
-import { type PageRequester } from '@/shared/types/Contracts/PageRequester';
+import type { PageRequester } from '@/shared/types/Contracts/PageRequester';
+import type { Paths } from '@/shared/types/Urls/Paths';
 import { faker } from '@faker-js/faker';
 import { renderHook, waitFor } from '@testing-library/react';
 import { createElement, type PropsWithChildren } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
-import { Paths } from '../types/Urls/Paths';
-import { usePaginationListData } from './usePaginationListData';
 
 describe('usePaginationListData hook', () => {
     it('renders requesting and receiving status code equals 200 correctly', async () => {

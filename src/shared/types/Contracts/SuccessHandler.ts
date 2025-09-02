@@ -2,7 +2,7 @@ import type {
     HttpSuccessResponse,
     SuccessResponseStatusCodes,
 } from '@/shared/types/Http/Response';
-import type { State } from '../States';
+import type { State } from '@/shared/types/States';
 
 export interface SuccessHandler<B, S extends State> {
     /**

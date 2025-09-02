@@ -1,13 +1,9 @@
+import { useDataToRequest } from '@/shared/hooks/useDataToRequest';
+import type { AbilityIndex } from '@/shared/types/Models/Ability';
 import { faker } from '@faker-js/faker';
 import { renderHook } from '@testing-library/react';
-import { createElement, type ReactNode } from 'react';
+import { createElement, type PropsWithChildren } from 'react';
 import { MemoryRouter, Route, Routes } from 'react-router';
-import { AbilityIndex } from '../types/Models/Ability';
-import { useDataToRequest } from './useDataToRequest';
-
-type Children = {
-    children: ReactNode;
-};
 
 describe('useDataToRequest hook', () => {
     it('runs with id params undefined correctly', () => {
@@ -19,7 +15,7 @@ describe('useDataToRequest hook', () => {
                 name: faker.word.noun(),
             },
         };
-        const wrapper = ({ children }: Children) => {
+        const wrapper = ({ children }: PropsWithChildren) => {
             return createElement(MemoryRouter, {
                 initialEntries: [{ pathname: '/', state: info }],
                 initialIndex: 0,
@@ -52,7 +48,7 @@ describe('useDataToRequest hook', () => {
                 name: faker.word.noun(),
             },
         };
-        const wrapper = ({ children }: Children) => {
+        const wrapper = ({ children }: PropsWithChildren) => {
             return createElement(MemoryRouter, {
                 initialEntries: [{ pathname: `/${info.data.id}`, state: info }],
                 initialIndex: 0,

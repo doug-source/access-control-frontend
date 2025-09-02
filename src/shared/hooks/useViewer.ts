@@ -1,5 +1,5 @@
+import { ViewerContext } from '@/shared/contexts/ViewerContext';
 import { useContext } from 'react';
-import { ViewerContext } from '../contexts/ViewerContext';
 
 export const useViewer = () => {
     const viewer = useContext(ViewerContext);

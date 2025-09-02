@@ -1,5 +1,5 @@
-import { AbilityIndex } from '../../Models/Ability';
-import { RoleIndex } from '../../Models/Role';
+import type { AbilityIndex } from '@/shared/types/Models/Ability';
+import type { RoleIndex } from '@/shared/types/Models/Role';
 
 export interface IdToAttachAction<T = unknown> {
     type: 'to-attach';

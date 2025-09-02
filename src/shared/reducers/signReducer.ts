@@ -1,5 +1,5 @@
-import { SignAction, SignState } from '../types/Reducers/Sign';
-import { assertUnreachable } from '../utils/assertUnreachable';
+import type { SignAction, SignState } from '@/shared/types/Reducers/Sign';
+import { assertUnreachable } from '@/shared/utils/assertUnreachable';
 
 export const signReducer = (
     state: SignState,

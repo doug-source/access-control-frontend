@@ -1,13 +1,12 @@
-import { renderHook } from '@testing-library/react';
-import { createElement, MouseEvent, type PropsWithChildren } from 'react';
-import { createMemoryRouter, RouterProvider } from 'react-router';
-import { MockInstance } from 'vitest';
-import { AbilityIndex } from '../types/Models/Ability';
-import { useAbilityLocalHandler } from './useAbilityLocalHandler';
-
+import * as AbilityLocalAttachHandlerHooks from '@/shared/hooks/useAbilityLocalAttachHandler';
+import * as AbilityLocalDetachHandlerHooks from '@/shared/hooks/useAbilityLocalDetachHandler';
+import { useAbilityLocalHandler } from '@/shared/hooks/useAbilityLocalHandler';
+import type { AbilityIndex } from '@/shared/types/Models/Ability';
 import { faker } from '@faker-js/faker';
-import * as AbilityLocalAttachHandlerHooks from './useAbilityLocalAttachHandler';
-import * as AbilityLocalDetachHandlerHooks from './useAbilityLocalDetachHandler';
+import { renderHook } from '@testing-library/react';
+import { createElement, type MouseEvent, type PropsWithChildren } from 'react';
+import { createMemoryRouter, RouterProvider } from 'react-router';
+import type { MockInstance } from 'vitest';
 
 let AbilityLocalAttachHandlerSpy: MockInstance<
     () => (ability: AbilityIndex) => void

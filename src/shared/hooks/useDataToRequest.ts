@@ -1,6 +1,6 @@
+import { useLocalLocation } from '@/shared/hooks/useLocalLocation';
+import type { LocationStateBetweenScreen } from '@/shared/types/LocationStateBetweenScreen';
 import { useParams } from 'react-router';
-import { type LocationStateBetweenScreen } from '../types/LocationStateBetweenScreen';
-import { useLocalLocation } from './useLocalLocation';
 
 export const useDataToRequest = <T, W extends string>(
     makeEndpoint: (id: number) => W

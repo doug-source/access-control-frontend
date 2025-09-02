@@ -1,6 +1,6 @@
-import { type Action } from '@/shared/types/Reducers/Standard/Action';
+import type { Action } from '@/shared/types/Reducers/Standard/Action';
+import type { State } from '@/shared/types/States';
 import { assertUnreachable } from '@/shared/utils/assertUnreachable';
-import { type State } from '../types/States';
 
 export const standardReducer = <T extends State = State>(
     state: T,

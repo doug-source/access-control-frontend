@@ -1,10 +1,10 @@
+import { useAbilityLocalDetachHandler } from '@/shared/hooks/useAbilityLocalDetachHandler';
+import { DetachmentDataProvider } from '@/shared/providers/DetachmentDataProvider';
+import { DispatchProvider } from '@/shared/providers/DispatchProvider';
 import { faker } from '@faker-js/faker';
 import { renderHook } from '@testing-library/react';
 import { createElement, type PropsWithChildren } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
-import { DetachmentDataProvider } from '../providers/DetachmentDataProvider';
-import { DispatchProvider } from '../providers/DispatchProvider';
-import { useAbilityLocalDetachHandler } from './useAbilityLocalDetachHandler';
 
 describe('useAbilityLocalDetachHandler hook', () => {
     it("renders hook's returns correctly", () => {

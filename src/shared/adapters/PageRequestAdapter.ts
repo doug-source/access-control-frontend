@@ -1,7 +1,7 @@
-import { type HttpClient } from '@/shared/types/Contracts/HttpClient';
-import { type PaginationRequester } from '@/shared/types/Contracts/PaginationRequester';
-import { type RemotionRequester } from '@/shared/types/Contracts/RemotionRequester';
-import { Paths } from '../types/Urls/Paths';
+import type { HttpClient } from '@/shared/types/Contracts/HttpClient';
+import type { PaginationRequester } from '@/shared/types/Contracts/PaginationRequester';
+import type { RemotionRequester } from '@/shared/types/Contracts/RemotionRequester';
+import type { Paths } from '@/shared/types/Urls/Paths';
 
 type PaginationParams = Parameters<PaginationRequester['paginate']>;
 

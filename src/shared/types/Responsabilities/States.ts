@@ -2,15 +2,13 @@ import type {
     AbilityFormState,
     ForgotPasswordState,
     LoginState,
+    RegisterAccountState,
     RequestAccountState,
+    ResetPasswordState,
     RoleFormState,
+    State,
     UserFormState,
 } from '@/shared/types/States';
-import type {
-    RegisterAccountState,
-    ResetPasswordState,
-    State,
-} from '../States';
 
 export type LogicBaseStates =
     | LoginState

@@ -1,5 +1,5 @@
+import { LocalNavigate } from '@/shared/components/atoms/LocalNavigate';
 import { Outlet, useParams } from 'react-router';
-import { LocalNavigate } from '../../atoms/LocalNavigate';
 
 type CheckParamsProps = Record<string, RegExp>;
 

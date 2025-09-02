@@ -1,6 +1,6 @@
 import { useLocalNavigate } from '@/shared/hooks/useLocalNavigate';
-import { type MouseEvent } from 'react';
-import { type XOR } from '../types/Xor';
+import type { XOR } from '@/shared/types/Xor';
+import type { MouseEvent } from 'react';
 
 interface Info<T> {
     label: string;

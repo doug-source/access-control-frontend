@@ -1,13 +1,13 @@
+import { useRemoveHandler } from '@/shared/hooks/useRemoveHandler';
+import { DispatchProvider } from '@/shared/providers/DispatchProvider';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
+import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
+import type { PageRequester } from '@/shared/types/Contracts/PageRequester';
+import type { Paths } from '@/shared/types/Urls/Paths';
 import { faker } from '@faker-js/faker';
 import { renderHook } from '@testing-library/react';
 import { createElement, type PropsWithChildren } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
-import { DispatchProvider } from '../providers/DispatchProvider';
-import { HttpClientProvider } from '../providers/HttpClientProvider';
-import { PageRequesterProvider } from '../providers/PageRequesterProvider';
-import type { PageRequester } from '../types/Contracts/PageRequester';
-import type { Paths } from '../types/Urls/Paths';
-import { useRemoveHandler } from './useRemoveHandler';
 
 describe('useRemoveHandler hook', () => {
     afterEach(() => {

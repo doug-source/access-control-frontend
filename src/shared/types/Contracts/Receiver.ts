@@ -1,5 +1,5 @@
 import type { GenericResponse } from '@/shared/types/Response/GateDispatcher';
-import type { State } from '../States';
+import type { State } from '@/shared/types/States';
 
 export interface Receiver<S extends State, B, C, F1, F2 = F1> {
     /**

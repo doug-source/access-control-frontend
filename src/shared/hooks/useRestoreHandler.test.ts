@@ -1,13 +1,13 @@
+import { useRestoreHandler } from '@/shared/hooks/useRestoreHandler';
 import { DispatchProvider } from '@/shared/providers/DispatchProvider';
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { PageRequesterWithRestoreProvider } from '@/shared/providers/PageRequesterWithRestoreProvider';
 import type { PageRequesterWithRestore } from '@/shared/types/Contracts/PageRequesterWithRestore';
+import type { Paths } from '@/shared/types/Urls/Paths';
 import { faker } from '@faker-js/faker';
 import { renderHook } from '@testing-library/react';
 import { createElement, type PropsWithChildren } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
-import type { Paths } from '../types/Urls/Paths';
-import { useRestoreHandler } from './useRestoreHandler';
 
 describe('useRestoreHandler hook', () => {
     it('renders with resulting output correctly', async () => {

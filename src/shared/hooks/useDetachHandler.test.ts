@@ -1,13 +1,13 @@
-import { type PermissionsRelationRequester } from '@/shared/types/Contracts/PermissionsRelationRequester';
-import { type Paths } from '@/shared/types/Urls/Paths';
+import { useDetachHandler } from '@/shared/hooks/useDetachHandler';
+import { DispatchProvider } from '@/shared/providers/DispatchProvider';
+import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
+import { PermissionsRequesterProvider } from '@/shared/providers/PermissionsRequesterProvider';
+import type { PermissionsRelationRequester } from '@/shared/types/Contracts/PermissionsRelationRequester';
+import type { Paths } from '@/shared/types/Urls/Paths';
 import { faker } from '@faker-js/faker';
 import { renderHook } from '@testing-library/react';
 import { createElement, type PropsWithChildren } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
-import { DispatchProvider } from '../providers/DispatchProvider';
-import { HttpClientProvider } from '../providers/HttpClientProvider';
-import { PermissionsRequesterProvider } from '../providers/PermissionsRequesterProvider';
-import { useDetachHandler } from './useDetachHandler';
 
 describe('useDetachHandler hook', () => {
     it("renders hook's returns correctly", () => {
