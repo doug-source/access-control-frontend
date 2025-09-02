@@ -1,6 +1,7 @@
 import { CreatorProvider } from '@/shared/providers/CreatorProvider';
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import type { RoleFormState } from '@/shared/types/States';
+import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { RoleFormTemplate } from '.';
@@ -16,7 +17,7 @@ describe('<RoleFormTemplate /> component', () => {
             {
                 path: '/',
                 element: (
-                    <HttpClientProvider>
+                    <HttpClientProvider client={httpClientInstance}>
                         <CreatorProvider>
                             <RoleFormTemplate
                                 state={state}

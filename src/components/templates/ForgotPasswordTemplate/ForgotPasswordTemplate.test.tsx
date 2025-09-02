@@ -1,5 +1,6 @@
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import type { ForgotPasswordState } from '@/shared/types/States';
+import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { ForgotPasswordTemplate } from '.';
@@ -15,7 +16,7 @@ describe('<ForgotPasswordTemplate /> component', () => {
             {
                 path: '/',
                 element: (
-                    <HttpClientProvider>
+                    <HttpClientProvider client={httpClientInstance}>
                         <ForgotPasswordTemplate
                             state={state}
                             formAction={formAction}

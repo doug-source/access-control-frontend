@@ -4,6 +4,7 @@ import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { PermissionsRequesterProvider } from '@/shared/providers/PermissionsRequesterProvider';
 import type { PermissionsRelationRequester } from '@/shared/types/Contracts/PermissionsRelationRequester';
 import type { Paths } from '@/shared/types/Urls/Paths';
+import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { faker } from '@faker-js/faker';
 import { renderHook } from '@testing-library/react';
 import { createElement, type PropsWithChildren } from 'react';
@@ -45,6 +46,7 @@ describe('useDetachHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
+                                client: httpClientInstance,
                                 children: createElement(
                                     PermissionsRequesterProvider,
                                     {
@@ -92,6 +94,7 @@ describe('useDetachHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
+                                client: httpClientInstance,
                                 children,
                             }),
                         }),
@@ -159,6 +162,7 @@ describe('useDetachHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
+                                client: httpClientInstance,
                                 children: createElement(
                                     PermissionsRequesterProvider,
                                     {
@@ -232,6 +236,7 @@ describe('useDetachHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
+                                client: httpClientInstance,
                                 children: createElement(
                                     PermissionsRequesterProvider,
                                     {
@@ -315,6 +320,7 @@ describe('useDetachHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
+                                client: httpClientInstance,
                                 children: createElement(
                                     PermissionsRequesterProvider,
                                     {
@@ -411,6 +417,7 @@ describe('useDetachHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
+                                client: httpClientInstance,
                                 children: createElement(
                                     PermissionsRequesterProvider,
                                     {

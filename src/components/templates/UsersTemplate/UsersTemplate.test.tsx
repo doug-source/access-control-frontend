@@ -3,6 +3,7 @@ import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { InputRefProvider } from '@/shared/providers/InputRefProvider';
 import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
 import { usersReducer } from '@/shared/reducers/usersReducer';
+import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { groups } from '@/shared/utils/pagination';
 import { usersInitialData } from '@/shared/utils/ReduceInitialValues';
 import { faker } from '@faker-js/faker';
@@ -51,7 +52,7 @@ describe('<UsersPageTemplate /> component', () => {
         } = runRefHook();
         render(
             <MemoryRouter initialEntries={['/']}>
-                <HttpClientProvider>
+                <HttpClientProvider client={httpClientInstance}>
                     <PageRequesterProvider>
                         <InputRefProvider inputRef={ref}>
                             <UsersTemplate
@@ -75,7 +76,7 @@ describe('<UsersPageTemplate /> component', () => {
         const { rerender } = render(
             <MemoryRouter initialEntries={['/']}>
                 <DispatchProvider dispatch={result.current[1]}>
-                    <HttpClientProvider>
+                    <HttpClientProvider client={httpClientInstance}>
                         <PageRequesterProvider>
                             <InputRefProvider inputRef={ref}>
                                 <UsersTemplate state={result.current[0]} />
@@ -95,7 +96,7 @@ describe('<UsersPageTemplate /> component', () => {
         rerender(
             <MemoryRouter initialEntries={['/']}>
                 <DispatchProvider dispatch={result.current[1]}>
-                    <HttpClientProvider>
+                    <HttpClientProvider client={httpClientInstance}>
                         <PageRequesterProvider>
                             <InputRefProvider inputRef={ref}>
                                 <UsersTemplate state={result.current[0]} />

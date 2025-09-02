@@ -1,5 +1,6 @@
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
+import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { RolesFromUser } from '.';
@@ -8,7 +9,7 @@ describe('<RolesFromUser /> component', () => {
     it('renders correctly', () => {
         render(
             <MemoryRouter initialEntries={['/']}>
-                <HttpClientProvider>
+                <HttpClientProvider client={httpClientInstance}>
                     <PageRequesterProvider>
                         <RolesFromUser />
                     </PageRequesterProvider>

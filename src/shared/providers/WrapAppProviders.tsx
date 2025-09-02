@@ -1,6 +1,7 @@
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
+import { UnauthenticatorProvider } from '@/shared/providers/UnauthenticatorProvider';
+import { httpClientInstance } from '@/shared/utils/globals/generic';
 import type { PropsWithChildren } from 'react';
-import { UnauthenticatorProvider } from './UnauthenticatorProvider';
 
 interface WrapAppProvidersProps extends PropsWithChildren {
     token: string;
@@ -9,12 +10,10 @@ interface WrapAppProvidersProps extends PropsWithChildren {
 export const WrapAppProviders = ({
     token,
     children,
-}: WrapAppProvidersProps) => {
-    return (
-        <HttpClientProvider>
-            <UnauthenticatorProvider token={token}>
-                {children}
-            </UnauthenticatorProvider>
-        </HttpClientProvider>
-    );
-};
+}: WrapAppProvidersProps) => (
+    <HttpClientProvider client={httpClientInstance}>
+        <UnauthenticatorProvider token={token}>
+            {children}
+        </UnauthenticatorProvider>
+    </HttpClientProvider>
+);

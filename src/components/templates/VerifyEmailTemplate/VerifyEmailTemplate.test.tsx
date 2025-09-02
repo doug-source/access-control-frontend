@@ -1,6 +1,7 @@
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
-import { AuthUser } from '@/shared/types/NullableUser';
+import type { AuthUser } from '@/shared/types/NullableUser';
 import type { VerifyEmailState } from '@/shared/types/States';
+import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { faker } from '@faker-js/faker';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
@@ -18,7 +19,7 @@ describe('<VerifyEmailTemplate /> component', () => {
             {
                 path: '/',
                 element: (
-                    <HttpClientProvider>
+                    <HttpClientProvider client={httpClientInstance}>
                         <VerifyEmailTemplate
                             state={state}
                             formAction={formAction}
@@ -54,7 +55,7 @@ describe('<VerifyEmailTemplate /> component', () => {
             {
                 path: '/',
                 element: (
-                    <HttpClientProvider>
+                    <HttpClientProvider client={httpClientInstance}>
                         <VerifyEmailTemplate
                             state={state}
                             formAction={formAction}
@@ -85,7 +86,7 @@ describe('<VerifyEmailTemplate /> component', () => {
                 {
                     path: '/',
                     element: (
-                        <HttpClientProvider>
+                        <HttpClientProvider client={httpClientInstance}>
                             <VerifyEmailTemplate
                                 state={state}
                                 formAction={formAction}
@@ -119,7 +120,7 @@ describe('<VerifyEmailTemplate /> component', () => {
                 {
                     path: '/verify/:id/:hash',
                     element: (
-                        <HttpClientProvider>
+                        <HttpClientProvider client={httpClientInstance}>
                             <VerifyEmailTemplate
                                 state={state}
                                 formAction={formAction}

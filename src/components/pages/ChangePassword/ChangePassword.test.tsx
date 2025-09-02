@@ -1,4 +1,5 @@
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
+import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { ChangePassword } from '.';
@@ -9,7 +10,7 @@ describe('<ChangePassword /> component', () => {
             {
                 path: '/',
                 element: (
-                    <HttpClientProvider>
+                    <HttpClientProvider client={httpClientInstance}>
                         <ChangePassword />
                     </HttpClientProvider>
                 ),

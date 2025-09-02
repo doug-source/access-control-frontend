@@ -1,6 +1,7 @@
 import { CreatorProvider } from '@/shared/providers/CreatorProvider';
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { RegisterAccountState } from '@/shared/types/States';
+import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { faker } from '@faker-js/faker';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
@@ -18,7 +19,7 @@ describe('<RegisterAccountTemplate /> component', () => {
             {
                 path: '/',
                 element: (
-                    <HttpClientProvider>
+                    <HttpClientProvider client={httpClientInstance}>
                         <CreatorProvider>
                             <RegisterAccountTemplate
                                 state={state}

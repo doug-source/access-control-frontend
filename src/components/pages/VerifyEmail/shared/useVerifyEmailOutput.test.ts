@@ -2,6 +2,7 @@ import * as LocalNavigateHooks from '@/shared/hooks/useLocalNavigate';
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { AuthUser } from '@/shared/types/NullableUser';
 import { VerifyEmailState } from '@/shared/types/States';
+import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { faker } from '@faker-js/faker';
 import { renderHook, waitFor } from '@testing-library/react';
 import {
@@ -54,6 +55,7 @@ describe('useVerifyEmailVerification hook', () => {
                     {
                         path: '/',
                         element: createElement(HttpClientProvider, {
+                            client: httpClientInstance,
                             children,
                         }),
                         loader: vi.fn(async () => emailVerifyLoaderReturn),
@@ -120,6 +122,7 @@ describe('useVerifyEmailVerification hook', () => {
                     {
                         path: '/',
                         element: createElement(HttpClientProvider, {
+                            client: httpClientInstance,
                             children,
                         }),
                         loader: vi.fn(async () => emailVerifyLoaderReturn),

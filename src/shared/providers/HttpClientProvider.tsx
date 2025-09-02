@@ -1,7 +1,15 @@
 import { HttpClientContext } from '@/shared/contexts/HttpClientContext';
-import { httpClientInstance } from '@/shared/utils/globals/generic';
-import type { PropsWithChildren } from 'react';
+import type { ComponentPropsWithRef, PropsWithChildren } from 'react';
 
-export const HttpClientProvider = ({ children }: PropsWithChildren) => (
-    <HttpClientContext value={httpClientInstance}>{children}</HttpClientContext>
+interface HttpClientProviderProps extends PropsWithChildren {
+    client: NonNullable<
+        ComponentPropsWithRef<typeof HttpClientContext>['value']
+    >;
+}
+
+export const HttpClientProvider = ({
+    client,
+    children,
+}: HttpClientProviderProps) => (
+    <HttpClientContext value={client}>{children}</HttpClientContext>
 );

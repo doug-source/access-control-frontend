@@ -1,6 +1,7 @@
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
 import { type AbilitiesState } from '@/shared/types/Reducers/Abilities';
+import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { groups } from '@/shared/utils/pagination';
 import { abilitiesInitialData } from '@/shared/utils/ReduceInitialValues';
 import { render, screen } from '@testing-library/react';
@@ -12,7 +13,7 @@ describe('<AbilitiesFromRoleTemplate /> component', () => {
         const state: AbilitiesState = abilitiesInitialData(1, groups[0]);
         render(
             <MemoryRouter initialEntries={['/']}>
-                <HttpClientProvider>
+                <HttpClientProvider client={httpClientInstance}>
                     <PageRequesterProvider>
                         <AbilitiesFromRoleTemplate state={state} />
                     </PageRequesterProvider>

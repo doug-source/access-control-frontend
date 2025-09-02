@@ -1,5 +1,6 @@
 import { CreatorProvider } from '@/shared/providers/CreatorProvider';
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
+import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { RegisterAccount } from '.';
@@ -10,7 +11,7 @@ describe('<RegisterAccount /> component', () => {
             {
                 path: '/',
                 element: (
-                    <HttpClientProvider>
+                    <HttpClientProvider client={httpClientInstance}>
                         <CreatorProvider>
                             <RegisterAccount />
                         </CreatorProvider>

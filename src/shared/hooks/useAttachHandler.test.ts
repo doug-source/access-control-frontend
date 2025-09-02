@@ -1,13 +1,14 @@
+import { useAttachHandler } from '@/shared/hooks/useAttachHandler';
 import { DispatchProvider } from '@/shared/providers/DispatchProvider';
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { PermissionsRequesterProvider } from '@/shared/providers/PermissionsRequesterProvider';
 import type { PermissionsRelationRequester } from '@/shared/types/Contracts/PermissionsRelationRequester';
 import type { Paths } from '@/shared/types/Urls/Paths';
+import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { faker } from '@faker-js/faker';
 import { renderHook } from '@testing-library/react';
-import { createElement, PropsWithChildren } from 'react';
+import { createElement, type PropsWithChildren } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
-import { useAttachHandler } from './useAttachHandler';
 
 describe('useAttachHandler hook', () => {
     it("renders hook's returns correctly", () => {
@@ -45,6 +46,7 @@ describe('useAttachHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
+                                client: httpClientInstance,
                                 children: createElement(
                                     PermissionsRequesterProvider,
                                     {
@@ -92,6 +94,7 @@ describe('useAttachHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
+                                client: httpClientInstance,
                                 children,
                             }),
                         }),
@@ -159,6 +162,7 @@ describe('useAttachHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
+                                client: httpClientInstance,
                                 children: createElement(
                                     PermissionsRequesterProvider,
                                     {
@@ -232,6 +236,7 @@ describe('useAttachHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
+                                client: httpClientInstance,
                                 children: createElement(
                                     PermissionsRequesterProvider,
                                     {
@@ -316,6 +321,7 @@ describe('useAttachHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
+                                client: httpClientInstance,
                                 children: createElement(
                                     PermissionsRequesterProvider,
                                     {
@@ -412,6 +418,7 @@ describe('useAttachHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
+                                client: httpClientInstance,
                                 children: createElement(
                                     PermissionsRequesterProvider,
                                     {

@@ -1,5 +1,6 @@
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { ViewerProvider } from '@/shared/providers/ViewerProvider';
+import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { User } from '.';
@@ -9,7 +10,7 @@ describe('<User /> component', () => {
         const router = createMemoryRouter([
             {
                 element: (
-                    <HttpClientProvider>
+                    <HttpClientProvider client={httpClientInstance}>
                         <ViewerProvider />
                     </HttpClientProvider>
                 ),

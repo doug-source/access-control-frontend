@@ -1,6 +1,7 @@
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { InputRefProvider } from '@/shared/providers/InputRefProvider';
 import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
+import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { groups } from '@/shared/utils/pagination';
 import { usersInitialData } from '@/shared/utils/ReduceInitialValues';
 import { render, renderHook, screen } from '@testing-library/react';
@@ -19,7 +20,7 @@ describe('<UsersRemovedTemplate /> component', () => {
             result: { current: ref },
         } = runHook();
         render(
-            <HttpClientProvider>
+            <HttpClientProvider client={httpClientInstance}>
                 <PageRequesterProvider>
                     <InputRefProvider inputRef={ref}>
                         <UsersRemovedTemplate

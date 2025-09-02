@@ -2,6 +2,7 @@ import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
 import { LocationStateBetweenScreen } from '@/shared/types/LocationStateBetweenScreen';
 import { UserIndex } from '@/shared/types/Models/User';
+import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { groups } from '@/shared/utils/pagination';
 import { abilitiesInitialData } from '@/shared/utils/ReduceInitialValues';
 import { faker } from '@faker-js/faker';
@@ -13,7 +14,7 @@ describe('<AbilitiesTemplate /> component', () => {
     it('renders correctly', () => {
         render(
             <MemoryRouter initialEntries={['/']}>
-                <HttpClientProvider>
+                <HttpClientProvider client={httpClientInstance}>
                     <PageRequesterProvider>
                         <AbilitiesTemplate
                             state={abilitiesInitialData(1, groups[0])}
@@ -28,7 +29,7 @@ describe('<AbilitiesTemplate /> component', () => {
     it("renders with 'PaginationPurpose' not included into DOM correctly", () => {
         render(
             <MemoryRouter initialEntries={['/abilities']}>
-                <HttpClientProvider>
+                <HttpClientProvider client={httpClientInstance}>
                     <PageRequesterProvider>
                         <AbilitiesTemplate
                             state={abilitiesInitialData(1, groups[0])}
@@ -62,7 +63,7 @@ describe('<AbilitiesTemplate /> component', () => {
                     },
                 ]}
             >
-                <HttpClientProvider>
+                <HttpClientProvider client={httpClientInstance}>
                     <PageRequesterProvider>
                         <AbilitiesTemplate
                             state={abilitiesInitialData(1, groups[0])}

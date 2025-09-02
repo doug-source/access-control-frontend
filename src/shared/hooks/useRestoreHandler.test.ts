@@ -4,6 +4,7 @@ import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { PageRequesterWithRestoreProvider } from '@/shared/providers/PageRequesterWithRestoreProvider';
 import type { PageRequesterWithRestore } from '@/shared/types/Contracts/PageRequesterWithRestore';
 import type { Paths } from '@/shared/types/Urls/Paths';
+import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { faker } from '@faker-js/faker';
 import { renderHook } from '@testing-library/react';
 import { createElement, type PropsWithChildren } from 'react';
@@ -54,6 +55,7 @@ describe('useRestoreHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
+                                client: httpClientInstance,
                                 children: createElement(
                                     PageRequesterWithRestoreProvider,
                                     {
@@ -99,6 +101,7 @@ describe('useRestoreHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
+                                client: httpClientInstance,
                                 children,
                             }),
                         }),
@@ -173,6 +176,7 @@ describe('useRestoreHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
+                                client: httpClientInstance,
                                 children: createElement(
                                     PageRequesterWithRestoreProvider,
                                     {
@@ -249,6 +253,7 @@ describe('useRestoreHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
+                                client: httpClientInstance,
                                 children: createElement(
                                     PageRequesterWithRestoreProvider,
                                     {
@@ -342,6 +347,7 @@ describe('useRestoreHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
+                                client: httpClientInstance,
                                 children: createElement(
                                     PageRequesterWithRestoreProvider,
                                     {
@@ -444,6 +450,7 @@ describe('useRestoreHandler hook', () => {
                         element: createElement(DispatchProvider, {
                             dispatch,
                             children: createElement(HttpClientProvider, {
+                                client: httpClientInstance,
                                 children: createElement(
                                     PageRequesterWithRestoreProvider,
                                     {

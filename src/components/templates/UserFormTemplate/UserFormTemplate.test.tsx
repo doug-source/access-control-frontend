@@ -1,6 +1,7 @@
 import { CreatorProvider } from '@/shared/providers/CreatorProvider';
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import type { UserFormState } from '@/shared/types/States';
+import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { UserFormTemplate } from '.';
@@ -16,7 +17,7 @@ describe('<UserFormTemplate /> component', () => {
             {
                 path: '/',
                 element: (
-                    <HttpClientProvider>
+                    <HttpClientProvider client={httpClientInstance}>
                         <CreatorProvider>
                             <UserFormTemplate
                                 state={state}

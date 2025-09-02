@@ -1,5 +1,6 @@
 import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
+import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { groups } from '@/shared/utils/pagination';
 import { rolesInitialData } from '@/shared/utils/ReduceInitialValues';
 import { render, screen } from '@testing-library/react';
@@ -11,7 +12,7 @@ describe('<RolesTemplate /> component', () => {
         const state = rolesInitialData(1, groups[0]);
         render(
             <MemoryRouter initialEntries={['/']}>
-                <HttpClientProvider>
+                <HttpClientProvider client={httpClientInstance}>
                     <PageRequesterProvider>
                         <RolesTemplate state={state} />
                     </PageRequesterProvider>
