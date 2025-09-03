@@ -2,11 +2,11 @@ import { MainLayout } from '@/components/templates/MainLayout';
 import { AppTitle } from '@/shared/components/atoms/AppTitle';
 import { makeAbilityRoutes } from './abilities';
 import { makeConfigRoutes } from './config';
-import { emailVerifyRoutes } from './multiple';
 import { makeRegisterPermissionRoutes } from './registerPermissions';
 import { makeRegisterRequestRoutes } from './registerRequests';
 import { makeRoleRoutes } from './roles';
 import { makeUserRoutes } from './users';
+import { makeVerifyEmailRoutes } from './verifyEmail';
 
 export const makeProtectedRoutes = (token: string) => [
     {
@@ -24,5 +24,5 @@ export const makeProtectedRoutes = (token: string) => [
             ...makeConfigRoutes(token),
         ],
     },
-    ...emailVerifyRoutes(token),
+    ...makeVerifyEmailRoutes(token),
 ];
