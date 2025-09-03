@@ -2,14 +2,13 @@ import type { Paths } from '@/shared/types/Urls/Paths';
 import type { WithShow } from '@/shared/types/Utils';
 import classNames from 'classnames';
 import type { ComponentPropsWithRef } from 'react';
-import { NavLink } from 'react-router';
+import { Link } from 'react-router';
 import styles from './Anchor.module.scss';
 
-type AnchorProps = WithShow<
-    ComponentPropsWithRef<typeof NavLink> & {
-        to: Paths['navigation']['concrete'];
-    }
->;
+type BaseProps = Omit<ComponentPropsWithRef<typeof Link>, 'to'>;
+interface AnchorProps extends BaseProps {
+    to: Paths['navigation']['concrete'];
+}
 
 export const Anchor = ({
     show = true,
@@ -17,17 +16,17 @@ export const Anchor = ({
     className,
     children,
     ...remain
-}: AnchorProps) => {
+}: WithShow<AnchorProps>) => {
     if (!show) {
         return null;
     }
     return (
-        <NavLink
+        <Link
             {...remain}
             to={to}
             className={classNames(styles.anchor, className)}
         >
             {children}
-        </NavLink>
+        </Link>
     );
 };
