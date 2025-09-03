@@ -5,7 +5,7 @@ import { Guest } from '@/shared/components/molecules/Guest';
 import { ScreenWrapper } from '@/shared/components/molecules/ScreenWrapper';
 import { WrapAppProviders } from '@/shared/providers/WrapAppProviders';
 import { WrapGuestProviders } from '@/shared/providers/WrapGuestProviders';
-import { makeProtectedRoutes } from '@/shared/routes/shared/makeProtectedRoutes';
+import { makeProtectedRoutes } from '@/shared/routes/shared/protected';
 import { unprotectedRoutes } from '@/shared/routes/shared/unprotected';
 import type { RouteObject } from 'react-router';
 
