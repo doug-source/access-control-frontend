@@ -32,7 +32,7 @@ export const RolesTemplate = ({ state }: RolesTemplateProps) => {
                         </InputRefProvider>
                         <PlusLink
                             show={abilities.includes('add-role-screen')}
-                            to="/roles-create"
+                            to="/roles/create"
                             title="Criar papel"
                         />
                     </FiltersBlock>

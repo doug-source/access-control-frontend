@@ -44,7 +44,7 @@ export const makeRoleRoutes = (token: string) => [
         element: <Gate abilityName="add-role-screen" />,
         children: [
             {
-                path: '/roles-create',
+                path: '/roles/create',
                 element: (
                     <ScreenWrapper title="Criar Papel">
                         <LogicBaseProvider

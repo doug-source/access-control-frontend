@@ -14,8 +14,8 @@ export type AbstractNavigations = {
 
 export type NavigationCreations = {
     user: '/users/create';
-    role: '/roles-create';
-    ability: '/abilities-create';
+    role: '/roles/create';
+    ability: '/abilities/create';
 };
 
 type UserNavigations =

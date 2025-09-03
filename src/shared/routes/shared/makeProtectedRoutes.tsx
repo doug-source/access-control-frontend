@@ -63,7 +63,7 @@ export const makeProtectedRoutes = (token: string) => [
                 element: <Gate abilityName="add-ability-screen" />,
                 children: [
                     {
-                        path: '/abilities-create',
+                        path: '/abilities/create',
                         element: (
                             <ScreenWrapper title="Criar Habilidade">
                                 <LogicBaseProvider

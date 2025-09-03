@@ -36,7 +36,7 @@ export const AbilitiesTemplate = ({ state }: AbilitiesTemplateProps) => {
                         </InputRefProvider>
                         <PlusLink
                             show={abilities.includes('add-ability-screen')}
-                            to="/abilities-create"
+                            to="/abilities/create"
                             title="Criar habilidade"
                         />
                     </FiltersBlock>
