@@ -1,11 +1,9 @@
 import { Ability } from '@/components/pages/Ability';
 import { AbilityForm } from '@/components/pages/AbilityForm';
-import { Config } from '@/components/pages/Config';
 import { RegisterPermission } from '@/components/pages/RegisterPermission';
 import { RegisterPermissions } from '@/components/pages/RegisterPermissions';
 import { RegisterRequest } from '@/components/pages/RegisterRequest';
 import { RegisterRequests } from '@/components/pages/RegisterRequests';
-import { UserConfig } from '@/components/pages/UserConfig';
 import { MainLayout } from '@/components/templates/MainLayout';
 import { AppTitle } from '@/shared/components/atoms/AppTitle';
 import { CheckParams } from '@/shared/components/molecules/CheckParams';
@@ -16,7 +14,7 @@ import { LogicBaseProvider } from '@/shared/providers/LogicBaseProvider';
 import { ViewerProvider } from '@/shared/providers/ViewerProvider';
 import { attachToken } from '@/shared/utils/attachToken';
 import { abilityFormBase } from '@/shared/utils/globals/abilityForm';
-import { userConfigBase } from '@/shared/utils/globals/userConfig';
+import { makeConfigRoutes } from './config';
 import { abilityRoutes, emailVerifyRoutes } from './multiple';
 import { makeRoleRoutes } from './roles';
 import { makeUserRoutes } from './users';
@@ -147,26 +145,7 @@ export const makeProtectedRoutes = (token: string) => [
                 ],
             },
             ...abilityRoutes(),
-            {
-                path: '/config',
-                element: (
-                    <ScreenWrapper title="Configurações">
-                        <Config />
-                    </ScreenWrapper>
-                ),
-            },
-            {
-                path: '/config-user',
-                element: (
-                    <ScreenWrapper title="Configurações do usuário">
-                        <LogicBaseProvider
-                            base={attachToken(userConfigBase, token)}
-                        >
-                            <UserConfig />
-                        </LogicBaseProvider>
-                    </ScreenWrapper>
-                ),
-            },
+            ...makeConfigRoutes(token),
         ],
     },
     ...emailVerifyRoutes(token),
