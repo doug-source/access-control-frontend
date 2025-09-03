@@ -23,6 +23,43 @@ export const makeAbilityRoutes = (token: string) => [
                     </ScreenWrapper>
                 ),
             },
+            {
+                element: <CheckParams id={/^\d+$/} />,
+                children: [
+                    {
+                        path: '/abilities/user/:id',
+                        element: (
+                            <ScreenWrapper title="Habilidades">
+                                <AbilitiesFromUser />
+                            </ScreenWrapper>
+                        ),
+                    },
+                    {
+                        path: '/abilities/user/:id/attach',
+                        element: (
+                            <ScreenWrapper title="Habilidades">
+                                <AbilitiesFromUser />
+                            </ScreenWrapper>
+                        ),
+                    },
+                    {
+                        path: '/abilities/role/:id',
+                        element: (
+                            <ScreenWrapper title="Habilidades">
+                                <AbilitiesFromRole />
+                            </ScreenWrapper>
+                        ),
+                    },
+                    {
+                        path: '/abilities/role/:id/attach',
+                        element: (
+                            <ScreenWrapper title="Habilidades">
+                                <AbilitiesFromRole />
+                            </ScreenWrapper>
+                        ),
+                    },
+                ],
+            },
         ],
     },
     {
@@ -58,38 +95,6 @@ export const makeAbilityRoutes = (token: string) => [
                         loader: subjectShowLoader(
                             token,
                             (id) => `/api/abilities/${id}`
-                        ),
-                    },
-                    {
-                        path: '/abilities/user/:id',
-                        element: (
-                            <ScreenWrapper title="Habilidades">
-                                <AbilitiesFromUser />
-                            </ScreenWrapper>
-                        ),
-                    },
-                    {
-                        path: '/abilities/user/:id/attach',
-                        element: (
-                            <ScreenWrapper title="Habilidades">
-                                <AbilitiesFromUser />
-                            </ScreenWrapper>
-                        ),
-                    },
-                    {
-                        path: '/abilities/role/:id',
-                        element: (
-                            <ScreenWrapper title="Habilidades">
-                                <AbilitiesFromRole />
-                            </ScreenWrapper>
-                        ),
-                    },
-                    {
-                        path: '/abilities/role/:id/attach',
-                        element: (
-                            <ScreenWrapper title="Habilidades">
-                                <AbilitiesFromRole />
-                            </ScreenWrapper>
                         ),
                     },
                 ],
