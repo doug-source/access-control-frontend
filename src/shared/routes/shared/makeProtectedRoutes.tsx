@@ -8,11 +8,7 @@ import { RegisterRequests } from '@/components/pages/RegisterRequests';
 import { Role } from '@/components/pages/Role';
 import { RoleForm } from '@/components/pages/RoleForm';
 import { Roles } from '@/components/pages/Roles';
-import { User } from '@/components/pages/User';
 import { UserConfig } from '@/components/pages/UserConfig';
-import { UserForm } from '@/components/pages/UserForm';
-import { Users } from '@/components/pages/Users';
-import { UsersRemoved } from '@/components/pages/UsersRemoved';
 import { MainLayout } from '@/components/templates/MainLayout';
 import { AppTitle } from '@/shared/components/atoms/AppTitle';
 import { CheckParams } from '@/shared/components/molecules/CheckParams';
@@ -25,12 +21,12 @@ import { attachToken } from '@/shared/utils/attachToken';
 import { abilityFormBase } from '@/shared/utils/globals/abilityForm';
 import { roleFormBase } from '@/shared/utils/globals/roleForm';
 import { userConfigBase } from '@/shared/utils/globals/userConfig';
-import { userFormBase } from '@/shared/utils/globals/userForm';
 import {
     abilityRoutes,
     emailVerifyRoutes,
     rolesFromUserRoutes,
 } from './multiple';
+import { makeUserRoutes } from './users';
 
 export const makeProtectedRoutes = (token: string) => [
     {
@@ -40,27 +36,7 @@ export const makeProtectedRoutes = (token: string) => [
                 path: '/home',
                 element: <AppTitle />,
             },
-            {
-                element: <Gate abilityName="user-screen" />,
-                children: [
-                    {
-                        path: '/users',
-                        element: (
-                            <ScreenWrapper title="Usuários">
-                                <Users />
-                            </ScreenWrapper>
-                        ),
-                    },
-                    {
-                        path: '/users/removed',
-                        element: (
-                            <ScreenWrapper title="Usuários Removidos">
-                                <UsersRemoved />
-                            </ScreenWrapper>
-                        ),
-                    },
-                ],
-            },
+            ...makeUserRoutes(token),
             {
                 element: <CheckParams id={/^\d+$/} />,
                 children: [
@@ -68,37 +44,6 @@ export const makeProtectedRoutes = (token: string) => [
                         element: <ViewerProvider />,
 
                         children: [
-                            {
-                                element: (
-                                    <Gate abilityName="show-user-screen" />
-                                ),
-                                children: [
-                                    {
-                                        path: '/users/:id',
-                                        element: (
-                                            <ScreenWrapper title="Visão geral do Usuário">
-                                                <User />
-                                            </ScreenWrapper>
-                                        ),
-                                        loader: subjectShowLoader(
-                                            token,
-                                            (id) => `/api/users/${id}`
-                                        ),
-                                    },
-                                    {
-                                        path: '/users/removed/:id',
-                                        element: (
-                                            <ScreenWrapper title="Visão geral do Usuário">
-                                                <User removed />
-                                            </ScreenWrapper>
-                                        ),
-                                        loader: subjectShowLoader(
-                                            token,
-                                            (id) => `/api/users/removed/${id}`
-                                        ),
-                                    },
-                                ],
-                            },
                             {
                                 element: (
                                     <Gate abilityName="show-role-screen" />
@@ -180,23 +125,6 @@ export const makeProtectedRoutes = (token: string) => [
                                 ],
                             },
                         ],
-                    },
-                ],
-            },
-            {
-                element: <Gate abilityName="add-user-screen" />,
-                children: [
-                    {
-                        path: '/users/create',
-                        element: (
-                            <ScreenWrapper title="Criar usuário">
-                                <LogicBaseProvider
-                                    base={attachToken(userFormBase, token)}
-                                >
-                                    <UserForm />
-                                </LogicBaseProvider>
-                            </ScreenWrapper>
-                        ),
                     },
                 ],
             },
