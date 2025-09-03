@@ -37,7 +37,7 @@ export const MainLayout = () => {
                     </Menu.Item>
                     <Menu.Item show={abilities.includes('user-screen')}>
                         <Anchor
-                            to="/users-removed"
+                            to="/users/removed"
                             className={styles.menuItemAnchor}
                         >
                             <UsersRemovedIcon className={styles.menuItemIcon} />

@@ -52,7 +52,7 @@ export const makeProtectedRoutes = (token: string) => [
                         ),
                     },
                     {
-                        path: '/users-removed',
+                        path: '/users/removed',
                         element: (
                             <ScreenWrapper title="Usuários Removidos">
                                 <UsersRemoved />
@@ -187,7 +187,7 @@ export const makeProtectedRoutes = (token: string) => [
                 element: <Gate abilityName="add-user-screen" />,
                 children: [
                     {
-                        path: '/users-create',
+                        path: '/users/create',
                         element: (
                             <ScreenWrapper title="Criar usuário">
                                 <LogicBaseProvider

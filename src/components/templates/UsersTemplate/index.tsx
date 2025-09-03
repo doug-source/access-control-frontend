@@ -32,7 +32,7 @@ export const UsersTemplate = ({ state }: UsersTemplateProps) => {
                             context="user"
                         />
                         <PlusLink
-                            to="/users-create"
+                            to="/users/create"
                             title="Criar usuário"
                             show={canAddUser}
                         />

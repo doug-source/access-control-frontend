@@ -13,14 +13,14 @@ export type AbstractNavigations = {
 };
 
 export type NavigationCreations = {
-    user: '/users-create';
+    user: '/users/create';
     role: '/roles-create';
     ability: '/abilities-create';
 };
 
 type UserNavigations =
     | '/users'
-    | '/users-removed'
+    | '/users/removed'
     | `/users/${number}`
     | AbstractNavigations['user']
     | NavigationCreations['user'];
