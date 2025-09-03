@@ -2,8 +2,6 @@ import { Ability } from '@/components/pages/Ability';
 import { AbilityForm } from '@/components/pages/AbilityForm';
 import { RegisterPermission } from '@/components/pages/RegisterPermission';
 import { RegisterPermissions } from '@/components/pages/RegisterPermissions';
-import { RegisterRequest } from '@/components/pages/RegisterRequest';
-import { RegisterRequests } from '@/components/pages/RegisterRequests';
 import { MainLayout } from '@/components/templates/MainLayout';
 import { AppTitle } from '@/shared/components/atoms/AppTitle';
 import { CheckParams } from '@/shared/components/molecules/CheckParams';
@@ -16,6 +14,7 @@ import { attachToken } from '@/shared/utils/attachToken';
 import { abilityFormBase } from '@/shared/utils/globals/abilityForm';
 import { makeConfigRoutes } from './config';
 import { abilityRoutes, emailVerifyRoutes } from './multiple';
+import { makeRegisterRequestRoutes } from './registerRequests';
 import { makeRoleRoutes } from './roles';
 import { makeUserRoutes } from './users';
 
@@ -29,6 +28,7 @@ export const makeProtectedRoutes = (token: string) => [
             },
             ...makeUserRoutes(token),
             ...makeRoleRoutes(token),
+            ...makeRegisterRequestRoutes(token),
             {
                 element: <CheckParams id={/^\d+$/} />,
                 children: [
@@ -51,27 +51,6 @@ export const makeProtectedRoutes = (token: string) => [
                                         loader: subjectShowLoader(
                                             token,
                                             (id) => `/api/abilities/${id}`
-                                        ),
-                                    },
-                                ],
-                            },
-                            {
-                                element: (
-                                    <Gate abilityName="show-register-request-screen" />
-                                ),
-                                children: [
-                                    {
-                                        path: '/register-requests/:id',
-                                        element: (
-                                            <ScreenWrapper title="Visão geral do pedido">
-                                                <RegisterRequest />
-                                            </ScreenWrapper>
-                                        ),
-                                        loader: subjectShowLoader(
-                                            token,
-                                            (id) => {
-                                                return `/api/registers/requests/${id}`;
-                                            }
                                         ),
                                     },
                                 ],
@@ -113,19 +92,6 @@ export const makeProtectedRoutes = (token: string) => [
                                 >
                                     <AbilityForm />
                                 </LogicBaseProvider>
-                            </ScreenWrapper>
-                        ),
-                    },
-                ],
-            },
-            {
-                element: <Gate abilityName="register-request-screen" />,
-                children: [
-                    {
-                        path: '/register-requests',
-                        element: (
-                            <ScreenWrapper title="Pedidos de registro">
-                                <RegisterRequests />
                             </ScreenWrapper>
                         ),
                     },
