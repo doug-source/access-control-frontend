@@ -1,7 +1,6 @@
 import { Abilities } from '@/components/pages/Abilities';
 import { AbilitiesFromRole } from '@/components/pages/AbilitiesFromRole';
 import { AbilitiesFromUser } from '@/components/pages/AbilitiesFromUser';
-import { RolesFromUser } from '@/components/pages/RolesFromUser';
 import { VerifyEmail } from '@/components/pages/VerifyEmail';
 import { ScreenWrapper } from '@/shared/components/molecules/ScreenWrapper';
 import { Gate } from '@/shared/components/organisms/Gate';
@@ -67,29 +66,6 @@ export const abilityRoutes = (): RouteObject[] => {
                 {
                     path: '/abilities/user/:id/attach',
                     element: abilityFromUserComponent,
-                },
-            ],
-        },
-    ];
-};
-
-export const rolesFromUserRoutes = (): RouteObject[] => {
-    const component = (
-        <ScreenWrapper title="Papéis">
-            <RolesFromUser />
-        </ScreenWrapper>
-    );
-    return [
-        {
-            element: <Gate abilityName="role-screen" />,
-            children: [
-                {
-                    path: '/roles/user/:id',
-                    element: component,
-                },
-                {
-                    path: '/roles/user/:id/attach',
-                    element: component,
                 },
             ],
         },

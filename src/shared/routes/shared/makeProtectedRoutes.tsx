@@ -5,9 +5,6 @@ import { RegisterPermission } from '@/components/pages/RegisterPermission';
 import { RegisterPermissions } from '@/components/pages/RegisterPermissions';
 import { RegisterRequest } from '@/components/pages/RegisterRequest';
 import { RegisterRequests } from '@/components/pages/RegisterRequests';
-import { Role } from '@/components/pages/Role';
-import { RoleForm } from '@/components/pages/RoleForm';
-import { Roles } from '@/components/pages/Roles';
 import { UserConfig } from '@/components/pages/UserConfig';
 import { MainLayout } from '@/components/templates/MainLayout';
 import { AppTitle } from '@/shared/components/atoms/AppTitle';
@@ -19,13 +16,9 @@ import { LogicBaseProvider } from '@/shared/providers/LogicBaseProvider';
 import { ViewerProvider } from '@/shared/providers/ViewerProvider';
 import { attachToken } from '@/shared/utils/attachToken';
 import { abilityFormBase } from '@/shared/utils/globals/abilityForm';
-import { roleFormBase } from '@/shared/utils/globals/roleForm';
 import { userConfigBase } from '@/shared/utils/globals/userConfig';
-import {
-    abilityRoutes,
-    emailVerifyRoutes,
-    rolesFromUserRoutes,
-} from './multiple';
+import { abilityRoutes, emailVerifyRoutes } from './multiple';
+import { makeRoleRoutes } from './roles';
 import { makeUserRoutes } from './users';
 
 export const makeProtectedRoutes = (token: string) => [
@@ -37,6 +30,7 @@ export const makeProtectedRoutes = (token: string) => [
                 element: <AppTitle />,
             },
             ...makeUserRoutes(token),
+            ...makeRoleRoutes(token),
             {
                 element: <CheckParams id={/^\d+$/} />,
                 children: [
@@ -44,25 +38,6 @@ export const makeProtectedRoutes = (token: string) => [
                         element: <ViewerProvider />,
 
                         children: [
-                            {
-                                element: (
-                                    <Gate abilityName="show-role-screen" />
-                                ),
-                                children: [
-                                    {
-                                        path: '/roles/:id',
-                                        element: (
-                                            <ScreenWrapper title="Visão geral do papel">
-                                                <Role />
-                                            </ScreenWrapper>
-                                        ),
-                                        loader: subjectShowLoader(
-                                            token,
-                                            (id) => `/api/roles/${id}`
-                                        ),
-                                    },
-                                ],
-                            },
                             {
                                 element: (
                                     <Gate abilityName="show-ability-screen" />
@@ -129,23 +104,6 @@ export const makeProtectedRoutes = (token: string) => [
                 ],
             },
             {
-                element: <Gate abilityName="add-role-screen" />,
-                children: [
-                    {
-                        path: '/roles-create',
-                        element: (
-                            <ScreenWrapper title="Criar Papel">
-                                <LogicBaseProvider
-                                    base={attachToken(roleFormBase, token)}
-                                >
-                                    <RoleForm />
-                                </LogicBaseProvider>
-                            </ScreenWrapper>
-                        ),
-                    },
-                ],
-            },
-            {
                 element: <Gate abilityName="add-ability-screen" />,
                 children: [
                     {
@@ -188,20 +146,6 @@ export const makeProtectedRoutes = (token: string) => [
                     },
                 ],
             },
-            {
-                element: <Gate abilityName="role-screen" />,
-                children: [
-                    {
-                        path: '/roles',
-                        element: (
-                            <ScreenWrapper title="Papéis">
-                                <Roles />
-                            </ScreenWrapper>
-                        ),
-                    },
-                ],
-            },
-            ...rolesFromUserRoutes(),
             ...abilityRoutes(),
             {
                 path: '/config',
