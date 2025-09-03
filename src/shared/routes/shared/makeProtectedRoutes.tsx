@@ -1,7 +1,5 @@
 import { Ability } from '@/components/pages/Ability';
 import { AbilityForm } from '@/components/pages/AbilityForm';
-import { RegisterPermission } from '@/components/pages/RegisterPermission';
-import { RegisterPermissions } from '@/components/pages/RegisterPermissions';
 import { MainLayout } from '@/components/templates/MainLayout';
 import { AppTitle } from '@/shared/components/atoms/AppTitle';
 import { CheckParams } from '@/shared/components/molecules/CheckParams';
@@ -14,6 +12,7 @@ import { attachToken } from '@/shared/utils/attachToken';
 import { abilityFormBase } from '@/shared/utils/globals/abilityForm';
 import { makeConfigRoutes } from './config';
 import { abilityRoutes, emailVerifyRoutes } from './multiple';
+import { makeRegisterPermissionRoutes } from './registerPermissions';
 import { makeRegisterRequestRoutes } from './registerRequests';
 import { makeRoleRoutes } from './roles';
 import { makeUserRoutes } from './users';
@@ -29,6 +28,7 @@ export const makeProtectedRoutes = (token: string) => [
             ...makeUserRoutes(token),
             ...makeRoleRoutes(token),
             ...makeRegisterRequestRoutes(token),
+            ...makeRegisterPermissionRoutes(token),
             {
                 element: <CheckParams id={/^\d+$/} />,
                 children: [
@@ -55,27 +55,6 @@ export const makeProtectedRoutes = (token: string) => [
                                     },
                                 ],
                             },
-                            {
-                                element: (
-                                    <Gate abilityName="show-register-permission-screen" />
-                                ),
-                                children: [
-                                    {
-                                        path: '/register-permissions/:id',
-                                        element: (
-                                            <ScreenWrapper title="Visão geral da permissão">
-                                                <RegisterPermission />
-                                            </ScreenWrapper>
-                                        ),
-                                        loader: subjectShowLoader(
-                                            token,
-                                            (id) => {
-                                                return `/api/registers/permissions/${id}`;
-                                            }
-                                        ),
-                                    },
-                                ],
-                            },
                         ],
                     },
                 ],
@@ -92,19 +71,6 @@ export const makeProtectedRoutes = (token: string) => [
                                 >
                                     <AbilityForm />
                                 </LogicBaseProvider>
-                            </ScreenWrapper>
-                        ),
-                    },
-                ],
-            },
-            {
-                element: <Gate abilityName="register-permission-screen" />,
-                children: [
-                    {
-                        path: '/register-permissions',
-                        element: (
-                            <ScreenWrapper title="Permissões concedidas">
-                                <RegisterPermissions />
                             </ScreenWrapper>
                         ),
                     },
