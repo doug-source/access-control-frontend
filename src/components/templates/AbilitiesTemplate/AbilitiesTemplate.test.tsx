@@ -1,26 +1,17 @@
-import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
-import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
-import { LocationStateBetweenScreen } from '@/shared/types/LocationStateBetweenScreen';
-import { UserIndex } from '@/shared/types/Models/User';
-import { httpClientInstance } from '@/shared/utils/globals/generic';
-import { groups } from '@/shared/utils/pagination';
-import { abilitiesInitialData } from '@/shared/utils/ReduceInitialValues';
+import type { AbilityIndex } from '@/shared/types/Models/Ability';
 import { faker } from '@faker-js/faker';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { AbilitiesTemplate } from '.';
 
 describe('<AbilitiesTemplate /> component', () => {
+    const Comp = ({ data }: { data: AbilityIndex }) => {
+        throw data;
+    };
     it('renders correctly', () => {
         render(
             <MemoryRouter initialEntries={['/']}>
-                <HttpClientProvider client={httpClientInstance}>
-                    <PageRequesterProvider>
-                        <AbilitiesTemplate
-                            state={abilitiesInitialData(1, groups[0])}
-                        />
-                    </PageRequesterProvider>
-                </HttpClientProvider>
+                <AbilitiesTemplate navigation="/abilities" item={Comp} />
             </MemoryRouter>
         );
         const $el = screen.getByRole('textbox');
@@ -29,13 +20,7 @@ describe('<AbilitiesTemplate /> component', () => {
     it("renders with 'PaginationPurpose' not included into DOM correctly", () => {
         render(
             <MemoryRouter initialEntries={['/abilities']}>
-                <HttpClientProvider client={httpClientInstance}>
-                    <PageRequesterProvider>
-                        <AbilitiesTemplate
-                            state={abilitiesInitialData(1, groups[0])}
-                        />
-                    </PageRequesterProvider>
-                </HttpClientProvider>
+                <AbilitiesTemplate navigation="/abilities" item={Comp} />
             </MemoryRouter>
         );
 
@@ -49,27 +34,15 @@ describe('<AbilitiesTemplate /> component', () => {
             }),
             name: faker.person.firstName(),
         };
-        const info: LocationStateBetweenScreen<UserIndex> = {
-            data: user,
-            label: `Propriedade de usuário`,
-            value: user.name,
-        };
         render(
             <MemoryRouter
                 initialEntries={[
                     {
                         pathname: `/abilities/user/${user.id}`,
-                        state: info,
                     },
                 ]}
             >
-                <HttpClientProvider client={httpClientInstance}>
-                    <PageRequesterProvider>
-                        <AbilitiesTemplate
-                            state={abilitiesInitialData(1, groups[0])}
-                        />
-                    </PageRequesterProvider>
-                </HttpClientProvider>
+                <AbilitiesTemplate navigation="/abilities" item={Comp} />
             </MemoryRouter>
         );
 

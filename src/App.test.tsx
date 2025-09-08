@@ -2,14 +2,13 @@ import { faker } from '@faker-js/faker';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { App } from './App';
-import type { AuthUser } from './shared/types/NullableUser';
 
 describe('main.tsx', () => {
     beforeEach(() => {
         window.localStorage.clear();
     });
     it("renders with user's email verified correctly", () => {
-        const userSigned: AuthUser = {
+        const userSigned = {
             id: faker.number.int({ min: 1 }).toString(),
             email: faker.internet.email(),
             emailVerified: true,
@@ -47,7 +46,7 @@ describe('main.tsx', () => {
         expect($el).toHaveTextContent(rootContent);
     });
     it("renders with user's email unverified correctly", () => {
-        const userSigned: AuthUser = {
+        const userSigned = {
             id: faker.number.int({ min: 1 }).toString(),
             email: faker.internet.email(),
             emailVerified: false,

@@ -1,7 +1,4 @@
-import { CreatorProvider } from '@/shared/providers/CreatorProvider';
-import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import type { AbilityFormState } from '@/shared/types/States';
-import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { AbilityFormTemplate } from '.';
@@ -17,15 +14,11 @@ describe('<AbilityFormTemplate /> component', () => {
             {
                 path: '/',
                 element: (
-                    <HttpClientProvider client={httpClientInstance}>
-                        <CreatorProvider>
-                            <AbilityFormTemplate
-                                state={state}
-                                formAction={formAction}
-                                pending={false}
-                            />
-                        </CreatorProvider>
-                    </HttpClientProvider>
+                    <AbilityFormTemplate
+                        state={state}
+                        formAction={formAction}
+                        pending={false}
+                    />
                 ),
             },
         ]);

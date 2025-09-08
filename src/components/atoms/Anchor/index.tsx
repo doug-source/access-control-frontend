@@ -1,5 +1,5 @@
 import type { Paths } from '@/shared/types/Urls/Paths';
-import type { WithShow } from '@/shared/types/Utils';
+import type { PropsWithShow } from '@/shared/types/Utils';
 import classNames from 'classnames';
 import type { ComponentPropsWithRef } from 'react';
 import { Link } from 'react-router';
@@ -16,7 +16,7 @@ export const Anchor = ({
     className,
     children,
     ...remain
-}: WithShow<AnchorProps>) => {
+}: PropsWithShow<AnchorProps>) => {
     if (!show) {
         return null;
     }

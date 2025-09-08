@@ -1,6 +1,4 @@
-import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
 import { LogicBaseProvider } from '@/shared/providers/LogicBaseProvider';
-import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { verifyEmailBase } from '@/shared/utils/globals/verifyEmail';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
@@ -12,11 +10,9 @@ describe('<VerifyEmail /> component', () => {
             {
                 path: '/',
                 element: (
-                    <HttpClientProvider client={httpClientInstance}>
-                        <LogicBaseProvider base={verifyEmailBase}>
-                            <VerifyEmail />
-                        </LogicBaseProvider>
-                    </HttpClientProvider>
+                    <LogicBaseProvider base={verifyEmailBase}>
+                        <VerifyEmail />
+                    </LogicBaseProvider>
                 ),
             },
         ]);

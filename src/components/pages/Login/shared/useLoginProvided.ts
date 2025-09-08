@@ -1,11 +1,10 @@
-import { useLocalNavigate } from '@/shared/hooks/useLocalNavigate';
 import { useLogicBase } from '@/shared/hooks/useLogicBase';
 import { useSignState } from '@/shared/hooks/useSignState';
 import type { Reference } from '@/shared/types/Responsabilities/LogicBase';
 import type { Generics } from '@/shared/types/Responsabilities/Outputs';
 import type { LoginState } from '@/shared/types/States';
 import { assertUnreachable } from '@/shared/utils/assertUnreachable';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 
 type ProvideOutput = Generics['Login']['provide'] | null;
 
@@ -16,7 +15,7 @@ export const useLoginProvided = (state: LoginState): LoginState => {
     >();
     const output = useLoaderData() as ProvideOutput;
     const { dispatch } = useSignState();
-    const navigate = useLocalNavigate();
+    const navigate = useNavigate();
     if (output === null) {
         return state;
     }

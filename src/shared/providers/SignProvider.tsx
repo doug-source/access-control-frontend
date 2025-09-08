@@ -10,7 +10,21 @@ import {
 type DataObj = ComponentPropsWithRef<typeof SignStateContext>['value'];
 
 export const SignProvider = ({ children }: PropsWithChildren) => {
-    const [state, dispatch] = useReducer(signReducer, { user: null });
+    const [state, dispatch] = useReducer(signReducer, {
+        user: null,
+        confirmations: {
+            remotions: {
+                user: true,
+                registerRequest: true,
+                role: true,
+                ability: true,
+            },
+            restorations: { user: true },
+            approvements: { registerRequest: true },
+            attachment: { role: true, ability: true },
+            detachment: { role: true, ability: true },
+        },
+    });
     const obj: DataObj = useMemo(
         () => ({
             state,

@@ -6,6 +6,9 @@ interface GateProps {
     abilityName: Abilities;
 }
 
+/**
+ * Este component não funciona em React Router's actions definitions
+ */
 export const Gate = ({ abilityName }: GateProps) => {
     const abilities = useSignState().state.user?.abilities ?? [];
     return (

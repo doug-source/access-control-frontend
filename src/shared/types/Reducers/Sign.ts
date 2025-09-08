@@ -1,10 +1,32 @@
 import type {
     NullableUserSigned,
     UserSigned,
-} from '@/shared/types/NullableUser';
+} from '@/shared/types/NullableUserSigned';
 
 export interface SignState {
     user: NullableUserSigned;
+    confirmations: {
+        remotions: {
+            user: boolean;
+            registerRequest: boolean;
+            role: boolean;
+            ability: boolean;
+        };
+        restorations: {
+            user: boolean;
+        };
+        approvements: {
+            registerRequest: boolean;
+        };
+        detachment: {
+            role: boolean;
+            ability: boolean;
+        };
+        attachment: {
+            role: boolean;
+            ability: boolean;
+        };
+    };
 }
 
 export interface SignInAction {

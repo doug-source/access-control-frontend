@@ -1,4 +1,4 @@
-import { groups } from '@/shared/utils/pagination';
+import { groups } from '@/shared/utils/defaultValues';
 import type { ComponentPropsWithRef } from 'react';
 import { Box } from './shared/Box';
 import { Controls } from './shared/Controls';

@@ -1,4 +1,4 @@
-import { groups } from '@/shared/utils/pagination';
+import { groups } from '@/shared/utils/defaultValues';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Groups } from '.';

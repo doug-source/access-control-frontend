@@ -1,60 +1,77 @@
 import { ColumnBox } from '@/components/atoms/ColumnBox';
 import { FiltersBlock } from '@/components/atoms/FiltersBlock';
 import { StretchedBox } from '@/components/atoms/StretchedBox';
-import { PlusLink } from '@/components/molecules/PlusLink';
-import { RoleItem } from '@/components/molecules/RoleItem';
+import { ListItems } from '@/components/organisms/ListItems';
 import { ListWrapper } from '@/components/organisms/ListWrapper';
 import { NameInputFilterBlock } from '@/components/organisms/NameInputFilterBlock';
 import { PaginationDispatch } from '@/components/organisms/PaginationDispatch';
-import { RemotionConfirmation } from '@/components/organisms/RemotionConfirmation';
-import { RolesItems } from '@/components/organisms/RolesItems';
-import { InputRefProvider } from '@/shared/providers/InputRefProvider';
-import { RemotionDataProvider } from '@/shared/providers/RemotionDataProvider';
-import { type RolesState } from '@/shared/types/Reducers/Roles';
-import { useDeps } from './shared/useDeps';
+import inputFilterStyles from '@/shared/stylessheets/inputFilter.module.scss';
+import type { RoleIndex } from '@/shared/types/Models/Role';
+import type { PaginationLoaderData } from '@/shared/types/Pagination/PaginationLoaderData';
+import type { ReloadHandle } from '@/shared/types/ReactHandles/ReloadHandle';
+import type { ListNavigations } from '@/shared/types/Urls/shared/Navigations';
+import { Suspense, useRef, type ComponentType, type ReactNode } from 'react';
+import { Await, useLoaderData, useLocation } from 'react-router';
 
 interface RolesTemplateProps {
-    state: RolesState;
+    navigation: ListNavigations['role'];
+    item: ComponentType<{
+        data: RoleIndex;
+    }>;
+    tools?: ReactNode;
+    remain?: ReactNode;
 }
 
-export const RolesTemplate = ({ state }: RolesTemplateProps) => {
-    const { removeHandler, inputRef, abilities } = useDeps(state);
+export const RolesTemplate = ({
+    navigation,
+    item: Item,
+    tools,
+    remain,
+}: RolesTemplateProps) => {
+    const { pagination, output } =
+        useLoaderData() as PaginationLoaderData<RoleIndex>;
+    const searchParams = new URLSearchParams(useLocation().search);
+    const changeRef = useRef<ReloadHandle>(null);
     return (
         <>
             <StretchedBox>
                 <ColumnBox>
                     <FiltersBlock>
-                        <InputRefProvider inputRef={inputRef}>
-                            <NameInputFilterBlock
-                                subject="papel"
-                                context="role"
-                            />
-                        </InputRefProvider>
-                        <PlusLink
-                            show={abilities.includes('add-role-screen')}
-                            to="/roles/create"
-                            title="Criar papel"
+                        <NameInputFilterBlock
+                            className={inputFilterStyles.inputFilterBlock}
+                            subject="papel"
+                            navigation={navigation}
+                            defaultValue={searchParams.get('name') ?? ''}
+                            onChange={() => changeRef.current?.wait()}
                         />
+                        {tools}
                     </FiltersBlock>
-                    <PaginationDispatch state={state} context="role" />
+                    <Suspense
+                        fallback={
+                            <PaginationDispatch.Fallback {...pagination} />
+                        }
+                    >
+                        <Await resolve={output}>
+                            {({ lastPage, total }) => (
+                                <PaginationDispatch
+                                    {...{ ...pagination, lastPage, total }}
+                                    navigation={navigation}
+                                    onChange={() => changeRef.current?.wait()}
+                                />
+                            )}
+                        </Await>
+                    </Suspense>
                 </ColumnBox>
                 <StretchedBox>
-                    <RemotionDataProvider
-                        remotionConfirm={state.remotionConfirm}
-                        onRemove={removeHandler}
-                    >
-                        <ListWrapper requestType={state.requestType}>
-                            <RolesItems items={state.data} item={RoleItem} />
-                        </ListWrapper>
-                    </RemotionDataProvider>
+                    {remain}
+                    <ListWrapper
+                        output={output}
+                        list={ListItems}
+                        item={Item}
+                        ref={changeRef}
+                    />
                 </StretchedBox>
             </StretchedBox>
-            <RemotionConfirmation
-                show={state.idRemoved !== null}
-                action="remover este papel"
-                label="remoção de papel"
-                onPositive={removeHandler}
-            />
         </>
     );
 };

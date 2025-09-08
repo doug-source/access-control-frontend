@@ -1,29 +1,30 @@
 import { Pagination } from '@/components/molecules/Pagination';
-import { useDispatch } from '@/shared/hooks/useDispatch';
-import { usePageGroupPagination } from '@/shared/hooks/usePageGroupPagination';
-import type {
-    ChangeGroupAction,
-    ChangePageAction,
-} from '@/shared/types/Reducers/Custom/PaginationAction';
-import type { PaginationState } from '@/shared/types/Reducers/Custom/PaginationState';
-import type { Resolve } from '@/shared/types/Utils';
-import type { PaginateKeyContext } from '@/shared/utils/pagination';
+import type { Paths } from '@/shared/types/Urls/Paths';
+import { groups } from '@/shared/utils/defaultValues';
 import type { ComponentPropsWithRef } from 'react';
+import { useLocation, useNavigate } from 'react-router';
 
-interface PaginationDispatchProps extends ComponentPropsWithRef<'div'> {
-    state: Resolve<
-        Pick<PaginationState, 'page' | 'lastPage' | 'group' | 'total'>
-    >;
-    context: PaginateKeyContext;
+interface PaginationDispatchProps
+    extends Omit<ComponentPropsWithRef<'div'>, 'onChange'> {
+    page: number;
+    group: number;
+    lastPage: number;
+    total: number;
+    navigation: Paths['navigation']['lists'];
+    onChange?: () => void;
 }
 
 export const PaginationDispatch = ({
-    state: { page, lastPage, group, total },
-    context,
+    page = 1,
+    lastPage,
+    group = groups[0],
+    total,
+    navigation,
+    onChange,
     ...remain
 }: PaginationDispatchProps) => {
-    const { setPage, setGroup } = usePageGroupPagination(context);
-    const dispatch = useDispatch<ChangePageAction | ChangeGroupAction>();
+    const navigate = useNavigate();
+    const search = new URLSearchParams(useLocation().search);
     return (
         <Pagination
             {...remain}
@@ -31,14 +32,44 @@ export const PaginationDispatch = ({
             lastPage={lastPage}
             group={group}
             total={total}
-            onChangePage={(payload) => {
-                dispatch({ type: 'change-page', payload });
-                setPage(payload);
+            onChangePage={(newPage) => {
+                if (total === 0) {
+                    return;
+                }
+                onChange?.();
+                search.set('page', newPage.toString());
+                search.set('group', group.toString());
+                navigate(`${navigation}?${search.toString()}`, {
+                    replace: true,
+                });
             }}
-            onChangeGroup={(payload) => {
-                dispatch({ type: 'change-group', payload });
-                setGroup(payload);
+            onChangeGroup={(newGroup) => {
+                if (total === 0) {
+                    return;
+                }
+                onChange?.();
+                search.set('page', page.toString());
+                search.set('group', newGroup.toString());
+                navigate(`${navigation}?${search.toString()}`, {
+                    replace: true,
+                });
             }}
         />
     );
 };
+
+PaginationDispatch.Fallback = ({
+    page,
+    group,
+    ...remain
+}: { page: number; group: number } & ComponentPropsWithRef<'div'>) => (
+    <Pagination
+        {...remain}
+        page={page}
+        group={group}
+        lastPage={0}
+        total={0}
+        onChangePage={() => {}}
+        onChangeGroup={() => {}}
+    />
+);

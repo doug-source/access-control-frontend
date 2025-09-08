@@ -1,28 +1,10 @@
-import * as LocalNavigateHooks from '@/shared/hooks/useLocalNavigate';
-import { DispatchProvider } from '@/shared/providers/DispatchProvider';
 import { faker } from '@faker-js/faker';
 import { renderHook, waitFor } from '@testing-library/react';
 import { createElement, type PropsWithChildren } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
-import { type MockInstance } from 'vitest';
 import { useLoginProvided } from './useLoginProvided';
 
-type LocalLocationReturn = ReturnType<
-    typeof LocalNavigateHooks.useLocalNavigate
->;
-
-let localNavigateSpy: MockInstance<() => LocalLocationReturn>;
-
 describe('useLoginProvided hook', () => {
-    beforeAll(() => {
-        localNavigateSpy = vi.spyOn(LocalNavigateHooks, 'useLocalNavigate');
-    });
-    afterAll(() => {
-        localNavigateSpy.mockRestore();
-    });
-    beforeEach(() => {
-        localNavigateSpy.mockReset();
-    });
     it('runs with request resulting on status code equal 200 correctly', async () => {
         const body = {
             user: {
@@ -71,9 +53,6 @@ describe('useLoginProvided hook', () => {
     });
     it('runs with request resulting on status code equal 422 correctly', async () => {
         const onNavigate = vi.fn();
-        localNavigateSpy.mockReturnValue(function (...args: unknown[]) {
-            onNavigate(...args);
-        });
         const dispatch = vi.fn();
         const errorMessage = 'obrigatório';
         const wrapper = ({ children }: PropsWithChildren) => {
@@ -81,10 +60,7 @@ describe('useLoginProvided hook', () => {
                 [
                     {
                         path: '/',
-                        element: createElement(DispatchProvider, {
-                            dispatch,
-                            children,
-                        }),
+                        element: children,
                         loader: vi.fn(async () => ({
                             statusCode: 422,
                             body: { errors: { email: [errorMessage] } },

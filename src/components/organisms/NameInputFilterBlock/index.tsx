@@ -1,24 +1,27 @@
 import { InputFilterBlock } from '@/components/molecules/InputFilterBlock';
-import { useDispatch } from '@/shared/hooks/useDispatch';
-import { usePageGroupPagination } from '@/shared/hooks/usePageGroupPagination';
-import type { ChangeFilterAction } from '@/shared/types/Reducers/Custom/PaginationAction';
-import { groups, type PaginateKeyContext } from '@/shared/utils/pagination';
+import type { Paths } from '@/shared/types/Urls/Paths';
 import type { ComponentPropsWithRef } from 'react';
+import { useNavigate } from 'react-router';
 
-type RemainProps = Omit<ComponentPropsWithRef<'div'>, 'children'>;
+type RemainProps = Omit<ComponentPropsWithRef<'div'>, 'children' | 'onChange'>;
 interface NameInputFilterBlockProps extends RemainProps {
     subject: string;
-    context: PaginateKeyContext;
+    navigation: Paths['navigation']['lists'];
+    defaultValue?: ComponentPropsWithRef<
+        typeof InputFilterBlock
+    >['defaultValue'];
+    onChange?: () => void;
 }
 
 export const NameInputFilterBlock = ({
     subject,
-    context,
+    navigation,
     className,
+    defaultValue,
+    onChange,
     ...remain
 }: NameInputFilterBlockProps) => {
-    const { setPage, setGroup } = usePageGroupPagination(context);
-    const dispatch = useDispatch<ChangeFilterAction>();
+    const navigate = useNavigate();
     return (
         <InputFilterBlock
             {...remain}
@@ -26,14 +29,17 @@ export const NameInputFilterBlock = ({
             label={`Nome de ${subject}`}
             placeholder={`Nome de ${subject}`}
             btnText="Atualizar"
-            onChange={() => {
-                dispatch({
-                    type: 'change-filter',
+            onChange={(name) => {
+                onChange?.();
+                const searchParams = new URLSearchParams({
+                    name: name?.trim() ?? '',
                 });
-                setPage(1);
-                setGroup(groups[0]);
+                navigate(`${navigation}?${searchParams.toString()}`, {
+                    replace: true,
+                });
             }}
             nameInput="name"
+            defaultValue={defaultValue}
         />
     );
 };

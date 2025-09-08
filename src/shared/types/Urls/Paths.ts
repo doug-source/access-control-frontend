@@ -17,6 +17,7 @@ import {
 import {
     AbilityNavigations,
     AbstractNavigations,
+    ListNavigations,
     NavigationCreations,
     Navigations,
     RoleNavigations,
@@ -47,6 +48,7 @@ export interface Paths {
             Navigations,
             AbstractNavigations[keyof AbstractNavigations]
         >;
+        lists: ListNavigations[keyof ListNavigations];
         creations: NavigationCreations[keyof NavigationCreations];
         role: RoleNavigations;
         ability: AbilityNavigations;

@@ -1,9 +1,9 @@
-import type { WithShow } from '@/shared/types/Utils';
+import type { PropsWithShow } from '@/shared/types/Utils';
 import classNames from 'classnames';
 import type { ComponentPropsWithRef } from 'react';
 import styles from './Item.module.scss';
 
-type ItemProps = WithShow<ComponentPropsWithRef<'li'>>;
+type ItemProps = PropsWithShow<ComponentPropsWithRef<'li'>>;
 
 export const Item = ({
     show = true,

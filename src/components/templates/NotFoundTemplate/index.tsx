@@ -1,10 +1,10 @@
 import { VerticalCardBox } from '@/components/atoms/VerticalCardBox';
 import { BrandBtn } from '@/components/molecules/BrandBtn';
-import { useLocalNavigate } from '@/shared/hooks/useLocalNavigate';
+import { useNavigate } from 'react-router';
 import styles from './NotFoundTemplate.module.scss';
 
 export const NotFoundTemplate = () => {
-    const navigate = useLocalNavigate();
+    const navigate = useNavigate();
     return (
         <div className={styles.notFoundPage}>
             <VerticalCardBox className={styles.card}>

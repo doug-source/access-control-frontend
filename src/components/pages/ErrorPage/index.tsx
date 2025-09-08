@@ -1,9 +1,9 @@
 import { Btn } from '@/components/atoms/Btn';
-import { useLocalNavigate } from '@/shared/hooks/useLocalNavigate';
+import { useNavigate } from 'react-router';
 import styles from './ErrorPage.module.scss';
 
 export const ErrorPage = () => {
-    const navigate = useLocalNavigate();
+    const navigate = useNavigate();
     return (
         <div className={styles.errorContainer}>
             <h1>Oops!</h1>

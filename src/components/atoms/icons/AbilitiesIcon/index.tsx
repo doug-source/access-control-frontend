@@ -1,9 +1,9 @@
 import Icon from '@/icons/abilities-20x24.svg?react';
-import type { WithShow } from '@/shared/types/Utils';
+import type { PropsWithShow } from '@/shared/types/Utils';
 import { svgAppendTitle } from '@/shared/utils/svgAppendTitle';
 import type { ComponentPropsWithRef } from 'react';
 
-type AbilitiesIconProps = WithShow<ComponentPropsWithRef<'svg'>> & {
+type AbilitiesIconProps = PropsWithShow<ComponentPropsWithRef<'svg'>> & {
     title?: string;
 };
 

@@ -1,83 +1,77 @@
 import { ColumnBox } from '@/components/atoms/ColumnBox';
 import { FiltersBlock } from '@/components/atoms/FiltersBlock';
-import { PaginationPurpose } from '@/components/atoms/PaginationPurpose';
 import { StretchedBox } from '@/components/atoms/StretchedBox';
-import { AbilityItem } from '@/components/molecules/AbilityItem';
-import { PlusLink } from '@/components/molecules/PlusLink';
-import { AbilitiesItems } from '@/components/organisms/AbilitiesItems';
-import { AttachmentConfirmation } from '@/components/organisms/AttachmentConfirmation';
+import { ListItems } from '@/components/organisms/ListItems';
 import { ListWrapper } from '@/components/organisms/ListWrapper';
 import { NameInputFilterBlock } from '@/components/organisms/NameInputFilterBlock';
 import { PaginationDispatch } from '@/components/organisms/PaginationDispatch';
-import { RemotionConfirmation } from '@/components/organisms/RemotionConfirmation';
-import { AttachmentDataProvider } from '@/shared/providers/AttachmentDataProvider';
-import { InputRefProvider } from '@/shared/providers/InputRefProvider';
-import { RemotionDataProvider } from '@/shared/providers/RemotionDataProvider';
-import { type AbilitiesState } from '@/shared/types/Reducers/Abilities';
-import { useDeps } from './shared/useDeps';
+import inputFilterStyles from '@/shared/stylessheets/inputFilter.module.scss';
+import type { AbilityIndex } from '@/shared/types/Models/Ability';
+import type { PaginationLoaderData } from '@/shared/types/Pagination/PaginationLoaderData';
+import type { ReloadHandle } from '@/shared/types/ReactHandles/ReloadHandle';
+import type { ListNavigations } from '@/shared/types/Urls/shared/Navigations';
+import { type ComponentType, type ReactNode, Suspense, useRef } from 'react';
+import { Await, useLoaderData, useLocation } from 'react-router';
 
 interface AbilitiesTemplateProps {
-    state: AbilitiesState;
+    navigation: ListNavigations['ability'];
+    item: ComponentType<{
+        data: AbilityIndex;
+    }>;
+    tools?: ReactNode;
+    remain?: ReactNode;
 }
 
-export const AbilitiesTemplate = ({ state }: AbilitiesTemplateProps) => {
-    const { removeHandler, attachHandler, inputRef, info, abilities } =
-        useDeps(state);
+export const AbilitiesTemplate = ({
+    navigation,
+    item: Item,
+    tools,
+    remain,
+}: AbilitiesTemplateProps) => {
+    const { pagination, output } =
+        useLoaderData() as PaginationLoaderData<AbilityIndex>;
+    const searchParams = new URLSearchParams(useLocation().search);
+    const changeRef = useRef<ReloadHandle>(null);
     return (
         <>
             <StretchedBox>
                 <ColumnBox>
                     <FiltersBlock>
-                        <InputRefProvider inputRef={inputRef}>
-                            <NameInputFilterBlock
-                                subject="papel"
-                                context="ability"
-                            />
-                        </InputRefProvider>
-                        <PlusLink
-                            show={abilities.includes('add-ability-screen')}
-                            to="/abilities/create"
-                            title="Criar habilidade"
+                        <NameInputFilterBlock
+                            className={inputFilterStyles.inputFilterBlock}
+                            subject="habilidade"
+                            navigation={navigation}
+                            defaultValue={searchParams.get('name') ?? ''}
+                            onChange={() => changeRef.current?.wait()}
                         />
+                        {tools}
                     </FiltersBlock>
-                    <PaginationDispatch state={state} context="ability" />
+                    <Suspense
+                        fallback={
+                            <PaginationDispatch.Fallback {...pagination} />
+                        }
+                    >
+                        <Await resolve={output}>
+                            {({ lastPage, total }) => (
+                                <PaginationDispatch
+                                    {...{ ...pagination, lastPage, total }}
+                                    navigation={navigation}
+                                    onChange={() => changeRef.current?.wait()}
+                                />
+                            )}
+                        </Await>
+                    </Suspense>
                 </ColumnBox>
                 <StretchedBox>
-                    <RemotionDataProvider
-                        remotionConfirm={state.remotionConfirm}
-                        onRemove={removeHandler}
-                    >
-                        <AttachmentDataProvider
-                            attachmentConfirm={state.attachmentConfirm}
-                            onAttach={attachHandler}
-                        >
-                            <PaginationPurpose
-                                show={Boolean(info)}
-                                label={info?.label}
-                                value={info?.value}
-                            />
-                            <ListWrapper requestType={state.requestType}>
-                                <AbilitiesItems
-                                    items={state.data}
-                                    item={AbilityItem}
-                                />
-                            </ListWrapper>
-                        </AttachmentDataProvider>
-                    </RemotionDataProvider>
+                    {remain}
+                    <ListWrapper
+                        output={output}
+                        list={ListItems}
+                        item={Item}
+                        ref={changeRef}
+                    />
                 </StretchedBox>
             </StretchedBox>
-            <RemotionConfirmation
-                show={state.idRemoved !== null}
-                action="remover esta habilidade"
-                label="remoção de habilidade"
-                onPositive={removeHandler}
-            />
-            <AttachmentConfirmation
-                show={state.idAttached !== null}
-                action="adicionar esta habilidade"
-                label="adição de habilidade"
-                onPositive={attachHandler}
-            />
         </>
     );
 };

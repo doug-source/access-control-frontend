@@ -1,9 +1,9 @@
 import Icon from '@/icons/error-24x24.svg?react';
-import type { WithShow } from '@/shared/types/Utils';
+import type { PropsWithShow } from '@/shared/types/Utils';
 import { svgAppendTitle } from '@/shared/utils/svgAppendTitle';
 import type { ComponentPropsWithRef } from 'react';
 
-type ErrorIconProps = WithShow<ComponentPropsWithRef<'svg'>> & {
+type ErrorIconProps = PropsWithShow<ComponentPropsWithRef<'svg'>> & {
     title?: string;
 };
 

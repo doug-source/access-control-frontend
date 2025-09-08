@@ -1,26 +1,35 @@
 import { ColumnBox } from '@/components/atoms/ColumnBox';
 import { FiltersBlock } from '@/components/atoms/FiltersBlock';
 import { StretchedBox } from '@/components/atoms/StretchedBox';
-import { PlusLink } from '@/components/molecules/PlusLink';
-import { UserItem } from '@/components/molecules/UserItem';
-import { AttachConfirmation } from '@/components/organisms/AttachConfirmation';
+import { ListItems } from '@/components/organisms/ListItems';
 import { ListWrapper } from '@/components/organisms/ListWrapper';
 import { NameInputFilterBlock } from '@/components/organisms/NameInputFilterBlock';
 import { PaginationDispatch } from '@/components/organisms/PaginationDispatch';
-import { RemotionConfirmation } from '@/components/organisms/RemotionConfirmation';
-import { UsersItems } from '@/components/organisms/UsersItems';
-import { RemotionDataProvider } from '@/shared/providers/RemotionDataProvider';
 import inputFilterStyles from '@/shared/stylessheets/inputFilter.module.scss';
-import { type UsersState } from '@/shared/types/Reducers/Users';
-import styles from './UsersTemplate.module.scss';
-import { useDeps } from './shared/useDeps';
+import type { UserIndex } from '@/shared/types/Models/User';
+import type { PaginationLoaderData } from '@/shared/types/Pagination/PaginationLoaderData';
+import type { ReloadHandle } from '@/shared/types/ReactHandles/ReloadHandle';
+import type { ListNavigations } from '@/shared/types/Urls/shared/Navigations';
+import { ComponentType, type ReactNode, Suspense, useRef } from 'react';
+import { Await, useLoaderData, useLocation } from 'react-router';
 
-interface UsersTemplateProps {
-    state: UsersState;
+interface UsersNewTemplateProps {
+    navigation: ListNavigations['user'];
+    item: ComponentType<{
+        data: UserIndex;
+    }>;
+    tools?: ReactNode;
 }
 
-export const UsersTemplate = ({ state }: UsersTemplateProps) => {
-    const { dispatch, removeHandler, canAddUser } = useDeps(state);
+export const UsersTemplate = ({
+    navigation,
+    tools,
+    item: Item,
+}: UsersNewTemplateProps) => {
+    const { pagination, output } =
+        useLoaderData() as PaginationLoaderData<UserIndex>;
+    const searchParams = new URLSearchParams(useLocation().search);
+    const changeRef = useRef<ReloadHandle>(null);
     return (
         <>
             <StretchedBox>
@@ -29,44 +38,37 @@ export const UsersTemplate = ({ state }: UsersTemplateProps) => {
                         <NameInputFilterBlock
                             className={inputFilterStyles.inputFilterBlock}
                             subject="usuário"
-                            context="user"
+                            navigation={navigation}
+                            defaultValue={searchParams.get('name') ?? ''}
+                            onChange={() => changeRef.current?.wait()}
                         />
-                        <PlusLink
-                            to="/users/create"
-                            title="Criar usuário"
-                            show={canAddUser}
-                        />
+                        {tools}
                     </FiltersBlock>
-                    <PaginationDispatch state={state} context="user" />
+                    <Suspense
+                        fallback={
+                            <PaginationDispatch.Fallback {...pagination} />
+                        }
+                    >
+                        <Await resolve={output}>
+                            {({ lastPage, total }) => (
+                                <PaginationDispatch
+                                    {...{ ...pagination, lastPage, total }}
+                                    navigation={navigation}
+                                    onChange={() => changeRef.current?.wait()}
+                                />
+                            )}
+                        </Await>
+                    </Suspense>
                 </ColumnBox>
                 <StretchedBox>
-                    <ListWrapper requestType={state.requestType}>
-                        <RemotionDataProvider
-                            remotionConfirm={state.remotionConfirm}
-                            onRemove={removeHandler}
-                        >
-                            <UsersItems items={state.data} item={UserItem} />
-                        </RemotionDataProvider>
-                    </ListWrapper>
+                    <ListWrapper
+                        output={output}
+                        list={ListItems}
+                        item={Item}
+                        ref={changeRef}
+                    />
                 </StretchedBox>
             </StretchedBox>
-            <RemotionConfirmation
-                show={state.idRemoved !== null}
-                action="remover este usuário"
-                label="remoção de usuário"
-                onPositive={removeHandler}
-            />
-            <AttachConfirmation
-                user={state.user}
-                idToAttach={state.idToAttach}
-                className={styles.dialogAttach}
-                onClose={() =>
-                    dispatch({
-                        type: 'to-attach',
-                        payload: null,
-                    })
-                }
-            />
         </>
     );
 };

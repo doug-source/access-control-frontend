@@ -6,9 +6,10 @@ export interface PaginationRequester extends RequestAborter {
     /**
      * Request asking the list in pagination format
      */
-    paginate(
-        token: string,
-        url: Paths['endpoint']['paginations'],
-        qs?: Record<string, string>
-    ): ReturnType<HttpClient['request']>;
+    paginate(args: {
+        token: string;
+        url: Paths['endpoint']['paginations'];
+        qs?: Record<string, string>;
+        signal?: AbortSignal;
+    }): ReturnType<HttpClient['request']>;
 }

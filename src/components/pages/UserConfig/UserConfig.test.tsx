@@ -1,5 +1,3 @@
-import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
-import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { UserConfig } from '.';
@@ -9,11 +7,7 @@ describe('<UserConfig /> component', () => {
         const router = createMemoryRouter([
             {
                 path: '/',
-                element: (
-                    <HttpClientProvider client={httpClientInstance}>
-                        <UserConfig />
-                    </HttpClientProvider>
-                ),
+                element: <UserConfig />,
             },
         ]);
         render(<RouterProvider router={router} />);

@@ -1,4 +1,3 @@
-import { DispatchProvider } from '@/shared/providers/DispatchProvider';
 import { faker } from '@faker-js/faker';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -22,11 +21,7 @@ describe('<BackPhotoBtn /> component', () => {
             value: faker.word.noun(),
         } as unknown as HTMLInputElement;
 
-        render(
-            <DispatchProvider dispatch={dispatch}>
-                <BackPhotoBtn show onClick={onClick} />
-            </DispatchProvider>
-        );
+        render(<BackPhotoBtn show onClick={onClick} />);
         const btn = screen.getByRole('button');
         const user = userEvent.setup();
         await user.click(btn);

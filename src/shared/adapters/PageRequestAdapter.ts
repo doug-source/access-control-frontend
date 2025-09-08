@@ -3,7 +3,7 @@ import type { PaginationRequester } from '@/shared/types/Contracts/PaginationReq
 import type { RemotionRequester } from '@/shared/types/Contracts/RemotionRequester';
 import type { Paths } from '@/shared/types/Urls/Paths';
 
-type PaginationParams = Parameters<PaginationRequester['paginate']>;
+type PaginatParams = Parameters<PaginationRequester['paginate']>[number];
 
 export class PageRequestAdapter
     implements PaginationRequester, RemotionRequester
@@ -14,11 +14,12 @@ export class PageRequestAdapter
         this.httpClient = httpClient;
     }
 
-    paginate(
-        token: PaginationParams[0],
-        url: PaginationParams[1],
-        qs: PaginationParams[2]
-    ): ReturnType<HttpClient['request']> {
+    paginate({
+        token,
+        url,
+        qs,
+        signal,
+    }: PaginatParams): ReturnType<HttpClient['request']> {
         const urlValue = qs ? { url, qs } : url;
         return this.httpClient.request({
             url: urlValue,
@@ -27,6 +28,7 @@ export class PageRequestAdapter
                 accept: 'application/json',
                 Authorization: `Bearer ${token}`,
             },
+            signal,
         });
     }
 

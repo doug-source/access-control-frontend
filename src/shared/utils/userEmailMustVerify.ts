@@ -1,4 +1,4 @@
-import type { NullableUserSigned } from '@/shared/types/NullableUser';
+import type { NullableUserSigned } from '@/shared/types/NullableUserSigned';
 import type { Location } from 'react-router';
 
 export const userEmailMustVerify = (

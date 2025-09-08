@@ -1,7 +1,6 @@
-import { type XOR } from '@/shared/types/Xor';
-import { type ActionDispatch } from 'react';
+import type { XOR } from '@/shared/types/Xor';
 
-export type WithShow<T, S = false> = T &
+export type PropsWithShow<T, S = false> = T &
     (S extends true
         ? {
               show: boolean;
@@ -14,8 +13,6 @@ export type GenericOrField = XOR<
     { type: 'field'; field: string },
     { type: 'generic' }
 >;
-
-export type AD<T> = ActionDispatch<[action: T]>;
 
 type list = unknown[];
 export type Explosion<T extends list, W> = list extends T

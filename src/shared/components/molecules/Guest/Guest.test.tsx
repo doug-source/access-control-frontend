@@ -1,4 +1,3 @@
-import { AuthUser } from '@/shared/types/NullableUser';
 import { faker } from '@faker-js/faker';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
@@ -6,7 +5,7 @@ import { Guest } from '.';
 
 describe('<Guest /> component', () => {
     it('renders with user already signed correctly', () => {
-        const userSigned: AuthUser = {
+        const userSigned = {
             id: faker.number.int({ min: 1 }).toString(),
             email: faker.internet.email(),
             emailVerified: true,

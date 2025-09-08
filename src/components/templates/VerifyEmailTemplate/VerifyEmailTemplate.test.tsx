@@ -1,7 +1,4 @@
-import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
-import type { AuthUser } from '@/shared/types/NullableUser';
 import type { VerifyEmailState } from '@/shared/types/States';
-import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { faker } from '@faker-js/faker';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
@@ -19,13 +16,11 @@ describe('<VerifyEmailTemplate /> component', () => {
             {
                 path: '/',
                 element: (
-                    <HttpClientProvider client={httpClientInstance}>
-                        <VerifyEmailTemplate
-                            state={state}
-                            formAction={formAction}
-                            pending={false}
-                        />
-                    </HttpClientProvider>
+                    <VerifyEmailTemplate
+                        state={state}
+                        formAction={formAction}
+                        pending={false}
+                    />
                 ),
             },
         ]);
@@ -34,7 +29,7 @@ describe('<VerifyEmailTemplate /> component', () => {
         expect($el).toBeInTheDocument();
     });
     it("renders with email already verified by auth's user's status correctly", () => {
-        const userSigned: AuthUser = {
+        const userSigned = {
             id: faker.number.int({ min: 1 }).toString(),
             email: faker.internet.email(),
             emailVerified: true,
@@ -55,13 +50,11 @@ describe('<VerifyEmailTemplate /> component', () => {
             {
                 path: '/',
                 element: (
-                    <HttpClientProvider client={httpClientInstance}>
-                        <VerifyEmailTemplate
-                            state={state}
-                            formAction={formAction}
-                            pending={false}
-                        />
-                    </HttpClientProvider>
+                    <VerifyEmailTemplate
+                        state={state}
+                        formAction={formAction}
+                        pending={false}
+                    />
                 ),
             },
             {
@@ -86,13 +79,11 @@ describe('<VerifyEmailTemplate /> component', () => {
                 {
                     path: '/',
                     element: (
-                        <HttpClientProvider client={httpClientInstance}>
-                            <VerifyEmailTemplate
-                                state={state}
-                                formAction={formAction}
-                                pending={false}
-                            />
-                        </HttpClientProvider>
+                        <VerifyEmailTemplate
+                            state={state}
+                            formAction={formAction}
+                            pending={false}
+                        />
                     ),
                 },
                 {
@@ -120,13 +111,11 @@ describe('<VerifyEmailTemplate /> component', () => {
                 {
                     path: '/verify/:id/:hash',
                     element: (
-                        <HttpClientProvider client={httpClientInstance}>
-                            <VerifyEmailTemplate
-                                state={state}
-                                formAction={formAction}
-                                pending={false}
-                            />
-                        </HttpClientProvider>
+                        <VerifyEmailTemplate
+                            state={state}
+                            formAction={formAction}
+                            pending={false}
+                        />
                     ),
                 },
             ],

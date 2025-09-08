@@ -1,9 +1,9 @@
 import Icon from '@/icons/arrow-12x24.svg?react';
-import type { WithShow } from '@/shared/types/Utils';
+import type { PropsWithShow } from '@/shared/types/Utils';
 import { svgAppendTitle } from '@/shared/utils/svgAppendTitle';
 import type { ComponentPropsWithRef } from 'react';
 
-interface ArrowIconProps extends WithShow<ComponentPropsWithRef<'svg'>> {
+interface ArrowIconProps extends PropsWithShow<ComponentPropsWithRef<'svg'>> {
     title?: string;
 }
 

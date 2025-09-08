@@ -1,17 +1,22 @@
 import { InputFilter } from '@/components/atoms/InputFilter';
 import { Label } from '@/components/atoms/Label';
-import { useInputRef } from '@/shared/hooks/useInputRef';
-import { type ComponentPropsWithRef, useId } from 'react';
+import { type ComponentPropsWithRef, useId, useRef } from 'react';
 
-type RemainProps = ComponentPropsWithRef<typeof InputFilter.Box>;
+type BaseProps = Omit<
+    ComponentPropsWithRef<typeof InputFilter.Box>,
+    'onChange'
+>;
 
-interface InputFilterBlockProps extends RemainProps {
+interface InputFilterBlockProps extends BaseProps {
     className?: string;
     label: string;
     placeholder: string;
     btnText: string;
-    onChange(): void;
+    onChange(name?: string): void;
     nameInput?: string;
+    defaultValue?: ComponentPropsWithRef<
+        typeof InputFilter.Input
+    >['defaultValue'];
 }
 
 export const InputFilterBlock = ({
@@ -21,10 +26,12 @@ export const InputFilterBlock = ({
     btnText,
     onChange,
     nameInput,
+    defaultValue,
     ...remain
 }: InputFilterBlockProps) => {
     const inputID = useId();
-    const inputRef = useInputRef();
+    const inputRef = useRef<HTMLInputElement | null>(null);
+    const btnRef = useRef<HTMLButtonElement | null>(null);
     return (
         <InputFilter.Box {...remain} className={className}>
             <Label htmlFor={inputID}>{label}</Label>
@@ -33,12 +40,19 @@ export const InputFilterBlock = ({
                 id={inputID}
                 ref={inputRef}
                 name={nameInput}
+                defaultValue={defaultValue}
+                onKeyDown={(evt) => {
+                    if (evt.key === 'Enter') {
+                        btnRef.current?.click();
+                    }
+                }}
             />
             <InputFilter.Btn
+                ref={btnRef}
                 onClick={() => {
                     const { current: input } = inputRef;
                     if (input) {
-                        onChange();
+                        onChange(input.value);
                     }
                 }}
             >

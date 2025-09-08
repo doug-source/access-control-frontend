@@ -1,8 +1,4 @@
-import * as LocalNavigateHooks from '@/shared/hooks/useLocalNavigate';
-import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
-import { AuthUser } from '@/shared/types/NullableUser';
 import { VerifyEmailState } from '@/shared/types/States';
-import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { faker } from '@faker-js/faker';
 import { renderHook, waitFor } from '@testing-library/react';
 import {
@@ -13,24 +9,10 @@ import {
     type PropsWithChildren,
 } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
-import { type MockInstance } from 'vitest';
 import { useVerifyEmailOutput } from './useVerifyEmailOutput';
 
-type LocalLocationReturn = ReturnType<
-    typeof LocalNavigateHooks.useLocalNavigate
->;
-
-let localNavigateSpy: MockInstance<() => LocalLocationReturn>;
-
 describe('useVerifyEmailVerification hook', () => {
-    beforeAll(() => {
-        localNavigateSpy = vi.spyOn(LocalNavigateHooks, 'useLocalNavigate');
-    });
-    afterAll(() => {
-        localNavigateSpy.mockRestore();
-    });
     afterEach(() => {
-        localNavigateSpy.mockReset();
         localStorage.clear();
     });
     it('runs when request returns status code equals 200 correctly', async () => {
@@ -54,10 +36,7 @@ describe('useVerifyEmailVerification hook', () => {
                 [
                     {
                         path: '/',
-                        element: createElement(HttpClientProvider, {
-                            client: httpClientInstance,
-                            children,
-                        }),
+                        element: children,
                         loader: vi.fn(async () => emailVerifyLoaderReturn),
                         HydrateFallback: () => null,
                     },
@@ -90,9 +69,9 @@ describe('useVerifyEmailVerification hook', () => {
         );
         await waitFor(() => {
             expect(result.current).toBeTruthy();
-            const user = JSON.parse(
-                localStorage.getItem('user') ?? ''
-            ) as AuthUser;
+            const user = JSON.parse(localStorage.getItem('user') ?? '') as {
+                emailVerified: boolean;
+            };
             expect(user.emailVerified).toBe(true);
         });
     });
@@ -109,9 +88,6 @@ describe('useVerifyEmailVerification hook', () => {
             })
         );
         const onNavigate = vi.fn();
-        localNavigateSpy.mockReturnValue(function (...args: unknown[]) {
-            onNavigate(...args);
-        });
         const emailVerifyLoaderReturn = {
             expires: faker.number.int({ min: 1 }),
             signature: faker.word.noun(),
@@ -121,10 +97,7 @@ describe('useVerifyEmailVerification hook', () => {
                 [
                     {
                         path: '/',
-                        element: createElement(HttpClientProvider, {
-                            client: httpClientInstance,
-                            children,
-                        }),
+                        element: children,
                         loader: vi.fn(async () => emailVerifyLoaderReturn),
                         HydrateFallback: () => null,
                     },

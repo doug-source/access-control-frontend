@@ -1,5 +1,5 @@
 import { VerifyEmailTemplate } from '@/components/templates/VerifyEmailTemplate';
-import { LocalNavigate } from '@/shared/components/atoms/LocalNavigate';
+import { Navigate } from 'react-router';
 import { useDeps } from './shared/useDeps';
 
 /**
@@ -21,7 +21,7 @@ import { useDeps } from './shared/useDeps';
 export const VerifyEmail = () => {
     const [state, formAction, pending] = useDeps();
     if (state.verified) {
-        return <LocalNavigate to="/home" replace />;
+        return <Navigate to="/home" replace />;
     }
     return (
         <VerifyEmailTemplate

@@ -1,9 +1,9 @@
 import Icon from '@/icons/logout-30x24.svg?react';
-import type { WithShow } from '@/shared/types/Utils';
+import type { PropsWithShow } from '@/shared/types/Utils';
 import { svgAppendTitle } from '@/shared/utils/svgAppendTitle';
 import type { ComponentPropsWithRef } from 'react';
 
-type LogoutIconProps = WithShow<ComponentPropsWithRef<'svg'>> & {
+type LogoutIconProps = PropsWithShow<ComponentPropsWithRef<'svg'>> & {
     title?: string;
 };
 

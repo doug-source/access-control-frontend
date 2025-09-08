@@ -3,9 +3,11 @@ import { RegisterPermissions } from '@/components/pages/RegisterPermissions';
 import { CheckParams } from '@/shared/components/molecules/CheckParams';
 import { ScreenWrapper } from '@/shared/components/molecules/ScreenWrapper';
 import { Gate } from '@/shared/components/organisms/Gate';
+import { registerPermissionsLoader } from '@/shared/loaders/registerPermissionsLoader';
 import { subjectShowLoader } from '@/shared/loaders/subjectShowLoader';
+import { pageRequester } from '@/shared/utils/globals/generic';
 
-export const makeRegisterPermissionRoutes = (token: string) => [
+export const makeRegisterPermissionRoutes = (token: string, id: number) => [
     {
         element: <Gate abilityName="register-permission-screen" />,
         children: [
@@ -15,6 +17,14 @@ export const makeRegisterPermissionRoutes = (token: string) => [
                     <ScreenWrapper title="Permissões concedidas">
                         <RegisterPermissions />
                     </ScreenWrapper>
+                ),
+                loader: registerPermissionsLoader(
+                    pageRequester,
+                    token,
+                    '/register-permissions',
+                    '/api/registers/permissions',
+                    'register-permissions',
+                    id
                 ),
             },
         ],

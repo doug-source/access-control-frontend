@@ -1,11 +1,11 @@
 import { UserIcon } from '@/components/atoms/icons/UserIcon';
-import { useLocalNavigate } from '@/shared/hooks/useLocalNavigate';
 import { useId } from 'react';
+import { useNavigate } from 'react-router';
 import styles from './UserBtn.module.scss';
 
 export const UserBtn = () => {
     const descriptionId = useId();
-    const navigate = useLocalNavigate();
+    const navigate = useNavigate();
     return (
         <button
             className={styles.userBtn}

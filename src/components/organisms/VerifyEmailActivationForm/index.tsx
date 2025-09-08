@@ -1,7 +1,7 @@
 import { LoadingIcon } from '@/components/atoms/icons/LoadingIcon';
 import { BrandBtn } from '@/components/molecules/BrandBtn';
 import btnStyles from '@/shared/stylessheets/btn.module.scss';
-import type { WithShow } from '@/shared/types/Utils';
+import type { PropsWithShow } from '@/shared/types/Utils';
 import type { PropsWithChildren } from 'react';
 import styles from './VerifyEmailActivationForm.module.scss';
 
@@ -15,7 +15,7 @@ export const VerifyEmailActivationForm = ({
     formAction,
     pending,
     children,
-}: WithShow<VerifyEmailActivationFormProps, true>) => {
+}: PropsWithShow<VerifyEmailActivationFormProps, true>) => {
     if (!show) {
         return null;
     }

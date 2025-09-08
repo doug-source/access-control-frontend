@@ -1,6 +1,5 @@
-import { LocalNavigate } from '@/shared/components/atoms/LocalNavigate';
-import { type Paths } from '@/shared/types/Urls/Paths';
-import { Outlet } from 'react-router';
+import type { Paths } from '@/shared/types/Urls/Paths';
+import { Navigate, Outlet } from 'react-router';
 
 interface ProtectedRouteProps {
     allowed: boolean;
@@ -12,7 +11,7 @@ export const ProtectedRoute = ({
     allowed,
 }: ProtectedRouteProps) => {
     if (!allowed) {
-        return <LocalNavigate to={redirectPath} replace />;
+        return <Navigate to={redirectPath} replace />;
     }
     return <Outlet />;
 };

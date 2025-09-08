@@ -1,10 +1,10 @@
 import Icon from '@/icons/users-removed-24x24.svg?react';
-import type { WithShow } from '@/shared/types/Utils';
+import type { PropsWithShow } from '@/shared/types/Utils';
 import { svgAppendTitle } from '@/shared/utils/svgAppendTitle';
 import classNames from 'classnames';
 import type { ComponentPropsWithRef } from 'react';
 
-type UsersRemovedIconProps = WithShow<ComponentPropsWithRef<'svg'>> & {
+type UsersRemovedIconProps = PropsWithShow<ComponentPropsWithRef<'svg'>> & {
     title?: string;
 };
 

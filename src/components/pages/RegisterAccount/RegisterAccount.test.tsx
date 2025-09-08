@@ -1,6 +1,3 @@
-import { CreatorProvider } from '@/shared/providers/CreatorProvider';
-import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
-import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { RegisterAccount } from '.';
@@ -10,13 +7,7 @@ describe('<RegisterAccount /> component', () => {
         const router = createMemoryRouter([
             {
                 path: '/',
-                element: (
-                    <HttpClientProvider client={httpClientInstance}>
-                        <CreatorProvider>
-                            <RegisterAccount />
-                        </CreatorProvider>
-                    </HttpClientProvider>
-                ),
+                element: <RegisterAccount />,
             },
         ]);
         render(<RouterProvider router={router} />);

@@ -1,11 +1,13 @@
-import classNames from 'classnames';
-import { memo, type ComponentPropsWithRef } from 'react';
-import styles from './Btn.module.scss';
+import type { ComponentPropsWithRef } from 'react';
+import { Base } from './shared/Base';
+import { BtnGroup } from './shared/Group';
+import { PrimaryBtn } from './shared/PrimaryBtn';
+import { SecondaryBtn } from './shared/SecondaryBtn';
 
-type BtnProps = ComponentPropsWithRef<'button'>;
+export const Btn = (props: ComponentPropsWithRef<typeof Base>) => (
+    <Base {...props} />
+);
 
-export const Btn = memo(({ className, children, ...remain }: BtnProps) => (
-    <button {...remain} className={classNames(styles.btn, className)}>
-        {children}
-    </button>
-));
+Btn.PrimaryBtn = PrimaryBtn;
+Btn.SecondaryBtn = SecondaryBtn;
+Btn.Group = BtnGroup;

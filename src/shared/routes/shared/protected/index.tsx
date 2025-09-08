@@ -1,5 +1,6 @@
 import { MainLayout } from '@/components/templates/MainLayout';
 import { AppTitle } from '@/shared/components/atoms/AppTitle';
+import type { RouteObject } from 'react-router';
 import { makeAbilityRoutes } from './abilities';
 import { makeConfigRoutes } from './config';
 import { makeRegisterPermissionRoutes } from './registerPermissions';
@@ -8,21 +9,30 @@ import { makeRoleRoutes } from './roles';
 import { makeUserRoutes } from './users';
 import { makeVerifyEmailRoutes } from './verifyEmail';
 
-export const makeProtectedRoutes = (token: string) => [
-    {
-        element: <MainLayout />,
-        children: [
-            {
-                path: '/home',
-                element: <AppTitle />,
-            },
-            ...makeUserRoutes(token),
-            ...makeRoleRoutes(token),
-            ...makeRegisterRequestRoutes(token),
-            ...makeRegisterPermissionRoutes(token),
-            ...makeAbilityRoutes(token),
+export const makeProtectedRoutes = (token: string, id: number) => {
+    let routes: RouteObject[] = [];
+    if (token) {
+        routes = [
+            ...makeUserRoutes(token, id),
+            ...makeRoleRoutes(token, id),
+            ...makeRegisterRequestRoutes(token, id),
+            ...makeRegisterPermissionRoutes(token, id),
+            ...makeAbilityRoutes(token, id),
             ...makeConfigRoutes(token),
-        ],
-    },
-    ...makeVerifyEmailRoutes(token),
-];
+        ];
+    }
+
+    return [
+        {
+            element: <MainLayout />,
+            children: [
+                {
+                    path: '/home',
+                    element: <AppTitle />,
+                },
+                ...routes,
+            ],
+        },
+        ...makeVerifyEmailRoutes(token),
+    ];
+};

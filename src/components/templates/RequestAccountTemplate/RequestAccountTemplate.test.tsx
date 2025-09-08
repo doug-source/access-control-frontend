@@ -1,7 +1,4 @@
-import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
-import { ViewerProvider } from '@/shared/providers/ViewerProvider';
 import type { RequestAccountState } from '@/shared/types/States';
-import { httpClientInstance } from '@/shared/utils/globals/generic';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { RequestAccountTemplate } from '.';
@@ -15,23 +12,14 @@ describe('<RequestAccountTemplate /> component', () => {
         const formData = vi.fn();
         const router = createMemoryRouter([
             {
+                path: '/',
                 element: (
-                    <HttpClientProvider client={httpClientInstance}>
-                        <ViewerProvider />
-                    </HttpClientProvider>
+                    <RequestAccountTemplate
+                        state={state}
+                        formAction={formData}
+                        pending={false}
+                    />
                 ),
-                children: [
-                    {
-                        path: '/',
-                        element: (
-                            <RequestAccountTemplate
-                                state={state}
-                                formAction={formData}
-                                pending={false}
-                            />
-                        ),
-                    },
-                ],
             },
         ]);
         render(<RouterProvider router={router} />);

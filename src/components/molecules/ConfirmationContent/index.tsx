@@ -1,31 +1,35 @@
-import { BtnGroup } from '@/components/organisms/BtnGroup';
+import { Btn } from '@/components/atoms/Btn';
 import dialogStyles from '@/shared/stylessheets/dialog.module.scss';
 
 interface ConfirmationContentProps {
     action: string;
-    setLoading(value: boolean): void;
     onPositive(): Promise<void>;
     onNegative(): void;
+    setLoading?: (value: boolean) => void;
 }
 
 export const ConfirmationContent = ({
     action,
-    setLoading,
     onPositive,
     onNegative,
+    setLoading,
 }: ConfirmationContentProps) => (
     <>
         <h3 className={dialogStyles.heading}>Deseja {action}?</h3>
-        <BtnGroup
+        <Btn.Group
             className={dialogStyles.dialogBtnGroup}
             firstLabel="Sim"
             secondLabel="Não"
-            onFirstClick={async () => {
-                setLoading(true);
+            onFirstClick={async (evt) => {
+                evt.stopPropagation();
+                setLoading?.(true);
                 await onPositive();
-                setLoading(false);
+                setLoading?.(false);
             }}
-            onSecondClick={onNegative}
+            onSecondClick={(evt) => {
+                evt.stopPropagation();
+                onNegative();
+            }}
         />
     </>
 );

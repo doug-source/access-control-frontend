@@ -1,22 +1,16 @@
-import { HttpClientProvider } from '@/shared/providers/HttpClientProvider';
-import { PageRequesterProvider } from '@/shared/providers/PageRequesterProvider';
-import { httpClientInstance } from '@/shared/utils/globals/generic';
-import { groups } from '@/shared/utils/pagination';
-import { rolesInitialData } from '@/shared/utils/ReduceInitialValues';
+import type { RoleIndex } from '@/shared/types/Models/Role';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { RolesTemplate } from '.';
 
 describe('<RolesTemplate /> component', () => {
     it('renders correctly', () => {
-        const state = rolesInitialData(1, groups[0]);
+        const Comp = ({ data }: { data: RoleIndex }) => {
+            throw data;
+        };
         render(
             <MemoryRouter initialEntries={['/']}>
-                <HttpClientProvider client={httpClientInstance}>
-                    <PageRequesterProvider>
-                        <RolesTemplate state={state} />
-                    </PageRequesterProvider>
-                </HttpClientProvider>
+                <RolesTemplate navigation="/roles" item={Comp} />
             </MemoryRouter>
         );
         const $el = screen.getByRole('list');

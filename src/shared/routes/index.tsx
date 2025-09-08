@@ -3,28 +3,23 @@ import { ErrorPage } from '@/components/pages/ErrorPage';
 import { NotFound } from '@/components/pages/NotFound';
 import { Guest } from '@/shared/components/molecules/Guest';
 import { ScreenWrapper } from '@/shared/components/molecules/ScreenWrapper';
-import { WrapAppProviders } from '@/shared/providers/WrapAppProviders';
-import { WrapGuestProviders } from '@/shared/providers/WrapGuestProviders';
+import { UnauthenticatorProvider } from '@/shared/providers/UnauthenticatorProvider';
 import { makeProtectedRoutes } from '@/shared/routes/shared/protected';
 import { unprotectedRoutes } from '@/shared/routes/shared/unprotected';
 import type { RouteObject } from 'react-router';
 
-export const makeRouteList = (token: string): RouteObject[] => [
+export const makeRouteList = (token: string, id: number): RouteObject[] => [
     {
-        element: (
-            <WrapGuestProviders>
-                <Guest />
-            </WrapGuestProviders>
-        ),
+        element: <Guest />,
         children: unprotectedRoutes,
     },
     {
         element: (
-            <WrapAppProviders token={token}>
+            <UnauthenticatorProvider token={token}>
                 <App />
-            </WrapAppProviders>
+            </UnauthenticatorProvider>
         ),
-        children: makeProtectedRoutes(token),
+        children: makeProtectedRoutes(token, id),
         errorElement: (
             <ScreenWrapper title="Oops">
                 <ErrorPage />

@@ -1,10 +1,9 @@
-import { useLocalLocation } from '@/shared/hooks/useLocalLocation';
 import { useSignState } from '@/shared/hooks/useSignState';
 import type { Generics } from '@/shared/types/Responsabilities/Outputs';
 import type { VerifyEmailState } from '@/shared/types/States';
 import { verifyEmailBase } from '@/shared/utils/globals/verifyEmail';
 import { type Dispatch, type SetStateAction, useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import { makeURLSearchParams } from './makeURLSearchParams';
 
 type ProvideOutput = Generics['VerifyEmail']['provide'] | null;
@@ -20,7 +19,7 @@ export const useVerifyEmailRequest = (state: VerifyEmailState): HookOutput => {
     const user = useSignState().state.user;
     const token = user?.token;
     const emailVerified = user?.emailVerified;
-    const { search } = useLocalLocation();
+    const { search } = useLocation();
     const { id, hash } = useParams();
     const [output, setOutput] = useState<ProvideOutput>(null);
     const [requested, setRequested] = useState(false);

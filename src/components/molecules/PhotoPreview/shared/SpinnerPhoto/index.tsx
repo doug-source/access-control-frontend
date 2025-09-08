@@ -1,10 +1,10 @@
 import { BarLoading } from '@/components/atoms/BarLoading';
-import { WithShow } from '@/shared/types/Utils';
+import { PropsWithShow } from '@/shared/types/Utils';
 import classNames from 'classnames';
 import type { ComponentPropsWithRef } from 'react';
 import styles from './SpinnerPhoto.module.scss';
 
-type SpinnerPhotoProps = WithShow<
+type SpinnerPhotoProps = PropsWithShow<
     ComponentPropsWithRef<typeof BarLoading>,
     true
 >;

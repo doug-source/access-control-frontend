@@ -1,6 +1,6 @@
 import type { HttpSuccessResponse } from '@/shared/types/Http/Response';
 import type { HttpStatusCodes } from '@/shared/types/Http/Standard';
-import type { OutcomeAuthUSer } from '@/shared/types/NullableUser';
+import type { UserSigned } from '@/shared/types/NullableUserSigned';
 import type {
     GenericResponse,
     NoFieldResponse,
@@ -9,7 +9,7 @@ import type { XOR } from '@/shared/types/Xor';
 
 export type Successes = {
     Login: {
-        Body: { user: OutcomeAuthUSer };
+        Body: { user: UserSigned };
     };
     ResetPassword: {
         Body: { token: string; email: string };

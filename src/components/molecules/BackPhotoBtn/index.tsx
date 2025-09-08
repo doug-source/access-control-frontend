@@ -1,10 +1,10 @@
 import { BackPhotoIcon } from '@/components/atoms/icons/BackPhotoIcon';
-import type { WithShow } from '@/shared/types/Utils';
+import type { PropsWithShow } from '@/shared/types/Utils';
 import classNames from 'classnames';
 import { useId } from 'react';
 import styles from './BackPhotoBtn.module.scss';
 
-interface BackPhotoBtnProps extends WithShow<unknown, true> {
+interface BackPhotoBtnProps extends PropsWithShow<unknown, true> {
     className?: string;
     onClick(): void;
 }

@@ -1,15 +1,36 @@
 import { List } from '@/components/atoms/List';
-import { SkeletonList } from '@/components/molecules/SkeletonList';
-import { type UsersState } from '@/shared/types/Reducers/Users';
-import { type ReactNode } from 'react';
+import { SkeletonList } from '@/components/molecules/SkeletonNewList';
+import type { ReloadHandle } from '@/shared/types/ReactHandles/ReloadHandle';
+import type { ComponentType, RefObject } from 'react';
+import { useDeps } from './shared/useDeps';
 
-interface ListWrapperProps {
-    requestType: UsersState['requestType'];
-    children: ReactNode;
+type ItemProp<I> = ComponentType<{
+    data: I;
+}>;
+
+interface ListWrapperProps<T, I> {
+    output: Promise<{ data: T[] }>;
+    list: ComponentType<{
+        items: T[];
+        item: ItemProp<I>;
+    }>;
+    item: ItemProp<I>;
+    ref?: RefObject<ReloadHandle | null>;
 }
 
-export const ListWrapper = ({ requestType, children }: ListWrapperProps) => (
-    <SkeletonList show={requestType !== 'list'}>
-        <List.Box>{children}</List.Box>
-    </SkeletonList>
-);
+export const ListWrapper = <T, I>({
+    output,
+    list: ListComp,
+    item: ItemComp,
+    ref = { current: { wait() {} } },
+}: ListWrapperProps<T, I>) => {
+    const status = useDeps(output, ref);
+    if (status.wait) {
+        return <SkeletonList />;
+    }
+    return (
+        <List.Box>
+            <ListComp items={status.result?.data ?? []} item={ItemComp} />
+        </List.Box>
+    );
+};

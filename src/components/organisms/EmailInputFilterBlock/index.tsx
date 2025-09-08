@@ -1,36 +1,45 @@
 import { InputFilterBlock } from '@/components/molecules/InputFilterBlock';
-import { useDispatch } from '@/shared/hooks/useDispatch';
-import { usePageGroupPagination } from '@/shared/hooks/usePageGroupPagination';
-import type { ChangeFilterAction } from '@/shared/types/Reducers/Custom/PaginationAction';
-import { groups, type PaginateKeyContext } from '@/shared/utils/pagination';
+import type { Paths } from '@/shared/types/Urls/Paths';
+import type { ComponentPropsWithRef } from 'react';
+import { useNavigate } from 'react-router';
 
-interface EmailInputFilterBlockProps {
+type RemainProps = Omit<ComponentPropsWithRef<'div'>, 'children' | 'onChange'>;
+interface EmailInputFilterBlockProps extends RemainProps {
     subject: string;
-    context: PaginateKeyContext;
-    className?: string;
+    navigation: Paths['navigation']['lists'];
+    defaultValue?: ComponentPropsWithRef<
+        typeof InputFilterBlock
+    >['defaultValue'];
+    onChange?: () => void;
 }
 
 export const EmailInputFilterBlock = ({
     subject,
-    context,
+    navigation,
     className,
+    defaultValue,
+    onChange,
+    ...remain
 }: EmailInputFilterBlockProps) => {
-    const { setPage, setGroup } = usePageGroupPagination(context);
-    const dispatch = useDispatch<ChangeFilterAction>();
+    const navigate = useNavigate();
     return (
         <InputFilterBlock
+            {...remain}
             className={className}
             label={`Email de ${subject}`}
             placeholder={`Email de ${subject}`}
             btnText="Atualizar"
-            onChange={() => {
-                dispatch({
-                    type: 'change-filter',
+            onChange={(email) => {
+                onChange?.();
+                const searchParams = new URLSearchParams({
+                    email: email?.trim() ?? '',
                 });
-                setPage(1);
-                setGroup(groups[0]);
+                navigate(`${navigation}?${searchParams.toString()}`, {
+                    replace: true,
+                });
             }}
             nameInput="email"
+            defaultValue={defaultValue}
         />
     );
 };

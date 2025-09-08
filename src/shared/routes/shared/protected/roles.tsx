@@ -1,16 +1,23 @@
 import { Role } from '@/components/pages/Role';
-import { RoleForm } from '@/components/pages/RoleForm';
 import { Roles } from '@/components/pages/Roles';
-import { RolesFromUser } from '@/components/pages/RolesFromUser';
+import { attachFromListAction } from '@/shared/actions/attachFromListAction';
+import { detachFromListAction } from '@/shared/actions/detachFromListAction';
+import { remotionFromListAction } from '@/shared/actions/remotionFromListAction';
 import { CheckParams } from '@/shared/components/molecules/CheckParams';
 import { ScreenWrapper } from '@/shared/components/molecules/ScreenWrapper';
 import { Gate } from '@/shared/components/organisms/Gate';
+import { rolesLoader } from '@/shared/loaders/rolesLoader';
 import { subjectShowLoader } from '@/shared/loaders/subjectShowLoader';
 import { LogicBaseProvider } from '@/shared/providers/LogicBaseProvider';
 import { attachToken } from '@/shared/utils/attachToken';
+import {
+    pageRequester,
+    permissionsRequester,
+} from '@/shared/utils/globals/generic';
 import { roleFormBase } from '@/shared/utils/globals/roleForm';
+import { viewerInstance } from '@/shared/utils/globals/viewer';
 
-export const makeRoleRoutes = (token: string) => [
+export const makeRoleRoutes = (token: string, id: number) => [
     {
         element: <Gate abilityName="role-screen" />,
         children: [
@@ -21,21 +28,71 @@ export const makeRoleRoutes = (token: string) => [
                         <Roles />
                     </ScreenWrapper>
                 ),
+                loader: rolesLoader(
+                    pageRequester,
+                    viewerInstance,
+                    token,
+                    () => '/roles',
+                    () => '/api/roles',
+                    'role',
+                    id
+                ),
+            },
+            {
+                path: '/roles/remove/:id',
+                action: remotionFromListAction(
+                    pageRequester,
+                    token,
+                    (id) => `/api/roles/${id}`,
+                    '/roles'
+                ),
             },
             {
                 path: '/roles/user/:id',
                 element: (
                     <ScreenWrapper title="Papéis">
-                        <RolesFromUser />
+                        <Roles.FromUser />
                     </ScreenWrapper>
+                ),
+                loader: rolesLoader(
+                    pageRequester,
+                    viewerInstance,
+                    token,
+                    (id) => `/roles/user/${id}`,
+                    (id) => `/api/users/${id}/roles`,
+                    'role-from-user',
+                    id
+                ),
+                // action para detach
+                action: detachFromListAction(
+                    permissionsRequester,
+                    token,
+                    (id) => `/api/users/${id}/roles`,
+                    (id) => `/roles/user/${id}`
                 ),
             },
             {
                 path: '/roles/user/:id/attach',
                 element: (
                     <ScreenWrapper title="Papéis">
-                        <RolesFromUser />
+                        <Roles.FromUser />
                     </ScreenWrapper>
+                ),
+                loader: rolesLoader(
+                    pageRequester,
+                    viewerInstance,
+                    token,
+                    (id) => `/roles/user/${id}/attach`,
+                    (id) => `/api/users/${id}/roles`,
+                    'role-from-user-attach',
+                    id
+                ),
+                // action para attach
+                action: attachFromListAction(
+                    permissionsRequester,
+                    token,
+                    (id) => `/api/users/${id}/roles`,
+                    (id) => `/roles/user/${id}/attach`
                 ),
             },
         ],
@@ -50,7 +107,7 @@ export const makeRoleRoutes = (token: string) => [
                         <LogicBaseProvider
                             base={attachToken(roleFormBase, token)}
                         >
-                            <RoleForm />
+                            <Role.Form />
                         </LogicBaseProvider>
                     </ScreenWrapper>
                 ),

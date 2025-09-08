@@ -1,16 +1,8 @@
-import * as LocalNavigateHooks from '@/shared/hooks/useLocalNavigate';
 import { faker } from '@faker-js/faker';
 import { renderHook } from '@testing-library/react';
 import { createElement, type MouseEvent, type PropsWithChildren } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
-import { type MockInstance } from 'vitest';
 import { useToAbilityRouteHandler } from './useToAbilityRouteHandler';
-
-type LocalLocationReturn = ReturnType<
-    typeof LocalNavigateHooks.useLocalNavigate
->;
-
-let localNavigateSpy: MockInstance<() => LocalLocationReturn>;
 
 const makeMouseEvent = () => {
     return { stopPropagation() {} } as unknown as MouseEvent<
@@ -20,15 +12,6 @@ const makeMouseEvent = () => {
 };
 
 describe('useToAbilityRouteHandler hook', () => {
-    beforeAll(() => {
-        localNavigateSpy = vi.spyOn(LocalNavigateHooks, 'useLocalNavigate');
-    });
-    afterAll(() => {
-        localNavigateSpy.mockRestore();
-    });
-    beforeEach(() => {
-        localNavigateSpy.mockReset();
-    });
     it("renders with hook's returns correctly", () => {
         const wrapper = ({ children }: PropsWithChildren) => {
             const router = createMemoryRouter(
@@ -46,11 +29,7 @@ describe('useToAbilityRouteHandler hook', () => {
         };
         const { result } = renderHook(
             () => {
-                return useToAbilityRouteHandler({
-                    endpoint: 'user',
-                    label: faker.word.noun(),
-                    makeValue: vi.fn(() => faker.word.noun()),
-                });
+                return useToAbilityRouteHandler({ from: 'user' });
             },
             { wrapper }
         );
@@ -61,9 +40,6 @@ describe('useToAbilityRouteHandler hook', () => {
     });
     it('renders triggering the mouse event into user context correctly', () => {
         const onNavigate = vi.fn();
-        localNavigateSpy.mockReturnValue(function (...args: unknown[]) {
-            onNavigate(...args);
-        });
         const wrapper = ({ children }: PropsWithChildren) => {
             const router = createMemoryRouter(
                 [
@@ -80,14 +56,9 @@ describe('useToAbilityRouteHandler hook', () => {
         };
         const label = faker.word.noun();
         const user = { id: faker.number.int({ min: 1 }) };
-        const makeValue = vi.fn((data: typeof user) => `${data.id}`);
         const { result } = renderHook(
             () => {
-                return useToAbilityRouteHandler({
-                    endpoint: 'user',
-                    label,
-                    makeValue,
-                });
+                return useToAbilityRouteHandler({ from: 'user' });
             },
             { wrapper }
         );

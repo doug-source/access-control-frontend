@@ -1,5 +1,5 @@
 import type { RequestStatus } from '@/shared/types/Http/Request';
-import type { OutcomeAuthUSer } from '@/shared/types/NullableUser';
+import type { NullableUserSigned } from '@/shared/types/NullableUserSigned';
 
 export interface State {
     requestStatus: RequestStatus;
@@ -7,7 +7,7 @@ export interface State {
 
 export interface LoginState extends State {
     fields: { email: string; password: string };
-    user: OutcomeAuthUSer | null;
+    user: NullableUserSigned;
 }
 
 export interface RequestAccountState extends State {

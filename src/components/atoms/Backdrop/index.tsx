@@ -1,9 +1,9 @@
-import type { WithShow } from '@/shared/types/Utils';
+import type { PropsWithShow } from '@/shared/types/Utils';
 import classNames from 'classnames';
 import type { ComponentPropsWithRef } from 'react';
 import styles from './Backdrop.module.scss';
 
-type BackdropProps = WithShow<ComponentPropsWithRef<'div'>, true>;
+type BackdropProps = PropsWithShow<ComponentPropsWithRef<'div'>, true>;
 
 export const Backdrop = ({
     show,
