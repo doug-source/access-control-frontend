@@ -58,7 +58,6 @@ export interface AbilityFormState extends State {
 }
 
 export interface UserConfigState extends State {
-    photoRemote: string | null;
     fields: {
         name: string;
         phone: string;

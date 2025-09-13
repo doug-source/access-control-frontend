@@ -9,7 +9,6 @@ import { useUserConfigCallback } from './useUserConfigCallback';
 export const useDeps = () => {
     const user = useSignState().state.user;
 
-    const photoRemote = user?.photo ?? null;
     const name = user?.name ?? '';
     const phone = user?.phone ?? '';
     const email = user?.email ?? '';
@@ -21,7 +20,6 @@ export const useDeps = () => {
 
     const [state, formAction, pending] = useActionState(submitHandler, {
         ...userConfigInitialData,
-        photoRemote,
         fields: {
             ...userConfigInitialData.fields,
             name,

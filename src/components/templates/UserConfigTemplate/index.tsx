@@ -18,7 +18,7 @@ export const UserConfigTemplate = ({
     formAction,
     pending,
 }: UserConfigTemplateProps) => {
-    const [nameId, phoneId] = useDeps();
+    const { nameId, phoneId, photo } = useDeps();
     return (
         <FormSimpleContainer
             state={state}
@@ -29,7 +29,7 @@ export const UserConfigTemplate = ({
         >
             <FieldGroup.Box>
                 <ProfilePhoto
-                    url={state.photoRemote}
+                    url={photo}
                     fallback={<UserIcon className={styles.iconFallback} />}
                 />
             </FieldGroup.Box>
