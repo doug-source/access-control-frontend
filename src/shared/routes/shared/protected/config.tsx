@@ -1,4 +1,5 @@
 import { Config } from '@/components/pages/Config';
+import { ConfirmationsConfig } from '@/components/pages/ConfirmationsConfig';
 import { UserConfig } from '@/components/pages/UserConfig';
 import { ScreenWrapper } from '@/shared/components/molecules/ScreenWrapper';
 import { LogicBaseProvider } from '@/shared/providers/LogicBaseProvider';
@@ -21,6 +22,14 @@ export const makeConfigRoutes = (token: string) => [
                 <LogicBaseProvider base={attachToken(userConfigBase, token)}>
                     <UserConfig />
                 </LogicBaseProvider>
+            </ScreenWrapper>
+        ),
+    },
+    {
+        path: '/config-confirmations',
+        element: (
+            <ScreenWrapper title="Configurações das confirmações">
+                <ConfirmationsConfig />
             </ScreenWrapper>
         ),
     },

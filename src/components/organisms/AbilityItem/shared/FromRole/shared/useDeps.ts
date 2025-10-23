@@ -12,7 +12,6 @@ export const useDeps = (ability: AbilityIndex) => {
         clickHandler: attachClickHandler,
         handler: attachHandler,
         pending: attachPending,
-        setPending: setAttachPending,
         setShowConfirm: setShowConfirmAttach,
         showConfirm: showConfirmAttach,
     } = useActionHandlers(
@@ -24,7 +23,6 @@ export const useDeps = (ability: AbilityIndex) => {
         clickHandler: detachClickHandler,
         handler: detachHandler,
         pending: detachPending,
-        setPending: setDetachPending,
         setShowConfirm: setShowConfirmDetach,
         showConfirm: showConfirmDetach,
     } = useActionHandlers(
@@ -40,14 +38,12 @@ export const useDeps = (ability: AbilityIndex) => {
         attachClickHandler,
         attachHandler,
         attachPending,
-        setAttachPending,
         setShowConfirmAttach,
         showConfirmAttach,
 
         detachClickHandler,
         detachHandler,
         detachPending,
-        setDetachPending,
         setShowConfirmDetach,
         showConfirmDetach,
     };

@@ -1,5 +1,5 @@
 import { List } from '@/components/atoms/List';
-import { SkeletonList } from '@/components/molecules/SkeletonNewList';
+import { SkeletonList } from '@/components/molecules/SkeletonList';
 import type { ReloadHandle } from '@/shared/types/ReactHandles/ReloadHandle';
 import type { ComponentType, RefObject } from 'react';
 import { useDeps } from './shared/useDeps';

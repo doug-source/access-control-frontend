@@ -7,7 +7,6 @@ export const useDeps = (registerRequest: RegisterRequestIndex) => {
 
     const {
         handler: removeHandler,
-        setPending: setRemotionPending,
         clickHandler: removeClickHandler,
         setShowConfirm: setShowConfirmRemotion,
         showConfirm: showConfirmRemotion,
@@ -19,7 +18,6 @@ export const useDeps = (registerRequest: RegisterRequestIndex) => {
     );
     const {
         handler: approvalHandler,
-        setPending: setApprovalPending,
         clickHandler: approvalClickHandler,
         setShowConfirm: setShowConfirmApproval,
         showConfirm: showConfirmApproval,
@@ -36,14 +34,12 @@ export const useDeps = (registerRequest: RegisterRequestIndex) => {
         setShowConfirmRemotion,
         showConfirmRemotion,
         removeHandler,
-        setRemotionPending,
         remotionPending,
 
         approvalClickHandler,
         setShowConfirmApproval,
         showConfirmApproval,
         approvalHandler,
-        setApprovalPending,
         approvalPending,
     };
 };

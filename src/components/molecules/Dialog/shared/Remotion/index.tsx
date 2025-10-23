@@ -7,7 +7,6 @@ import { Base } from '../Base';
 
 interface RemotionDialogProps {
     setShowDialog(show: boolean): void;
-    setPending(pending: boolean): void;
     handler(): void;
     subject: string;
 }
@@ -15,7 +14,6 @@ interface RemotionDialogProps {
 export const RemotionDialog = ({
     show,
     setShowDialog,
-    setPending,
     handler,
     subject,
 }: PropsWithShow<RemotionDialogProps, true>) => {
@@ -34,7 +32,6 @@ export const RemotionDialog = ({
                 action="remover"
                 onPositive={async () => {
                     setShowDialog(false);
-                    setPending(true);
                     handler();
                 }}
                 onNegative={() => {

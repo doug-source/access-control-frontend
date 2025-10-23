@@ -1,4 +1,3 @@
-import { RegisterPermission } from '@/shared/types/Models/RegisterPermission';
 import { faker } from '@faker-js/faker';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -7,20 +6,15 @@ import { RegisterPermissionItem } from '.';
 
 describe('<RegisterPermissionItem /> component', () => {
     it('renders correctly', () => {
-        const registerPermission: RegisterPermission = {
-            id: faker.number.int({ min: 1 }),
-            email: faker.internet.email(),
-            createdAt: faker.date.anytime().toString(),
-            updatedAt: faker.date.anytime().toString(),
-            phone: faker.phone.number(),
-            expirationData: faker.date.anytime().toString(),
-        };
         render(
             <MemoryRouter initialEntries={['/']}>
                 <ul>
                     <RegisterPermissionItem
-                        registerPermission={registerPermission}
                         data-testid="item"
+                        data={{
+                            email: faker.internet.email(),
+                            id: faker.number.int({ min: 1 }),
+                        }}
                     />
                 </ul>
             </MemoryRouter>
@@ -29,14 +23,6 @@ describe('<RegisterPermissionItem /> component', () => {
         expect($el).toBeInTheDocument();
     });
     it('renders moving between screens correctly', async () => {
-        const registerPermission: RegisterPermission = {
-            id: faker.number.int({ min: 1 }),
-            email: faker.internet.email(),
-            createdAt: faker.date.anytime().toString(),
-            updatedAt: faker.date.anytime().toString(),
-            phone: faker.phone.number(),
-            expirationData: faker.date.anytime().toString(),
-        };
         const content = faker.word.noun();
         const router = createMemoryRouter([
             {
@@ -48,7 +34,10 @@ describe('<RegisterPermissionItem /> component', () => {
                 element: (
                     <ul>
                         <RegisterPermissionItem
-                            registerPermission={registerPermission}
+                            data={{
+                                email: faker.internet.email(),
+                                id: faker.number.int({ min: 1 }),
+                            }}
                         />
                     </ul>
                 ),

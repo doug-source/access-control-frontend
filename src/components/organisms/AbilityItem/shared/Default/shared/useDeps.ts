@@ -8,7 +8,6 @@ export const useDeps = (ability: AbilityIndex) => {
         clickHandler: removeClickHandler,
         handler: removeHandler,
         pending: remotionPending,
-        setPending: setRemotionPending,
         setShowConfirm: setShowConfirmRemotion,
         showConfirm: showConfirmRemotion,
     } = useActionHandlers(
@@ -23,7 +22,6 @@ export const useDeps = (ability: AbilityIndex) => {
         removeClickHandler,
         removeHandler,
         remotionPending,
-        setRemotionPending,
         setShowConfirmRemotion,
         showConfirmRemotion,
     };

@@ -7,7 +7,6 @@ import { Base } from '../Base';
 
 interface AttachDialogProps {
     setShowDialog(show: boolean): void;
-    setPending(pending: boolean): void;
     handler(): void;
     subject: string;
 }
@@ -15,7 +14,6 @@ interface AttachDialogProps {
 export const AttachDialog = ({
     show,
     setShowDialog,
-    setPending,
     handler,
     subject,
 }: PropsWithShow<AttachDialogProps, true>) => {
@@ -34,7 +32,6 @@ export const AttachDialog = ({
                 action="vincular"
                 onPositive={async () => {
                     setShowDialog(false);
-                    setPending(true);
                     handler();
                 }}
                 onNegative={() => {

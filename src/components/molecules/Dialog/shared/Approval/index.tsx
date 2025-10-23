@@ -7,7 +7,6 @@ import { Base } from '../Base';
 
 interface ApprovalDialogProps {
     setShowDialog(show: boolean): void;
-    setPending(pending: boolean): void;
     handler(): void;
     subject: string;
 }
@@ -15,7 +14,6 @@ interface ApprovalDialogProps {
 export const ApprovalDialog = ({
     show,
     setShowDialog,
-    setPending,
     handler,
     subject,
 }: PropsWithShow<ApprovalDialogProps, true>) => {
@@ -34,7 +32,6 @@ export const ApprovalDialog = ({
                 action="aprovar"
                 onPositive={async () => {
                     setShowDialog(false);
-                    setPending(true);
                     handler();
                 }}
                 onNegative={() => {

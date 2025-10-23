@@ -13,7 +13,7 @@ export const useUserConfigCallback = (
             const result = await output;
             if (result.requestStatus.statusCode === 200) {
                 dispatch({
-                    type: 'CONFIG_UPDATING',
+                    type: 'CONFIG_USER_UPDATING',
                     payload: {
                         name: result.fields.name,
                         phone: result.fields.phone ?? null,

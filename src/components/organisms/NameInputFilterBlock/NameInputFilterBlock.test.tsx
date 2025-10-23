@@ -9,8 +9,8 @@ describe('<NameInputFilterBlock /> component', () => {
         render(
             <NameInputFilterBlock
                 subject={subject}
-                context="user"
                 data-testid="f-block"
+                navigation="/abilities"
             />
         );
         const $el = screen.getByTestId('f-block');
@@ -21,8 +21,8 @@ describe('<NameInputFilterBlock /> component', () => {
         render(
             <NameInputFilterBlock
                 subject={faker.word.noun()}
-                context="user"
                 data-testid="f-block"
+                navigation="/abilities"
             />
         );
         const $button = screen.getByRole('button');

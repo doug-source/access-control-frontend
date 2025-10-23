@@ -43,7 +43,7 @@ export interface EmailValidatedAction {
 }
 
 export interface ConfigUpdatingAction {
-    type: 'CONFIG_UPDATING';
+    type: 'CONFIG_USER_UPDATING';
     payload: {
         name: string;
         phone: string | null;
@@ -51,8 +51,20 @@ export interface ConfigUpdatingAction {
     };
 }
 
+type ConfirmationKeys = keyof SignState['confirmations'];
+
+export interface ConfirmationChangeAction {
+    type: 'CONFIG_CONFIRMATION_UPDATING';
+    payload: {
+        [K in ConfirmationKeys]?: {
+            [W in keyof SignState['confirmations'][K]]?: boolean;
+        };
+    };
+}
+
 export type SignAction =
     | SignInAction
     | SignOutAction
     | EmailValidatedAction
-    | ConfigUpdatingAction;
+    | ConfigUpdatingAction
+    | ConfirmationChangeAction;

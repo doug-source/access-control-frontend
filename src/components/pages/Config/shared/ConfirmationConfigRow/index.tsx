@@ -1,21 +1,21 @@
 import { Anchor } from '@/components/atoms/Anchor';
 import { ArrowIcon } from '@/components/atoms/icons/ArrowIcon';
-import { UserIcon } from '@/components/atoms/icons/UserIcon';
+import { ConfirmationsIcon } from '@/components/atoms/icons/ConfirmationsIcon';
 import { useId } from 'react';
 import sharedStyles from '../Config-shared.module.scss';
-import styles from './UserConfigRow.module.scss';
+import styles from './ConfirmationConfigRow.module.scss';
 
-export const UserConfigRow = () => {
+export const ConfirmationConfigRow = () => {
     const descriptionId = useId();
     return (
         <article>
             <Anchor
-                to="/config-user"
+                to="/config-confirmations"
                 aria-describedby={descriptionId}
                 className={sharedStyles.anchorRow}
             >
-                <UserIcon className={styles.userIcon} />
-                <span id={descriptionId}>Usuário</span>
+                <ConfirmationsIcon className={styles.confirmationIcon} />
+                <span id={descriptionId}>Confirmações</span>
                 <ArrowIcon
                     className={sharedStyles.arrow}
                     title="Selecione configurações do usuário"

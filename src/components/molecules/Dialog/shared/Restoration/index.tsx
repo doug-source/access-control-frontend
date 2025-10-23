@@ -7,7 +7,6 @@ import { Base } from '../Base';
 
 interface RestorationDialogProps {
     setShowDialog(show: boolean): void;
-    setPending(pending: boolean): void;
     handler(): void;
     subject: string;
 }
@@ -15,7 +14,6 @@ interface RestorationDialogProps {
 export const RestorationDialog = ({
     show,
     setShowDialog,
-    setPending,
     handler,
     subject,
 }: PropsWithShow<RestorationDialogProps, true>) => {
@@ -34,7 +32,6 @@ export const RestorationDialog = ({
                 action="restaurar"
                 onPositive={async () => {
                     setShowDialog(false);
-                    setPending(true);
                     handler();
                 }}
                 onNegative={() => {

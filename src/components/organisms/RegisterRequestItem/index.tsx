@@ -20,14 +20,12 @@ export const RegisterRequestItem = ({ data }: RegisterRequestItemProps) => {
         setShowConfirmRemotion,
         showConfirmRemotion,
         removeHandler,
-        setRemotionPending,
         remotionPending,
 
         approvalClickHandler,
         setShowConfirmApproval,
         showConfirmApproval,
         approvalHandler,
-        setApprovalPending,
         approvalPending,
     } = useDeps(data);
     return (
@@ -54,7 +52,6 @@ export const RegisterRequestItem = ({ data }: RegisterRequestItemProps) => {
             <Dialog.Remotion
                 show={showConfirmRemotion}
                 setShowDialog={setShowConfirmRemotion}
-                setPending={setRemotionPending}
                 handler={removeHandler}
                 subject="pedido"
             />
@@ -62,7 +59,6 @@ export const RegisterRequestItem = ({ data }: RegisterRequestItemProps) => {
             <Dialog.Approval
                 show={showConfirmApproval}
                 setShowDialog={setShowConfirmApproval}
-                setPending={setApprovalPending}
                 handler={approvalHandler}
                 subject="pedido"
             />

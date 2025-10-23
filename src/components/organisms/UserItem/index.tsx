@@ -26,7 +26,6 @@ export const UserItem = ({ data }: UserItemProps) => {
         showConfirm: showConfirmRemotion,
         setShowConfirm: setShowConfirmRemotion,
         pending: remotionPending,
-        setPending: setRemotionPending,
 
         handler: removeHandler,
         clickHandler: removeClickHandler,
@@ -75,7 +74,6 @@ export const UserItem = ({ data }: UserItemProps) => {
             <Dialog.Remotion
                 show={showConfirmRemotion}
                 setShowDialog={setShowConfirmRemotion}
-                setPending={setRemotionPending}
                 handler={removeHandler}
                 subject="usuário"
             />

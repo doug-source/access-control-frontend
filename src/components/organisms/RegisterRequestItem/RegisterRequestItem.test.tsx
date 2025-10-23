@@ -1,4 +1,3 @@
-import type { RegisterRequest } from '@/shared/types/Models/RegisterRequest';
 import { faker } from '@faker-js/faker';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -7,17 +6,15 @@ import { RegisterRequestItem } from '.';
 
 describe('<RegisterRequestItem /> component', () => {
     it('renders correctly', () => {
-        const registerRequest: RegisterRequest = {
-            id: faker.number.int({ min: 1 }),
-            email: faker.internet.email(),
-            phone: faker.phone.number(),
-            createdAt: faker.date.anytime().toString(),
-            updatedAt: faker.date.anytime().toString(),
-        };
         render(
             <MemoryRouter initialEntries={['/']}>
                 <ul>
-                    <RegisterRequestItem registerRequest={registerRequest} />
+                    <RegisterRequestItem
+                        data={{
+                            email: faker.internet.email(),
+                            id: faker.number.int({ min: 1 }),
+                        }}
+                    />
                 </ul>
             </MemoryRouter>
         );
@@ -25,13 +22,6 @@ describe('<RegisterRequestItem /> component', () => {
         expect($el).toBeInTheDocument();
     });
     it('renders change the current page clicking on the row correctly', async () => {
-        const registerRequest: RegisterRequest = {
-            id: faker.number.int({ min: 1 }),
-            email: faker.internet.email(),
-            phone: faker.phone.number(),
-            createdAt: faker.date.anytime().toString(),
-            updatedAt: faker.date.anytime().toString(),
-        };
         const content = faker.word.noun();
         const router = createMemoryRouter([
             {
@@ -43,7 +33,10 @@ describe('<RegisterRequestItem /> component', () => {
                 element: (
                     <ul>
                         <RegisterRequestItem
-                            registerRequest={registerRequest}
+                            data={{
+                                email: faker.internet.email(),
+                                id: faker.number.int({ min: 1 }),
+                            }}
                         />
                     </ul>
                 ),

@@ -139,4 +139,5 @@ export type Navigations =
     | RoleNavigations
     | AbilityNavigations
     | '/config'
-    | '/config-user';
+    | '/config-user'
+    | '/config-confirmations';

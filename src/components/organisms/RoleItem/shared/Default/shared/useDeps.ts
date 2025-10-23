@@ -18,7 +18,6 @@ export const useDeps = (role: RoleIndex) => {
         clickHandler: removeClickHandler,
         handler: removeHandler,
         pending: remotionPending,
-        setPending: setRemotionPending,
         setShowConfirm: setShowConfirmRemotion,
         showConfirm: showConfirmRemotion,
     } = useActionHandlers(`/roles/remove/${role.id}`, 'remotions', 'role');
@@ -30,7 +29,6 @@ export const useDeps = (role: RoleIndex) => {
         remotionPending,
         showConfirmRemotion,
         setShowConfirmRemotion,
-        setRemotionPending,
         removeHandler,
         removeClickHandler,
     };

@@ -15,7 +15,6 @@ export const Default = ({ data }: DefaultProps) => {
         remotionPending,
         showConfirmRemotion,
         setShowConfirmRemotion,
-        setRemotionPending,
         removeHandler,
     } = useDeps(data);
     return (
@@ -29,7 +28,6 @@ export const Default = ({ data }: DefaultProps) => {
             <Dialog.Remotion
                 show={showConfirmRemotion}
                 setShowDialog={setShowConfirmRemotion}
-                setPending={setRemotionPending}
                 handler={removeHandler}
                 subject="habilidade"
             />

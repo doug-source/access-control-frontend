@@ -7,7 +7,6 @@ import { Base } from '../Base';
 
 interface DetachDialogProps {
     setShowDialog(show: boolean): void;
-    setPending(pending: boolean): void;
     handler(): void;
     subject: string;
 }
@@ -15,7 +14,6 @@ interface DetachDialogProps {
 export const DetachDialog = ({
     show,
     setShowDialog,
-    setPending,
     handler,
     subject,
 }: PropsWithShow<DetachDialogProps, true>) => {
@@ -34,7 +32,6 @@ export const DetachDialog = ({
                 action="desvincular"
                 onPositive={async () => {
                     setShowDialog(false);
-                    setPending(true);
                     handler();
                 }}
                 onNegative={() => {

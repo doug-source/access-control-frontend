@@ -1,0 +1,9 @@
+.unordered {
+    list-style-type: none;
+    display: grid;
+    justify-content: start;
+
+    li {
+        user-select: none;
+    }
+}

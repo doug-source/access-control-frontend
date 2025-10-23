@@ -9,7 +9,6 @@ export const useDeps = (user: UserIndex) => {
     const {
         handler: removeHandler,
         pending: remotionPending,
-        setPending: setRemotionPending,
         clickHandler: removeClickHandler,
         setShowConfirm: setShowConfirmRemotion,
         showConfirm: showConfirmRemotion,
@@ -22,7 +21,6 @@ export const useDeps = (user: UserIndex) => {
     const {
         handler: restoreHandler,
         pending: restorePending,
-        setPending: setRestorationPending,
         showConfirm: showConfirmRestoration,
         clickHandler: restoreClickHandler,
         setShowConfirm: setShowConfirmRestoration,
@@ -33,7 +31,6 @@ export const useDeps = (user: UserIndex) => {
 
         removeHandler,
         remotionPending,
-        setRemotionPending,
 
         removeClickHandler,
         setShowConfirmRemotion,
@@ -41,7 +38,6 @@ export const useDeps = (user: UserIndex) => {
 
         restoreHandler,
         restorePending,
-        setRestorationPending,
 
         restoreClickHandler,
         setShowConfirmRestoration,

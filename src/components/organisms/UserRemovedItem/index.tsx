@@ -19,7 +19,6 @@ export const UserRemovedItem = ({ data }: UserRemovedItemProps) => {
         showConfirmRemotion,
         setShowConfirmRemotion,
         remotionPending,
-        setRemotionPending,
 
         removeHandler,
         removeClickHandler,
@@ -27,7 +26,6 @@ export const UserRemovedItem = ({ data }: UserRemovedItemProps) => {
         showConfirmRestoration,
         setShowConfirmRestoration,
         restorePending,
-        setRestorationPending,
 
         restoreHandler,
         restoreClickHandler,
@@ -53,14 +51,12 @@ export const UserRemovedItem = ({ data }: UserRemovedItemProps) => {
             <Dialog.Remotion
                 show={showConfirmRemotion}
                 setShowDialog={setShowConfirmRemotion}
-                setPending={setRemotionPending}
                 handler={removeHandler}
                 subject="usuário"
             />
             <SpinnerCovering show={remotionPending || restorePending} />
             <Dialog.Restoration
                 show={showConfirmRestoration}
-                setPending={setRestorationPending}
                 setShowDialog={setShowConfirmRestoration}
                 handler={restoreHandler}
                 subject="usuário"

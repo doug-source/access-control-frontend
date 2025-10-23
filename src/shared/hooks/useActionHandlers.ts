@@ -40,6 +40,7 @@ const useActionSubmitHandler = (
     const submit = useSubmit();
     const [pending, setPending] = useState(false);
     const handler = () => {
+        setPending(true);
         submit(null, {
             method: 'post',
             action: actionUrl,
@@ -48,7 +49,6 @@ const useActionSubmitHandler = (
     return {
         handler,
         pending,
-        setPending,
     };
 };
 

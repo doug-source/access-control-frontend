@@ -30,7 +30,7 @@ export const signReducer = (
                 },
             };
         }
-        case 'CONFIG_UPDATING': {
+        case 'CONFIG_USER_UPDATING': {
             if (state.user === null) {
                 return state;
             }
@@ -39,6 +39,37 @@ export const signReducer = (
                 user: {
                     ...state.user,
                     ...action.payload,
+                },
+            };
+        }
+        case 'CONFIG_CONFIRMATION_UPDATING': {
+            if (state.user === null) {
+                return state;
+            }
+            return {
+                ...state,
+                confirmations: {
+                    ...state.confirmations,
+                    remotions: {
+                        ...state.confirmations.remotions,
+                        ...action.payload.remotions,
+                    },
+                    approvements: {
+                        ...state.confirmations.approvements,
+                        ...action.payload.approvements,
+                    },
+                    attachment: {
+                        ...state.confirmations.attachment,
+                        ...action.payload.attachment,
+                    },
+                    detachment: {
+                        ...state.confirmations.detachment,
+                        ...action.payload.detachment,
+                    },
+                    restorations: {
+                        ...state.confirmations.restorations,
+                        ...action.payload.restorations,
+                    },
                 },
             };
         }

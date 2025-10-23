@@ -23,12 +23,10 @@ export const FromRole = ({ data }: FromUserProps) => {
 
         showConfirmAttach,
         setShowConfirmAttach,
-        setAttachPending,
         attachHandler,
 
         showConfirmDetach,
         setShowConfirmDetach,
-        setDetachPending,
         detachHandler,
     } = useDeps(data);
     return (
@@ -65,14 +63,12 @@ export const FromRole = ({ data }: FromUserProps) => {
             <Dialog.Attach
                 show={showConfirmAttach}
                 setShowDialog={setShowConfirmAttach}
-                setPending={setAttachPending}
                 handler={attachHandler}
                 subject="habilidade"
             />
             <Dialog.Detach
                 show={showConfirmDetach}
                 setShowDialog={setShowConfirmDetach}
-                setPending={setDetachPending}
                 handler={detachHandler}
                 subject="habilidade"
             />
